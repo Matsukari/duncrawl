@@ -1,13 +1,11 @@
 package com.leisure.duncraw;
 
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 
-public class GameApplication extends Game {
-	
+public class GameApplication extends Game {	
 	@Override
-	public void create () {
+	public void create () { 
 	}
 
 	@Override
