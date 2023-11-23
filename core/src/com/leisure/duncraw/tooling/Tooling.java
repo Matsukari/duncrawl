@@ -2,26 +2,15 @@ package com.leisure.duncraw.tooling;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Graphics;
-import com.badlogic.gdx.graphics.FPSLogger;
-
 import imgui.ImGui;
 import imgui.ImGuiIO;
 import imgui.gl3.ImGuiImplGl3;
 import imgui.glfw.ImGuiImplGlfw;
-import imgui.type.ImBoolean;
-import imgui.type.ImFloat;
-import imgui.type.ImString;
-
-import com.badlogic.gdx.math.Interpolation;
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.utils.Array;
 
 public class Tooling {
-  private FPSLogger fps;
   private ImGuiImplGlfw glfw;
   private ImGuiImplGl3 gl;
-  private boolean start = true;
   private Array<ToolAgent> tools;
   private static Tooling tooling;
 
