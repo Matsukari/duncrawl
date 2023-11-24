@@ -1,0 +1,6 @@
+{
+"player_idle": "player_idle.png",
+"player_icon": "player_icon.png",
+"player_move": "player_move.png",
+"ghost_idle": "ghost_idle.png"
+}

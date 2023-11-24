@@ -17,9 +17,7 @@ public class DebugManager {
     gridLines = new GridLines(floor.terrainSet.cols, floor.terrainSet.rows, 
       floor.terrainSet.terrainWidth, floor.terrainSet.terrainHeight);
   }
-  public void render() {
-    
-    Logger.log("DebugManager", "Renderer");
+  public void render() { 
     if (gridLines != null) gridLines.render(renderer);
   }
 }

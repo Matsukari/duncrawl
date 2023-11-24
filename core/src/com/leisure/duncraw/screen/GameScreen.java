@@ -29,7 +29,7 @@ public class GameScreen extends Screen {
     this.saveData = saveData;
     camera = new OrthographicCamera();
     viewport = new ExtendViewport(saveData.settings.bounds.width, saveData.settings.bounds.height, camera);
-    charaManager = new CharaManager();
+    charaManager = new CharaManager(AssetSource.getCharasData());
     floorManager = new FloorManager(saveData, AssetSource.getFloorsData(), saveData.progression.level.level);
     floorManager.setCurrentFloor(new Floor(TerrainSetGenerator.blank()));
     debugManager = new DebugManager();
