@@ -1,0 +1,8 @@
+{
+"bossRoom1": "bossroom_start",
+"bossRoom2": "bossroom_middle",
+"bossRoom3": "bossroom_final",
+"safePlace1": "safeplace_start",
+"safePlace2": "safeplace_middle",
+"startingHall": "starting_hall"
+}

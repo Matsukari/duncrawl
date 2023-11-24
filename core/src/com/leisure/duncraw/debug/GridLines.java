@@ -21,7 +21,6 @@ public class GridLines extends RenderDebug {
   }
   @Override
   public void render(ShapeRenderer renderer) {
-    Logger.log("GridLines", "Renderer");
     renderer.begin(ShapeType.Line);
     renderer.setColor(color);
     for (int x = 0; x <= cols; x++) {
