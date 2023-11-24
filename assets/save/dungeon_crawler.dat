@@ -49,11 +49,7 @@
 		"menuRight": 22
 	},
 	"screenControls": {
-		"dPadX": 0,
-		"dPadY": 0,
 		"dPadScale": 1,
-		"actionX": 0,
-		"actionY": 0,
 		"actionScale": 1
 	}
 }

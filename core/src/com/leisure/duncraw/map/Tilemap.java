@@ -12,7 +12,9 @@ public class Tilemap {
     this.terrainSet = terrainSet;
   }
   public void render() {
-    for (Terrain terrain : terrainSet.terrains) terrain.render();
+    for (Terrain terrain : terrainSet.terrains) {
+      if (terrain != null) terrain.render();
+    }
   }
   public void putChara(TilemapChara chara) {
     if (chars.contains(chara)) return;

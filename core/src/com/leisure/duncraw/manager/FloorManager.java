@@ -15,5 +15,6 @@ public class FloorManager {
     floor = new Floor(TerrainSetGenerator.gen(level));
     floor.exits.addAll(TerrainSetGenerator.selectExits(floor.terrainSet));
   }
-  public Tilemap getCurrentFloor() { return floor; }
+  public void setCurrentFloor(Floor f) { floor = f; }
+  public Floor getCurrentFloor() { return floor; }
 }

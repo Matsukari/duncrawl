@@ -11,8 +11,8 @@ public class Settings {
   public float ambient;
   public boolean vSync;
   public Rectangle bounds;
-  DesktopControls desktopControls;
-  ScreenControls screenControls;
+  public DesktopControls desktopControls;
+  public ScreenControls screenControls;
   public void reset() {
     difficulty = Difficulty.NORMAL;
     music = 0.5f;
@@ -26,7 +26,7 @@ public class Settings {
     screenControls.reset();
   }
 
-  public class DesktopControls {
+  public static class DesktopControls {
     public int action;
     public int left;
     public int right;
@@ -48,7 +48,7 @@ public class Settings {
       menuRight = Keys.RIGHT;
     }
   }
-  public class ScreenControls {
+  public static class ScreenControls {
     // Offsets to bottom left (as dpad is attached in a stage)
     public float dPadX;
     public float dPadY;

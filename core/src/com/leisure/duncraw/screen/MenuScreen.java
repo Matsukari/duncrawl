@@ -7,12 +7,12 @@ import com.leisure.duncraw.data.AssetSource;
 import com.leisure.duncraw.data.SaveData;
 import com.leisure.duncraw.logging.Logger;
 
-public class MenuScreen extends ScreenAdapter {
+public class MenuScreen extends Screen {
   private SaveData save;
-  public MenuScreen(ScreenChanger screenChanger) {
+  public MenuScreen() {
     Logger.log("MenuScreen", "Init");
     save = AssetSource.getSaveData();
-    screenChanger.change(new GameScreen(save));
+    next = new GameScreen(save);
   }
   @Override
   public void render(float delta) {
