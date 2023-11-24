@@ -1,4 +1,4 @@
-package com.leisure.duncraw.tooling;
+package lib.tooling;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Graphics;

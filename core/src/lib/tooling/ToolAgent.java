@@ -1,4 +1,4 @@
-package com.leisure.duncraw.tooling;
+package lib.tooling;
 
 public class ToolAgent {
   public String id = "Tool";
