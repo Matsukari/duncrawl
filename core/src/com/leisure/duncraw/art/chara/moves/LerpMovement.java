@@ -22,18 +22,26 @@ public class LerpMovement extends Movement {
   }
   @Override
   public boolean update(float dt) {
-    time += dt;
-    nextStepX = velX * dt;
-    nextStepY = velY * dt;
-    stepTaken += Math.abs(nextStepX + nextStepY);
-    if (time >= stepDuration && stepTaken >=Math.abs(velX + velY)) {
-      Logger.log("LerpMovement", "step taken: " + Float.toString(stepTaken));
+    boolean ahead = stepTaken >= Math.abs(velX + velY);
+    if (ahead || (time >= stepDuration && ahead)) {
+      // Logger.log("LerpMovement", "step taken: " + Float.toString(stepTaken));
       nextStepY = 0;
       nextStepX = 0;
       stepTaken = 0;
       time = 0;
       stop();
       return true;
+    }
+    dt *= stepDuration;
+    time += dt;
+    nextStepX = velX * dt;
+    nextStepY = velY * dt;
+    stepTaken += Math.abs(nextStepX + nextStepY);
+    if (stepTaken >= Math.abs(velX + velY)) {
+      float excessX = stepTaken - Math.abs(velX);
+      float excessY = stepTaken - Math.abs(velY);
+      if (velX != 0) nextStepX -= excessX;
+      else if (velY != 0) nextStepY -= excessY;
     }
     return false;
   }

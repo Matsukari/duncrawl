@@ -30,7 +30,7 @@ public class Chara extends Art {
     id = IdGenerator.gen(); 
     this.animation = frames;
     this.batch = batch;
-    movement = new LerpMovement(1);
+    movement = new LerpMovement(2f);
     setState(new IdleState());
     Status status = new Status();
     status.reset();
