@@ -19,27 +19,28 @@ public class GameScreenInput extends GameScreen implements InputProcessor {
   }
   private void update() {
     if (player.movement.isMoving()) return;
-    if (pressedKey == saveData.settings.desktopControls.down) {
+    if (Gdx.input.isKeyPressed(saveData.settings.desktopControls.down)) {
       player.movement.moveBy(0, -1);
     }
-    else if (pressedKey == saveData.settings.desktopControls.up) {
+    else if (Gdx.input.isKeyPressed(saveData.settings.desktopControls.up)) {
       player.movement.moveBy(0, 1);
     }
-    else if (pressedKey == saveData.settings.desktopControls.left) {
+    else if (Gdx.input.isKeyPressed(saveData.settings.desktopControls.left)) {
       player.movement.moveBy(-1, 0);
     }
-    else if (pressedKey == saveData.settings.desktopControls.right) {
+    else if (Gdx.input.isKeyPressed(saveData.settings.desktopControls.right)) {
       player.movement.moveBy(1, 0);
     }
   }
   @Override
   public boolean keyDown(int keycode) {
+    Logger.log("GameScreenInput", "Keydown");
     pressedKey = keycode;
-    // Logger.log("GameScreenInput", "Keydown");
     return true;
   }
   @Override
   public boolean keyUp(int keycode) {
+    Logger.log("GameScreenInput", "Keyup");
     pressedKey = -1;
     return true;
   }
