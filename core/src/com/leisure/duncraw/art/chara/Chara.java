@@ -29,7 +29,7 @@ public class Chara extends Art {
     id = IdGenerator.gen(); 
     this.animation = frames;
     this.batch = batch;
-    movement = new Movement(1);
+    movement = new Movement(1000);
     setState(new IdleState());
     Status status = new Status();
     status.reset();

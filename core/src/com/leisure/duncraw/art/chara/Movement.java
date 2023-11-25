@@ -8,21 +8,26 @@ public class Movement {
   public float nextStepY = 0;
   public int velX = 0;
   public int velY = 0;
-  public int tilePerSec = 1;
-  public Movement(int tilePerSec) {
-    this.tilePerSec = tilePerSec;
+  public int stepDelay = 0;
+  public Movement(int stepDelay) {
+    this.stepDelay = stepDelay;
   }
   public void moveBy(int x, int y) {
     velX = x;
     velY = y;
   }
+  public void stop() {
+    velX = 0;
+    velY = 0;
+  }
   public boolean update(float dt) {
     nextStepX = 0;
     nextStepY = 0;
-    if (timer.sinceLastPeek() > tilePerSec) {
+    if (timer.sinceLastPeek() > stepDelay) {
       timer.peek();
       nextStepX = velX;
       nextStepY = velY;
+      stop();
       return true;
     }
     return false;

@@ -21,10 +21,11 @@ public class CharaManager {
   public ArrayList<Chara> charas = new ArrayList<>();
   public SpriteBatch batch = new SpriteBatch();
   public Chara player;
+  public final CharasData sources;
   private final Floor floor;
   public CharaManager(CharasData sources, Floor floor) { 
+    this.sources = sources;
     this.floor = floor;
-    player = addFrom(sources.player_idle);
   }
 
   public Chara addFrom(String source) {

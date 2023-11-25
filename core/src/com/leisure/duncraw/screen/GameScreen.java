@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
+import com.leisure.duncraw.art.chara.Chara;
 import com.leisure.duncraw.data.AssetSource;
 import com.leisure.duncraw.data.Deserializer;
 import com.leisure.duncraw.data.SaveData;
@@ -18,12 +19,13 @@ import com.leisure.duncraw.map.generator.TerrainSetGenerator;
 
 public class GameScreen extends Screen {
   public Color backgroundColor = new Color(4/255f, 4/255f, 4/255f, 1f);
-  private final SaveData saveData;
-  private final CharaManager charaManager;
-  private final FloorManager floorManager;  
-  private final DebugManager debugManager;
-  private final OrthographicCamera camera;
-  private final ExtendViewport viewport; 
+  protected final SaveData saveData;
+  protected final CharaManager charaManager;
+  protected final FloorManager floorManager;  
+  protected final DebugManager debugManager;
+  protected final OrthographicCamera camera;
+  protected final ExtendViewport viewport; 
+  protected Chara player;
   public GameScreen(SaveData saveData) {
     Logger.log("GameScreen", "Init");
     this.saveData = saveData;
@@ -34,6 +36,7 @@ public class GameScreen extends Screen {
     charaManager = new CharaManager(AssetSource.getCharasData(), floorManager.getCurrentFloor());
     debugManager = new DebugManager();
     debugManager.debugMap(floorManager.getCurrentFloor());
+    player = charaManager.addFrom(charaManager.sources.player_idle);
   }
   @Override
   public void pause() {
