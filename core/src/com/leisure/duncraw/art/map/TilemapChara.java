@@ -12,7 +12,13 @@ public class TilemapChara {
     this.chara = chara;
     this.map = map;
   }
-  public void move(int nextX, int nextY) {
+  public void moveTo(int nextX, int nextY) {
+    x = nextX;
+    y = nextY;
+  }
+  public void moveBy(int byX, int byY) {
+    x += byX;
+    y += byY;
   }
   public int getWidth() { return map.terrainSet.terrainWidth; }
   public int getHeight() { return map.terrainSet.terrainHeight; }

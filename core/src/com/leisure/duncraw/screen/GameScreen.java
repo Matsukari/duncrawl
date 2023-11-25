@@ -29,9 +29,9 @@ public class GameScreen extends Screen {
     this.saveData = saveData;
     camera = new OrthographicCamera();
     viewport = new ExtendViewport(saveData.settings.bounds.width, saveData.settings.bounds.height, camera);
-    charaManager = new CharaManager(AssetSource.getCharasData());
     floorManager = new FloorManager(saveData, AssetSource.getFloorsData(), saveData.progression.level.level);
     floorManager.setCurrentFloor(new Floor(TerrainSetGenerator.blank()));
+    charaManager = new CharaManager(AssetSource.getCharasData(), floorManager.getCurrentFloor());
     debugManager = new DebugManager();
     debugManager.debugMap(floorManager.getCurrentFloor());
   }
@@ -47,10 +47,12 @@ public class GameScreen extends Screen {
   @Override
   public void render(float delta) {
     camera.update();
+    charaManager.updateAll(delta);
     // Chars, obj, terrain interaction
 
     ScreenUtils.clear(backgroundColor);
     floorManager.getCurrentFloor().render();
+    charaManager.renderAll();
     debugManager.render();
   }
   @Override
