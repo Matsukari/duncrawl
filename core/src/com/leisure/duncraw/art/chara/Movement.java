@@ -3,15 +3,11 @@ package com.leisure.duncraw.art.chara;
 import lib.time.TimePeeker;
 
 public class Movement {
-  private TimePeeker timer = new TimePeeker();
+  protected TimePeeker timer = new TimePeeker();
   public float nextStepX = 0;
   public float nextStepY = 0;
   public int velX = 0;
   public int velY = 0;
-  public int stepDelay = 0;
-  public Movement(int stepDelay) {
-    this.stepDelay = stepDelay;
-  }
   public void moveBy(int x, int y) {
     velX = x;
     velY = y;
@@ -20,16 +16,7 @@ public class Movement {
     velX = 0;
     velY = 0;
   }
-  public boolean update(float dt) {
-    nextStepX = 0;
-    nextStepY = 0;
-    if (timer.sinceLastPeek() > stepDelay) {
-      timer.peek();
-      nextStepX = velX;
-      nextStepY = velY;
-      stop();
-      return true;
-    }
-    return false;
-  } 
+  public boolean isMoving() { return velX != 0 || velY != 0; }
+  public void apply(Chara chara) {}
+  public boolean update(float dt) { return false; } 
 }

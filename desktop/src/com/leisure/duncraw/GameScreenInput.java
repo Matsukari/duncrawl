@@ -18,6 +18,7 @@ public class GameScreenInput extends GameScreen implements InputProcessor {
     super.render(delta);
   }
   private void update() {
+    if (player.movement.isMoving()) return;
     if (pressedKey == saveData.settings.desktopControls.down) {
       player.movement.moveBy(0, -1);
     }

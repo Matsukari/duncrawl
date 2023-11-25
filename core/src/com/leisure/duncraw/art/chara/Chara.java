@@ -3,6 +3,7 @@ package com.leisure.duncraw.art.chara;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.leisure.duncraw.art.Art;
+import com.leisure.duncraw.art.chara.moves.LerpMovement;
 import com.leisure.duncraw.art.chara.states.IdleState;
 import com.leisure.duncraw.art.map.TilemapChara;
 import com.leisure.duncraw.logging.Logger;
@@ -13,7 +14,7 @@ public class Chara extends Art {
   public final int id;
   public Status status;
   public State state;
-  public Movement movement;
+  public LerpMovement movement;
   public TilemapChara mapAgent;
   private LinearAnimation<TextureRegion> animation;
   private final SpriteBatch batch;
@@ -29,7 +30,7 @@ public class Chara extends Art {
     id = IdGenerator.gen(); 
     this.animation = frames;
     this.batch = batch;
-    movement = new Movement(1000);
+    movement = new LerpMovement(1);
     setState(new IdleState());
     Status status = new Status();
     status.reset();
@@ -37,8 +38,7 @@ public class Chara extends Art {
   }
   public void update(float dt) {
     if (movement.update(dt) && mapAgent != null) mapAgent.moveBy(movement.velX, movement.velY);
-    bounds.x += movement.nextStepX * mapAgent.getWidth();
-    bounds.y += movement.nextStepY * mapAgent.getHeight();
+    movement.apply(this);
   }
   @Override
   public void render() {
