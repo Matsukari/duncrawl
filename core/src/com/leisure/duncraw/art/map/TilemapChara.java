@@ -20,6 +20,11 @@ public class TilemapChara {
     x += byX;
     y += byY;
   }
+  public Obj getObjBy(int byX, int byY) {
+    Terrain terrain = map.terrainSet.getTerrain(x+byX, y+byY);
+    if (terrain != null) return terrain.lastObj();
+    return null;
+  }
   public boolean onBlock(int u, int v) { return x == u && y == v; } 
   public int getWidth() { return map.terrainSet.terrainWidth; }
   public int getHeight() { return map.terrainSet.terrainHeight; }

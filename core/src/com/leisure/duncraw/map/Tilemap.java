@@ -2,6 +2,7 @@ package com.leisure.duncraw.map;
 
 import java.util.ArrayList;
 
+import com.leisure.duncraw.art.map.Obj;
 import com.leisure.duncraw.art.map.Terrain;
 import com.leisure.duncraw.art.map.TilemapChara;
 

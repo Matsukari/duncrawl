@@ -42,7 +42,7 @@ public class GameScreenInput extends GameScreen implements InputProcessor {
   public boolean keyUp(int keycode) {
     // Logger.log("GameScreenInput", "Keyup");
     if (pressedKey == saveData.settings.desktopControls.confirm) {
-      player.interactFront();
+      player.interactAhead();
     }
     pressedKey = -1;
     return true;
