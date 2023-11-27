@@ -47,9 +47,7 @@ public class Chara extends Art {
     status.update();
     state.update(dt);
     if (state.next != null) setState(state.next); 
-    // if (movement.update(dt)) 
-    movement.update(dt);
-    mapAgent.moveTo((int)bounds.x/mapAgent.getWidth(), (int)bounds.y/mapAgent.getHeight());
+    if (movement.update(dt)) mapAgent.moveBy(movement.lastVelX, movement.lastVelY);
     movement.apply(this);
   }
   @Override
@@ -63,7 +61,7 @@ public class Chara extends Art {
   }
   public void interactFront() {
     int frontX = mapAgent.x + movement.lastVelX;
-    int frontY = mapAgent.map.terrainSet.rows - mapAgent.y + movement.lastVelY;
+    int frontY = mapAgent.y + movement.lastVelY;
     Logger.log("Chara", String.format("Attempting to interact at %d %d", frontX, frontY));
     TilemapChara frontChara = mapAgent.map.getChara(frontX, frontY);
     Terrain terrain = mapAgent.map.terrainSet.getTerrain(frontX, frontY);
