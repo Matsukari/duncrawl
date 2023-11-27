@@ -13,6 +13,7 @@ public class Obj extends Art {
     super(batch, frames);
   }
   public Obj(SpriteBatch batch, TextureRegion... animation) { super(batch, animation); }
+  public void update(float dt) {}
   public void onCharaOccupy(Chara chara) {}
   public void onCharaInteract(Chara chara) {}
 }

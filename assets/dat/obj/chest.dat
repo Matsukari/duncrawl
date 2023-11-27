@@ -1,0 +1,5 @@
+{
+"idle": "images/objects/chest_idle.png",
+"openAnim": "images/objects/chest_open.png",
+"openSfx": ""
+}

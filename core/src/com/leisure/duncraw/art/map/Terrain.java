@@ -13,17 +13,17 @@ public class Terrain extends Art {
   public Terrain(SpriteBatch batch, TextureRegion texture) {
     super(batch, texture);
   }
+  public boolean isWall() { return false; }
+  public void putObj(Obj obj) { objs.add(obj); }
   public Terrain getTail() {
     Terrain node = this;
     while (node.next != null) node = node.next;
     return node;
   }
-  public void putObj(Obj obj) { objs.add(obj); }
   public Obj lastObj() { 
     if (objs.isEmpty()) return null;
-    return objs.get(objs.size()); 
+    return objs.get(objs.size()-1); 
   }
-  public boolean isWall() { return false; }
   @Override
   public void render() {
     super.render();

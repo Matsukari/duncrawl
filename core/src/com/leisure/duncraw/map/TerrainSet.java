@@ -1,5 +1,6 @@
 package com.leisure.duncraw.map;
 
+import com.leisure.duncraw.art.map.Obj;
 import com.leisure.duncraw.art.map.Terrain;
 import com.leisure.duncraw.logging.Logger;
 
@@ -26,8 +27,13 @@ public class TerrainSet {
     else terrains[cell] = terrain;
     
   }
-  public void putObject(Terrain terrain, int x, int y) {
+  public void putObject(Obj obj, int x, int y) {
     Logger.log("TerrainSet", "put obj");
+    if (getTerrain(x, y) != null) { 
+      getTerrain(x, y).putObj(obj);
+      obj.bounds.x = x * terrainWidth;
+      obj.bounds.y = y * terrainHeight;
+    }
   }
   public Terrain getTerrain(int x, int y) { return terrains[y*rows+x]; }
 }

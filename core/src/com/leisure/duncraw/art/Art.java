@@ -16,6 +16,11 @@ public abstract class Art {
   public Rectangle bounds = new Rectangle(0, 0, 0, 0);
   protected LinearAnimation<TextureRegion> animation;
   public final SpriteBatch batch;
+  public static class TexAnim extends LinearAnimation<TextureRegion> {
+    public TexAnim(float frameDur, Array<TextureRegion> vals, PlayMode mode) {
+      super(frameDur, vals, mode);
+    }
+  }
   public Art(SpriteBatch batch, LinearAnimation<TextureRegion> animation) { 
     id = IdGenerator.gen(); 
     this.animation = animation;

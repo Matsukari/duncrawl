@@ -16,6 +16,7 @@ public class LinearAnimation<T> {
     stateTime += Gdx.graphics.getDeltaTime();
     return data.getKeyFrame(stateTime);
   }
+  public boolean isFinished() { return data.isAnimationFinished(stateTime); }
   public void reset() {
     stateTime = 0f;
   }
