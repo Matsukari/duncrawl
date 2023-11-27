@@ -1,12 +1,17 @@
 package com.leisure.duncraw;
 
 import com.badlogic.gdx.InputProcessor;
+import com.leisure.duncraw.screen.Screen;
 import com.leisure.duncraw.screen.SplashScreen;
 
 public class SplashScreenInput extends SplashScreen implements InputProcessor {
   public SplashScreenInput() {
-    next = new MenuScreenInput();
+    change();
   }   
+  @Override
+  public Screen next() {
+    return new MenuScreenInput();
+  }
   @Override
   public boolean keyDown(int keycode) {
     return true;

@@ -11,8 +11,12 @@ public class MenuScreen extends Screen {
   private SaveData save;
   public MenuScreen() {
     Logger.log("MenuScreen", "Init");
+    change();
+  }
+  @Override
+  public Screen next() {
     save = AssetSource.getSaveData();
-    next = new GameScreen(save);
+    return new GameScreen(save);
   }
   @Override
   public void render(float delta) {

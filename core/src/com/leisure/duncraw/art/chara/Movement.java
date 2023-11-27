@@ -1,5 +1,7 @@
 package com.leisure.duncraw.art.chara;
 
+import com.badlogic.gdx.math.Vector2;
+
 import lib.time.TimePeeker;
 
 public class Movement {
@@ -8,9 +10,13 @@ public class Movement {
   public float nextStepY = 0;
   public int velX = 0;
   public int velY = 0;
+  public int lastVelX = 0;
+  public int lastVelY = 0;
   public void moveBy(int x, int y) {
     velX = x;
     velY = y;
+    lastVelX = velX;
+    lastVelY = velY;
   }
   public void stop() {
     velX = 0;

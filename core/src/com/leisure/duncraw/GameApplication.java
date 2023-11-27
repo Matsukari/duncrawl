@@ -22,7 +22,7 @@ public class GameApplication extends Game {
   @Override
   public void render() {
     if (screen == null) return;
-    if (((Screen)screen).next != null) setScreen(((Screen)screen).next);
+    if (((Screen)screen).hasChanged) setScreen(((Screen)screen).next());
     screen.render(Gdx.graphics.getDeltaTime());
   }
 	@Override

@@ -14,8 +14,8 @@ public class Status {
   public float elementPower;
   public Element element;
   public Element weakness;
+  public ActionState action;
   public enum Element { HOLY, DARK, NONE };
-  public enum State { MOVING, IDLE, ATTACKING, INTERACTING };
   public void reset() {
     health = 100;
     maxHealth = 100;
@@ -26,6 +26,9 @@ public class Status {
     elementPower = 1;
     element = Element.NONE;
     weakness = Element.NONE;
-
+    action = ActionState.IDLE;
+  }
+  public void update() {
+    action = ActionState.IDLE;
   }
 }

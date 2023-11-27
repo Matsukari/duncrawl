@@ -2,14 +2,17 @@ package com.leisure.duncraw;
 
 import com.badlogic.gdx.InputProcessor;
 import com.leisure.duncraw.data.AssetSource;
-import com.leisure.duncraw.data.SaveData;
-import com.leisure.duncraw.screen.GameScreen;
 import com.leisure.duncraw.screen.MenuScreen;
+import com.leisure.duncraw.screen.Screen;
 
 public class MenuScreenInput extends MenuScreen implements InputProcessor {
   public MenuScreenInput() {
-    next = new GameScreenInput(AssetSource.getSaveData());
-  }   
+    change();
+  }
+  @Override
+  public Screen next() {
+    return new GameScreenInput(AssetSource.getSaveData());
+  }
   @Override
   public boolean keyDown(int keycode) {
     return true;

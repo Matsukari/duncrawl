@@ -37,6 +37,8 @@ public class GameScreen extends Screen {
     debugManager = new DebugManager();
     debugManager.debugMap(floorManager.getCurrentFloor());
     player = charaManager.addFrom(charaManager.sources.player_idle);
+    Chara mob = charaManager.addFrom(charaManager.sources.ghost_idle);
+    mob.moveTo(3, 3);
   }
   @Override
   public void pause() {

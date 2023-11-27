@@ -20,6 +20,7 @@ public class TilemapChara {
     x += byX;
     y += byY;
   }
+  public boolean onBlock(int u, int v) { return x == u && y == v; } 
   public int getWidth() { return map.terrainSet.terrainWidth; }
   public int getHeight() { return map.terrainSet.terrainHeight; }
   @Override

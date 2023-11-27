@@ -31,16 +31,19 @@ public class GameScreenInput extends GameScreen implements InputProcessor {
     else if (Gdx.input.isKeyPressed(saveData.settings.desktopControls.right)) {
       player.movement.moveBy(1, 0);
     }
+    else if (Gdx.input.isKeyPressed(saveData.settings.desktopControls.confirm)) {
+      player.interactFront();
+    }
   }
   @Override
   public boolean keyDown(int keycode) {
-    Logger.log("GameScreenInput", "Keydown");
+    // Logger.log("GameScreenInput", "Keydown");
     pressedKey = keycode;
     return true;
   }
   @Override
   public boolean keyUp(int keycode) {
-    Logger.log("GameScreenInput", "Keyup");
+    // Logger.log("GameScreenInput", "Keyup");
     pressedKey = -1;
     return true;
   }

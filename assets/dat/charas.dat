@@ -2,5 +2,5 @@
 "player_idle": "images/characters/mc/mc_idle_front.png",
 "player_icon": "player_icon.png",
 "player_move": "player_move.png",
-"ghost_idle": "ghost_idle.png"
+"ghost_idle": "images/characters/ghost/ghost_front.png"
 }

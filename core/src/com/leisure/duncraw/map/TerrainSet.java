@@ -24,5 +24,6 @@ public class TerrainSet {
   public void putObject(Terrain terrain, int x, int y) {
     Logger.log("TerrainSet", "put obj");
   }
+  public Terrain getTerrain(int x, int y) { return terrains[y*rows+x]; }
 }
 

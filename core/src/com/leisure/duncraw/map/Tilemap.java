@@ -17,7 +17,13 @@ public class Tilemap {
     }
   }
   public void putChara(TilemapChara chara) {
-    if (chars.contains(chara)) return;
+    if (chars.contains(chara));
     chars.add(chara);
+  }
+  public TilemapChara getChara(int x, int y) {
+    for (TilemapChara chara : chars) {
+      if (chara.onBlock(x, y)) return chara;
+    }
+    return null;
   }
 }
