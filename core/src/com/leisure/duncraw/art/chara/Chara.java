@@ -48,6 +48,7 @@ public class Chara extends Art {
     state.update(dt);
     if (state.next != null) setState(state.next); 
     // if (movement.update(dt)) 
+    movement.update(dt);
     mapAgent.moveTo((int)bounds.x/mapAgent.getWidth(), (int)bounds.y/mapAgent.getHeight());
     movement.apply(this);
   }
