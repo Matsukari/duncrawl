@@ -16,6 +16,7 @@ import com.leisure.duncraw.manager.DebugManager;
 import com.leisure.duncraw.manager.FloorManager;
 import com.leisure.duncraw.map.Floor;
 import com.leisure.duncraw.map.generator.TerrainSetGenerator;
+import com.leisure.duncraw.map.loader.TmxLoader;
 
 public class GameScreen extends Screen {
   public Color backgroundColor = new Color(4/255f, 4/255f, 4/255f, 1f);
@@ -32,7 +33,7 @@ public class GameScreen extends Screen {
     camera = new OrthographicCamera();
     viewport = new ExtendViewport(saveData.settings.bounds.width, saveData.settings.bounds.height, camera);
     floorManager = new FloorManager(saveData, AssetSource.getFloorsData(), saveData.progression.level.level);
-    floorManager.setCurrentFloor(new Floor(TerrainSetGenerator.blank()));
+    floorManager.setCurrentFloor(new Floor(TmxLoader.load(floorManager.sources.startingHall, floorManager.batch, 32, 32)));
     charaManager = new CharaManager(AssetSource.getCharasData(), floorManager.getCurrentFloor());
     debugManager = new DebugManager();
     debugManager.debugMap(floorManager.getCurrentFloor());
@@ -56,7 +57,7 @@ public class GameScreen extends Screen {
     // Chars, obj, terrain interaction
 
     ScreenUtils.clear(backgroundColor);
-    floorManager.getCurrentFloor().render();
+    floorManager.renderCurrent();
     charaManager.renderAll();
     debugManager.render();
   }

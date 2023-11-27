@@ -4,5 +4,5 @@
 "bossRoom3": "bossroom_final",
 "safePlace1": "safeplace_start",
 "safePlace2": "safeplace_middle",
-"startingHall": "starting_hall"
+"startingHall": "floors/starting_room.tmx"
 }

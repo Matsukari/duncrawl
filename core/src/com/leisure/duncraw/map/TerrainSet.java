@@ -17,9 +17,14 @@ public class TerrainSet {
   }
   public void putTerrain(Terrain terrain, int x, int y) {
     Logger.log("TerrainSet", "put terrain");
-    terrains[y * cols + x] = terrain;
+    int cell = y * cols + x; 
     terrain.bounds.x = x * terrainWidth;
     terrain.bounds.y = y * terrainHeight;
+
+    // Overlay then
+    if (terrains[cell] != null) terrains[cell].getTail().next = terrain; 
+    else terrains[cell] = terrain;
+    
   }
   public void putObject(Terrain terrain, int x, int y) {
     Logger.log("TerrainSet", "put obj");

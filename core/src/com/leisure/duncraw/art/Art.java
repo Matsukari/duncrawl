@@ -15,7 +15,7 @@ public abstract class Art {
   public Color color = new Color(1, 1, 1, 1);
   public Rectangle bounds = new Rectangle(0, 0, 0, 0);
   protected LinearAnimation<TextureRegion> animation;
-  protected final SpriteBatch batch;
+  public final SpriteBatch batch;
   public Art(SpriteBatch batch, LinearAnimation<TextureRegion> animation) { 
     id = IdGenerator.gen(); 
     this.animation = animation;

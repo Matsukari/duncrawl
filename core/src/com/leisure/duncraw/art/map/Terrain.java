@@ -8,9 +8,15 @@ import com.leisure.duncraw.art.Art;
 
 public class Terrain extends Art {
   // A snigle block (terrain) can contain mulitple objs (usuallyloots)
-  public ArrayList<Obj> objs;
+  public ArrayList<Obj> objs = new ArrayList<>();
+  public Terrain next = null;
   public Terrain(SpriteBatch batch, TextureRegion texture) {
     super(batch, texture);
+  }
+  public Terrain getTail() {
+    Terrain node = this;
+    while (node.next != null) node = node.next;
+    return node;
   }
   public void putObj(Obj obj) { objs.add(obj); }
   public Obj lastObj() { 
@@ -20,7 +26,8 @@ public class Terrain extends Art {
   public boolean isWall() { return false; }
   @Override
   public void render() {
-    for (Obj obj : objs) obj.render();
     super.render();
+    for (Obj obj : objs) obj.render();
+    for (Terrain node = next; node != null; node = node.next) node.render();
   }
 }
