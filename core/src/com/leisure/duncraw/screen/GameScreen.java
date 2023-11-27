@@ -37,8 +37,8 @@ public class GameScreen extends Screen {
     charaManager = new CharaManager(AssetSource.getCharasData(), floorManager.getCurrentFloor());
     debugManager = new DebugManager();
     debugManager.debugMap(floorManager.getCurrentFloor());
-    player = charaManager.addFrom(charaManager.sources.player_idle);
-    Chara mob = charaManager.addFrom(charaManager.sources.ghost_idle);
+    player = charaManager.addFrom(charaManager.sources.player);
+    Chara mob = charaManager.addFrom(charaManager.sources.ghost);
     mob.moveTo(3, 3);
   }
   @Override

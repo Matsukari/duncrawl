@@ -1,0 +1,33 @@
+{
+"anims": {
+	"move": {
+		"side": "images/characters/ghost/ghost_back.png",
+		"back": "images/characters/ghost/ghost_back.png",
+		"front": "images/characters/ghost/ghost_back.png"
+	},
+	"idle": {
+		"side": "images/characters/ghost/ghost_back.png",
+		"back": "images/characters/ghost/ghost_back.png",
+		"front": "images/characters/ghost/ghost_back.png"
+	}
+},
+"sounds": {},
+"status": {
+	"health": 100,
+	"maxHealth": 100,
+	"stamina": 100,
+	"maxStamina": 100,
+	"phyAttack": {
+		"x": 1,
+		"y": 1
+	},
+	"phyDefense": {
+		"x": 1,
+		"y": 1
+	},
+	"elementPower": 1,
+	"element": "NONE",
+	"weakness": "NONE",
+	"action": "IDLE"
+}
+}

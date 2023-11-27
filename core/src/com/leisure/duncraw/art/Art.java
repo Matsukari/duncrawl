@@ -26,6 +26,10 @@ public abstract class Art {
     this.animation = animation;
     this.batch = batch;
   }
+  public Art(SpriteBatch batch) {
+    id = IdGenerator.gen();
+    this.batch = batch;
+  }
   public Art(SpriteBatch batch, TextureRegion... animation) {
     id = IdGenerator.gen();
     this.batch = batch;
@@ -40,7 +44,7 @@ public abstract class Art {
   private static class IdGenerator {
     private static int last = 0;
     public static int gen() { 
-      Logger.log("IdGenerator", "Generated id for unique resource");
+      // Logger.log("IdGenerator", "Generated id for unique resource");
       last += 1; 
       return last;
     }

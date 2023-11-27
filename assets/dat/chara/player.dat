@@ -1,0 +1,33 @@
+{
+"anims": {
+	"move": {
+		"side": "images/characters/mc/mc_move_side.png",
+		"back": "images/characters/mc/mc_move_back.png",
+		"front": "images/characters/mc/mc_move_front.png"
+	},
+	"idle": {
+		"side": "images/characters/mc/mc_idle_side.png",
+		"back": "images/characters/mc/mc_idle_back.png",
+		"front": "images/characters/mc/mc_idle_front.png"
+	}
+},
+"sounds": {},
+"status": {
+	"health": 100,
+	"maxHealth": 100,
+	"stamina": 100,
+	"maxStamina": 100,
+	"phyAttack": {
+		"x": 1,
+		"y": 1
+	},
+	"phyDefense": {
+		"x": 1,
+		"y": 1
+	},
+	"elementPower": 1,
+	"element": "NONE",
+	"weakness": "NONE",
+	"action": "IDLE"
+}
+}
