@@ -32,7 +32,7 @@ public class Chara extends Art {
   public Chara(CharaData data, SpriteBatch batch) {
     super(batch);
     status = data.status;
-    Logger.log("Chara", "Data anim front: " + data.anims.get("idle").front);
+    // Logger.log("Chara", "Data anim front: " + data.anims.get("idle").front);
     for (Map.Entry<String, DirAnimData> anim : data.anims.entrySet()) 
       anims.data.put(anim.getKey(), new DirAnimation(anim.getValue())); 
     anims.set("idle");

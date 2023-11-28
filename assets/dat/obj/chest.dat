@@ -1,5 +1,8 @@
 {
-"idle": "images/objects/chest_idle.png",
-"openAnim": "images/objects/chest_open.png",
-"openSfx": ""
+"anims": {
+	"idle": "images/objects/chest_idle.png",
+	"open": "images/objects/chest_open.png"
+},
+"sounds": {},
+"oneTexture": true
 }

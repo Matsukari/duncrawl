@@ -2,7 +2,7 @@ package com.leisure.duncraw.data;
 
 import java.util.HashMap;
 
-public class ObjData extends Dat { 
+public class ItemData extends Dat { 
   public HashMap<String, String> anims;
   public HashMap<String, String> sounds;
   public boolean oneTexture;
@@ -10,8 +10,11 @@ public class ObjData extends Dat {
   @Override
   public void reset() {
     anims = new HashMap<>();
-    anims.put("idle", DEFAULT_PNG);
+    anims.put("drop", DEFAULT_AUD);
+    anims.put("store", DEFAULT_AUD);
     oneTexture = true;
     sounds = new HashMap<>();
+    sounds.put("store", DEFAULT_AUD);
   }
 }
+

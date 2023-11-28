@@ -17,7 +17,7 @@ public class TerrainSet {
     for (int i = 0; i < cols * rows; i++) terrains[i] = null;
   }
   public void putTerrain(Terrain terrain, int x, int y) {
-    Logger.log("TerrainSet", "put terrain");
+    // Logger.log("TerrainSet", "put terrain");
     int cell = y * cols + x; 
     terrain.bounds.x = x * terrainWidth;
     terrain.bounds.y = y * terrainHeight;
