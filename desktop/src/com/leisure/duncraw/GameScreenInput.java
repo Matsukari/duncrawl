@@ -20,16 +20,16 @@ public class GameScreenInput extends GameScreen implements InputProcessor {
   private void update() {
     if (player.movement.isMoving()) return;
     if (Gdx.input.isKeyPressed(saveData.settings.desktopControls.down)) {
-      player.movement.moveBy(0, -1);
+      player.moveBy(0, -1);
     }
     else if (Gdx.input.isKeyPressed(saveData.settings.desktopControls.up)) {
-      player.movement.moveBy(0, 1);
+      player.moveBy(0, 1);
     }
     else if (Gdx.input.isKeyPressed(saveData.settings.desktopControls.left)) {
-      player.movement.moveBy(-1, 0);
+      player.moveBy(-1, 0);
     }
     else if (Gdx.input.isKeyPressed(saveData.settings.desktopControls.right)) {
-      player.movement.moveBy(1, 0);
+      player.moveBy(1, 0);
     }
   }
   @Override

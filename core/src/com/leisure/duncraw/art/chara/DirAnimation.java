@@ -2,13 +2,13 @@ package com.leisure.duncraw.art.chara;
 
 import lib.animation.LinearAnimation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.leisure.duncraw.art.Art.TexAnim;
-import com.leisure.duncraw.data.CharaData;
 import com.leisure.duncraw.data.DirAnimData;
 import com.leisure.duncraw.data.GeneralAnimation;
 
 public class DirAnimation {
+  @SuppressWarnings("unchecked")
   public final LinearAnimation<TextureRegion> anims[] = (LinearAnimation<TextureRegion>[]) new LinearAnimation[3]; 
+  public LinearAnimation<TextureRegion> currentDir;
   public static int FRONT=0, SIDE=1, BACK=2;
   public boolean rightHanded = true;
   public DirAnimation(DirAnimData dat) { 
@@ -16,13 +16,20 @@ public class DirAnimation {
     anims[FRONT] = GeneralAnimation.line(dat.front);
     anims[SIDE] = GeneralAnimation.line(dat.side);
     anims[BACK] = GeneralAnimation.line(dat.back);
+    currentDir = anims[DirAnimation.FRONT];
   }
   public void flipSide(boolean v) {
     for (TextureRegion frames : anims[SIDE].data.getKeyFrames()) frames.flip(v, false);
   }
   public LinearAnimation<TextureRegion> getSideFlip(int vel) {
-    if (vel > 0 && !rightHanded) flipSide(true);
-    else if (vel < 0) flipSide(false);
+    if (vel > 0 && !anims[SIDE].data.getKeyFrames()[0].isFlipX()) flipSide(!rightHanded);
+    else if (vel < 0 && anims[SIDE].data.getKeyFrames()[0].isFlipX()) flipSide(!rightHanded);
+    else if (vel < 0) flipSide(rightHanded);
     return anims[SIDE];
+  }
+  public void face(int x, int y) {
+    if (x != 0) currentDir = getSideFlip(x);
+    else if (y < 0) currentDir = anims[DirAnimation.FRONT];
+    else if (y > 0) currentDir = anims[DirAnimation.BACK];
   }
 }
