@@ -45,8 +45,11 @@ public class Tooling {
     ImGui.newFrame();
    
     for (ToolAgent tool : tools) { 
-      ImGui.setNextWindowPos(Gdx.graphics.getWidth()-200, 0);
+      ImGui.setNextWindowPos(Gdx.graphics.getWidth()-tool.size.x, 0);
+      ImGui.setNextWindowSize(tool.size.x, tool.size.y);
+      ImGui.begin(tool.id);
       tool.tool();
+      ImGui.end();
     }
     ImGui.render();
     gl.renderDrawData(ImGui.getDrawData());
