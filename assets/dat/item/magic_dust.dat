@@ -5,5 +5,8 @@
 },
 "sounds": {
 	"store": ""
-}
+},
+"oneTexture": true,
+"name": "Magic Dust",
+"desc": ""
 }

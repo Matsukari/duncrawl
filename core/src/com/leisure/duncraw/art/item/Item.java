@@ -15,7 +15,6 @@ import com.leisure.duncraw.data.Serializer;
 import lib.animation.LinearAnimation;
 
 public class Item extends Obj {
-  public String desc;
   public boolean isDrop = true;
   public LinearAnimation<TextureRegion> dropAnim; 
   public LinearAnimation<TextureRegion> storeAnim;

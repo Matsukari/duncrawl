@@ -4,5 +4,7 @@
 	"open": "images/objects/chest_open.png"
 },
 "sounds": {},
-"oneTexture": true
+"oneTexture": true,
+"name": "",
+"desc": ""
 }

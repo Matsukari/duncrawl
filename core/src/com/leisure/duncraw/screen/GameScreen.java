@@ -36,11 +36,13 @@ public class GameScreen extends Screen {
     floorManager = new FloorManager(saveData, AssetSource.getFloorsData(), saveData.progression.level.level);
     floorManager.setCurrentFloor(new Floor(TmxLoader.load(floorManager.sources.startingHall, floorManager.batch, 32, 32)));
     charaManager = new CharaManager(AssetSource.getCharasData(), floorManager.getCurrentFloor());
-    debugManager = new DebugManager();
-    debugManager.debugMap(floorManager.getCurrentFloor());
     player = charaManager.addFrom(charaManager.sources.player, Player.class);
     Chara mob = charaManager.addFrom(charaManager.sources.ghost);
     mob.moveTo(3, 3);
+
+    debugManager = new DebugManager();
+    debugManager.debugMap(floorManager.getCurrentFloor());
+    debugManager.debugInventory(player.inventory);
   }
   @Override
   public void pause() {

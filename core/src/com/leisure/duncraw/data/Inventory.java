@@ -22,6 +22,7 @@ public class Inventory extends Dat {
   public void merge() {
   }
   public void remove(int index) {
+    data.remove(index);
   }
   @Override
   public void reset() {
