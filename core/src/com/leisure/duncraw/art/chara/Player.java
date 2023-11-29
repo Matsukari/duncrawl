@@ -12,4 +12,11 @@ public class Player extends Chara {
     super(data, batch);
     inventory.reset();
   }
+  @Override
+  public void update(float dt) {
+    super.update(dt);
+  }
+  public void equip(Item item) {
+    itemSel = item;
+  }
 }

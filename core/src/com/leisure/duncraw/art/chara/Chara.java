@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.leisure.duncraw.art.Art;
 import com.leisure.duncraw.art.chara.moves.LerpMovement;
 import com.leisure.duncraw.art.chara.states.IdleState;
+import com.leisure.duncraw.art.chara.states.InteractObjState;
 import com.leisure.duncraw.art.chara.states.InteractState;
 import com.leisure.duncraw.art.chara.states.MoveState;
 import com.leisure.duncraw.art.map.Obj;
@@ -74,11 +75,13 @@ public class Chara extends Art {
     Obj frontObject = mapAgent.getObjBy(movement.lastVelX, movement.lastVelY);
     TilemapChara frontChara = mapAgent.map.getChara(frontX, frontY);
     if (frontChara != null) {
-      frontChara.chara.setState(new InteractState(this));
       setState(new InteractState(frontChara.chara));
+      frontChara.chara.setState(new InteractState(this));
     } else if (belowObject != null) {
+      setState(new InteractObjState(belowObject));
       belowObject.onCharaOccupy(this);
     } else if (frontObject != null) {
+      setState(new InteractObjState(frontObject));
       frontObject.onCharaInteract(this);
     }
   }

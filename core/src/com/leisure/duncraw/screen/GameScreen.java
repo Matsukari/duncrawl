@@ -8,7 +8,6 @@ import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.leisure.duncraw.art.chara.Chara;
 import com.leisure.duncraw.art.chara.Player;
 import com.leisure.duncraw.data.AssetSource;
-import com.leisure.duncraw.data.Deserializer;
 import com.leisure.duncraw.data.SaveData;
 import com.leisure.duncraw.data.Serializer;
 import com.leisure.duncraw.logging.Logger;
@@ -16,7 +15,6 @@ import com.leisure.duncraw.manager.CharaManager;
 import com.leisure.duncraw.manager.DebugManager;
 import com.leisure.duncraw.manager.FloorManager;
 import com.leisure.duncraw.map.Floor;
-import com.leisure.duncraw.map.generator.TerrainSetGenerator;
 import com.leisure.duncraw.map.loader.TmxLoader;
 
 public class GameScreen extends Screen {
@@ -42,7 +40,7 @@ public class GameScreen extends Screen {
 
     debugManager = new DebugManager();
     debugManager.debugMap(floorManager.getCurrentFloor());
-    debugManager.debugInventory(player.inventory);
+    debugManager.debugPlayer(player);
   }
   @Override
   public void pause() {

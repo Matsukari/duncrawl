@@ -1,9 +1,9 @@
 package com.leisure.duncraw.manager;
 
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.leisure.duncraw.data.Inventory;
+import com.leisure.duncraw.art.chara.Player;
 import com.leisure.duncraw.debug.GridLines;
-import com.leisure.duncraw.debug.InventoryDebug;
+import com.leisure.duncraw.debug.PlayerDebug;
 import com.leisure.duncraw.logging.Logger;
 import com.leisure.duncraw.map.Floor;
 
@@ -20,8 +20,8 @@ public class DebugManager {
     Tooling.init(tooling);
     // Tooling.addAgent(new Logger());
   }
-  public void debugInventory(Inventory inventory) {
-    Tooling.addAgent(new InventoryDebug(inventory));
+  public void debugPlayer(Player player) {
+    Tooling.addAgent(new PlayerDebug(player));
   }
   public void debugMap(Floor floor) {
     Logger.log("DebugManager", "Debugging map");

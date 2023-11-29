@@ -33,6 +33,16 @@ public class Item extends Obj {
     itemData.passTo(dat);
     try { dat = Deserializer.load(ObjData.class, Gdx.files.local(datFile)); } catch(Exception e) { Serializer.save(dat, Gdx.files.local(datFile)); };
   }
+  @Override
+  public void onCharaOccupy(Chara chara) {
+    if (chara instanceof Player && isDrop) {
+      Player player = (Player)chara;
+      player.inventory.put(this);
+      if (player.itemSel == null) player.equip(this);
+    }
+  }
+  public void use() {
+  }
   // Will be called by Terrain
   @Override
   public void render() {
@@ -41,9 +51,5 @@ public class Item extends Obj {
   // Will be called by the UI
   public void renderStore(int x, int y, int w, int h) {
     batch.draw(storeAnim.current(), x, y, w, h); 
-  }
-  @Override
-  public void onCharaOccupy(Chara chara) {
-    if (chara instanceof Player && isDrop) ((Player)chara).inventory.put(this);
   }
 }
