@@ -8,6 +8,7 @@ public class DesktopLauncher {
 	public static void main (String[] arg) {
 		Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
 		config.setForegroundFPS(60);
+    config.setWindowedMode(1020, 620);
 		config.setTitle("dungeon_crawler");
 
     GameApplication game = new GameApplication(()->new SplashScreenInput());

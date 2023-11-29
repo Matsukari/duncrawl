@@ -38,8 +38,8 @@ public class Settings {
     public int menuRight;
     public void reset() {
       action = Keys.J;
-      left = Keys.A;
       right = Keys.D;
+      left = Keys.A;
       up = Keys.W;
       down = Keys.S;
       confirm = Keys.J;

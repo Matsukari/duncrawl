@@ -12,6 +12,11 @@ public class TilemapChara {
     this.chara = chara;
     this.map = map;
   }
+  @Override
+  public boolean equals(Object obj) {
+    TilemapChara compare = (TilemapChara)obj;
+    return (chara.id == compare.chara.id);
+  }
   public void moveTo(int nextX, int nextY) {
     x = nextX;
     y = nextY;
@@ -28,9 +33,4 @@ public class TilemapChara {
   public boolean onBlock(int u, int v) { return x == u && y == v; } 
   public int getWidth() { return map.terrainSet.terrainWidth; }
   public int getHeight() { return map.terrainSet.terrainHeight; }
-  @Override
-  public boolean equals(Object obj) {
-    TilemapChara compare = (TilemapChara)obj;
-    return (chara.id == compare.chara.id);
-  }
 }

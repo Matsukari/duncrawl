@@ -1,5 +1,6 @@
 package com.leisure.duncraw.manager;
 
+import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.leisure.duncraw.art.map.Terrain;
 import com.leisure.duncraw.data.FloorData;
@@ -23,7 +24,8 @@ public class FloorManager {
   }
   public void setCurrentFloor(Floor f) { floor = f; }
   public Floor getCurrentFloor() { return floor; }
-  public void renderCurrent() {
+  public void renderCurrent(Camera cam) {
+    batch.setProjectionMatrix(cam.combined);
     batch.begin();
     floor.render();
     batch.end();

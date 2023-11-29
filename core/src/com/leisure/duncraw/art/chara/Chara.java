@@ -7,6 +7,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.leisure.duncraw.art.Art;
 import com.leisure.duncraw.art.chara.moves.LerpMovement;
+import com.leisure.duncraw.art.chara.states.AttackState;
+import com.leisure.duncraw.art.chara.states.HurtState;
 import com.leisure.duncraw.art.chara.states.IdleState;
 import com.leisure.duncraw.art.chara.states.InteractObjState;
 import com.leisure.duncraw.art.chara.states.InteractState;
@@ -71,26 +73,32 @@ public class Chara extends Art {
   public void interactAhead() {
     int frontX = mapAgent.x + movement.lastVelX, frontY = mapAgent.y + movement.lastVelY;
     Logger.log("Chara", String.format("Attempting to interact at %d %d", frontX, frontY));
-    Obj belowObject = mapAgent.getObjBy(0, 0);
-    Obj frontObject = mapAgent.getObjBy(movement.lastVelX, movement.lastVelY);
-    TilemapChara frontChara = mapAgent.map.getChara(frontX, frontY);
-    if (frontChara != null) {
-      setState(new InteractState(frontChara.chara));
-      frontChara.chara.setState(new InteractState(this));
-    } else if (belowObject != null) {
-      setState(new InteractObjState(belowObject));
-      belowObject.onCharaOccupy(this);
-    } else if (frontObject != null) {
-      setState(new InteractObjState(frontObject));
-      frontObject.onCharaInteract(this);
-    }
+    if (tryInteract(mapAgent.getObjBy(0, 0), true)) {}
+    else if (tryInteract(mapAgent.getObjBy(movement.lastVelX, movement.lastVelY), false)) {}
+    else if (tryInteract(mapAgent.map.getChara(frontX, frontY), false)) {}
   }
-  public void attackAhead() {
-  }
-  public void setStats(Status s) { status = s; }
   public void setState(State s) { 
     state = s; 
     state.init(this);  
     observers.notifyAll(state);
+  }
+  private <T> boolean tryInteract(T other, boolean below) {
+    if (other instanceof Obj) {
+      setState(new InteractObjState((Obj)other));
+      if (below) ((Obj)other).onCharaOccupy(this);
+      else ((Obj)other).onCharaInteract(this);
+      return true;
+    }
+    else if (other instanceof TilemapChara) {
+      if (((TilemapChara)other).chara instanceof Enemy) {
+        setState(new AttackState(((TilemapChara)other).chara));
+        ((TilemapChara)other).chara.setState(new HurtState(this));
+      } else {
+        setState(new InteractState(((TilemapChara)other).chara));
+        ((TilemapChara)other).chara.setState(new InteractState(this));
+      }
+      return true;
+    }
+    return false;
   }
 }

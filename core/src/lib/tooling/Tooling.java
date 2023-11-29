@@ -4,6 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Graphics;
 import imgui.ImGui;
 import imgui.ImGuiIO;
+import imgui.flag.ImGuiCond;
+import imgui.flag.ImGuiWindowFlags;
 import imgui.gl3.ImGuiImplGl3;
 import imgui.glfw.ImGuiImplGlfw;
 import com.badlogic.gdx.utils.Array;
@@ -44,11 +46,13 @@ public class Tooling {
     glfw.newFrame();
     ImGui.newFrame();
    
-    for (ToolAgent tool : tools) { 
-      ImGui.setNextWindowPos(Gdx.graphics.getWidth()-tool.size.x, 0);
-      ImGui.setNextWindowSize(tool.size.x, tool.size.y);
-      ImGui.begin(tool.id);
-      tool.tool();
+    for (int i = 0; i < tools.size; i++) { 
+      float nextPosX = Gdx.graphics.getWidth()-tools.get(i).size.x;
+      if (i-1 >= 0) nextPosX -= tools.get(i-1).size.x;
+      ImGui.setNextWindowPos(nextPosX, 0);
+      ImGui.setNextWindowSize(tools.get(i).size.x, tools.get(i).size.y);
+      ImGui.begin(tools.get(i).id);
+      tools.get(i).tool();
       ImGui.end();
     }
     ImGui.render();
