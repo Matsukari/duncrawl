@@ -19,7 +19,6 @@ public class FloorManager {
     level = levelStart;
     floor = new Floor(TerrainSetGenerator.gen(level));
     floor.exits.addAll(TerrainSetGenerator.selectExits(floor.terrainSet));
-
     // TmxLoader.load(sources.startingHall, batch);
   }
   public void setCurrentFloor(Floor f) { floor = f; }

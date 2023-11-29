@@ -13,6 +13,7 @@ public class AssetSource {
   public String floors;
   public String charas;
   public String objects;
+  public String graphics;
   public static AssetSource instance;
   public AssetSource(FileHandle ini) {
     this.ini = ini; 
@@ -29,6 +30,8 @@ public class AssetSource {
   }
   public static void save() { Serializer.save(instance, instance.ini); }
   public static AssetSource load() throws Exception { return Deserializer.load(AssetSource.class, instance.ini); }
+  public static GraphicsData getGraphicsData() 
+  { return getGenericData(GraphicsData.class, instance.graphics, ()->{GraphicsData dat = new GraphicsData(); dat.reset(); return dat;}); }
   public static FloorData getFloorsData() 
   { return getGenericData(FloorData.class, instance.floors, ()->{FloorData dat = new FloorData(); dat.reset(); return dat;}); }
   public static CharasData getCharasData() 
@@ -54,6 +57,7 @@ public class AssetSource {
       instance.floors = "dat/floors.dat";
       instance.objects = "dat/objects.dat";
       instance.charas = "dat/charas.dat";
+      instance.graphics = "dat/graphics.dat";
       AssetSource.save();
     }
   }

@@ -17,6 +17,7 @@ public class GameApplication extends Game {
 	public void create () {
     Logger.log("GameApplication", "Create");
     AssetSource.init(Gdx.files.local("dungeon_crawler.ini"));
+    Graphics.init();
     setScreen(nextScreen.instance());
   }	
   @Override

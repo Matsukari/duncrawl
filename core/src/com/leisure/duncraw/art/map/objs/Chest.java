@@ -15,14 +15,9 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.Animation.PlayMode;
 
 public class Chest extends Obj {
-  public ObjData dat = new ObjData();
-  private LinearAnimation<TextureRegion> idle;
   private LinearAnimation<TextureRegion> open;
   public Chest(String datFile, SpriteBatch batch) {
-    super(null, batch);
-    dat.reset();
-    try { dat = Deserializer.load(ObjData.class, Gdx.files.local(datFile)); } catch(Exception e) { Serializer.save(dat, Gdx.files.local(datFile)); }
-    idle = GeneralAnimation.line(dat.anims.get("idle"), PlayMode.NORMAL);
+    super(batch, datFile);
     open = GeneralAnimation.line(dat.anims.get("open"), PlayMode.NORMAL);
     animation = idle;
   }

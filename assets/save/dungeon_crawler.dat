@@ -7,7 +7,7 @@
 "status": {
 	"rank": "BRONZE",
 	"inventory": {
-		"list": []
+		"data": []
 	},
 	"status": {
 		"health": 100,
@@ -24,7 +24,8 @@
 		},
 		"elementPower": 1,
 		"element": "NONE",
-		"weakness": "NONE"
+		"weakness": "NONE",
+		"action": "IDLE"
 	}
 },
 "settings": {

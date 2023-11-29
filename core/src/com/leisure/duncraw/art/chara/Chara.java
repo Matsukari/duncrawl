@@ -68,28 +68,22 @@ public class Chara extends Art {
     anims.current.face(x, y);
   }
   public void interactAhead() {
-    int frontX = mapAgent.x + movement.lastVelX;
-    int frontY = mapAgent.y + movement.lastVelY;
+    int frontX = mapAgent.x + movement.lastVelX, frontY = mapAgent.y + movement.lastVelY;
     Logger.log("Chara", String.format("Attempting to interact at %d %d", frontX, frontY));
     Obj belowObject = mapAgent.getObjBy(0, 0);
     Obj frontObject = mapAgent.getObjBy(movement.lastVelX, movement.lastVelY);
     TilemapChara frontChara = mapAgent.map.getChara(frontX, frontY);
-
     if (frontChara != null) {
-      Logger.log("Chara", "Got one");
       frontChara.chara.setState(new InteractState(this));
       setState(new InteractState(frontChara.chara));
-    }
-    else if (belowObject != null) {
-      Logger.log("Chara", "Interacts with obj below");
-      belowObject.onCharaInteract(this);
-    }
-    else if (frontObject != null) {
-      Logger.log("Chara", "Interacts with obj  ahead");
+    } else if (belowObject != null) {
+      belowObject.onCharaOccupy(this);
+    } else if (frontObject != null) {
       frontObject.onCharaInteract(this);
     }
   }
-  public void attackAhead() {}
+  public void attackAhead() {
+  }
   public void setStats(Status s) { status = s; }
   public void setState(State s) { 
     state = s; 

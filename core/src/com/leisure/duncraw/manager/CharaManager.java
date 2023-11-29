@@ -32,21 +32,25 @@ public class CharaManager {
     this.floor = floor;
   }
 
-  public Chara addFrom(String source) {
+  public <T extends Chara> T addFrom(String source, Class<T> clazz) {
     Logger.log("CharaManager", "Creating a character from source: " + source);
     CharaData data = new CharaData();
     data.reset();
     try { data = Deserializer.load(CharaData.class, Gdx.files.local(source)); }
     catch(Exception e) { Serializer.save(data, Gdx.files.local(source)); }
-    Chara chara = new Chara(data, batch);
-    chara.bounds.setSize(32, 32);
-    chara.mapAgent = new TilemapChara(chara, floor);
-    floor.putChara(chara.mapAgent); 
-    charas.add(chara);
-    chara.observers.add(new AnimationReactor());
-    return chara;
-  
+    // T chara = new T(data, batch);
+    try {
+      T chara = clazz.getDeclaredConstructor(CharaData.class, SpriteBatch.class).newInstance(data, batch);
+      chara.bounds.setSize(32, 32);
+      chara.mapAgent = new TilemapChara(chara, floor);
+      floor.putChara(chara.mapAgent); 
+      charas.add(chara);
+      chara.observers.add(new AnimationReactor());
+      return chara;  
+    } catch (Exception e) { e.printStackTrace(); }
+    return null;
   }
+  public Chara addFrom(String source) { return addFrom(source, Chara.class); }
   public void updateAll(float dt) {
     for (Chara chara : charas) {
       chara.update(dt);

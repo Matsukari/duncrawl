@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.leisure.duncraw.art.chara.Chara;
+import com.leisure.duncraw.art.chara.Player;
 import com.leisure.duncraw.data.AssetSource;
 import com.leisure.duncraw.data.Deserializer;
 import com.leisure.duncraw.data.SaveData;
@@ -26,7 +27,7 @@ public class GameScreen extends Screen {
   protected final DebugManager debugManager;
   protected final OrthographicCamera camera;
   protected final ExtendViewport viewport; 
-  protected Chara player;
+  protected Player player;
   public GameScreen(SaveData saveData) {
     Logger.log("GameScreen", "Init");
     this.saveData = saveData;
@@ -37,7 +38,7 @@ public class GameScreen extends Screen {
     charaManager = new CharaManager(AssetSource.getCharasData(), floorManager.getCurrentFloor());
     debugManager = new DebugManager();
     debugManager.debugMap(floorManager.getCurrentFloor());
-    player = charaManager.addFrom(charaManager.sources.player);
+    player = charaManager.addFrom(charaManager.sources.player, Player.class);
     Chara mob = charaManager.addFrom(charaManager.sources.ghost);
     mob.moveTo(3, 3);
   }
