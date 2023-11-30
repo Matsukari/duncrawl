@@ -1,17 +1,12 @@
 package com.leisure.duncraw.art.chara.moves;
 
-import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.math.Vector2;
 import com.leisure.duncraw.art.chara.Chara;
 import com.leisure.duncraw.art.chara.Movement;
-import com.leisure.duncraw.logging.Logger;
-
-import lib.time.TimePeeker;
 
 // normalized lerping
 public class LerpMovement extends Movement {
   private float stepTaken = 0;
-  private float stepDuration = 0;
+  public float stepDuration = 0;
   private float time = 0f;
   public LerpMovement(float stepDuration) {
     this.stepDuration = stepDuration;

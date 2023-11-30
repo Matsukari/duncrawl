@@ -11,6 +11,7 @@ public class Player extends Chara {
   public Player(CharaData data, SpriteBatch batch) {
     super(data, batch);
     inventory.reset();
+    movement.stepDuration = 3.5f;
   }
   @Override
   public void update(float dt) {
