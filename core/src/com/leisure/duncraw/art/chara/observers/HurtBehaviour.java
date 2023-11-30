@@ -12,4 +12,8 @@ public class HurtBehaviour extends Observer {
       s.chara.status.health -= s.attacker.status.phyAttack.x;
     }
   }
+  @Override
+  public Observer copy() {
+    return new HurtBehaviour();
+  }
 }

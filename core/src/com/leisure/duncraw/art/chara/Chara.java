@@ -1,14 +1,11 @@
 package com.leisure.duncraw.art.chara;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.leisure.duncraw.art.Art;
 import com.leisure.duncraw.art.chara.moves.LerpMovement;
 import com.leisure.duncraw.art.chara.states.AttackState;
-import com.leisure.duncraw.art.chara.states.HurtState;
 import com.leisure.duncraw.art.chara.states.IdleState;
 import com.leisure.duncraw.art.chara.states.InteractObjState;
 import com.leisure.duncraw.art.chara.states.InteractState;
@@ -19,7 +16,6 @@ import com.leisure.duncraw.data.CharaData;
 import com.leisure.duncraw.data.DirAnimData;
 import com.leisure.duncraw.logging.Logger;
 
-import lib.animation.LinearAnimation;
 
 public class Chara extends Art {
   public Status status = new Status();
@@ -28,16 +24,14 @@ public class Chara extends Art {
   public Observers observers;
   public TilemapChara mapAgent;
   public final DirAnimationMap anims = new DirAnimationMap();
-  // public Chara(LinearAnimation<TextureRegion> frames, SpriteBatch batch) {
-  //   super(batch, frames);
-  // }
   // Load from .dat file
   public Chara(CharaData data, SpriteBatch batch) {
     super(batch);
     status = data.status;
-    // Logger.log("Chara", "Data anim front: " + data.anims.get("idle").front);
-    for (Map.Entry<String, DirAnimData> anim : data.anims.entrySet()) 
-      anims.data.put(anim.getKey(), new DirAnimation(anim.getValue())); 
+    for (Map.Entry<String, DirAnimData> anim : data.anims.entrySet()) {
+      // Logger.log("Chara", "Loading animation dat = " + anim.getKey());
+      anims.data.put(anim.getKey(), new DirAnimation(anim.getValue()));
+    }
     anims.set("idle");
   }
   // Initializer block

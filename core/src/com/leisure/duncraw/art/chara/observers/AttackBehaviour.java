@@ -12,4 +12,8 @@ public class AttackBehaviour extends Observer {
       // s.target.status.health -= s.chara.status.phyAttack.x;
     }
   }
+  @Override
+  public Observer copy() {
+    return new AttackBehaviour();
+  }
 }

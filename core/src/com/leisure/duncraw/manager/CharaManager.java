@@ -6,6 +6,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.leisure.duncraw.art.chara.Chara;
+import com.leisure.duncraw.art.chara.Observer;
 import com.leisure.duncraw.art.chara.observers.AnimationReactor;
 import com.leisure.duncraw.art.chara.observers.AttackBehaviour;
 import com.leisure.duncraw.art.chara.observers.HurtBehaviour;
@@ -23,9 +24,12 @@ public class CharaManager {
   public Chara player;
   public final CharasData sources;
   private final Floor floor;
+  public final ArrayList<Observer> observers = new ArrayList<>();
   public CharaManager(CharasData sources, Floor floor) { 
     this.sources = sources;
     this.floor = floor;
+    observers.add(new AttackBehaviour());
+    observers.add(new HurtBehaviour());
   }
 
   public <T extends Chara> T addFrom(String source, Class<T> clazz) {
@@ -40,9 +44,7 @@ public class CharaManager {
       chara.mapAgent = new TilemapChara(chara, floor);
       floor.putChara(chara.mapAgent); 
       charas.add(chara);
-      chara.observers.add(new AnimationReactor());
-      chara.observers.add(new AttackBehaviour());
-      chara.observers.add(new HurtBehaviour());
+      for (Observer observer : observers) chara.observers.add(observer.copy());
       return chara;  
     } catch (Exception e) { e.printStackTrace(); }
     return null;
