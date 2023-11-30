@@ -5,5 +5,8 @@
 },
 "sounds": {
 	"store": ""
-}
+},
+"oneTexture": true,
+"name": "No-name-obj",
+"desc": "No-desc-obj"
 }

@@ -18,10 +18,13 @@ public class PlayerDebug extends ToolAgent {
   public void tool() {
     if (ImGui.collapsingHeader("Inventory", ImGuiTreeNodeFlags.DefaultOpen)) {
       ImGui.beginChild("Scroll panel", size.x, 100);
-      for (Item item : player.inventory.data) 
+      for (Item item : player.inventory.data) { 
         ImGui.text(String.format("%s", item.dat.name));
+      }
       ImGui.endChild();
     }
-    if (player.itemSel != null) ImGui.labelText("Equip", player.itemSel.dat.name);
+    if (player.itemSel != null) {
+      ImGui.labelText("Equip", player.itemSel.dat.name);
+    }
   }
 }

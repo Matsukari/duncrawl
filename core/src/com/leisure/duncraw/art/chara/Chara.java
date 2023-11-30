@@ -69,7 +69,7 @@ public class Chara extends Art {
   public void interactAhead() {
     int frontX = mapAgent.x + movement.lastVelX, frontY = mapAgent.y + movement.lastVelY;
     Logger.log("Chara", String.format("Attempting to interact at %d %d", frontX, frontY));
-    if (tryInteract(mapAgent.getObjBy(0, 0), true)) {}
+    if (tryInteract(mapAgent.getObjBy(0, 0), true)) { }
     else if (tryInteract(mapAgent.getObjBy(movement.lastVelX, movement.lastVelY), false)) {}
     else if (tryInteract(mapAgent.map.getChara(frontX, frontY), false)) {}
   }

@@ -15,7 +15,7 @@ public class ObjData extends Dat {
     anims.put("idle", DEFAULT_PNG);
     oneTexture = true;
     sounds = new HashMap<>();
-    name = "";
-    desc = "";
+    name = "No-name-obj";
+    desc = "No-desc-obj";
   }
 }

@@ -12,6 +12,7 @@ import com.leisure.duncraw.data.GeneralAnimation;
 import com.leisure.duncraw.data.ItemData;
 import com.leisure.duncraw.data.ObjData;
 import com.leisure.duncraw.data.Serializer;
+import com.leisure.duncraw.logging.Logger;
 
 import lib.animation.LinearAnimation;
 
@@ -28,6 +29,7 @@ public class Item extends Obj {
   }
   @Override
   public void load(String datFile) {
+    dat.reset();
     ItemData itemData = new ItemData();
     itemData.reset();
     itemData.passTo(dat);

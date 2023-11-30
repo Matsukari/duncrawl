@@ -4,10 +4,11 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.leisure.duncraw.art.item.Item;
 import com.leisure.duncraw.data.CharaData;
 import com.leisure.duncraw.data.Inventory;
+import com.leisure.duncraw.logging.Logger;
 
 public class Player extends Chara {
   public Inventory inventory = new Inventory();
-  public Item itemSel;
+  public Item itemSel = null;
   public Player(CharaData data, SpriteBatch batch) {
     super(data, batch);
     inventory.reset();
@@ -18,6 +19,8 @@ public class Player extends Chara {
     super.update(dt);
   }
   public void equip(Item item) {
+    Logger.log("Player", "Trying to equip");
     itemSel = item;
+    Logger.log("Player", "Equipped");
   }
 }

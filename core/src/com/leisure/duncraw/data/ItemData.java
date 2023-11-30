@@ -17,8 +17,8 @@ public class ItemData extends Dat {
     sounds.put("store", DEFAULT_AUD);
   }
   public void passTo(ObjData obj) {
-    obj.anims = anims;
-    obj.sounds = sounds;
+    obj.anims = new HashMap<>(anims);
+    obj.sounds = new HashMap<>(sounds);
   }
 }
 
