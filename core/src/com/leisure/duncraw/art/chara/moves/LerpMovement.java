@@ -2,28 +2,41 @@ package com.leisure.duncraw.art.chara.moves;
 
 import com.leisure.duncraw.art.chara.Chara;
 import com.leisure.duncraw.art.chara.Movement;
+import com.leisure.duncraw.art.map.Terrain;
 
 // normalized lerping
 public class LerpMovement extends Movement {
   private float stepTaken = 0;
   public float stepDuration = 0;
   private float time = 0f;
-  public LerpMovement(float stepDuration) {
+  private final Chara chara;
+  public LerpMovement(Chara chara, float stepDuration) {
     this.stepDuration = stepDuration;
+    this.chara = chara;
   }
   @Override
-  public void moveBy(int x, int y) {
-    super.moveBy(x, y);
+  public boolean moveBy(int x, int y) {
+    lastVelY = y;
+    lastVelX = x;
+    Terrain terrain = chara.mapAgent.getTerrainBy(x, y);
+    if (terrain != null && terrain.traversable()) {
+      super.moveBy(x, y);
+      return true;
+    }
+    return false;
+  }
+  @Override
+  public void reset() {
+    super.reset();
+    stepTaken = 0;
+    time = 0;
   }
   @Override
   public boolean update(float dt) {
     boolean ahead = stepTaken > Math.abs(velX + velY);
     if (ahead || (time >= stepDuration && ahead)) {
       // Logger.log("LerpMovement", "step taken: " + Float.toString(stepTaken));
-      nextStepY = 0;
-      nextStepX = 0;
-      stepTaken = 0;
-      time = 0;
+      reset();
       stop();
       return true;
     }
@@ -40,11 +53,9 @@ public class LerpMovement extends Movement {
       stepTaken = 1.0000001f;
       // Logger.log("LerpMovement", "excess: " + Float.toString(excessX));
     }
-    return false;
-  }
-  @Override
-  public void apply(Chara chara) {
     chara.bounds.x += chara.movement.nextStepX * chara.mapAgent.getWidth();
     chara.bounds.y += chara.movement.nextStepY * chara.mapAgent.getHeight();
+    return false;
   }
+
 }

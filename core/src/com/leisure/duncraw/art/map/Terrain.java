@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.leisure.duncraw.art.Art;
+import com.leisure.duncraw.art.item.Item;
 
 import lib.animation.LinearAnimation;
 
@@ -13,12 +14,18 @@ public class Terrain extends Art {
   public ArrayList<Obj> objs = new ArrayList<>();
   public Terrain next = null;
   public LinearAnimation<TextureRegion> anim;
+  public boolean canTravel = true;
   public Terrain(SpriteBatch batch, LinearAnimation<TextureRegion> anim) {
     super(batch);
     this.anim = anim;
   }
-  public boolean isWall() { return false; }
-  public void putObj(Obj obj) { objs.add(obj); }
+  public void putObj(Obj obj) { 
+    objs.add(obj); 
+    if (!(obj instanceof Item)) canTravel = false;
+  }
+  public boolean traversable() {
+    return canTravel;
+  }
   public Terrain getTail() {
     Terrain node = this;
     while (node.next != null) node = node.next;

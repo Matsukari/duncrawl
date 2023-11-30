@@ -12,17 +12,21 @@ public class Movement {
   public int velY = 0;
   public int lastVelX = 0;
   public int lastVelY = 0;
-  public void moveBy(int x, int y) {
+  public boolean moveBy(int x, int y) {
     velX = x;
     velY = y;
     lastVelX = velX;
     lastVelY = velY;
+    return true;
   }
   public void stop() {
     velX = 0;
     velY = 0;
   }
+  public void reset() {
+    nextStepX = 0;
+    nextStepY = 0;
+  }
   public boolean isMoving() { return velX != 0 || velY != 0; }
-  public void apply(Chara chara) {}
   public boolean update(float dt) { return false; } 
 }

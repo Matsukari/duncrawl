@@ -36,7 +36,7 @@ public class Chara extends Art {
   }
   // Initializer block
   {
-    movement = new LerpMovement(2f);
+    movement = new LerpMovement(this, 2f);
     observers = new Observers(this);
     status.reset();
     setState(new IdleState());
@@ -50,7 +50,6 @@ public class Chara extends Art {
       setState(new IdleState());
       mapAgent.moveBy(movement.lastVelX, movement.lastVelY);
     }
-    movement.apply(this);
   }
   @Override
   public void render() {
@@ -64,8 +63,8 @@ public class Chara extends Art {
   }
   public void moveBy(int x, int y) {
     setState(new MoveState());
-    movement.moveBy(x, y);
     anims.current.face(x, y);
+    movement.moveBy(x, y);
   }
   public void interactAhead() {
     int frontX = mapAgent.x + movement.lastVelX, frontY = mapAgent.y + movement.lastVelY;

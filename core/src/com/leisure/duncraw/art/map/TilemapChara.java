@@ -25,8 +25,11 @@ public class TilemapChara {
     x += byX;
     y += byY;
   }
+  public Terrain getTerrainBy(int byX, int byY) {
+     return map.terrainSet.getTerrain(x+byX, y+byY);
+  }
   public Obj getObjBy(int byX, int byY) {
-    Terrain terrain = map.terrainSet.getTerrain(x+byX, y+byY);
+    Terrain terrain = getTerrainBy(byX, byY);
     if (terrain != null) return terrain.lastObj();
     return null;
   }
