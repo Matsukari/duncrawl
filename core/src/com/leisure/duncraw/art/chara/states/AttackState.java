@@ -8,6 +8,11 @@ public class AttackState extends State {
   public Chara target;
   public AttackState(Chara target) { this.target = target; }
   @Override
+  public void init(Chara s) {
+    super.init(s);
+    target.setState(new HurtState(chara));
+  }
+  @Override
   public void update(float dt) {
 
   }

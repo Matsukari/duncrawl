@@ -3,6 +3,7 @@ package com.leisure.duncraw.art.item;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.leisure.duncraw.Graphics;
 import com.leisure.duncraw.art.chara.Chara;
 import com.leisure.duncraw.art.chara.Player;
 import com.leisure.duncraw.art.map.Obj;
@@ -18,12 +19,11 @@ public class Item extends Obj {
   public boolean isDrop = true;
   public LinearAnimation<TextureRegion> dropAnim; 
   public LinearAnimation<TextureRegion> storeAnim;
-  public Item(SpriteBatch batch, String datFile, LinearAnimation<TextureRegion> dropAnimation) {
+  public Item(SpriteBatch batch, String datFile) {
     super(batch, datFile);
-    assert dropAnimation != null;
-    idle = dropAnimation;
-    animation = dropAnimation;
+    idle = GeneralAnimation.line(dat.anims.get("drop"));
     storeAnim = GeneralAnimation.line(dat.anims.get("store"));
+    anim = idle;
     // animation = storeAnim;
   }
   @Override

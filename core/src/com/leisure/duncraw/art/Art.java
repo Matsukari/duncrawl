@@ -14,32 +14,27 @@ public abstract class Art {
   public final int id;
   public Color color = new Color(1, 1, 1, 1);
   public Rectangle bounds = new Rectangle(0, 0, 0, 0);
-  protected LinearAnimation<TextureRegion> animation;
+  // protected LinearAnimation<TextureRegion> animation;
   public final SpriteBatch batch;
-  public static class TexAnim extends LinearAnimation<TextureRegion> {
-    public TexAnim(float frameDur, Array<TextureRegion> vals, PlayMode mode) {
-      super(frameDur, vals, mode);
-    }
-  }
-  public Art(SpriteBatch batch, LinearAnimation<TextureRegion> animation) { 
-    id = IdGenerator.gen(); 
-    this.animation = animation;
-    this.batch = batch;
-  }
   public Art(SpriteBatch batch) {
     id = IdGenerator.gen();
     this.batch = batch;
   }
-  public Art(SpriteBatch batch, TextureRegion... animation) {
-    id = IdGenerator.gen();
-    this.batch = batch;
-    Array<TextureRegion> frames = new Array<>();
-    for (TextureRegion frame : animation) frames.add(frame);
-    this.animation = new LinearAnimation<>(0f, frames, PlayMode.LOOP);
-  }
+  // public Art(SpriteBatch batch, LinearAnimation<TextureRegion> animation) { 
+  //   id = IdGenerator.gen(); 
+  //   this.animation = animation;
+  //   this.batch = batch;
+  // }
+  // public Art(SpriteBatch batch, TextureRegion... animation) {
+  //   id = IdGenerator.gen();
+  //   this.batch = batch;
+  //   Array<TextureRegion> frames = new Array<>();
+  //   for (TextureRegion frame : animation) frames.add(frame);
+  //   this.animation = new LinearAnimation<>(0f, frames, PlayMode.LOOP);
+  // }
   public void moveTo(float x, float y) { bounds.setPosition(x, y); }
   public void render() {
-    batch.draw(animation.current(), bounds.x, bounds.y, bounds.width, bounds.height);
+    // batch.draw(animation.current(), bounds.x, bounds.y, bounds.width, bounds.height);
   }
   private static class IdGenerator {
     private static int last = 0;

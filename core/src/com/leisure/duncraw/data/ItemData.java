@@ -10,7 +10,7 @@ public class ItemData extends Dat {
   @Override
   public void reset() {
     anims = new HashMap<>();
-    anims.put("drop", DEFAULT_PNG);
+    anims.put("drop", "images/items/drop.png");
     anims.put("store", DEFAULT_PNG);
     oneTexture = true;
     sounds = new HashMap<>();

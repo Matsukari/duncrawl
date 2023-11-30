@@ -1,12 +1,9 @@
 {
 "anims": {
-	"drop": "images/default.png",
+	"drop": "images/items/drop.png",
 	"store": "images/default.png"
 },
 "sounds": {
 	"store": ""
-},
-"oneTexture": true,
-"name": "Magic Dust",
-"desc": ""
+}
 }

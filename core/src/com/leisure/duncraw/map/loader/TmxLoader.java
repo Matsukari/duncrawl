@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
@@ -18,6 +19,8 @@ import com.leisure.duncraw.art.map.ObjParser;
 import com.leisure.duncraw.art.map.Terrain;
 import com.leisure.duncraw.logging.Logger;
 import com.leisure.duncraw.map.TerrainSet;
+
+import lib.animation.LinearAnimation;
 
 public class TmxLoader {
   public static TerrainSet load(String file, SpriteBatch batch, int width, int height) {
@@ -39,7 +42,7 @@ public class TmxLoader {
             if (objType != null && objDat != null) obj = ObjParser.from(objType, objDat, batch);
             else if (itemType != null && objDat != null) obj = ItemParser.from(itemType, objDat, batch);
             else {
-              Terrain terrain = new Terrain(batch, cell.getTile().getTextureRegion());
+              Terrain terrain = new Terrain(batch, new LinearAnimation<TextureRegion>(cell.getTile().getTextureRegion()));
               terrain.bounds.setSize(width, height);
               terrainSet.putTerrain(terrain, x, y); 
             }

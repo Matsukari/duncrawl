@@ -9,6 +9,11 @@
 		"side": "images/characters/mc/mc_idle_side.png",
 		"back": "images/characters/mc/mc_idle_back.png",
 		"front": "images/characters/mc/mc_idle_front.png"
+	},
+	"attack": {
+		"side": "images/effects/strike_overlay_side.png",
+		"back": "images/effects/strike_overlay_back.png",
+		"front": "images/effects/strike_overlay_front.png"
 	}
 },
 "sounds": {},

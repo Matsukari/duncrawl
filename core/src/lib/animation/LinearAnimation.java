@@ -12,6 +12,17 @@ public class LinearAnimation<T> {
   public LinearAnimation(float frameDur, Array<? extends T> vals, PlayMode mode) {
     data = new Animation<T>(frameDur, vals, mode);
   }
+  @SafeVarargs
+  public LinearAnimation(float frameDur, PlayMode mode, T... vals) {
+    init(frameDur, mode, vals);
+  }
+  public LinearAnimation(T val) { init(1, PlayMode.NORMAL, val); }
+  @SafeVarargs
+  public final void init(float frameDur, PlayMode mode, T... vals) {
+    Array<T> arr = new Array<>();
+    for (T val : vals) arr.add(val);
+    data = new Animation<T>(frameDur, arr, mode);
+  }
   public T current() {
     stateTime += Gdx.graphics.getDeltaTime();
     return data.getKeyFrame(stateTime);

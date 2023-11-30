@@ -12,4 +12,5 @@ public class DirAnimationMap {
     if (a != null) current = a;
     current.face(dirX, dirY);
   }
+  public DirAnimation get(String anim) { return data.get(anim); }
 }

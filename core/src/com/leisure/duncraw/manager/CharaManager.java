@@ -48,6 +48,7 @@ public class CharaManager {
     return null;
   }
   public Chara addFrom(String source) { return addFrom(source, Chara.class); }
+  public void kill(int id) {}
   public void updateAll(float dt) {
     for (Chara chara : charas) {
       chara.update(dt);

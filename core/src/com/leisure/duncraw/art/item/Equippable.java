@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import lib.animation.LinearAnimation;
 
 public class Equippable extends Item {
-  public Equippable(SpriteBatch batch, String datFile, LinearAnimation<TextureRegion> dropAnimation) {
-    super(batch, datFile, dropAnimation);
+  public Equippable(SpriteBatch batch, String datFile) {
+    super(batch, datFile);
   }
 }

@@ -6,12 +6,16 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.leisure.duncraw.art.Art;
 
+import lib.animation.LinearAnimation;
+
 public class Terrain extends Art {
   // A snigle block (terrain) can contain mulitple objs (usuallyloots)
   public ArrayList<Obj> objs = new ArrayList<>();
   public Terrain next = null;
-  public Terrain(SpriteBatch batch, TextureRegion texture) {
-    super(batch, texture);
+  public LinearAnimation<TextureRegion> anim;
+  public Terrain(SpriteBatch batch, LinearAnimation<TextureRegion> anim) {
+    super(batch);
+    this.anim = anim;
   }
   public boolean isWall() { return false; }
   public void putObj(Obj obj) { objs.add(obj); }
@@ -26,7 +30,7 @@ public class Terrain extends Art {
   }
   @Override
   public void render() {
-    super.render();
+    batch.draw(anim.current(), bounds.x, bounds.y, bounds.width, bounds.height);
     for (Obj obj : objs) obj.render();
     for (Terrain node = next; node != null; node = node.next) node.render();
   }

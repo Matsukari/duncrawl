@@ -28,9 +28,9 @@ public class Chara extends Art {
   public Observers observers;
   public TilemapChara mapAgent;
   public final DirAnimationMap anims = new DirAnimationMap();
-  public Chara(LinearAnimation<TextureRegion> frames, SpriteBatch batch) {
-    super(batch, frames);
-  }
+  // public Chara(LinearAnimation<TextureRegion> frames, SpriteBatch batch) {
+  //   super(batch, frames);
+  // }
   // Load from .dat file
   public Chara(CharaData data, SpriteBatch batch) {
     super(batch);
@@ -57,7 +57,10 @@ public class Chara extends Art {
       mapAgent.moveBy(movement.lastVelX, movement.lastVelY);
     }
     movement.apply(this);
-    animation = anims.current.currentDir;
+  }
+  @Override
+  public void render() {
+    batch.draw(anims.current.currentDir.current(), bounds.x, bounds.y, bounds.width, bounds.height);
   }
   @Override
   public void moveTo(float x, float y) {
@@ -90,13 +93,8 @@ public class Chara extends Art {
       return true;
     }
     else if (other instanceof TilemapChara) {
-      if (((TilemapChara)other).chara instanceof Enemy) {
-        setState(new AttackState(((TilemapChara)other).chara));
-        ((TilemapChara)other).chara.setState(new HurtState(this));
-      } else {
-        setState(new InteractState(((TilemapChara)other).chara));
-        ((TilemapChara)other).chara.setState(new InteractState(this));
-      }
+      if (((TilemapChara)other).chara instanceof Enemy) setState(new AttackState(((TilemapChara)other).chara));
+      else setState(new InteractState(((TilemapChara)other).chara));
       return true;
     }
     return false;
