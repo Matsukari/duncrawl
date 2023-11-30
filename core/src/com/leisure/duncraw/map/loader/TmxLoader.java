@@ -1,23 +1,16 @@
 package com.leisure.duncraw.map.loader;
 
-import java.util.ArrayList;
-
-import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapLayer;
-import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer.Cell;
-import com.badlogic.gdx.utils.Array;
-import com.leisure.duncraw.art.item.Item;
 import com.leisure.duncraw.art.item.ItemParser;
 import com.leisure.duncraw.art.map.Obj;
 import com.leisure.duncraw.art.map.ObjParser;
 import com.leisure.duncraw.art.map.Terrain;
-import com.leisure.duncraw.logging.Logger;
 import com.leisure.duncraw.map.TerrainSet;
 
 import lib.animation.LinearAnimation;
@@ -42,7 +35,9 @@ public class TmxLoader {
             if (objType != null && objDat != null) obj = ObjParser.from(objType, objDat, batch);
             else if (itemType != null && objDat != null) obj = ItemParser.from(itemType, objDat, batch);
             else {
+              String terrainType = cell.getTile().getProperties().get("terrain", String.class);
               Terrain terrain = new Terrain(batch, new LinearAnimation<TextureRegion>(cell.getTile().getTextureRegion()));
+              if (terrainType != null && terrainType.contains("wall")) terrain.canTravel = false;
               terrain.bounds.setSize(width, height);
               terrainSet.putTerrain(terrain, x, y); 
             }

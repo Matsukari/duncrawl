@@ -21,6 +21,11 @@ public class Obj extends Art {
   public Obj(SpriteBatch batch, String datFile) {
     super(batch); load(datFile);
   }
+  public Obj(SpriteBatch batch, LinearAnimation<TextureRegion> anim) {
+    super(batch);
+    this.anim = anim;
+    idle = anim;
+  }
   public void load(String datFile) {
     dat.reset();
     try { dat = Deserializer.load(ObjData.class, Gdx.files.local(datFile)); } catch(Exception e) { Serializer.save(dat, Gdx.files.local(datFile)); }
