@@ -37,7 +37,7 @@ public class GameScreen extends Screen {
     effectManager = new EffectManager();
     viewport = new ExtendViewport(saveData.settings.bounds.width, saveData.settings.bounds.height, camera);
     floorManager = new FloorManager(saveData, AssetSource.getFloorsData(), saveData.progression.level.level);
-    floorManager.setCurrentFloor(new Floor(TmxLoader.load(floorManager.sources.startingHall, floorManager.batch, 32, 32)));
+    floorManager.setCurrentFloor(TmxLoader.load(floorManager.sources.startingHall, floorManager.batch, 32, 32));
     charaManager = new CharaManager(AssetSource.getCharasData(), floorManager.getCurrentFloor());
     charaManager.observers.add(new AnimationReactor(effectManager));
     player = charaManager.addFrom(charaManager.sources.player, Player.class);
@@ -69,8 +69,9 @@ public class GameScreen extends Screen {
     // Chars, obj, terrain interaction
 
     ScreenUtils.clear(backgroundColor);
-    floorManager.renderCurrent(camera);
+    floorManager.renderBackground(camera);
     charaManager.renderAll(camera);
+    floorManager.renderForeground(camera);
     effectManager.renderAll(camera);
     debugManager.render(camera);
   }

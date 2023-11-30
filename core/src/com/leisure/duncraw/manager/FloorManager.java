@@ -18,16 +18,22 @@ public class FloorManager {
   public FloorManager(SaveData save, FloorData sources, int levelStart) {
     this.sources = sources;
     level = levelStart;
-    floor = new Floor(TerrainSetGenerator.gen(level));
+    floor = new Floor(TerrainSetGenerator.gen(level), null);
     floor.exits.addAll(TerrainSetGenerator.selectExits(floor.terrainSet));
     // TmxLoader.load(sources.startingHall, batch);
   }
   public void setCurrentFloor(Floor f) { floor = f; }
   public Floor getCurrentFloor() { return floor; }
-  public void renderCurrent(Camera cam) {
+  public void renderBackground(Camera cam) {
     batch.setProjectionMatrix(cam.combined);
     batch.begin();
     floor.render();
+    batch.end();
+  }
+  public void renderForeground(Camera cam) {
+    batch.setProjectionMatrix(cam.combined);
+    batch.begin();
+    floor.renderForeground();
     batch.end();
   }
 }

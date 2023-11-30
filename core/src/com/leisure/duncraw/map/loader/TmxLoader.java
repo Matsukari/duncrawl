@@ -11,15 +11,18 @@ import com.leisure.duncraw.art.item.ItemParser;
 import com.leisure.duncraw.art.map.Obj;
 import com.leisure.duncraw.art.map.ObjParser;
 import com.leisure.duncraw.art.map.Terrain;
+import com.leisure.duncraw.logging.Logger;
+import com.leisure.duncraw.map.Floor;
 import com.leisure.duncraw.map.TerrainSet;
 
 import lib.animation.LinearAnimation;
 
 public class TmxLoader {
-  public static TerrainSet load(String file, SpriteBatch batch, int width, int height) {
+  public static Floor load(String file, SpriteBatch batch, int width, int height) {
     TiledMap tiled = new TmxMapLoader().load(file);
     TiledMapTileLayer defLayer = (TiledMapTileLayer)tiled.getLayers().get(0);
     TerrainSet terrainSet = new TerrainSet(defLayer.getWidth(), defLayer.getHeight(), width, height);
+    TerrainSet foreground = new TerrainSet(defLayer.getWidth(), defLayer.getHeight(), width, height);
     String ar = "";
     for (MapLayer l : tiled.getLayers()) {
       if (l instanceof TiledMapTileLayer) {
@@ -32,18 +35,23 @@ public class TmxLoader {
             String itemType = cell.getTile().getProperties().get("item", String.class);
             String objDat = cell.getTile().getProperties().get("dat", String.class);
             Obj obj = null;
+            TerrainSet terrainLayer;
+        
+            if (l.getName().contains("bg")) terrainLayer = terrainSet;
+            else terrainLayer = foreground;
+
             if (objType != null && objDat != null) obj = ObjParser.from(objType, objDat, batch);
             else if (itemType != null && objDat != null) obj = ItemParser.from(itemType, objDat, batch);
             else {
               String terrainType = cell.getTile().getProperties().get("terrain", String.class);
               Terrain terrain = new Terrain(batch, new LinearAnimation<TextureRegion>(cell.getTile().getTextureRegion()));
-              if (terrainType != null && terrainType.contains("wall")) terrain.canTravel = false;
+              if (terrainType != null && terrainType.contains("wall") && l.getName().contains("nopass")) terrain.canTravel = false;
               terrain.bounds.setSize(width, height);
-              terrainSet.putTerrain(terrain, x, y); 
+              terrainLayer.putTerrain(terrain, x, y); 
             }
             if (obj != null) {
               obj.bounds.setSize(width, height);
-              terrainSet.putObject(obj, x, y);
+              terrainLayer.putObject(obj, x, y);
 
             }
             ar = ar + "#";
@@ -54,6 +62,7 @@ public class TmxLoader {
     }
 
     // Logger.log("TmxLoader", ar);
-    return terrainSet;
+    // return new TerrainSet[]{terrainSet, foreground};
+    return new Floor(terrainSet, foreground);
   }
 }
