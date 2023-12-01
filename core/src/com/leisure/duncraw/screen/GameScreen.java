@@ -71,9 +71,9 @@ public class GameScreen extends Screen {
     ScreenUtils.clear(backgroundColor);
     floorManager.renderBackground(camera);
     charaManager.renderAll(camera);
-    floorManager.renderForeground(camera);
     effectManager.renderAll(camera);
-    debugManager.render(camera);
+    floorManager.renderForeground(camera);
+    // debugManager.render(camera);
   }
   @Override
   public void dispose() {

@@ -2,7 +2,6 @@ package com.leisure.duncraw.map;
 
 import java.util.ArrayList;
 
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.leisure.duncraw.art.map.Obj;
 
 public class Floor extends Tilemap {
@@ -19,5 +18,7 @@ public class Floor extends Tilemap {
   public Floor(TerrainSet terrainSet, TerrainSet foreground) { 
     super(terrainSet);
     this.foreground = new Tilemap(foreground);
+  }
+  public void genLights() {
   }
 }

@@ -15,6 +15,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.Animation.PlayMode;
 
 public class Obj extends Art {
+  public Obj next;
   public ObjData dat = new ObjData();
   public LinearAnimation<TextureRegion> idle;
   public LinearAnimation<TextureRegion> anim;
@@ -32,9 +33,16 @@ public class Obj extends Art {
     idle = GeneralAnimation.line(dat.anims.get("idle"), PlayMode.NORMAL);
     anim = idle;
   }
+  public Obj getTail() {
+    Obj node = this;
+    while (node.next != null) node = node.next;
+    return node;
+  }
   @Override
   public void render() {
     batch.draw(anim.current(), bounds.x, bounds.y, bounds.width, bounds.height);
+    // for (Terrain node = next; node != null; node = node.next) node.render();
+    if (next != null) next.render();
   }
   public void update(float dt) {}
   public void onCharaOccupy(Chara chara) {}
