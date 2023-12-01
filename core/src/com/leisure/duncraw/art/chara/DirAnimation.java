@@ -21,6 +21,9 @@ public class DirAnimation {
   public void flipSide(boolean v) {
     for (TextureRegion frames : anims[SIDE].data.getKeyFrames()) frames.flip(v, false);
   }
+  public void setAnimDur(float dur) {
+    for (LinearAnimation<TextureRegion> anim : anims) anim.data.setFrameDuration(dur);
+  }
   public LinearAnimation<TextureRegion> getSideFlip(int vel) {
     if (vel > 0 && !anims[SIDE].data.getKeyFrames()[0].isFlipX()) flipSide(!rightHanded);
     else if (vel < 0 && anims[SIDE].data.getKeyFrames()[0].isFlipX()) flipSide(!rightHanded);

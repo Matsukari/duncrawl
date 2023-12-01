@@ -13,6 +13,7 @@ public class Player extends Chara {
     super(data, batch);
     inventory.reset();
     movement.stepDuration = 3.5f;
+    anims.get("move").setAnimDur(0.08f);
   }
   @Override
   public void update(float dt) {
