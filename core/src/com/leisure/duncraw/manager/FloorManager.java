@@ -12,14 +12,10 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.leisure.duncraw.Graphics;
-import com.leisure.duncraw.art.map.Terrain;
 import com.leisure.duncraw.data.FloorData;
-import com.leisure.duncraw.data.GeneralAnimation;
 import com.leisure.duncraw.data.SaveData;
 import com.leisure.duncraw.map.Floor;
-import com.leisure.duncraw.map.Tilemap;
 import com.leisure.duncraw.map.generator.TerrainSetGenerator;
-import com.leisure.duncraw.map.loader.TmxLoader;
 
 public class FloorManager {
   public int level;

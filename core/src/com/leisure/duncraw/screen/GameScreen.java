@@ -17,7 +17,6 @@ import com.leisure.duncraw.manager.CharaManager;
 import com.leisure.duncraw.manager.DebugManager;
 import com.leisure.duncraw.manager.EffectManager;
 import com.leisure.duncraw.manager.FloorManager;
-import com.leisure.duncraw.map.Floor;
 import com.leisure.duncraw.map.loader.TmxLoader;
 
 public class GameScreen extends Screen {
@@ -46,9 +45,10 @@ public class GameScreen extends Screen {
     player.moveTo(8, 10);
 
     debugManager = new DebugManager();
-    debugManager.debugMap(floorManager.getCurrentFloor());
+    debugManager.debugSystem();
     debugManager.debugPlayer(player);
     debugManager.debugChara(mob);
+    // debugManager.debugMap(floorManager.getCurrentFloor());
   }
   @Override
   public void pause() {
@@ -73,7 +73,7 @@ public class GameScreen extends Screen {
     charaManager.renderAll(camera);
     effectManager.renderAll(camera);
     floorManager.renderForeground(camera);
-    // debugManager.render(camera);
+    debugManager.render(camera);
   }
   @Override
   public void dispose() {

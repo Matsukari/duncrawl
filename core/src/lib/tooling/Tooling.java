@@ -1,11 +1,13 @@
 package lib.tooling;
 
+import java.util.Vector;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Graphics;
+import com.badlogic.gdx.math.Vector2;
+
 import imgui.ImGui;
 import imgui.ImGuiIO;
-import imgui.flag.ImGuiCond;
-import imgui.flag.ImGuiWindowFlags;
 import imgui.gl3.ImGuiImplGl3;
 import imgui.glfw.ImGuiImplGlfw;
 import com.badlogic.gdx.utils.Array;
@@ -14,11 +16,21 @@ public class Tooling {
   private ImGuiImplGlfw glfw;
   private ImGuiImplGl3 gl;
   private Array<ToolAgent> tools;
+  private Array<Vector2> toolsPos;
   private static Tooling tooling;
+  private Vector2 lastDock = new Vector2(Gdx.graphics.getWidth(), 0);
 
-  public static void addAgent(ToolAgent tool) {
+  public static void addAgent(ToolAgent tool, boolean next, boolean below) {
     assert tooling != null;
     tooling.tools.add(tool);
+    if (next) {
+      tooling.lastDock.x -= tool.size.x;
+      tooling.toolsPos.add(new Vector2(tooling.lastDock.x, tooling.lastDock.y));
+    }
+    else if (below) {
+      tooling.toolsPos.add(new Vector2(tooling.lastDock.x, tooling.lastDock.y));
+      tooling.lastDock.y += tool.size.y;
+    }
   }
   public static void removeAgent(ToolAgent tool) {
     assert tooling != null;
@@ -30,6 +42,7 @@ public class Tooling {
   }
   public Tooling() {
     tools = new Array<ToolAgent>();
+    toolsPos = new Array<>();
     glfw = new ImGuiImplGlfw();
     gl = new ImGuiImplGl3();
     long windowHandle = ((Lwjgl3Graphics)Gdx.graphics).getWindow().getWindowHandle();
@@ -47,9 +60,7 @@ public class Tooling {
     ImGui.newFrame();
    
     for (int i = 0; i < tools.size; i++) { 
-      float nextPosX = Gdx.graphics.getWidth()-tools.get(i).size.x;
-      if (i-1 >= 0) nextPosX -= tools.get(i-1).size.x;
-      ImGui.setNextWindowPos(nextPosX, 0);
+      ImGui.setNextWindowPos(toolsPos.get(i).x, toolsPos.get(i).y);
       ImGui.setNextWindowSize(tools.get(i).size.x, tools.get(i).size.y);
       ImGui.begin(tools.get(i).id);
       tools.get(i).tool();

@@ -7,6 +7,7 @@ import com.leisure.duncraw.art.chara.Player;
 import com.leisure.duncraw.debug.CharaDebug;
 import com.leisure.duncraw.debug.GridLines;
 import com.leisure.duncraw.debug.PlayerDebug;
+import com.leisure.duncraw.debug.SystemDebug;
 import com.leisure.duncraw.logging.Logger;
 import com.leisure.duncraw.map.Floor;
 
@@ -24,15 +25,18 @@ public class DebugManager {
     // Tooling.addAgent(new Logger());
   }
   public void debugPlayer(Player player) {
-    Tooling.addAgent(new PlayerDebug(player));
+    Tooling.addAgent(new PlayerDebug(player), false, true);
   }
   public void debugChara(Chara chara) {
-    Tooling.addAgent(new CharaDebug(chara));
+    Tooling.addAgent(new CharaDebug(chara), false, true);
   }
   public void debugMap(Floor floor) {
     Logger.log("DebugManager", "Debugging map");
     gridLines = new GridLines(floor.terrainSet.cols, floor.terrainSet.rows, 
       floor.terrainSet.terrainWidth, floor.terrainSet.terrainHeight);
+  }
+  public void debugSystem() {
+    Tooling.addAgent(new SystemDebug(), true, false);
   }
   public void render(Camera cam) { 
     renderer.setProjectionMatrix(cam.combined);

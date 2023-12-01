@@ -12,6 +12,7 @@ public class PlayerDebug extends ToolAgent {
   Player player;
   public PlayerDebug(Player inv) { 
     player = inv; 
+    id = "Player";
     size.y = Gdx.graphics.getHeight()*0.7f;
   } 
   @Override
