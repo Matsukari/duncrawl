@@ -3,10 +3,13 @@ package com.leisure.duncraw.map.generator;
 import java.util.ArrayList;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Vector2;
+import com.leisure.duncraw.data.FloorData;
 import com.leisure.duncraw.map.Floor;
 import com.leisure.duncraw.map.Room;
 
 public class FloorGenerator {
+  public FloorData data;
   public ArrayList<Room> reqRooms;
   public RoomsBuilder roomsBuilder;
   public boolean consumeReq = true;
@@ -15,11 +18,17 @@ public class FloorGenerator {
     public ArrayList<TextureRegion> textures = new ArrayList<>();
     public static String headsOrder = "><-|";
   }
-  public FloorGenerator() {
-    roomsBuilder = new RoomsBuilder();
+  public FloorGenerator(FloorData data) {
+    this.data = data;
+    roomsBuilder = new RoomsBuilder(data.tileSize);
   }
   public Floor gen() {
-    /*    
+    roomsBuilder.build(data.roomsNum, new Vector2(data.getMaxWidth(), data.getMaxHeight()), data.widthRange, data.heightRange);
+    return new Floor(TerrainSetGenerator.gen(1), null);
+  }
+}
+
+/*    
      *      BASIC RECTANGULAR STRUCTURED INTERCONNECTED ROOMS
      *
      * Create outline of the whole floor
@@ -60,6 +69,4 @@ public class FloorGenerator {
      *  * Place a circle on a minimized grid created using the position of the placer
      *
      * */
-    return new Floor(TerrainSetGenerator.gen(1), null);
-  }
-}
+

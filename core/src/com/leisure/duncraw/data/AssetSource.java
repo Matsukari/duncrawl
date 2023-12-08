@@ -28,8 +28,8 @@ public class AssetSource {
   }
   public static void save() { Serializer.save(instance, instance.ini); }
   public static AssetSource load() throws Exception { return Deserializer.load(AssetSource.class, instance.ini); }
-  public static FloorData getFloorsData() 
-  { return getGenericData(FloorData.class, instance.floors, ()->{FloorData dat = new FloorData(); dat.reset(); return dat;}); }
+  public static FloorsData getFloorsData() 
+  { return getGenericData(FloorsData.class, instance.floors, ()->{FloorsData dat = new FloorsData(); dat.reset(); return dat;}); }
   public static CharasData getCharasData() 
   { return getGenericData(CharasData.class, instance.charas, ()->{CharasData dat = new CharasData(); dat.reset(); return dat;}); }
 

@@ -1,8 +1,20 @@
 {
-"bossRoom1": "bossroom_start",
-"bossRoom2": "bossroom_middle",
-"bossRoom3": "bossroom_final",
-"safePlace1": "safeplace_start",
-"safePlace2": "safeplace_middle",
-"startingHall": "floors/starting_room.tmx"
+"bossRoom1": "floors/bossroom_start.tmx",
+"bossRoom2": "floors/bossroom_middle.tmx",
+"bossRoom3": "floors/bossroom_final.tmx",
+"safePlace1": "floors/safeplace_start.tmx",
+"safePlace2": "floors/safeplace_middle.tmx",
+"startingHall": "floors/starting_room.tmx",
+"floorsDat": [
+	"floors/random/0",
+	"floors/random/1",
+	"floors/random/2",
+	"floors/random/3",
+	"floors/random/4",
+	"floors/random/5",
+	"floors/random/6",
+	"floors/random/7",
+	"floors/random/8",
+	"floors/random/9"
+]
 }

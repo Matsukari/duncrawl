@@ -3,6 +3,7 @@ package com.leisure.duncraw.map.generator;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Vector;
 
 import org.jgrapht.Graph;
 import org.jgrapht.alg.spanning.PrimMinimumSpanningTree;
@@ -29,7 +30,10 @@ public class RoomsBuilder {
   public Vector2 roomsCenter = Vector2.Zero;
   public float mainRoomMinSize = 200;
   public int roomsNum;
-
+  public int tileSize;
+  public RoomsBuilder(int tileSize) {
+    this.tileSize = tileSize;
+  }
   public void build(int roomsNum, Vector2 maxSize, Vector2 widthRange, Vector2 heightRange) {
     this.roomsNum = roomsNum;
     mainRooms = genRandomRooms(roomsNum, maxSize, widthRange, heightRange);
@@ -64,6 +68,7 @@ public class RoomsBuilder {
       Rectangle rect = new Rectangle(pos.x, pos.y, 
         MathUtils.random(widthRange.x, widthRange.y) * maxSize.x, 
         MathUtils.random(heightRange.x, heightRange.y) * maxSize.y);
+      convertToTile(rect);
       newRooms.add(rect);
     }
     return newRooms;
@@ -84,6 +89,7 @@ public class RoomsBuilder {
         }
       }
     }
+    for (Rectangle room : roomsDiv) convertToTile(room);
   }
   private ArrayList<Edge> connectRooms(ArrayList<Rectangle> roomsDiv) {
     FloatArray points = new FloatArray();
@@ -155,6 +161,19 @@ public class RoomsBuilder {
       paths.add(new Edge(graph.getEdgeSource(edge), graph.getEdgeTarget(edge)));
     }
     return rConnections;
+  }
+  public float getTileValue(float x) {
+    return MathUtils.floor(x / tileSize) * tileSize;
+  }
+  public void convertToTile(Vector2 pos) {
+    pos.x = getTileValue(pos.x);
+    pos.y = getTileValue(pos.y);
+  }
+  public void convertToTile(Rectangle rect) {
+    rect.x = getTileValue(rect.x);
+    rect.y = getTileValue(rect.y);
+    rect.width = getTileValue(rect.width);
+    rect.height = getTileValue(rect.height);
   }
   // on the basis that each rectangles does not overlap with any other
   public Rectangle getRoomPointSrc(Vector2 point) {

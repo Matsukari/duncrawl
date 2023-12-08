@@ -1,18 +1,24 @@
 package com.leisure.duncraw.data;
 
-public class FloorData {
-  public String bossRoom1;
-  public String bossRoom2;
-  public String bossRoom3;
-  public String safePlace1;
-  public String safePlace2;
-  public String startingHall;
+import com.badlogic.gdx.math.Vector2;
+
+public class FloorData extends Dat {
+  public int roomsNum;
+  public int tileMaxRows;
+  public int tileMaxCols;
+  public int tileSize;
+  public Vector2 widthRange;
+  public Vector2 heightRange;
+  @Override
   public void reset() {
-    bossRoom3 = "bossroom_final";
-    bossRoom2 = "bossroom_middle";
-    bossRoom1 = "bossroom_start";
-    safePlace1 = "safeplace_start";
-    safePlace2 = "safeplace_middle";
-    startingHall = "starting_hall";
+    roomsNum = 5;
+    tileMaxCols = 60;
+    tileMaxRows = 60;
+    tileSize = 32;
+    widthRange = new Vector2(0.2f, 1f);
+    heightRange = new Vector2(0.2f, 1f);
   }
+  public float getMaxWidth() { return tileMaxCols * tileSize; }
+  public float getMaxHeight() { return tileMaxRows * tileSize; }
+
 }

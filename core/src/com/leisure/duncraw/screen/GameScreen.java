@@ -35,7 +35,7 @@ public class GameScreen extends Screen {
     camera = new OrthographicCamera();
     effectManager = new EffectManager();
     viewport = new ExtendViewport(saveData.settings.bounds.width, saveData.settings.bounds.height, camera);
-    floorManager = new FloorManager(saveData, AssetSource.getFloorsData(), saveData.progression.level.level);
+    floorManager = new FloorManager(saveData, AssetSource.getFloorsData(), saveData.progression.level.level-1);
     floorManager.setCurrentFloor(TmxLoader.load(floorManager.sources.startingHall, floorManager.batch, 32, 32));
     charaManager = new CharaManager(AssetSource.getCharasData(), floorManager.getCurrentFloor());
     charaManager.observers.add(new AnimationReactor(effectManager));

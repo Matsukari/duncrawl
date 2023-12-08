@@ -12,8 +12,11 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.leisure.duncraw.Graphics;
+import com.leisure.duncraw.data.Deserializer;
 import com.leisure.duncraw.data.FloorData;
+import com.leisure.duncraw.data.FloorsData;
 import com.leisure.duncraw.data.SaveData;
+import com.leisure.duncraw.data.Serializer;
 import com.leisure.duncraw.map.Floor;
 import com.leisure.duncraw.map.generator.FloorGenerator;
 import com.leisure.duncraw.map.generator.TerrainSetGenerator;
@@ -25,20 +28,25 @@ public class FloorManager {
   private TextureRegion light;
   private Floor floor; 
   public int level;
-  public final FloorData sources;
-  public FloorManager(SaveData save, FloorData sources, int levelStart) {
+  public final FloorsData sources;
+  public FloorManager(SaveData save, FloorsData sources, int levelStart) {
     this.sources = sources;
-    level = levelStart;
-    floorGenerator = new FloorGenerator();
+    this.level = levelStart;
+    
+    FloorData floorData = new FloorData();
+    floorData.reset();
+    try { Deserializer.load(FloorData.class, Gdx.files.local(sources.floorsDat.get(level))); }
+    catch(Exception e) { Serializer.save(floorData, Gdx.files.local(sources.floorsDat.get(level))); }
+    floorGenerator = new FloorGenerator(floorData);
     floor = floorGenerator.gen();
     floor.exits.addAll(TerrainSetGenerator.selectExits(floor.terrainSet));
+    
     lightBuffer = new FrameBuffer(Format.RGB888, Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), false);
     Graphics.assets.load("images/lights/light_smooth.png", Texture.class);
     Graphics.assets.finishLoadingAsset("images/lights/light_smooth.png");
+    Gdx.gl.glEnable(GL20.GL_BLEND);
     light = new TextureRegion(Graphics.assets.get("images/lights/light_smooth.png", Texture.class));
     batch.enableBlending();
-    Gdx.gl.glEnable(GL20.GL_BLEND);
-
     lightBuffer.begin();
     ScreenUtils.clear(color);
     batch.begin();

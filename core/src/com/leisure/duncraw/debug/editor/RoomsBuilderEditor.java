@@ -1,5 +1,6 @@
 package com.leisure.duncraw.debug.editor;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
@@ -20,11 +21,12 @@ public class RoomsBuilderEditor extends ToolAgent {
     super("RoomsBuilderEditor");
     this.roomsBuilder = roomsBuilder;
     this.renderer = renderer;
+    renderer.scale(0.1f, 0.1f, 1f);
   }
   @Override
   public void tool() {
     ImGui.inputInt("Rooms", points);
-    if (ImGui.button("Generate")) roomsBuilder.build(points.get(), new Vector2(100, 100), new Vector2(0.2f, 1f), new Vector2(0.2f, 1f));
+    if (ImGui.button("Generate")) roomsBuilder.build(points.get(), new Vector2(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()), new Vector2(0.2f, 1f), new Vector2(0.2f, 1f));
     for (Edge e : roomsBuilder.nodes) {
       renderer.begin(ShapeType.Line);
       renderer.setColor(Color.DARK_GRAY);
