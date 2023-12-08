@@ -45,9 +45,10 @@ public class GameScreen extends Screen {
     player.moveTo(8, 10);
 
     debugManager = new DebugManager();
-    debugManager.debugSystem();
+    // debugManager.debugSystem();
     debugManager.debugPlayer(player);
-    debugManager.debugChara(mob);
+    // debugManager.debugChara(mob);
+    debugManager.editFloorGen(floorManager.floorGenerator);
     // debugManager.debugMap(floorManager.getCurrentFloor());
   }
   @Override

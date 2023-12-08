@@ -1,7 +1,5 @@
 package lib.tooling;
 
-import java.util.Vector;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Graphics;
 import com.badlogic.gdx.math.Vector2;
@@ -53,19 +51,23 @@ public class Tooling {
     io.getFonts().build();
     glfw.init(windowHandle, true);
     gl.init("#version 150");
-    ImGui.getStyle().setWindowMinSize(200, 200);
+    ImGui.getStyle().setWindowMinSize(200, Gdx.graphics.getHeight());
   }
   public void render() {
     glfw.newFrame();
     ImGui.newFrame();
    
+    ImGui.begin("Tools");
+    // ImGui.setNextWindowSize(200, 700);
+    // ImGui.setNextWindowPos(Gdx.graphics.getWidth()-200, 0);
     for (int i = 0; i < tools.size; i++) { 
-      ImGui.setNextWindowPos(toolsPos.get(i).x, toolsPos.get(i).y);
-      ImGui.setNextWindowSize(tools.get(i).size.x, tools.get(i).size.y);
-      ImGui.begin(tools.get(i).id);
+      // ImGui.setNextWindowPos(toolsPos.get(i).x, toolsPos.get(i).y);
+      // ImGui.setNextWindowSize(tools.get(i).size.x, tools.get(i).size.y);
+      ImGui.separator();
+      ImGui.text(tools.get(i).id);
       tools.get(i).tool();
-      ImGui.end();
     }
+    ImGui.end();
     ImGui.render();
     gl.renderDrawData(ImGui.getDrawData());
 

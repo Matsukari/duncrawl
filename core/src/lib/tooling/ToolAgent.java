@@ -7,9 +7,7 @@ public class ToolAgent {
   public Vector2 size = new Vector2(200, 200);
   public ToolAgent(String id) { this.id = id; }
   public ToolAgent() { }
-  public void tool() {
-    
-  }
+  public void tool() {}
   @Override
   public boolean equals(Object obj) {
     return ((ToolAgent)obj).id == id;

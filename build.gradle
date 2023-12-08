@@ -115,6 +115,8 @@ project(":core") {
         api "io.github.spair:imgui-java-natives-linux:$imguiVersion"
         api "io.github.spair:imgui-java-natives-macos:$imguiVersion"
         api "io.github.spair:imgui-java-natives-windows:$imguiVersion"
+        implementation 'org.jgrapht:jgrapht-core:1.5.2'
+        implementation 'org.locationtech.jts:jts-core:1.18.1'
         
     }
 }
