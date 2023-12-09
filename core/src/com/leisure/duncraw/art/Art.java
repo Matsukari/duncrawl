@@ -7,7 +7,7 @@ import com.badlogic.gdx.math.Rectangle;
 public abstract class Art {
   public final int id;
   public Color color = new Color(1, 1, 1, 1);
-  public Rectangle bounds = new Rectangle(0, 0, 0, 0);
+  public Rectangle bounds = new Rectangle(0, 0, 100f, 100f);
   public final SpriteBatch batch;
   public Art(SpriteBatch batch) {
     id = IdGenerator.gen();

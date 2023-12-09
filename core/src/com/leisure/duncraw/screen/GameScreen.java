@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
+import com.leisure.duncraw.Graphics;
 import com.leisure.duncraw.art.chara.Chara;
 import com.leisure.duncraw.art.chara.Enemy;
 import com.leisure.duncraw.art.chara.Player;
@@ -36,19 +37,20 @@ public class GameScreen extends Screen {
     effectManager = new EffectManager();
     viewport = new ExtendViewport(saveData.settings.bounds.width, saveData.settings.bounds.height, camera);
     floorManager = new FloorManager(saveData, AssetSource.getFloorsData(), saveData.progression.level.level-1);
-    floorManager.setCurrentFloor(TmxLoader.load(floorManager.sources.startingHall, floorManager.batch, 32, 32));
+    // floorManager.setCurrentFloor(TmxLoader.load(floorManager.sources.startingHall, floorManager.batch, 32, 32));
     charaManager = new CharaManager(AssetSource.getCharasData(), floorManager.getCurrentFloor());
     charaManager.observers.add(new AnimationReactor(effectManager));
     player = charaManager.addFrom(charaManager.sources.player, Player.class);
     Chara mob = charaManager.addFrom(charaManager.sources.ghost, Enemy.class);
     mob.moveTo(10, 10);
     player.moveTo(8, 10);
+    camera.zoom = 30f;
 
     debugManager = new DebugManager();
-    // debugManager.debugSystem();
+    debugManager.debugSystem();
     debugManager.debugPlayer(player);
-    // debugManager.debugChara(mob);
-    debugManager.editFloorGen(floorManager.floorGenerator);
+    debugManager.debugChara(mob);
+    debugManager.editFloorGen(floorManager);
     // debugManager.debugMap(floorManager.getCurrentFloor());
   }
   @Override

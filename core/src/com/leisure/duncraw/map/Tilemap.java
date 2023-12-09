@@ -10,6 +10,7 @@ public class Tilemap {
   protected ArrayList<TilemapChara> chars = new ArrayList<>();
   public Tilemap(TerrainSet terrainSet) { 
     this.terrainSet = terrainSet;
+    assert terrainSet != null;
   }
   public void render() {
     for (Terrain terrain : terrainSet.terrains) {

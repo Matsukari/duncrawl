@@ -11,7 +11,6 @@ import com.leisure.duncraw.art.item.ItemParser;
 import com.leisure.duncraw.art.map.Obj;
 import com.leisure.duncraw.art.map.ObjParser;
 import com.leisure.duncraw.art.map.Terrain;
-import com.leisure.duncraw.logging.Logger;
 import com.leisure.duncraw.map.Floor;
 import com.leisure.duncraw.map.TerrainSet;
 

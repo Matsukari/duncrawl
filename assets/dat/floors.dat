@@ -5,6 +5,7 @@
 "safePlace1": "floors/safeplace_start.tmx",
 "safePlace2": "floors/safeplace_middle.tmx",
 "startingHall": "floors/starting_room.tmx",
+"tilesets": "floors/tilesets.tmx",
 "floorsDat": [
 	"floors/random/0",
 	"floors/random/1",

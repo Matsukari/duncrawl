@@ -3,7 +3,6 @@ package com.leisure.duncraw.map.generator;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Vector;
 
 import org.jgrapht.Graph;
 import org.jgrapht.alg.spanning.PrimMinimumSpanningTree;
@@ -15,6 +14,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.FloatArray;
+import com.leisure.duncraw.logging.Logger;
 
 import lib.math.Circle;
 import lib.math.DelaunayTriangulator;
@@ -27,7 +27,10 @@ public class RoomsBuilder {
   public ArrayList<Rectangle> mainRooms = new ArrayList<>();
   public ArrayList<Rectangle> subRooms = new ArrayList<>();
   public HashMap<Rectangle, ArrayList<Rectangle>> roomConnections = new HashMap<>();
-  public Vector2 roomsCenter = Vector2.Zero;
+  public Vector2 roomsCenter = new Vector2(1000, 1000);
+  public Rectangle rect = new Rectangle();
+  public Vector2 min = new Vector2();
+  public Vector2 max = new Vector2();
   public float mainRoomMinSize = 200;
   public int roomsNum;
   public int tileSize;
@@ -46,6 +49,7 @@ public class RoomsBuilder {
 
     roomConnections = createPaths(nodes);
     corridors = createCorridors(roomConnections);
+    rect = getRect();
     
     ArrayList<Rectangle> trimmedSubRooms = new ArrayList<>();
     // Trim; delete rooms that aren't connected by corridors; ie., rooms that are unreachable
@@ -62,7 +66,7 @@ public class RoomsBuilder {
   // Main rooms scattered
   private ArrayList<Rectangle> genRandomRooms(int roomsNum, Vector2 maxSize, Vector2 widthRange, Vector2 heightRange) {
     ArrayList<Rectangle> newRooms = new ArrayList<>();
-    Circle circle = new Circle(0, 0, 10);
+    Circle circle = new Circle(roomsCenter.x, roomsCenter.y, 10);
     for (int it = 0; it < roomsNum; it ++) {
       Vector2 pos = circle.getRandomPoint();
       Rectangle rect = new Rectangle(pos.x, pos.y, 
@@ -162,18 +166,94 @@ public class RoomsBuilder {
     }
     return rConnections;
   }
+  public ArrayList<Rectangle> expandCorridors(int span, boolean center) { 
+    assert (span < 1 || span >= 100);
+    ArrayList<Rectangle> expanded = new ArrayList<>();
+    span *= tileSize;
+    for (Edge corridor : corridors) {
+      Vector2 start = new Vector2(corridor.left().x, corridor.bottom().y);
+      float disX = corridor.p2.x - corridor.p1.x; 
+      float disY = corridor.p2.y - corridor.p1.y; 
+      float width = 0;
+      float height = 0;
+      Vector2 breadth = new Vector2();
+      // Corridor is vertical
+      if (disX < disY) {
+        breadth.x = span;
+        width = breadth.x;
+        height = Math.abs(disY);
+        // negative; then inverese the direction of rectangle
+        // if (disY < 0) start.y -= height;
+      }
+      // Horizontal
+      else {
+        breadth.y = span;
+        width = Math.abs(disX);
+        height = breadth.y;
+        // if (disX < 0) start.x -= width;
+      }
+    
+      if (center) {
+        start.x -= breadth.x / 2 * tileSize;
+        start.y -= breadth.y / 2 * tileSize;
+      }
+      
+      expanded.add(new Rectangle(start.x, start.y, width, height));
+      Logger.log("RoomsBuilder expandCorridors", String.format("Expanded %d. ", expanded.size()) + expanded.get(expanded.size()-1).toString());
+    }
+    return expanded;
+  }
+  public void forEachTileInRooms(ArrayList<Rectangle> roomsDiv, RoomTileIterator iterator) throws Exception {
+    int i = 0, j = 0;
+    for (Rectangle room : roomsDiv) {
+      int cols = (int)(room.width / tileSize);
+      int rows = (int)(room.height / tileSize);
+      Logger.log("Room", Integer.toString(i) + " - " + room.toString());
+      i++;
+      for (int col = 0; col < cols; col++) {
+        for (int row = 0; row < rows; row++) { 
+          iterator.onRoomAtTile(room, col, row);
+          j++;
+        }
+      }
+    }
+    Logger.log("FloorGenerator", "finished generating" + Integer.toString(j));
+  }
   public float getTileValue(float x) {
     return MathUtils.floor(x / tileSize) * tileSize;
-  }
-  public void convertToTile(Vector2 pos) {
-    pos.x = getTileValue(pos.x);
-    pos.y = getTileValue(pos.y);
   }
   public void convertToTile(Rectangle rect) {
     rect.x = getTileValue(rect.x);
     rect.y = getTileValue(rect.y);
     rect.width = getTileValue(rect.width);
     rect.height = getTileValue(rect.height);
+  }
+  // Get the space enclosing all of the rooms as a rectangle, positions vary and stay as it is... It's obviously bottom-left oriented
+  // Used to make the return axes the standard for operation.  
+  public Rectangle getRect() {
+    Rectangle rect = new Rectangle();
+    min = new Vector2(100000, 100000);
+    max = new Vector2(-10000, -10000);
+    for (Rectangle room : rooms) { 
+      min.x = Math.min(min.x, room.x);
+      min.y = Math.min(min.y, room.y);
+      max.x = Math.max(max.x, room.x + room.width);
+      max.y = Math.max(max.y, room.y + room.height);
+    }
+    rect.x = min.x;
+    rect.y = min.y;
+    rect.width = (int)((max.x - min.x) / tileSize) * tileSize;
+    rect.height = (int)((max.y - min.y) / tileSize) * tileSize;
+    // rect.width = Math.abs(rect.width);
+    // rect.height = Math.abs(rect.height);
+    return rect;
+  }
+  public Vector2 getRoomRelTilePos(Rectangle room) {
+    Vector2 pos = new Vector2(
+      (int)((room.x - rect.x) / tileSize), 
+      (int)((room.y - rect.y) / tileSize) );
+    // pos.y = rect.height / tileSize - pos.y;
+    return pos;
   }
   // on the basis that each rectangles does not overlap with any other
   public Rectangle getRoomPointSrc(Vector2 point) {
@@ -184,3 +264,8 @@ public class RoomsBuilder {
   }
 
 }
+
+
+/*    SAMPLE DATA
+ *
+ */

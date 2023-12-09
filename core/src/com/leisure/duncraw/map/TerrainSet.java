@@ -1,5 +1,6 @@
 package com.leisure.duncraw.map;
 
+import com.leisure.duncraw.art.map.LayeredTerrain;
 import com.leisure.duncraw.art.map.Obj;
 import com.leisure.duncraw.art.map.Terrain;
 import com.leisure.duncraw.logging.Logger;
@@ -17,14 +18,17 @@ public class TerrainSet {
     for (int i = 0; i < cols * rows; i++) terrains[i] = null;
   }
   public void putTerrain(Terrain terrain, int x, int y) {
-    // Logger.log("TerrainSet", "put terrain");
-    int cell = y * cols + x; 
+    // Logger.log("TerrainSet", String.format("put terrain at %d %d", x, y));
+    int cell = y * cols + x;
+    terrain.bounds.setSize(terrainWidth, terrainHeight);
     terrain.bounds.x = x * terrainWidth;
     terrain.bounds.y = y * terrainHeight;
 
     // Overlay then
-    if (terrains[cell] != null) terrains[cell].getTail().next = terrain; 
-    else terrains[cell] = terrain;
+    if (terrains[cell] == null) terrains[cell] = terrain;
+    else if (terrains[cell] instanceof LayeredTerrain) ((LayeredTerrain)terrains[cell]).add(terrain);
+    else terrains[cell] = new LayeredTerrain(terrain);
+    // terrains[cell].getTail().next = terrain; 
     
   }
   public void putObject(Obj obj, int x, int y) {
@@ -35,6 +39,7 @@ public class TerrainSet {
       obj.bounds.y = y * terrainHeight;
     }
   }
+  public int getTilesNum() { return cols * rows; }
   public Terrain getTerrain(int x, int y) { return terrains[y*rows+x]; }
 }
 

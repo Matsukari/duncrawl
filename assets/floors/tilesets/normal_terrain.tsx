@@ -26,12 +26,32 @@
    <property name="terrain" value="wall"/>
   </properties>
  </tile>
+ <tile id="23">
+  <properties>
+   <property name="terrain" value="wall"/>
+  </properties>
+ </tile>
+ <tile id="24">
+  <properties>
+   <property name="terrain" value="wall"/>
+  </properties>
+ </tile>
  <tile id="25">
   <properties>
    <property name="terrain" value="wall"/>
   </properties>
  </tile>
  <tile id="42">
+  <properties>
+   <property name="terrain" value="wall"/>
+  </properties>
+ </tile>
+ <tile id="43">
+  <properties>
+   <property name="terrain" value="wall"/>
+  </properties>
+ </tile>
+ <tile id="44">
   <properties>
    <property name="terrain" value="wall"/>
   </properties>
@@ -99,6 +119,26 @@
  <tile id="125">
   <properties>
    <property name="terrain" value="wall"/>
+  </properties>
+ </tile>
+ <tile id="161">
+  <properties>
+   <property name="terrain" value="ground"/>
+  </properties>
+ </tile>
+ <tile id="162">
+  <properties>
+   <property name="terrain" value="ground"/>
+  </properties>
+ </tile>
+ <tile id="181">
+  <properties>
+   <property name="terrain" value="ground"/>
+  </properties>
+ </tile>
+ <tile id="182">
+  <properties>
+   <property name="terrain" value="ground"/>
   </properties>
  </tile>
 </tileset>

@@ -28,6 +28,7 @@ public class GameApplication extends Game {
   }
 	@Override
 	public void dispose () {
+    Graphics.dispose(); 
     Logger.log("GameApplication", "Disposed");
 	}
 

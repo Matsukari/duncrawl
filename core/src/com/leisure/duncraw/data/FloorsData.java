@@ -9,6 +9,7 @@ public class FloorsData {
   public String safePlace1;
   public String safePlace2;
   public String startingHall;
+  public String tilesets;
   public ArrayList<String> floorsDat;
   public void reset() {
     bossRoom3 = "floors/bossroom_final.tmx";
@@ -17,6 +18,7 @@ public class FloorsData {
     safePlace1 = "floors/safeplace_start.tmx";
     safePlace2 = "floors/safeplace_middle.tmx";
     startingHall = "floors/starting_room.tmx";
+    tilesets = "floors/tilesets.tmx";
     floorsDat = new ArrayList<>();
     for (int i = 0; i < 10; i++)  {
       floorsDat.add(String.format("floors/random/%d", i));

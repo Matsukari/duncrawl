@@ -17,4 +17,8 @@ public class Graphics {
   public static void init () {
     assets = new AssetManager();
   }
+  public static void dispose() {
+    if (defFont != null) defFont.dispose();
+    assets.dispose();
+  }
 }

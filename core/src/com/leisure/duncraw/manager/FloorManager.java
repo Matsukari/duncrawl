@@ -18,12 +18,14 @@ import com.leisure.duncraw.data.FloorsData;
 import com.leisure.duncraw.data.SaveData;
 import com.leisure.duncraw.data.Serializer;
 import com.leisure.duncraw.map.Floor;
+import com.leisure.duncraw.map.Tileset;
 import com.leisure.duncraw.map.generator.FloorGenerator;
 import com.leisure.duncraw.map.generator.TerrainSetGenerator;
 
 public class FloorManager {
   public SpriteBatch batch = new SpriteBatch();
   public FloorGenerator floorGenerator;
+  public Tileset tileset;
   private FrameBuffer lightBuffer;
   private TextureRegion light;
   private Floor floor; 
@@ -33,14 +35,16 @@ public class FloorManager {
     this.sources = sources;
     this.level = levelStart;
     
+    tileset = new Tileset(sources.tilesets);
     FloorData floorData = new FloorData();
     floorData.reset();
     try { Deserializer.load(FloorData.class, Gdx.files.local(sources.floorsDat.get(level))); }
     catch(Exception e) { Serializer.save(floorData, Gdx.files.local(sources.floorsDat.get(level))); }
     floorGenerator = new FloorGenerator(floorData);
+    floorGenerator.grounds = (tileset.terrainTransform(tileset.filter("terrain", "ground"), batch));
     floor = floorGenerator.gen();
     floor.exits.addAll(TerrainSetGenerator.selectExits(floor.terrainSet));
-    
+     
     lightBuffer = new FrameBuffer(Format.RGB888, Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), false);
     Graphics.assets.load("images/lights/light_smooth.png", Texture.class);
     Graphics.assets.finishLoadingAsset("images/lights/light_smooth.png");
@@ -63,20 +67,21 @@ public class FloorManager {
     batch.setBlendFunction(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
     batch.begin();
     floor.render();
+    // floorGenerator.grounds.get(0).render(0, 0);
     batch.end();
   }
   public Color color = new Color(0.005f, 0.05f, 0.06f, 1f);
   public void renderForeground(Camera cam) {
-    batch.setProjectionMatrix(cam.combined);
-    batch.begin();
-    batch.setBlendFunction(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
-    floor.renderForeground();
-    batch.end();
+    // batch.setProjectionMatrix(cam.combined);
+    // batch.begin();
+    // batch.setBlendFunction(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
+    // floor.renderForeground();
+    // batch.end();
 
-    batch.begin();
-    batch.setBlendFunction(GL20.GL_DST_COLOR, GL20.GL_ZERO);
-    batch.draw(lightBuffer.getColorBufferTexture(), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), 0, 0, 1, 1);
-    batch.end();
+    // batch.begin();
+    // batch.setBlendFunction(GL20.GL_DST_COLOR, GL20.GL_ZERO);
+    // batch.draw(lightBuffer.getColorBufferTexture(), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), 0, 0, 1, 1);
+    // batch.end();
 
   }
 }

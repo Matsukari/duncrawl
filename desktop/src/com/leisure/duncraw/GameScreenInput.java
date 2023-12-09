@@ -49,7 +49,8 @@ public class GameScreenInput extends GameScreen implements InputProcessor {
   }
   @Override
   public boolean scrolled(float amountX, float amountY) {
-    return false;
+    camera.zoom += amountY;
+    return true;
   }
   @Override
   public boolean mouseMoved(int screenX, int screenY) {

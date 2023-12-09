@@ -8,7 +8,7 @@ import com.leisure.duncraw.debug.CharaDebug;
 import com.leisure.duncraw.debug.GridLines;
 import com.leisure.duncraw.debug.PlayerDebug;
 import com.leisure.duncraw.debug.SystemDebug;
-import com.leisure.duncraw.debug.editor.RoomsBuilderEditor;
+import com.leisure.duncraw.debug.editor.FloorEditor;
 import com.leisure.duncraw.logging.Logger;
 import com.leisure.duncraw.map.Floor;
 import com.leisure.duncraw.map.generator.FloorGenerator;
@@ -30,8 +30,8 @@ public class DebugManager extends ToolAgent {
   public void debugPlayer(Player player) {
     Tooling.addAgent(new PlayerDebug(player), false, true);
   }
-  public void editFloorGen(FloorGenerator floorGenerator) {
-    Tooling.addAgent(new RoomsBuilderEditor(floorGenerator.roomsBuilder, renderer), true, false);  
+  public void editFloorGen(FloorManager floorGenerator) {
+    Tooling.addAgent(new FloorEditor(floorGenerator, renderer), true, false);  
   }
   public void debugChara(Chara chara) {
     Tooling.addAgent(new CharaDebug(chara), false, true);

@@ -18,6 +18,6 @@ public class Circle {
     double r = 0;
     if (u > 1) r = 2-u;
     else r = u;
-    return new Vector2((float)(r * Math.cos(t)), (float)(r * Math.sin(t)));
+    return new Vector2(x + radius * (float)(r * Math.cos(t)), y + radius * (float)(r * Math.sin(t)));
   }
 }

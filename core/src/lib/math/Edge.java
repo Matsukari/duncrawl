@@ -22,8 +22,11 @@ public class Edge {
   }
   public double distance() {
     return Math.sqrt(Math.pow(p2.x - p1.x, 2) + Math.pow(p2.y - p1.y, 2));
-
   }
+  public Vector2 left() { return (p1.x < p2.x) ? p1 : p2; }
+  public Vector2 right() { return (p2.x > p1.x) ? p2 : p1; }
+  public Vector2 bottom() { return (p2.y < p1.y) ? p2 : p1; }
+  public Vector2 top() { return (p1.y > p2.y) ? p1 : p2; }
 
   @Override
   public int hashCode() {

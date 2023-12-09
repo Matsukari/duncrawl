@@ -26,6 +26,9 @@ public class Terrain extends Art {
   public boolean traversable() {
     return canTravel;
   }
+  public Terrain clone() {
+    return new Terrain(batch, anim);
+  }
   public Terrain getTail() {
     Terrain node = this;
     while (node.next != null) node = node.next;
@@ -42,6 +45,8 @@ public class Terrain extends Art {
     for (Terrain node = next; node != null; node = node.next) node.render();
   }
   public void render(int x, int y) {
-    batch.draw(anim.current(), x, y);
+    bounds.x = x;
+    bounds.y = y;
+    render();
   }
 }
