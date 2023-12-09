@@ -11,7 +11,6 @@ import com.leisure.duncraw.debug.SystemDebug;
 import com.leisure.duncraw.debug.editor.FloorEditor;
 import com.leisure.duncraw.logging.Logger;
 import com.leisure.duncraw.map.Floor;
-import com.leisure.duncraw.map.generator.FloorGenerator;
 
 import lib.tooling.ToolAgent;
 import lib.tooling.Tooling;
@@ -25,16 +24,15 @@ public class DebugManager extends ToolAgent {
     renderer = new ShapeRenderer();
     tooling = new Tooling();
     Tooling.init(tooling);
-    Tooling.addAgent(this, true, true);
   }
   public void debugPlayer(Player player) {
-    Tooling.addAgent(new PlayerDebug(player), false, true);
+    Tooling.addAgent(new PlayerDebug(player));
   }
   public void editFloorGen(FloorManager floorGenerator) {
-    Tooling.addAgent(new FloorEditor(floorGenerator, renderer), true, false);  
+    Tooling.addAgent(new FloorEditor(floorGenerator, renderer));  
   }
   public void debugChara(Chara chara) {
-    Tooling.addAgent(new CharaDebug(chara), false, true);
+    Tooling.addAgent(new CharaDebug(chara));
   }
   public void debugMap(Floor floor) {
     Logger.log("DebugManager", "Debugging map");
@@ -42,7 +40,7 @@ public class DebugManager extends ToolAgent {
       floor.terrainSet.terrainWidth, floor.terrainSet.terrainHeight);
   }
   public void debugSystem() {
-    Tooling.addAgent(new SystemDebug(), true, false);
+    Tooling.addAgent(new SystemDebug());
   }
   public void render(Camera cam) { 
     renderer.setProjectionMatrix(cam.combined);

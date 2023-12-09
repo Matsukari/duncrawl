@@ -5,7 +5,6 @@ import com.leisure.duncraw.art.chara.Player;
 import com.leisure.duncraw.art.item.Item;
 
 import imgui.ImGui;
-import imgui.flag.ImGuiTreeNodeFlags;
 import lib.tooling.ToolAgent;
 
 public class PlayerDebug extends ToolAgent {
@@ -17,13 +16,11 @@ public class PlayerDebug extends ToolAgent {
   } 
   @Override
   public void tool() {
-    if (ImGui.collapsingHeader("Inventory", ImGuiTreeNodeFlags.DefaultOpen)) {
-      ImGui.beginChild("Scroll panel", size.x, 100);
+      ImGui.beginChild("Scroll panel", size.x, player.inventory.data.size() * 10 + 10);
       for (Item item : player.inventory.data) { 
         ImGui.text(String.format("%s", item.dat.name));
       }
       ImGui.endChild();
-    }
     if (player.itemSel != null) {
       ImGui.labelText("Equip", player.itemSel.dat.name);
     }

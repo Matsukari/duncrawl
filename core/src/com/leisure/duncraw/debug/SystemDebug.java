@@ -1,7 +1,5 @@
 package com.leisure.duncraw.debug;
 
-import com.badlogic.gdx.graphics.FPSLogger;
-
 import imgui.ImGui;
 import lib.time.TimePeeker;
 import lib.tooling.ToolAgent;

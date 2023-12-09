@@ -5,7 +5,6 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.leisure.duncraw.data.SaveData;
-import com.leisure.duncraw.logging.Logger;
 import com.leisure.duncraw.screen.GameScreen;
 
 public class GameScreenInput extends GameScreen implements InputProcessor {

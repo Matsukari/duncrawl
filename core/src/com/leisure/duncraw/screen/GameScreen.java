@@ -20,7 +20,6 @@ import com.leisure.duncraw.manager.CharaManager;
 import com.leisure.duncraw.manager.DebugManager;
 import com.leisure.duncraw.manager.EffectManager;
 import com.leisure.duncraw.manager.FloorManager;
-import com.leisure.duncraw.map.loader.TmxLoader;
 
 public class GameScreen extends Screen {
   public Color backgroundColor = new Color(4/255f, 4/255f, 4/255f, 1f);
