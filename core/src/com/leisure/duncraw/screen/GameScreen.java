@@ -32,6 +32,7 @@ public class GameScreen extends Screen {
   protected final OrthographicCamera camera;
   protected final ExtendViewport viewport; 
   protected Player player;
+  protected boolean blockCamera = false; 
   public GameScreen(SaveData saveData) {
     Logger.log("GameScreen", "Init");
     this.saveData = saveData;
@@ -68,8 +69,10 @@ public class GameScreen extends Screen {
   }
   @Override
   public void render(float delta) {
-    camera.position.x = player.bounds.x;
-    camera.position.y = player.bounds.y;
+    if (!blockCamera) {
+      camera.position.x = player.bounds.x;
+      camera.position.y = player.bounds.y;
+    }
     camera.update();
     charaManager.updateAll(delta);
     effectManager.updateAll(delta);
