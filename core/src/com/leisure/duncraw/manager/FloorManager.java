@@ -42,7 +42,9 @@ public class FloorManager {
     catch(Exception e) { Serializer.save(floorData, Gdx.files.local(sources.floorsDat.get(level))); }
     floorGenerator = new FloorGenerator(floorData);
     floorGenerator.grounds = (tileset.terrainTransform(tileset.filter("terrain", "ground"), batch));
+    floorGenerator.walls = (tileset.terrainTransform(tileset.filter("terrain", "wall"), batch));
     floor = floorGenerator.gen();
+    floor.meta = floorGenerator.roomsBuilder;
     floor.exits.addAll(TerrainSetGenerator.selectExits(floor.terrainSet));
      
     lightBuffer = new FrameBuffer(Format.RGB888, Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), false);

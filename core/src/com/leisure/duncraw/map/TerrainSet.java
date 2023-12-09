@@ -40,6 +40,10 @@ public class TerrainSet {
     }
   }
   public int getTilesNum() { return cols * rows; }
-  public Terrain getTerrain(int x, int y) { return terrains[y*rows+x]; }
+  public Terrain getTerrain(int x, int y) { 
+    try { return terrains[y*cols+x]; } 
+    catch (Exception e) {}  
+    return null;
+  }
 }
 

@@ -3,6 +3,8 @@ package com.leisure.duncraw.screen;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.leisure.duncraw.Graphics;
@@ -42,8 +44,10 @@ public class GameScreen extends Screen {
     charaManager.observers.add(new AnimationReactor(effectManager));
     player = charaManager.addFrom(charaManager.sources.player, Player.class);
     Chara mob = charaManager.addFrom(charaManager.sources.ghost, Enemy.class);
+    
+    Vector2 pos = floorManager.getCurrentFloor().getTileInRandomRoom();
+    player.moveTo(pos.x, pos.y);
     mob.moveTo(10, 10);
-    player.moveTo(8, 10);
     camera.zoom = 30f;
 
     debugManager = new DebugManager();

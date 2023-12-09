@@ -2,7 +2,6 @@ package com.leisure.duncraw.map.generator;
 
 import java.util.ArrayList;
 
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
@@ -13,17 +12,16 @@ import com.leisure.duncraw.map.Floor;
 import com.leisure.duncraw.map.Room;
 import com.leisure.duncraw.map.TerrainSet;
 
-import lib.math.Edge;
-
 public class FloorGenerator {
   public FloorData data;
   public ArrayList<Room> reqRooms;
   public RoomsBuilder roomsBuilder;
   public boolean consumeReq = true;
   // public static class Texture {
-    public ArrayList<Terrain> heads = new ArrayList<>();
+    public ArrayList<Terrain> sideHeads = new ArrayList<>();
+    public ArrayList<Terrain> topHeads = new ArrayList<>();
     public ArrayList<Terrain> grounds = new ArrayList<>();
-    public ArrayList<TextureRegion> walls = new ArrayList<>();
+    public ArrayList<Terrain> walls = new ArrayList<>();
     public static String headsOrder = "><-|";
   // }
   public FloorGenerator(FloorData data) {
@@ -40,7 +38,10 @@ public class FloorGenerator {
     Logger.log("Rect", floorRect.toString());
     ArrayList<Rectangle> expandedCorridors = roomsBuilder.expandCorridors(4, false);
     roomsBuilder.rooms.addAll(expandedCorridors);
-    try { placeGrounds(terrainSet); }
+    try { 
+      placeGrounds(terrainSet); 
+      placeWalls(terrainSet);
+    }
     catch (Exception e) { gen(); }
     
     return new Floor(terrainSet, terrainSet);
@@ -48,19 +49,36 @@ public class FloorGenerator {
   public void placeGrounds(TerrainSet terrainSet) throws Exception {
     roomsBuilder.forEachTileInRooms(roomsBuilder.rooms, (room, col, row)->{
       Vector2 pos = roomsBuilder.getRoomRelTilePos(room);
-      Terrain terrain = grounds.get(0).clone();
+      Terrain terrain = grounds.get(MathUtils.random(0, grounds.size()-1)).clone();
       if ( pos.x < 0 || pos.y < 0 ) Logger.log("ERROR", "1");
       if ( col < 0 || row < 0 ) Logger.log("ERROR", "2");
       if ( pos.y + row < 0f ) Logger.log("ERROR", "3");
       if ( pos.x + col < 0f ) Logger.log("ERROR", "4");
-      try { 
-        terrainSet.putTerrain(terrain, 
-          (int)pos.x + col, 
-          ( ((int)pos.y + row))
-          ); 
-      } catch (Exception e) { throw new Exception(); }
-    });
-    
+      try { terrainSet.putTerrain(terrain, (int)pos.x + col, (int)pos.y + row); } 
+      catch (Exception e) { throw new Exception(); }
+    }); 
+  }
+  public void placeWalls(TerrainSet terrainSet) throws Exception {
+    // Logger.log("Rooms before", )
+    roomsBuilder.rooms.sort((a, b)-> (a.y > b.y) ? 1 : (b.y > a.y) ? -1 : 0 );
+    for (Rectangle room : roomsBuilder.rooms) {
+      int cols = (int)(room.width / data.tileSize);
+      int rows = (int)(room.height / data.tileSize);
+      for (int col = 0; col < cols; col++) {
+        Terrain terrain = walls.get(MathUtils.random(0, walls.size()-1)).clone();
+        Vector2 pos = roomsBuilder.getRoomRelTilePos(room);
+        int top = (int)pos.y;
+        int bottom = (int)pos.y + rows;
+        if (terrainSet.getTerrain((int)pos.x + col, top - 1) == null) terrainSet.putTerrain(terrain, (int)pos.x + col, top);
+        if (terrainSet.getTerrain((int)pos.x + col, bottom + 1) == null) terrainSet.putTerrain(terrain, (int)pos.x + col, bottom);
+      }
+      for (int row = 0; row < rows; row++) {
+        float rightX;
+        float rightY;
+        float leftX;
+        float leftY;
+      }
+    }
   }
 }
 

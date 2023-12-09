@@ -3,6 +3,7 @@ package com.leisure.duncraw.art.chara.moves;
 import com.leisure.duncraw.art.chara.Chara;
 import com.leisure.duncraw.art.chara.Movement;
 import com.leisure.duncraw.art.map.Terrain;
+import com.leisure.duncraw.logging.Logger;
 
 // normalized lerping
 public class LerpMovement extends Movement {
@@ -23,6 +24,11 @@ public class LerpMovement extends Movement {
       super.moveBy(x, y);
       return true;
     }
+    else if (terrain != null) {
+      Logger.log("LerpMovement", "cannot move: terrain is " + Boolean.toString(terrain.traversable()));
+    }
+    else
+    Logger.log("LerpMovement", "terrain you are in is null;");
     return false;
   }
   @Override
