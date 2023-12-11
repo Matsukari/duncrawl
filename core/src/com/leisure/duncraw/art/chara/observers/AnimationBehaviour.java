@@ -12,11 +12,11 @@ import com.leisure.duncraw.art.gfx.GfxAnimation;
 import com.leisure.duncraw.logging.Logger;
 import com.leisure.duncraw.manager.EffectManager;
 
-public class AnimationReactor extends Observer {
+public class AnimationBehaviour extends Observer {
   private final EffectManager effectManager;
   private Gfx attackEffect;
   private DirAnimation attackAnim;
-  public AnimationReactor(EffectManager effectManager) { this.effectManager = effectManager; }
+  public AnimationBehaviour(EffectManager effectManager) { this.effectManager = effectManager; }
   @Override
   public void init(Chara c) {
     super.init(c);
@@ -24,7 +24,7 @@ public class AnimationReactor extends Observer {
   }
   @Override
   public void invoke(State state) {
-    Logger.log("AnimationReactor", "Invoke");
+    Logger.log("AnimationBehaviour", "Invoke");
     if (state instanceof MoveState) chara.anims.set("move");
     else if (state instanceof IdleState) chara.anims.set("idle", chara.movement.lastVelX, chara.movement.lastVelY);
     else if (state instanceof AttackState && attackAnim != null) {
@@ -37,6 +37,6 @@ public class AnimationReactor extends Observer {
   } 
   @Override
   public Observer copy() {
-    return new AnimationReactor(effectManager);
+    return new AnimationBehaviour(effectManager);
   }
 }

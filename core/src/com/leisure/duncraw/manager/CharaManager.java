@@ -7,7 +7,6 @@ import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.leisure.duncraw.art.chara.Chara;
 import com.leisure.duncraw.art.chara.Observer;
-import com.leisure.duncraw.art.chara.observers.AnimationReactor;
 import com.leisure.duncraw.art.chara.observers.AttackBehaviour;
 import com.leisure.duncraw.art.chara.observers.HurtBehaviour;
 import com.leisure.duncraw.art.map.TilemapChara;

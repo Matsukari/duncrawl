@@ -3,15 +3,13 @@ package com.leisure.duncraw.screen;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
-import com.leisure.duncraw.Graphics;
 import com.leisure.duncraw.art.chara.Chara;
 import com.leisure.duncraw.art.chara.Enemy;
 import com.leisure.duncraw.art.chara.Player;
-import com.leisure.duncraw.art.chara.observers.AnimationReactor;
+import com.leisure.duncraw.art.chara.observers.AnimationBehaviour;
 import com.leisure.duncraw.data.AssetSource;
 import com.leisure.duncraw.data.SaveData;
 import com.leisure.duncraw.data.Serializer;
@@ -41,7 +39,7 @@ public class GameScreen extends Screen {
     floorManager = new FloorManager(saveData, AssetSource.getFloorsData(), saveData.progression.level.level-1);
     // floorManager.setCurrentFloor(TmxLoader.load(floorManager.sources.startingHall, floorManager.batch, 32, 32));
     charaManager = new CharaManager(AssetSource.getCharasData(), floorManager.getCurrentFloor());
-    charaManager.observers.add(new AnimationReactor(effectManager));
+    charaManager.observers.add(new AnimationBehaviour(effectManager));
     player = charaManager.addFrom(charaManager.sources.player, Player.class);
     Chara mob = charaManager.addFrom(charaManager.sources.ghost, Enemy.class);
     
