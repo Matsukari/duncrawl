@@ -19,6 +19,7 @@ import com.leisure.duncraw.logging.Logger;
 
 public class Chara extends Art {
   public Status status = new Status();
+  public State prevState;
   public State state;
   public LerpMovement movement;
   public Observers observers;
@@ -74,6 +75,7 @@ public class Chara extends Art {
     else if (tryInteract(mapAgent.map.getChara(frontX, frontY), false)) {}
   }
   public void setState(State s) { 
+    prevState = state;
     state = s; 
     state.init(this);  
     observers.notifyAll(state);

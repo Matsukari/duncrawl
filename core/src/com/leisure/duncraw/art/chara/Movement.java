@@ -1,7 +1,5 @@
 package com.leisure.duncraw.art.chara;
 
-import com.badlogic.gdx.math.Vector2;
-
 import lib.time.TimePeeker;
 
 public class Movement {

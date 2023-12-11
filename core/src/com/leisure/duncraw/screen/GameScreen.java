@@ -10,6 +10,7 @@ import com.leisure.duncraw.art.chara.Chara;
 import com.leisure.duncraw.art.chara.Enemy;
 import com.leisure.duncraw.art.chara.Player;
 import com.leisure.duncraw.art.chara.observers.AnimationBehaviour;
+import com.leisure.duncraw.art.chara.observers.DashBehaviour;
 import com.leisure.duncraw.data.AssetSource;
 import com.leisure.duncraw.data.SaveData;
 import com.leisure.duncraw.data.Serializer;
@@ -41,6 +42,7 @@ public class GameScreen extends Screen {
     charaManager = new CharaManager(AssetSource.getCharasData(), floorManager.getCurrentFloor());
     charaManager.observers.add(new AnimationBehaviour(effectManager));
     player = charaManager.addFrom(charaManager.sources.player, Player.class);
+    player.observers.add(new DashBehaviour());
     Chara mob = charaManager.addFrom(charaManager.sources.ghost, Enemy.class);
     
     Vector2 pos = floorManager.getCurrentFloor().getTileInRandomRoom();

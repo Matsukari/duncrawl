@@ -24,7 +24,4 @@ public class Player extends Chara {
     itemSel = item;
     Logger.log("Player", "Equipped");
   }
-  public void dash() {
-
-  }
 }
