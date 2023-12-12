@@ -27,7 +27,7 @@ public class AnimationBehaviour extends Observer {
   public void invoke(State state) {
     Logger.log("AnimationBehaviour", "Invoke");
     if (state instanceof MoveState) chara.anims.set("move");
-    else if (state instanceof DashState) chara.anims.set("idle");
+    else if (state instanceof DashState) chara.anims.set("move");
     else if (state instanceof IdleState) chara.anims.set("idle", chara.movement.lastVelX, chara.movement.lastVelY);
     else if (state instanceof AttackState && attackAnim != null) {
       attackAnim.face(chara.movement.lastVelX, chara.movement.lastVelY);

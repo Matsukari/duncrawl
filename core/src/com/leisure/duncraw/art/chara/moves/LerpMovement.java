@@ -1,5 +1,6 @@
 package com.leisure.duncraw.art.chara.moves;
 
+import com.badlogic.gdx.math.MathUtils;
 import com.leisure.duncraw.art.chara.Chara;
 import com.leisure.duncraw.art.chara.Movement;
 import com.leisure.duncraw.art.map.Terrain;
@@ -7,19 +8,24 @@ import com.leisure.duncraw.logging.Logger;
 
 // normalized lerping
 public class LerpMovement extends Movement {
+  private final Chara chara;
+  private float time = 0f;
   private float stepTaken = 0;
   public float stepDuration = 0;
-  private float time = 0f;
-  private final Chara chara;
+  public int length = 1;
   public LerpMovement(Chara chara, float stepDuration) {
     this.stepDuration = stepDuration;
     this.chara = chara;
   }
   @Override
   public boolean moveBy(int x, int y) {
-    lastVelY = y;
+    length = getLength(x, y);
+    x = MathUtils.clamp(x, -1, 1);
+    y = MathUtils.clamp(y, -1, 1);
     lastVelX = x;
+    lastVelY = y;
     Terrain terrain = chara.mapAgent.getTerrainBy(x, y);
+    Logger.log("LerpMovement", Integer.toString(length)); 
     if (terrain != null && terrain.traversable()) {
       super.moveBy(x, y);
       return true;
@@ -39,29 +45,36 @@ public class LerpMovement extends Movement {
   }
   @Override
   public boolean update(float dt) {
-    boolean ahead = stepTaken > Math.abs(velX + velY);
+    float direction = Math.abs(velX) + Math.abs(velY); 
+    boolean ahead = stepTaken > direction;
     if (ahead || (time >= stepDuration && ahead)) {
-      // Logger.log("LerpMovement", "step taken: " + Float.toString(stepTaken));
       reset();
-      stop();
-      return true;
+      if (length <= 1) {
+        stop();
+        return true;
+      } else {
+        if (lastVelX != 0) moveBy(lastVelX * (length - 1), 0);
+        else if (lastVelY != 0) moveBy(0, lastVelY * (length - 1));
+      }
+      return false;
     }
     dt *= stepDuration;
     time += dt;
     nextStepX = velX * dt;
     nextStepY = velY * dt;
-    stepTaken += Math.abs(nextStepX + nextStepY);
-    if (stepTaken > Math.abs(velX + velY)) {
+    stepTaken += Math.abs(nextStepX) + Math.abs(nextStepY);
+    if (stepTaken > direction) {
       float excessX = stepTaken - Math.abs(velX);
       float excessY = stepTaken - Math.abs(velY);
       if (velX != 0) nextStepX -= excessX * velX;
       else if (velY != 0) nextStepY -= excessY * velY; 
-      stepTaken = 1.0000001f;
-      // Logger.log("LerpMovement", "excess: " + Float.toString(excessX));
+      // stepTaken = direction + 0.0000001f;
+      Logger.log("LerpMovement", "step taken: " + Float.toString(stepTaken));
     }
     chara.bounds.x += chara.movement.nextStepX * chara.mapAgent.getWidth();
     chara.bounds.y += chara.movement.nextStepY * chara.mapAgent.getHeight();
     return false;
   }
+  
 
 }
