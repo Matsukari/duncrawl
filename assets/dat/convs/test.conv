@@ -1,0 +1,9 @@
+{
+"messages": [
+	{
+		"message": "Sample message test",
+		"sender": "Unknown",
+		"specialState": "normal"
+	}
+]
+}

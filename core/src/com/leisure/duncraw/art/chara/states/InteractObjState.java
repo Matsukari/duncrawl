@@ -8,6 +8,12 @@ public class InteractObjState extends State {
   public Obj target;
   public InteractObjState(Obj target) { this.target = target; }
   @Override
+  public void init(Chara s) {
+    super.init(s);
+
+  }
+  
+  @Override
   public void update(float dt) {
 
   }

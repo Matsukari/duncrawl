@@ -16,6 +16,7 @@ public class PlayerDebug extends ToolAgent {
   } 
   @Override
   public void tool() {
+      ImGui.labelText("state", player.state.getClass().getSimpleName());
       ImGui.beginChild("Scroll panel", size.x, player.inventory.data.size() * 10 + 10);
       for (Item item : player.inventory.data) { 
         ImGui.text(String.format("%s", item.dat.name));

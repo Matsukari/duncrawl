@@ -25,9 +25,10 @@ public class Floor extends Tilemap {
   public Vector2 getTileInRandomRoom() {
     if (meta == null) return Vector2.Zero;
     Vector2 tile = new Vector2();
-    Rectangle room = meta.mainRooms.get(MathUtils.random(meta.mainRooms.size()-1));
+    Rectangle room = meta.rooms.get(MathUtils.random(meta.rooms.size()-1));
     tile.x = (int)(MathUtils.random(room.x, room.x + room.width) - meta.min.x) / terrainSet.terrainWidth;
     tile.y = (int)(MathUtils.random(room.y, room.y + room.height) - meta.min.y) / terrainSet.terrainHeight;
+    // tile.y = terrainSet.rows - tile.y;
     return tile;
   }
   public void renderForeground() {

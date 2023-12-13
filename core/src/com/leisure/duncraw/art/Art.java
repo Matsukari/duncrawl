@@ -3,6 +3,7 @@ package com.leisure.duncraw.art;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
+import com.leisure.duncraw.helper.IdGenerator;
 
 public abstract class Art {
   public final int id;
@@ -19,13 +20,5 @@ public abstract class Art {
   }
   public void moveTo(float x, float y) { bounds.setPosition(x, y); }
   public void render() {}
-  private static class IdGenerator {
-    private static int last = 0;
-    public static int gen() { 
-      // Logger.log("IdGenerator", "Generated id for unique resource");
-      last += 1; 
-      return last;
-    }
-  }
 
 }

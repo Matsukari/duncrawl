@@ -6,6 +6,7 @@ import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.leisure.duncraw.art.chara.states.DashState;
+import com.leisure.duncraw.art.chara.states.InteractState;
 import com.leisure.duncraw.data.SaveData;
 import com.leisure.duncraw.screen.GameScreen;
 
@@ -37,7 +38,7 @@ public class GameScreenInput extends GameScreen implements InputProcessor {
   @Override public boolean keyUp(int keycode) {
     // Logger.log("GameScreenInput", "Keyup");
     if (pressedKey == saveData.settings.desktopControls.confirm) {
-      player.interactAhead();
+      player.setState(new InteractState());
     }
     pressedKey = -1;
     return true;

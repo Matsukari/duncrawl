@@ -30,7 +30,7 @@ public class Obj extends Art {
   public void load(String datFile) {
     dat.reset();
     try { dat = Deserializer.load(ObjData.class, Gdx.files.local(datFile)); } catch(Exception e) { Serializer.save(dat, Gdx.files.local(datFile)); }
-    idle = GeneralAnimation.line(dat.anims.get("idle"), PlayMode.NORMAL);
+    idle = GeneralAnimation.line(dat.anims.get("idle"));
     anim = idle;
   }
   public Obj getTail() {

@@ -17,10 +17,11 @@ public class TerrainSet {
     terrains = new Terrain[cols * rows];
     for (int i = 0; i < cols * rows; i++) terrains[i] = null;
   }
-  public void putTerrain(Terrain terrain, int x, int y) {
+  public void putTerrain(Terrain terrain, int x, int y) { putTerrain(terrain, x, y, true); }
+  public void putTerrain(Terrain terrain, int x, int y, boolean snapSize) {
     // Logger.log("TerrainSet", String.format("put terrain at %d %d", x, y));
     int cell = y * cols + x;
-    terrain.bounds.setSize(terrainWidth, terrainHeight);
+    if (snapSize) terrain.bounds.setSize(terrainWidth, terrainHeight);
     terrain.bounds.x = x * terrainWidth;
     terrain.bounds.y = y * terrainHeight;
 
@@ -28,16 +29,19 @@ public class TerrainSet {
     if (terrains[cell] == null) terrains[cell] = terrain;
     else if (terrains[cell] instanceof LayeredTerrain) ((LayeredTerrain)terrains[cell]).add(terrain);
     else terrains[cell] = new LayeredTerrain(terrain);
-    // terrains[cell].getTail().next = terrain; 
-    
+    // terrains[cell].getTail().next = terrain;  
   }
-  public void putObject(Obj obj, int x, int y) {
-    Logger.log("TerrainSet", "put obj");
+  public void putObject(Obj obj, int x, int y) { putObject(obj, x, y, true); }
+  public void putObject(Obj obj, int x, int y, boolean snapSize) {
     if (getTerrain(x, y) != null) { 
-      getTerrain(x, y).putObj(obj);
       obj.bounds.x = x * terrainWidth;
       obj.bounds.y = y * terrainHeight;
+      if (snapSize) obj.bounds.setSize(terrainWidth, terrainHeight);
+      getTerrain(x, y).putObj(obj);
+      Logger.log("TerrainSet", "put obj at" + obj.bounds.toString());
     }
+    else 
+      Logger.log("TerrainSet", "cannot put obj");
   }
   public int getTilesNum() { return cols * rows; }
   public Terrain getTerrain(int x, int y) { 
