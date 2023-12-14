@@ -6,8 +6,8 @@ import com.leisure.duncraw.map.Tilemap;
 public class TilemapChara {
   public final Tilemap map;
   public final Chara chara;
-  public int x;
-  public int y;
+  public int x = 0;
+  public int y = 0;
   public TilemapChara(Chara chara,  Tilemap map) {
     this.chara = chara;
     this.map = map;

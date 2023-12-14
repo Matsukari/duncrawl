@@ -3,20 +3,13 @@ package com.leisure.duncraw.art.chara;
 import java.util.Map;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.leisure.duncraw.Graphics;
 import com.leisure.duncraw.art.Art;
 import com.leisure.duncraw.art.chara.moves.LerpMovement;
-import com.leisure.duncraw.art.chara.states.AttackState;
 import com.leisure.duncraw.art.chara.states.IdleState;
-import com.leisure.duncraw.art.chara.states.InteractObjState;
-import com.leisure.duncraw.art.chara.states.InteractState;
 import com.leisure.duncraw.art.chara.states.MoveState;
-import com.leisure.duncraw.art.map.Obj;
 import com.leisure.duncraw.art.map.TilemapChara;
 import com.leisure.duncraw.data.CharaData;
 import com.leisure.duncraw.data.DirAnimData;
-import com.leisure.duncraw.logging.Logger;
-
 
 public class Chara extends Art {
   public Status status = new Status();
@@ -44,13 +37,11 @@ public class Chara extends Art {
     if (state.next != null) setState(state.next); 
     if (movement.update(dt)) {
       setState(new IdleState());
-      mapAgent.moveBy(movement.lastVelX, movement.lastVelY);
     }
   }
   @Override
   public void render() {
     batch.draw(anims.current.currentDir.current(), bounds.x, bounds.y, bounds.width, bounds.height);  
-    // Graphics.getFont(Graphics.fontSources.def).draw(batch, "PUTANGINANAMAN_SA_LAHAT", 0f, 0f);
   }
   @Override
   public void moveTo(float x, float y) {

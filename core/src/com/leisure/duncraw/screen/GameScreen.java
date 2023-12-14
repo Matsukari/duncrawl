@@ -13,7 +13,6 @@ import com.leisure.duncraw.art.chara.Player;
 import com.leisure.duncraw.art.chara.observers.AnimationBehaviour;
 import com.leisure.duncraw.art.chara.observers.DashBehaviour;
 import com.leisure.duncraw.art.chara.observers.TalkBehaviour;
-import com.leisure.duncraw.art.map.Obj;
 import com.leisure.duncraw.art.map.objs.Chest;
 import com.leisure.duncraw.data.AssetSource;
 import com.leisure.duncraw.data.Conversation;
@@ -25,27 +24,30 @@ import com.leisure.duncraw.manager.DebugManager;
 import com.leisure.duncraw.manager.EffectManager;
 import com.leisure.duncraw.manager.FloorManager;
 import com.leisure.duncraw.manager.HudManager;
+import com.leisure.duncraw.manager.StoryManager;
 
 public class GameScreen extends Screen {
-  public Color backgroundColor = new Color(4/255f, 4/255f, 4/255f, 1f);
+  protected Color backgroundColor = new Color(4/255f, 4/255f, 4/255f, 1f);
   protected final SaveData saveData;
-  protected final HudManager hudManager;
-  protected final CharaManager charaManager;
-  protected final FloorManager floorManager;  
   protected final DebugManager debugManager;
-  protected final EffectManager effectManager;
-  protected final OrthographicCamera camera;
-  protected final ExtendViewport viewport; 
-  protected Player player;
-  protected boolean blockCamera = false; 
+  protected final StoryManager storyManager;
+  public final HudManager hudManager;
+  public final CharaManager charaManager;
+  public final FloorManager floorManager;  
+  public final EffectManager effectManager;
+  public final OrthographicCamera camera;
+  public final ExtendViewport viewport; 
+  public Player player;
+  public boolean blockCamera = false; 
   public GameScreen(SaveData saveData) {
     Logger.log("GameScreen", "Init");
     this.saveData = saveData;
     camera = new OrthographicCamera();
     effectManager = new EffectManager();
     viewport = new ExtendViewport(saveData.settings.bounds.width, saveData.settings.bounds.height, camera);
-    hudManager = new HudManager();
-    floorManager = new FloorManager(saveData, AssetSource.getFloorsData(), saveData.progression.level.level-1);
+    hudManager = new HudManager(viewport);
+    storyManager = new StoryManager(this, saveData.progression.level.scene);
+    floorManager = new FloorManager(saveData, AssetSource.getFloorsData(), saveData.progression.level.floor);
     // floorManager.setCurrentFloor(TmxLoader.load(floorManager.sources.startingHall, floorManager.batch, 32, 32));
     charaManager = new CharaManager(AssetSource.getCharasData(), floorManager.getCurrentFloor());
     charaManager.observers.add(new AnimationBehaviour(effectManager));
@@ -62,6 +64,8 @@ public class GameScreen extends Screen {
     camera.zoom = 30f;
     floorManager.getCurrentFloor().terrainSet.putObject(new Chest("dat/obj/chest.dat", floorManager.batch), (int)pos.x + 3, (int)pos.y);
     Logger.log("Playerpos", player.bounds.toString());
+
+    storyManager.play();
 
     debugManager = new DebugManager();
     debugManager.debugSystem();
@@ -88,6 +92,8 @@ public class GameScreen extends Screen {
     camera.update();
     charaManager.updateAll(delta);
     effectManager.updateAll(delta);
+    storyManager.updateScene();
+    hudManager.update(delta);
     // Chars, obj, terrain interaction
 
     ScreenUtils.clear(backgroundColor);
@@ -100,6 +106,7 @@ public class GameScreen extends Screen {
   }
   @Override
   public void dispose() {
+    hudManager.dispose();
     Logger.log("GameScreen", "Dispose");
   } 
   

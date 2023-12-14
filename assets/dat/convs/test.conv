@@ -1,7 +1,12 @@
 {
 "messages": [
 	{
-		"message": "Sample message test",
+		"message": "Hello! Are you there?",
+		"sender": "Unknown",
+		"specialState": "normal"
+	},
+	{
+		"message": "This is? Who are you?",
 		"sender": "Unknown",
 		"specialState": "normal"
 	}

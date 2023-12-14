@@ -25,8 +25,9 @@ public class LerpMovement extends Movement {
     lastVelX = x;
     lastVelY = y;
     Terrain terrain = chara.mapAgent.getTerrainBy(x, y);
-    Logger.log("LerpMovement", Integer.toString(length)); 
     if (terrain != null && terrain.traversable()) {
+      // Logger.log("Position of player", String.format("%d %d", chara.mapAgent.x, chara.mapAgent.y)); 
+      chara.mapAgent.moveBy(lastVelX, lastVelY);
       super.moveBy(x, y);
       return true;
     }
@@ -34,7 +35,10 @@ public class LerpMovement extends Movement {
       Logger.log("LerpMovement", "cannot move: terrain is " + Boolean.toString(terrain.traversable()));
     }
     else
-    Logger.log("LerpMovement", "terrain you are in is null;");
+      Logger.log("LerpMovement", "terrain you are in is null;");
+    length = 0;
+    reset();
+    stop();
     return false;
   }
   @Override
@@ -56,6 +60,7 @@ public class LerpMovement extends Movement {
         if (lastVelX != 0) moveBy(lastVelX * (length - 1), 0);
         else if (lastVelY != 0) moveBy(0, lastVelY * (length - 1));
       }
+      Logger.log("LerpMovement", String.format("Moved by %d %s", lastVelX, lastVelY));
       return false;
     }
     dt *= stepDuration;
@@ -69,10 +74,10 @@ public class LerpMovement extends Movement {
       if (velX != 0) nextStepX -= excessX * velX;
       else if (velY != 0) nextStepY -= excessY * velY; 
       // stepTaken = direction + 0.0000001f;
-      Logger.log("LerpMovement", "step taken: " + Float.toString(stepTaken));
+      // Logger.log("LerpMovement", "step taken: " + Float.toString(stepTaken));
     }
     chara.bounds.x += chara.movement.nextStepX * chara.mapAgent.getWidth();
-    chara.bounds.y += chara.movement.nextStepY * chara.mapAgent.getHeight();
+    chara.bounds.y += chara.movement.nextStepY * chara.mapAgent.getHeight(); 
     return false;
   }
   
