@@ -24,6 +24,7 @@ import com.leisure.duncraw.manager.DebugManager;
 import com.leisure.duncraw.manager.EffectManager;
 import com.leisure.duncraw.manager.FloorManager;
 import com.leisure.duncraw.manager.HudManager;
+import com.leisure.duncraw.manager.MusicManager;
 import com.leisure.duncraw.manager.StoryManager;
 
 public class GameScreen extends Screen {
@@ -31,6 +32,7 @@ public class GameScreen extends Screen {
   protected final SaveData saveData;
   protected final DebugManager debugManager;
   protected final StoryManager storyManager;
+  protected final MusicManager musicManager;
   public final HudManager hudManager;
   public final CharaManager charaManager;
   public final FloorManager floorManager;  
@@ -46,8 +48,9 @@ public class GameScreen extends Screen {
     effectManager = new EffectManager();
     viewport = new ExtendViewport(saveData.settings.bounds.width, saveData.settings.bounds.height, camera);
     hudManager = new HudManager(viewport);
-    storyManager = new StoryManager(this, saveData.progression.level.scene);
     floorManager = new FloorManager(saveData, AssetSource.getFloorsData(), saveData.progression.level.floor);
+    storyManager = new StoryManager(this, saveData.progression.level.scene);
+    musicManager = new MusicManager(this, AssetSource.getMusicData());
     // floorManager.setCurrentFloor(TmxLoader.load(floorManager.sources.startingHall, floorManager.batch, 32, 32));
     charaManager = new CharaManager(AssetSource.getCharasData(), floorManager.getCurrentFloor());
     charaManager.observers.add(new AnimationBehaviour(effectManager));
@@ -94,6 +97,7 @@ public class GameScreen extends Screen {
     effectManager.updateAll(delta);
     storyManager.updateScene();
     hudManager.update(delta);
+    musicManager.update();
     // Chars, obj, terrain interaction
 
     ScreenUtils.clear(backgroundColor);

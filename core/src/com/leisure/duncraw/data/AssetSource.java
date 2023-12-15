@@ -13,6 +13,7 @@ public class AssetSource {
   public String charas;
   public String objects;
   public String fonts;
+  public String music;
   public static AssetSource instance;
   public AssetSource(FileHandle ini) {
     this.ini = ini; 
@@ -35,6 +36,8 @@ public class AssetSource {
   { return getGenericData(CharasData.class, instance.charas, ()->{CharasData dat = new CharasData(); dat.reset(); return dat;}); }
   public static FontsData getFontsData() 
   { return getGenericData(FontsData.class, instance.fonts, ()->{FontsData dat = new FontsData(); dat.reset(); return dat;}); }
+  public static MusicData getMusicData() 
+  { return getGenericData(MusicData.class, instance.music, ()->{MusicData dat = new MusicData(); dat.reset(); return dat;}); }
 
   public static <T> T getGenericData(Class<T> tClass, String local, Instantiator<T> instanciator) {
     T dat;
@@ -57,6 +60,7 @@ public class AssetSource {
       instance.objects = "dat/objects.dat";
       instance.charas = "dat/charas.dat";
       instance.fonts = "dat/fonts.dat";
+      instance.music = "dat/music.dat";
       AssetSource.save();
     }
   }

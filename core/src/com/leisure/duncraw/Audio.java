@@ -8,6 +8,7 @@ import com.badlogic.gdx.audio.Sound;
 import com.leisure.duncraw.data.AssetSource;
 import com.leisure.duncraw.data.CharaData;
 import com.leisure.duncraw.data.CharasData;
+import com.leisure.duncraw.data.MusicData;
 import com.leisure.duncraw.logging.Logger;
 
 public class Audio {
@@ -21,11 +22,18 @@ public class Audio {
     loadChara(charas.ghost);
     assets.finishLoading();
   }
+  public static AssetManager getManager() { return assets; }
   private static void loadChara(String chara) {
     for (Map.Entry<String, String> entry : CharaData.fromDat(chara).sounds.entrySet()) {
       Logger.log("Audio", "Loading chara's " + entry.getKey() + " : " + entry.getValue());
       assets.load((String)entry.getValue(), Sound.class);
     }
+  }
+  public static void applyMusicVolume(float volume, MusicData data) {
+    try {
+      for (String m : data.earlyGame) assets.get(m, Music.class).setVolume(volume);
+      for (String m : data.midGame) assets.get(m, Music.class).setVolume(volume);
+    } catch (Exception e) { e.printStackTrace(); }
   }
   public static void dispose() {
     assets.dispose();
