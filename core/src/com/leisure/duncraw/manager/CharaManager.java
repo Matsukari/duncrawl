@@ -9,6 +9,7 @@ import com.leisure.duncraw.art.chara.Chara;
 import com.leisure.duncraw.art.chara.Observer;
 import com.leisure.duncraw.art.chara.observers.AttackBehaviour;
 import com.leisure.duncraw.art.chara.observers.HurtBehaviour;
+import com.leisure.duncraw.art.chara.observers.SoundBehaviour;
 import com.leisure.duncraw.art.map.TilemapChara;
 import com.leisure.duncraw.data.CharaData;
 import com.leisure.duncraw.data.CharasData;
@@ -21,14 +22,15 @@ public class CharaManager {
   public ArrayList<Chara> charas = new ArrayList<>();
   public SpriteBatch batch = new SpriteBatch();
   public Chara player;
-  public final CharasData sources;
   private final Floor floor;
+  public final CharasData sources;
   public final ArrayList<Observer> observers = new ArrayList<>();
   public CharaManager(CharasData sources, Floor floor) { 
     this.sources = sources;
     this.floor = floor;
     observers.add(new AttackBehaviour());
     observers.add(new HurtBehaviour());
+    observers.add(new SoundBehaviour());
   }
 
   public <T extends Chara> T addFrom(String source, Class<T> clazz) {

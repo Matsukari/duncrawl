@@ -6,7 +6,6 @@ import com.leisure.duncraw.data.AssetSource;
 import com.leisure.duncraw.helper.Instantiator;
 import com.leisure.duncraw.logging.Logger;
 import com.leisure.duncraw.screen.Screen;
-import com.leisure.duncraw.screen.SplashScreen;
 
 public class GameApplication extends Game {
   private Instantiator<Screen> nextScreen;
@@ -18,6 +17,7 @@ public class GameApplication extends Game {
     Logger.log("GameApplication", "Create");
     AssetSource.init(Gdx.files.local("dungeon_crawler.ini"));
     Graphics.init();
+    Audio.init();
     setScreen(nextScreen.instance());
   }	
   @Override
@@ -29,6 +29,7 @@ public class GameApplication extends Game {
 	@Override
 	public void dispose () {
     Graphics.dispose(); 
+    Audio.dispose();
     Logger.log("GameApplication", "Disposed");
 	}
 

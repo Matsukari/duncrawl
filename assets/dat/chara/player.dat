@@ -16,7 +16,9 @@
 		"front": "images/effects/strike_overlay_front.png"
 	}
 },
-"sounds": {},
+"sounds": {
+  "attack": "audio/chara/slash_1.ogg"
+},
 "status": {
 	"health": 100,
 	"maxHealth": 100,

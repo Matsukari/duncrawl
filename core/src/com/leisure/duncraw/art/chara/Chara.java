@@ -1,5 +1,6 @@
 package com.leisure.duncraw.art.chara;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -18,10 +19,12 @@ public class Chara extends Art {
   public LerpMovement movement;
   public Observers observers;
   public TilemapChara mapAgent;
+  public final HashMap<String, String> sounds;  
   public final DirAnimationMap anims = new DirAnimationMap();
   public Chara(CharaData data, SpriteBatch batch) {
     super(batch);
     status = data.status;
+    sounds = data.sounds;
     for (Map.Entry<String, DirAnimData> anim : data.anims.entrySet()) anims.data.put(anim.getKey(), new DirAnimation(anim.getValue())); 
     anims.set("idle");
   } {
