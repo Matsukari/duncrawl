@@ -12,6 +12,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.leisure.duncraw.Graphics;
+import com.leisure.duncraw.art.item.items.HealthPotion;
 import com.leisure.duncraw.data.Deserializer;
 import com.leisure.duncraw.data.FloorData;
 import com.leisure.duncraw.data.FloorsData;
@@ -46,7 +47,7 @@ public class FloorManager {
     floor = floorGenerator.gen();
     floor.meta = floorGenerator.roomsBuilder;
     floor.exits.addAll(TerrainSetGenerator.selectExits(floor.terrainSet));
-     
+
     lightBuffer = new FrameBuffer(Format.RGB888, Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), false);
     Graphics.assets.load("images/lights/light_smooth.png", Texture.class);
     Graphics.assets.finishLoadingAsset("images/lights/light_smooth.png");

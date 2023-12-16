@@ -12,11 +12,10 @@ import lib.animation.LinearAnimation;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.graphics.g2d.Animation.PlayMode;
 
 public class Obj extends Art {
   public Obj next;
-  public ObjData dat = new ObjData();
+  public ObjData dat;
   public LinearAnimation<TextureRegion> idle;
   public LinearAnimation<TextureRegion> anim;
   public Obj(SpriteBatch batch, String datFile) {
@@ -28,9 +27,11 @@ public class Obj extends Art {
     idle = anim;
   }
   public void load(String datFile) {
-    dat.reset();
-    try { dat = Deserializer.load(ObjData.class, Gdx.files.local(datFile)); } catch(Exception e) { Serializer.save(dat, Gdx.files.local(datFile)); }
-    idle = GeneralAnimation.line(dat.anims.get("idle"));
+    ObjData data = new ObjData(); 
+    data.reset();
+    try { data = Deserializer.load(ObjData.class, Gdx.files.local(datFile)); } catch(Exception e) { Serializer.save(data, Gdx.files.local(datFile)); }
+    idle = GeneralAnimation.line(data.anims.get("idle"));
+    dat = data;
     anim = idle;
   }
   public Obj getTail() {

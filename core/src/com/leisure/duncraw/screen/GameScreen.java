@@ -15,6 +15,8 @@ import com.leisure.duncraw.art.chara.observers.DashBehaviour;
 import com.leisure.duncraw.art.chara.observers.TalkBehaviour;
 import com.leisure.duncraw.art.chara.observers.dark.InfuseDarknessBehaviour;
 import com.leisure.duncraw.art.chara.observers.dark.ShadowCloakBehaviour;
+import com.leisure.duncraw.art.item.items.HealthPotion;
+import com.leisure.duncraw.art.item.items.StaminaPotion;
 import com.leisure.duncraw.art.map.objs.Chest;
 import com.leisure.duncraw.data.AssetSource;
 import com.leisure.duncraw.data.Conversation;
@@ -63,10 +65,12 @@ public class GameScreen extends Screen {
     Chara mob = charaManager.addFrom(charaManager.sources.ghost, Enemy.class);
     Chara npc = charaManager.addFrom(charaManager.sources.ghost, Npc.class);
     
+
     Vector2 pos = floorManager.getCurrentFloor().getTileInRandomRoom();
     player.moveTo(pos.x, pos.y);
     mob.moveTo(pos.x + 5, pos.y + 5);
     npc.moveTo(pos.x + 2, pos.y - 1);
+    floorManager.getCurrentFloor().terrainSet.putObject(new StaminaPotion(floorManager.batch, "dat/item/stamina_potion.dat"), (int)pos.x - 1, (int)pos.y);
     npc.observers.add(new TalkBehaviour(hudManager.dialogueHud, Conversation.fromDat("dat/convs/test.conv")));
     camera.zoom = 30f;
     floorManager.getCurrentFloor().terrainSet.putObject(new Chest("dat/obj/chest.dat", floorManager.batch), (int)pos.x + 3, (int)pos.y);

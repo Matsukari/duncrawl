@@ -1,10 +1,9 @@
 {
 "anims": {
 	"idle": "images/objects/chest_idle.png",
-	"open": "images/objects/chest_open.png"
+  "open": "images/objects/chest_open.png"
 },
 "sounds": {},
-"oneTexture": true,
-"name": "",
-"desc": ""
+"name": "No-name-obj",
+"desc": "No-desc-obj"
 }

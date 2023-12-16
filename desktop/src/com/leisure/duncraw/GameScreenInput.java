@@ -56,6 +56,7 @@ public class GameScreenInput extends GameScreen implements InputProcessor {
     else if (pressedKey == desktopControls.skill2) {
       player.setState(new ShadowCloakSkill());
     }
+    else if (pressedKey == Keys.U && player.itemSel != null) player.itemSel.use(); 
     pressedKey = -1;
     return true;
   }
