@@ -8,10 +8,13 @@ import lib.animation.LinearAnimation;
 
 public class GfxAnimation extends Gfx {
   public LinearAnimation<TextureRegion> anim;
-  public GfxAnimation(SpriteBatch batch, LinearAnimation<TextureRegion> anim) {
+  public boolean loop = false;
+  public GfxAnimation(SpriteBatch batch, LinearAnimation<TextureRegion> anim, boolean loop) {
     super(batch);
     this.anim = anim;
-    anim.data.setPlayMode(PlayMode.NORMAL);
+    this.loop = loop;
+    if (!loop) anim.data.setPlayMode(PlayMode.NORMAL);
+    else anim.data.setPlayMode(PlayMode.LOOP);
   }
   @Override
   public void start() {
@@ -19,6 +22,7 @@ public class GfxAnimation extends Gfx {
   }
   @Override
   public boolean isFinished() {
+    if (loop) return false;
     return anim.isFinished();
   }
   @Override

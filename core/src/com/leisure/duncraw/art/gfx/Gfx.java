@@ -8,6 +8,7 @@ public abstract class Gfx extends Art {
     super(batch);
   } 
   public void update(float dt) {}
+  public void stop() {}
   public abstract void start();
   public abstract boolean isFinished();
 }

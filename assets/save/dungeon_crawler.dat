@@ -45,7 +45,13 @@
 		"confirm": 38,
 		"cancel": 111,
 		"menuLeft": 21,
-		"menuRight": 22
+		"menuRight": 22,
+		"steerMode": 40,
+		"dash": 39,
+		"skill1": 36,
+		"skill2": 30,
+		"skill3": 42,
+		"skill4": 41
 	},
 	"screenControls": {
 		"dPadScale": 1,

@@ -37,6 +37,7 @@ public class Chara extends Art {
   public void update(float dt) {
     status.update();
     state.update(dt);
+    observers.updateAll();
     if (state.next != null) setState(state.next); 
     if (movement.update(dt)) {
       setState(new IdleState());

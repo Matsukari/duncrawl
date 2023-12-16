@@ -5,4 +5,5 @@ public abstract class Observer {
   public void init(Chara c) { chara = c; }
   public abstract void invoke(State state);
   public abstract Observer copy();
+  public void update() {}
 }

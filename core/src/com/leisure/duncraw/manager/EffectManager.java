@@ -16,6 +16,11 @@ public class EffectManager {
     effects.add(gfx); 
     gfx.start();
   }
+  public void stop(Gfx gfx) {
+    if (!effects.contains(gfx)) return;
+    gfx.stop();
+    effects.remove(gfx); 
+  }
   public void updateAll(float dt) {
     for (int i = 0; i < effects.size(); i++) {
       effects.get(i).update(dt);

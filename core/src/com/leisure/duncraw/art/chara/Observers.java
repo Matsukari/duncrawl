@@ -12,6 +12,9 @@ public class Observers {
   public void notifyAll(State state) { 
     for (int i = 0; i < observers.size(); i++) notify(i, state); 
   }
+  public void updateAll() {
+    for (int i = 0; i < observers.size(); i++) observers.get(i).update(); 
+  }
   public void notify(int index, State state) {
     // Logger.log("Observers", "Notified" + state.getClass().getName());
     observers.get(index).invoke(state);

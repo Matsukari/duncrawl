@@ -13,6 +13,7 @@ import com.leisure.duncraw.art.chara.Player;
 import com.leisure.duncraw.art.chara.observers.AnimationBehaviour;
 import com.leisure.duncraw.art.chara.observers.DashBehaviour;
 import com.leisure.duncraw.art.chara.observers.TalkBehaviour;
+import com.leisure.duncraw.art.chara.observers.dark.InfuseDarknessBehaviour;
 import com.leisure.duncraw.art.map.objs.Chest;
 import com.leisure.duncraw.data.AssetSource;
 import com.leisure.duncraw.data.Conversation;
@@ -55,6 +56,7 @@ public class GameScreen extends Screen {
     charaManager = new CharaManager(AssetSource.getCharasData(), floorManager.getCurrentFloor());
     charaManager.observers.add(new AnimationBehaviour(effectManager));
     player = charaManager.addFrom(charaManager.sources.player, Player.class);
+    player.observers.add(new InfuseDarknessBehaviour(effectManager));
     player.observers.add(new DashBehaviour());
     Chara mob = charaManager.addFrom(charaManager.sources.ghost, Enemy.class);
     Chara npc = charaManager.addFrom(charaManager.sources.ghost, Npc.class);
@@ -68,7 +70,7 @@ public class GameScreen extends Screen {
     floorManager.getCurrentFloor().terrainSet.putObject(new Chest("dat/obj/chest.dat", floorManager.batch), (int)pos.x + 3, (int)pos.y);
     Logger.log("Playerpos", player.bounds.toString());
 
-    storyManager.play();
+    // storyManager.play();
 
     debugManager = new DebugManager();
     debugManager.debugSystem();

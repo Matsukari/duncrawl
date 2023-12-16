@@ -31,7 +31,7 @@ public class AnimationBehaviour extends Observer {
     else if (state instanceof IdleState) chara.anims.set("idle", chara.movement.lastVelX, chara.movement.lastVelY);
     else if (state instanceof AttackState && attackAnim != null) {
       attackAnim.face(chara.movement.lastVelX, chara.movement.lastVelY);
-      attackEffect = new GfxAnimation(effectManager.batch, attackAnim.currentDir);
+      attackEffect = new GfxAnimation(effectManager.batch, attackAnim.currentDir, false);
       attackEffect.bounds.setPosition(chara.bounds.x, chara.bounds.y);
       attackEffect.bounds.setSize(chara.bounds.width);
       effectManager.start(attackEffect);

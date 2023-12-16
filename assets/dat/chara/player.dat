@@ -14,6 +14,11 @@
 		"side": "images/effects/strike_overlay_side.png",
 		"back": "images/effects/strike_overlay_back.png",
 		"front": "images/effects/strike_overlay_front.png"
+	},
+	"skill1": {
+		"side": "images/effects/skill_1_sustain.png",
+		"back": "images/effects/skill_1_sustain.png",
+		"front": "images/effects/skill_1_sustain.png"
 	}
 },
 "sounds": {
@@ -32,7 +37,7 @@
 		"x": 1,
 		"y": 1
 	},
-	"elementPower": 1,
+	"elementPower": 4,
 	"element": "NONE",
 	"weakness": "NONE",
 	"action": "IDLE"

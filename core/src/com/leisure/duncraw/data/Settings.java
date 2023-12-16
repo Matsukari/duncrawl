@@ -36,6 +36,12 @@ public class Settings {
     public int cancel;
     public int menuLeft;
     public int menuRight;
+    public int steerMode;
+    public int dash;
+    public int skill1;
+    public int skill2;
+    public int skill3;
+    public int skill4;
     public void reset() {
       action = Keys.J;
       right = Keys.D;
@@ -46,6 +52,13 @@ public class Settings {
       cancel = Keys.ESCAPE;
       menuLeft = Keys.LEFT;
       menuRight = Keys.RIGHT;
+      steerMode = Keys.L;
+      dash = Keys.K;
+      skill1 = Keys.H;
+      skill2 = Keys.B;
+      skill3 = Keys.N;
+      skill4 = Keys.M;
+
     }
   }
   public static class ScreenControls {
