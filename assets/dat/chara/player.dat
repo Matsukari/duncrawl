@@ -1,6 +1,6 @@
 {
 "anims": {
-	"move": {
+"move": {
 		"side": "images/characters/mc/mc_move_side.png",
 		"back": "images/characters/mc/mc_move_back.png",
 		"front": "images/characters/mc/mc_move_front.png"
@@ -27,22 +27,26 @@
 	}
 },
 "sounds": {
-  "attack": "audio/chara/slash_1.ogg"
+	"move": "audio/chara/slash_1.ogg",
+	"attack": "audio/chara/slash_1.ogg",
+	"hurt": "audio/chara/slash_1.ogg"
 },
 "status": {
 	"health": 100,
-	"maxHealth": 100,
 	"stamina": 100,
+	"maxHealth": 100,
 	"maxStamina": 100,
+	"hpRecovery": 2,
+	"stRecovery": 3,
 	"phyAttack": {
-		"x": 1,
+		"x": 2,
 		"y": 1
 	},
 	"phyDefense": {
 		"x": 1,
 		"y": 1
 	},
-	"elementPower": 4,
+	"elementPower": 5,
 	"element": "NONE",
 	"weakness": "NONE",
 	"action": "IDLE"

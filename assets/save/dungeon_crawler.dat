@@ -9,8 +9,8 @@
 	},
 	"status": {
 		"health": 100,
-		"maxHealth": 100,
 		"stamina": 100,
+		"maxHealth": 100,
 		"maxStamina": 100,
 		"phyAttack": {
 			"x": 1,

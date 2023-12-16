@@ -10,7 +10,7 @@ public class HurtBehaviour extends Observer {
     if (state instanceof HurtState) {
       HurtState s = (HurtState)state;
       float sustain = s.chara.status.getDefense() - s.attacker.status.getAttack();
-      if (sustain < 0) s.chara.status.health += sustain;
+      if (sustain < 0) s.chara.status.setHealth(s.chara.status.health + (int)sustain);
     }
   }
   @Override

@@ -17,6 +17,7 @@ public class CharaDebug extends ToolAgent {
   public void tool() {
     if (ImGui.collapsingHeader("Attributes " + id)) {
       ImGui.labelText("Health", Integer.toString(chara.status.health));
+      ImGui.labelText("Stamina", Integer.toString(chara.status.stamina));
       ImGui.labelText("Total Attack", Float.toString(chara.status.getAttack()));
       ImGui.labelText("Total Defense", Float.toString(chara.status.getDefense()));
       ImGui.labelText("Element Pow", Float.toString(chara.status.elementPower));

@@ -27,9 +27,9 @@ public class CharaData extends Dat {
     anims.put("attack", template);
     anims.put("hurt", template);
     sounds = new HashMap<>();
-    sounds.put("move", "default");
-    sounds.put("attack", "default");
-    sounds.put("hurt", "default");
+    // sounds.put("move", "default");
+    // sounds.put("attack", "default");
+    // sounds.put("hurt", "default");
     status = new Status();
     status.reset();
   }

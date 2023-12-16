@@ -35,7 +35,7 @@ public class Chara extends Art {
   }
   // This must be called after all operations are done to this chara
   public void update(float dt) {
-    status.update();
+    status.update(dt);
     state.update(dt);
     observers.updateAll();
     if (state.next != null) setState(state.next); 
