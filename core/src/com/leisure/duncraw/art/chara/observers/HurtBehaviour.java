@@ -9,7 +9,8 @@ public class HurtBehaviour extends Observer {
   public void invoke(State state) {
     if (state instanceof HurtState) {
       HurtState s = (HurtState)state;
-      s.chara.status.health -= s.attacker.status.phyAttack.x;
+      float sustain = s.chara.status.getDefense() - s.attacker.status.getAttack();
+      if (sustain < 0) s.chara.status.health += sustain;
     }
   }
   @Override

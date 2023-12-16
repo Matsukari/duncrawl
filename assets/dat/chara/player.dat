@@ -19,6 +19,11 @@
 		"side": "images/effects/skill_1_sustain.png",
 		"back": "images/effects/skill_1_sustain.png",
 		"front": "images/effects/skill_1_sustain.png"
+	},
+	"skill2": {
+		"side": "images/effects/skill_2_sustain.png",
+		"back": "images/effects/skill_2_sustain.png",
+		"front": "images/effects/skill_2_sustain.png"
 	}
 },
 "sounds": {

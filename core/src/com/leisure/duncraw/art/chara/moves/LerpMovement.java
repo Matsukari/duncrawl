@@ -27,7 +27,6 @@ public class LerpMovement extends Movement {
     Terrain terrain = chara.mapAgent.getTerrainBy(x, y);
     if (terrain != null && terrain.traversable()) {
       // Logger.log("Position of player", String.format("%d %d", chara.mapAgent.x, chara.mapAgent.y)); 
-      chara.mapAgent.moveBy(lastVelX, lastVelY);
       super.moveBy(x, y);
       return true;
     }
@@ -52,6 +51,7 @@ public class LerpMovement extends Movement {
     float direction = Math.abs(velX) + Math.abs(velY); 
     boolean ahead = stepTaken > direction;
     if (ahead || (time >= stepDuration && ahead)) {
+      chara.mapAgent.moveBy(lastVelX, lastVelY);
       reset();
       if (length <= 1) {
         stop();
@@ -77,7 +77,8 @@ public class LerpMovement extends Movement {
       // Logger.log("LerpMovement", "step taken: " + Float.toString(stepTaken));
     }
     chara.bounds.x += chara.movement.nextStepX * chara.mapAgent.getWidth();
-    chara.bounds.y += chara.movement.nextStepY * chara.mapAgent.getHeight(); 
+    chara.bounds.y += chara.movement.nextStepY * chara.mapAgent.getHeight();
+    // chara.mapAgent.moveTo((int)chara.bounds.x/chara.mapAgent.getWidth(), chara.mapAgent.map.terrainSet.rows - ((int)chara.bounds.y/chara.mapAgent.getHeight()));
     return false;
   }
   

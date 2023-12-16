@@ -27,7 +27,7 @@ public class InfuseDarknessBehaviour extends Observer {
       timer.peek();
       invoked = true;
       DirAnimation dirAnimation = chara.anims.get("skill1");
-      if (dirAnimation != null && effectManager != null) {
+      if (dirAnimation != null && effectManager != null && stack == 1) {
         dirAnimation.face(chara.movement.lastVelX, chara.movement.lastVelY);
         effect = new GfxAnimation(effectManager.batch, dirAnimation.currentDir, true);
         effect.bounds.setPosition(chara.bounds.x, chara.bounds.y);
@@ -37,7 +37,7 @@ public class InfuseDarknessBehaviour extends Observer {
     }
     else if (state instanceof AttackState && invoked && isActive()) { 
       AttackState attackState = (AttackState)state;
-      attackState.target.status.health -= getDamage(); 
+      attackState.chara.status.bonusAttack = getDamage();
     } 
   }
   @Override
@@ -45,9 +45,10 @@ public class InfuseDarknessBehaviour extends Observer {
     if (!invoked) return;
     if (!isActive()) {
       if (effectManager != null) effectManager.stop(effect);
+      chara.status.bonusAttack = 0;
+      stack = 1;
       invoked = false;
-    }
-    else {
+    } else {
       effect.bounds.setPosition(chara.bounds.x, chara.bounds.y);
     }
   }
@@ -56,6 +57,6 @@ public class InfuseDarknessBehaviour extends Observer {
     return new InfuseDarknessBehaviour();
   }
   public boolean isActive() { return timer.sinceLastPeek() <= getDuration() * 1000f; }
-  public float getDamage() { return (chara.status.elementPower + stack * 0.5f) * chara.status.phyAttack.x; }
-  public float getDuration() { return chara.status.elementPower + stack; }
+  public float getDamage() { return (chara.status.elementPower + stack * 0.5f); }
+  public float getDuration() { return chara.status.elementPower + stack * 0.2f; }
 }

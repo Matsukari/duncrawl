@@ -59,7 +59,7 @@ public class Tooling {
     gl.renderDrawData(ImGui.getDrawData());
 
     if (ImGui.getIO().getWantCaptureKeyboard() || ImGui.getIO().getWantCaptureMouse()) {
-
+      
     }
   }
   public void dispose() {

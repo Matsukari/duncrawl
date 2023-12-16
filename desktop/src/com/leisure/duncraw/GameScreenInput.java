@@ -8,6 +8,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.leisure.duncraw.art.chara.states.DashState;
 import com.leisure.duncraw.art.chara.states.InteractState;
 import com.leisure.duncraw.art.chara.states.dark.InfuseDarknessSkill;
+import com.leisure.duncraw.art.chara.states.dark.ShadowCloakSkill;
 import com.leisure.duncraw.data.SaveData;
 import com.leisure.duncraw.data.Settings;
 import com.leisure.duncraw.data.Settings.DesktopControls;
@@ -51,6 +52,9 @@ public class GameScreenInput extends GameScreen implements InputProcessor {
     }
     else if (pressedKey == desktopControls.skill1) {
       player.setState(new InfuseDarknessSkill());
+    }
+    else if (pressedKey == desktopControls.skill2) {
+      player.setState(new ShadowCloakSkill());
     }
     pressedKey = -1;
     return true;

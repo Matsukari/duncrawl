@@ -10,12 +10,18 @@ public class Status {
   // Base attributes
   public Vector2 phyAttack;
   public Vector2 phyDefense;
+  // Bonus
+  transient public float bonusAttack;
+  transient public float bonusDefense;
   // Normalized scale, added to physical attributes
   public float elementPower;
   public Element element;
   public Element weakness;
   public ActionState action;
   public enum Element { HOLY, DARK, NONE };
+
+  public float getAttack() { return phyAttack.x + bonusAttack; }
+  public float getDefense() { return phyDefense.x + bonusDefense; }
   public void reset() {
     health = 100;
     maxHealth = 100;
