@@ -2,8 +2,6 @@ package com.leisure.duncraw.art.chara;
 
 import java.util.ArrayList;
 
-import com.leisure.duncraw.logging.Logger;
-
 public class Observers {
   private final Chara chara;
   private final ArrayList<Observer> observers = new ArrayList<>();
@@ -14,6 +12,12 @@ public class Observers {
   }
   public void updateAll() {
     for (int i = 0; i < observers.size(); i++) observers.get(i).update(); 
+  }
+  public <T extends Observer> T get(Class<T> clazz) {
+    for (Observer observer : observers) {
+      if (observer.getClass() == clazz) return clazz.cast(observer);
+    }
+    return null;
   }
   public void notify(int index, State state) {
     // Logger.log("Observers", "Notified" + state.getClass().getName());

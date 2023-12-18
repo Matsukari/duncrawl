@@ -12,7 +12,13 @@ public class GfxAnimation extends Gfx {
   public GfxAnimation(SpriteBatch batch, LinearAnimation<TextureRegion> anim, boolean loop) {
     super(batch);
     this.anim = anim;
-    this.loop = loop;
+    setLoop(loop);
+  }
+  public GfxAnimation(SpriteBatch batch) {
+    super(batch);
+  }
+  public void setLoop(boolean val) {
+    loop = val;
     if (!loop) anim.data.setPlayMode(PlayMode.NORMAL);
     else anim.data.setPlayMode(PlayMode.LOOP);
   }
@@ -27,6 +33,6 @@ public class GfxAnimation extends Gfx {
   }
   @Override
   public void render() {
-    batch.draw(anim.current(), bounds.x, bounds.y, bounds.width, bounds.height);
+    if (anim != null) batch.draw(anim.current(), bounds.x, bounds.y, bounds.width, bounds.height);
   }
 }

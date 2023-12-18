@@ -2,6 +2,7 @@ package com.leisure.duncraw.art.chara;
 
 import lib.animation.LinearAnimation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.g2d.Animation.PlayMode;
 import com.leisure.duncraw.data.DirAnimData;
 import com.leisure.duncraw.data.GeneralAnimation;
 
@@ -23,6 +24,12 @@ public class DirAnimation {
   }
   public void setAnimDur(float dur) {
     for (LinearAnimation<TextureRegion> anim : anims) anim.data.setFrameDuration(dur);
+  }
+  public void setPlayMode(PlayMode mode) {
+    for (LinearAnimation<TextureRegion> anim : anims) anim.data.setPlayMode(mode);
+  }
+  public void replay() {
+    currentDir.reset();
   }
   public LinearAnimation<TextureRegion> getSideFlip(int vel) {
     if (vel > 0 && !anims[SIDE].data.getKeyFrames()[0].isFlipX()) flipSide(!rightHanded);

@@ -17,6 +17,7 @@ public class TerrainSet {
     terrains = new Terrain[cols * rows];
     for (int i = 0; i < cols * rows; i++) terrains[i] = null;
   }
+  public boolean isWithin(int x, int y) { return x >= 0 || y >= 0 || x < cols || y < rows; }
   public void putTerrain(Terrain terrain, int x, int y) { putTerrain(terrain, x, y, true); }
   public void putTerrain(Terrain terrain, int x, int y, boolean snapSize) {
     // Logger.log("TerrainSet", String.format("put terrain at %d %d", x, y));

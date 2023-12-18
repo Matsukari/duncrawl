@@ -28,7 +28,7 @@ public class Floor extends Tilemap {
     Rectangle room = meta.rooms.get(MathUtils.random(meta.rooms.size()-1));
     tile.x = (int)(MathUtils.random(room.x, room.x + room.width) - meta.min.x) / terrainSet.terrainWidth;
     tile.y = (int)(MathUtils.random(room.y, room.y + room.height) - meta.min.y) / terrainSet.terrainHeight;
-    // tile.y = terrainSet.rows - tile.y;
+    if (!terrainSet.isWithin((int)tile.x, (int)tile.y)) getTileInRandomRoom();
     return tile;
   }
   public void renderForeground() {

@@ -2,6 +2,8 @@ package com.leisure.duncraw.art.chara;
 
 import java.util.HashMap;
 
+import com.leisure.duncraw.logging.Logger;
+
 
 public class DirAnimationMap {
   public final HashMap<String, DirAnimation> data = new HashMap<>();
@@ -14,6 +16,7 @@ public class DirAnimationMap {
   }
   public DirAnimation get(String anim) { return get(anim, 0, 0); }
   public DirAnimation get(String anim, int dirX, int dirY) { 
+    Logger.log("DirAnimation", "Get " + anim);
     DirAnimation a = data.get(anim);
     if (a == null) return null;
     a.face(dirX, dirY);

@@ -4,6 +4,7 @@ import com.leisure.duncraw.art.chara.DirAnimation;
 import com.leisure.duncraw.art.chara.Observer;
 import com.leisure.duncraw.art.chara.State;
 import com.leisure.duncraw.art.chara.states.AttackState;
+import com.leisure.duncraw.art.chara.states.MoveState;
 import com.leisure.duncraw.art.chara.states.dark.InfuseDarknessSkill;
 import com.leisure.duncraw.art.gfx.Gfx;
 import com.leisure.duncraw.art.gfx.GfxAnimation;
@@ -15,7 +16,7 @@ public class InfuseDarknessBehaviour extends Observer {
   private TimePeeker sustainTimer = new TimePeeker();
   private boolean invoked = false;
   private EffectManager effectManager;
-  public Gfx effect; 
+  public GfxAnimation effect; 
   public int stack = 1;
   public int cost = 10; // per second
   public InfuseDarknessBehaviour(EffectManager effectManager) {
@@ -29,19 +30,21 @@ public class InfuseDarknessBehaviour extends Observer {
       timer.peek();
       sustainTimer.peek();
       invoked = true;
-      DirAnimation dirAnimation = chara.anims.get("skill1");
-      if (dirAnimation != null && effectManager != null && stack == 1) {
-        dirAnimation.face(chara.movement.lastVelX, chara.movement.lastVelY);
-        effect = new GfxAnimation(effectManager.batch, dirAnimation.currentDir, true);
+      if (effectManager != null && stack == 1) {
+        effect = new GfxAnimation(effectManager.batch);
         effect.bounds.setPosition(chara.bounds.x, chara.bounds.y);
         effect.bounds.setSize(chara.bounds.width);
+        changeEffectDir();
         effectManager.start(effect);
       }
     }
-    else if (state instanceof AttackState && invoked && isActive()) { 
-      AttackState attackState = (AttackState)state;
-      attackState.chara.status.bonusAttack = getDamage();
-    } 
+    else if (invoked && isActive()) {
+      if (state instanceof MoveState) changeEffectDir();
+      else if (state instanceof AttackState) { 
+        AttackState attackState = (AttackState)state;
+        attackState.chara.status.bonusAttack = getDamage();
+      }  
+    }
   }
   @Override
   public void update() {
@@ -64,6 +67,15 @@ public class InfuseDarknessBehaviour extends Observer {
     invoked = false;
     stack = 1;
   }
+  public void changeEffectDir() {
+    DirAnimation dirAnimation = chara.anims.get("skill1");
+    if (dirAnimation != null) {
+      dirAnimation.face(chara.movement.lastVelX, chara.movement.lastVelY);
+      effect.anim = dirAnimation.currentDir;
+      effect.loop = true;
+    }
+  }
+  public boolean isRunning() { return invoked && isActive(); }
   public boolean isActive() { return timer.sinceLastPeek() <= getDuration() * 1000f; }
   public float getDamage() { return (chara.status.elementPower + stack * 0.5f); }
   public float getDuration() { return chara.status.elementPower + stack * 0.2f; }
