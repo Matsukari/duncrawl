@@ -16,6 +16,8 @@ public class Status {
   // Base attributes
   public Vector2 phyAttack;
   public Vector2 phyDefense;
+  // Properties
+  transient public boolean dead;
   // Bonus
   transient public float bonusAttack;
   transient public float bonusDefense;
@@ -53,6 +55,7 @@ public class Status {
     phyAttack = new Vector2(1, 1);
     phyDefense = new Vector2(1, 1);
     elementPower = 1;
+    dead = false;
     element = Element.NONE;
     weakness = Element.NONE;
     action = ActionState.IDLE;

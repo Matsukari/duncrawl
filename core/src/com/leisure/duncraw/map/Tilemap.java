@@ -24,7 +24,7 @@ public class Tilemap {
   // These TilemapChara are supposed to start bottom-left; their axix is not aligned to a grid array
   public TilemapChara getChara(int x, int y) {
     for (TilemapChara chara : chars) {
-      if (chara.onBlock(x, y)) return chara;
+      if (chara.onBlock(x, y) && !chara.chara.status.dead) return chara;
     }
     return null;
   }

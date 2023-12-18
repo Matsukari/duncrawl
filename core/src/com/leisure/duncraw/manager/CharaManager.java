@@ -1,6 +1,8 @@
 package com.leisure.duncraw.manager;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;
@@ -19,7 +21,10 @@ import com.leisure.duncraw.logging.Logger;
 import com.leisure.duncraw.map.Floor;
 
 public class CharaManager {
+  // Contains all charas that are alive
   public ArrayList<Chara> charas = new ArrayList<>();
+  // Queue for killing (When it needs to animate before completely removing)
+  public Queue<Chara> deadCharas = new LinkedList<>(); 
   public SpriteBatch batch = new SpriteBatch();
   public Chara player;
   private final Floor floor;
@@ -55,6 +60,14 @@ public class CharaManager {
   public void updateAll(float dt) {
     for (Chara chara : charas) {
       chara.update(dt);
+      if (chara.status.health <= 0) {
+        deadCharas.add(chara);
+        chara.status.dead = true;
+      }
+    }
+    for (Chara deadChara = deadCharas.poll(); deadChara != null; deadChara = deadCharas.poll()) {
+      Logger.log("CharaManager", String.format("Killed %d", deadChara.id));
+      charas.remove(deadChara);
     }
   }
   public void renderAll(Camera cam) {
