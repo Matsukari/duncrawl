@@ -3,6 +3,7 @@ package com.leisure.duncraw.story.components;
 import com.leisure.duncraw.story.SceneNode;
 import lib.time.TimePeeker;
 import com.leisure.duncraw.art.chara.Chara;
+import com.leisure.duncraw.art.chara.states.MoveState;
 import com.leisure.duncraw.screen.GameScreen;
 
 // Linear!
@@ -21,7 +22,7 @@ public class MoveCharaSceneNode extends SceneNode {
   }
   @Override
   public void invoke(GameScreen game) {
-    chara.moveBy(dstX, dstY);
+    chara.setState(new MoveState(dstX, dstY));
     started = true;
   }  
   @Override

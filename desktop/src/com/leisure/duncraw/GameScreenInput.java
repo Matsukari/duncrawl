@@ -7,10 +7,10 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.leisure.duncraw.art.chara.states.DashState;
 import com.leisure.duncraw.art.chara.states.InteractState;
+import com.leisure.duncraw.art.chara.states.MoveState;
 import com.leisure.duncraw.art.chara.states.dark.InfuseDarknessSkill;
 import com.leisure.duncraw.art.chara.states.dark.ShadowCloakSkill;
 import com.leisure.duncraw.data.SaveData;
-import com.leisure.duncraw.data.Settings;
 import com.leisure.duncraw.data.Settings.DesktopControls;
 import com.leisure.duncraw.screen.GameScreen;
 
@@ -30,10 +30,10 @@ public class GameScreenInput extends GameScreen implements InputProcessor {
   }
   private void update() {
     if (player.movement.isMoving()) return;
-    if (Gdx.input.isKeyPressed(desktopControls.down)) { player.moveBy(0, -1); }
-    else if (Gdx.input.isKeyPressed(desktopControls.up)) { player.moveBy(0, 1); }
-    else if (Gdx.input.isKeyPressed(desktopControls.left)) { player.moveBy(-1, 0); }
-    else if (Gdx.input.isKeyPressed(desktopControls.right)) { player.moveBy(1, 0); }
+    if (Gdx.input.isKeyPressed(desktopControls.down)) { player.setState(new MoveState(0, -1)); }
+    else if (Gdx.input.isKeyPressed(desktopControls.up)) { player.setState(new MoveState(0, 1)); }
+    else if (Gdx.input.isKeyPressed(desktopControls.left)) { player.setState(new MoveState(-1, 0)); }
+    else if (Gdx.input.isKeyPressed(desktopControls.right)) { player.setState(new MoveState(1, 0)); }
   }
   @Override public boolean keyDown(int keycode) {
     // Logger.log("GameScreenInput", "Keydown");

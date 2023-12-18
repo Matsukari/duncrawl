@@ -18,7 +18,6 @@ public abstract class Art {
   public boolean equals(Object obj) {
     return id == ((Art)obj).id;
   }
-  public void moveTo(float x, float y) { bounds.setPosition(x, y); }
   public void render() {}
 
 }

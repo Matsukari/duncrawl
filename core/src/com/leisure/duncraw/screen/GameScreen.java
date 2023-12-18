@@ -15,7 +15,7 @@ import com.leisure.duncraw.art.chara.observers.DashBehaviour;
 import com.leisure.duncraw.art.chara.observers.TalkBehaviour;
 import com.leisure.duncraw.art.chara.observers.dark.InfuseDarknessBehaviour;
 import com.leisure.duncraw.art.chara.observers.dark.ShadowCloakBehaviour;
-import com.leisure.duncraw.art.item.items.HealthPotion;
+import com.leisure.duncraw.art.chara.states.MoveState;
 import com.leisure.duncraw.art.item.items.StaminaPotion;
 import com.leisure.duncraw.art.map.objs.Chest;
 import com.leisure.duncraw.data.AssetSource;
@@ -49,12 +49,12 @@ public class GameScreen extends Screen {
     Logger.log("GameScreen", "Init");
     this.saveData = saveData;
     camera = new OrthographicCamera();
-    effectManager = new EffectManager();
     viewport = new ExtendViewport(saveData.settings.bounds.width, saveData.settings.bounds.height, camera);
-    hudManager = new HudManager(viewport);
+    effectManager = new EffectManager();
     floorManager = new FloorManager(saveData, AssetSource.getFloorsData(), saveData.progression.level.floor);
-    storyManager = new StoryManager(this, saveData.progression.level.scene);
     musicManager = new MusicManager(this, AssetSource.getMusicData());
+    storyManager = new StoryManager(this, saveData.progression.level.scene);
+    hudManager = new HudManager(viewport);
     // floorManager.setCurrentFloor(TmxLoader.load(floorManager.sources.startingHall, floorManager.batch, 32, 32));
     charaManager = new CharaManager(AssetSource.getCharasData(), floorManager.getCurrentFloor());
     charaManager.observers.add(new AnimationBehaviour(effectManager));
@@ -62,28 +62,30 @@ public class GameScreen extends Screen {
     player.observers.add(new InfuseDarknessBehaviour(effectManager));
     player.observers.add(new ShadowCloakBehaviour(effectManager));
     player.observers.add(new DashBehaviour());
+
+
+    debugManager = new DebugManager();
+    debugManager.debugSystem();
+    debugManager.debugPlayer(player);
+    debugManager.editFloorGen(floorManager);
+
+    testPlaceScene();
+  }
+  private void testPlaceScene() {
     Chara mob = charaManager.addFrom(charaManager.sources.ghost, Enemy.class);
     Chara npc = charaManager.addFrom(charaManager.sources.ghost, Npc.class);
     
-
     Vector2 pos = floorManager.getCurrentFloor().getTileInRandomRoom();
-    player.moveTo(pos.x, pos.y);
-    mob.moveTo(pos.x + 5, pos.y + 5);
-    npc.moveTo(pos.x + 2, pos.y - 1);
+    int x = (int)pos.x, y = (int)pos.y;
+    player.setState(new MoveState(x, y, false));
+    mob.setState(new MoveState(x + 5, y + 5, false));
+    npc.setState(new MoveState(x + 2, y - 1, false));
     floorManager.getCurrentFloor().terrainSet.putObject(new StaminaPotion(floorManager.batch, "dat/item/stamina_potion.dat"), (int)pos.x - 1, (int)pos.y);
     npc.observers.add(new TalkBehaviour(hudManager.dialogueHud, Conversation.fromDat("dat/convs/test.conv")));
     camera.zoom = 30f;
     floorManager.getCurrentFloor().terrainSet.putObject(new Chest("dat/obj/chest.dat", floorManager.batch), (int)pos.x + 3, (int)pos.y);
     Logger.log("Playerpos", player.bounds.toString());
-
-    // storyManager.play();
-
-    debugManager = new DebugManager();
-    debugManager.debugSystem();
-    debugManager.debugPlayer(player);
     debugManager.debugChara(mob);
-    debugManager.editFloorGen(floorManager);
-    // debugManager.debugMap(floorManager.getCurrentFloor());
   }
   @Override
   public void pause() {
