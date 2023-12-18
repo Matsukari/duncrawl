@@ -1,0 +1,64 @@
+{
+"anims": {
+"move": {
+		"side": "images/characters/player/player_move_side.png",
+		"back": "images/characters/player/player_move_back.png",
+		"front": "images/characters/player/player_move_front.png"
+	},
+	"idle": {
+		"side": "images/characters/player/player_idle_side.png",
+		"back": "images/characters/player/player_idle_back.png",
+		"front": "images/characters/player/player_idle_front.png"
+	},
+  "attack": { 
+		"side": "images/characters/player/player_attack_side.png",
+		"back": "images/characters/player/player_attack_back.png",
+		"front": "images/characters/player/player_attack_front.png"
+  },
+	"attack_effect": {
+		"side": "images/effects/strike_effect.png",
+		"back": "images/effects/strike_effect.png",
+		"front": "images/effects/strike_effect.png"
+	},
+	"skill1_strike": {
+		"side": "images/effects/skill_1_strike_effect.png",
+		"back": "images/effects/skill_1_strike_effect.png",
+		"front": "images/effects/skill_1_strike_effect.png"
+	},
+	"skill1": {
+		"side": "images/effects/skill_1_sustain_side.png",
+		"back": "images/effects/skill_1_sustain_back.png",
+		"front": "images/effects/skill_1_sustain_front.png"
+	},
+	"skill2": {
+		"side": "images/effects/skill_2_sustain.png",
+		"back": "images/effects/skill_2_sustain.png",
+		"front": "images/effects/skill_2_sustain.png"
+	}
+},
+"sounds": {
+	"move": "audio/chara/slash_1.ogg",
+	"attack": "audio/chara/slash_1.ogg",
+	"hurt": "audio/chara/slash_1.ogg"
+},
+"status": {
+	"health": 100,
+	"stamina": 100,
+	"maxHealth": 100,
+	"maxStamina": 100,
+	"hpRecovery": 2,
+	"stRecovery": 3,
+	"phyAttack": {
+		"x": 2,
+		"y": 1
+	},
+	"phyDefense": {
+		"x": 1,
+		"y": 1
+	},
+	"elementPower": 5,
+	"element": "NONE",
+	"weakness": "NONE",
+	"action": "IDLE"
+}
+}

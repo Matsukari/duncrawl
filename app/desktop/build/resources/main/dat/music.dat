@@ -1,0 +1,17 @@
+{
+"earlyGame": [
+	"audio/music/early_game_1.ogg"
+],
+"midGame": [
+	"audio/music/mid_game_1.ogg"
+],
+"lateGame": [
+	"audio/music/late_game_1.ogg"
+],
+"finalBoss": "audio/music/final_boss.ogg",
+"midBoss": "audio/music/mid_boss.ogg",
+"earlyBoss": "audio/music/earlyBoss.ogg",
+"safeArea": "audio/music/safeArea.ogg",
+"endingScene": "audio/music/ending_scene.ogg",
+"menuScreen": "audio/music/menu_screen.ogg"
+}
