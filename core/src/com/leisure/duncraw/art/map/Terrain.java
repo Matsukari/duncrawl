@@ -42,7 +42,7 @@ public class Terrain extends Art {
   public void render() {
     batch.draw(anim.current(), bounds.x, bounds.y, bounds.width, bounds.height);
     for (Obj obj : objs) obj.render();
-    for (Terrain node = next; node != null; node = node.next) node.render();
+    // for (Terrain node = next; node != null; node = node.next) node.render();
   }
   public void render(int x, int y) {
     bounds.x = x;
