@@ -31,6 +31,8 @@ import com.leisure.duncraw.manager.HudManager;
 import com.leisure.duncraw.manager.MusicManager;
 import com.leisure.duncraw.manager.StoryManager;
 
+import test.zombie.ZombieTest;
+
 public class GameScreen extends Screen {
   protected Color backgroundColor = new Color(4/255f, 4/255f, 4/255f, 1f);
   protected final SaveData saveData;
@@ -74,6 +76,7 @@ public class GameScreen extends Screen {
   private void testPlaceScene() {
     Chara mob = charaManager.addFrom(charaManager.sources.ghost, Enemy.class);
     Chara npc = charaManager.addFrom(charaManager.sources.ghost, Npc.class);
+
     
     Vector2 pos = floorManager.getCurrentFloor().getTileInRandomRoom();
     int x = (int)pos.x, y = (int)pos.y;
@@ -86,6 +89,7 @@ public class GameScreen extends Screen {
     floorManager.getCurrentFloor().terrainSet.putObject(new Chest("dat/obj/chest.dat", floorManager.batch), (int)pos.x + 3, (int)pos.y);
     Logger.log("Playerpos", player.bounds.toString());
     debugManager.debugChara(mob);
+    ZombieTest zombie = new ZombieTest();
   }
   @Override
   public void pause() {
