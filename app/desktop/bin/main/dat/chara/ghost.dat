@@ -1,0 +1,45 @@
+{
+"anims": {
+	"move": {
+		"side": "images/characters/ghost/ghost_front.png",
+		"back": "images/characters/ghost/ghost_front.png",
+		"front": "images/characters/ghost/ghost_front.png"
+	},
+	"idle": {
+		"side": "images/characters/ghost/ghost_front.png",
+		"back": "images/characters/ghost/ghost_front.png",
+		"front": "images/characters/ghost/ghost_front.png"
+	},
+	"attack": {
+		"side": "images/characters/ghost/ghost_front.png",
+		"back": "images/characters/ghost/ghost_front.png",
+		"front": "images/characters/ghost/ghost_front.png"
+	},
+	"hurt": {
+		"side": "images/characters/ghost/ghost_front.png",
+		"back": "images/characters/ghost/ghost_front.png",
+		"front": "images/characters/ghost/ghost_front.png"
+	}
+},
+"sounds": {},
+"status": {
+	"health": 100,
+	"stamina": 100,
+	"maxHealth": 100,
+	"maxStamina": 100,
+	"hpRecovery": 2,
+	"stRecovery": 3,
+	"phyAttack": {
+		"x": 1,
+		"y": 1
+	},
+	"phyDefense": {
+		"x": 1,
+		"y": 1
+	},
+	"elementPower": 1,
+	"element": "NONE",
+	"weakness": "NONE",
+	"action": "IDLE"
+}
+}

@@ -1,0 +1,14 @@
+{
+"roomsNum": 5,
+"tileMaxRows": 60,
+"tileMaxCols": 60,
+"tileSize": 32,
+"widthRange": {
+	"x": 0.2,
+	"y": 1
+},
+"heightRange": {
+	"x": 0.2,
+	"y": 1
+}
+}

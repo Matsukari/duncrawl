@@ -1,0 +1,9 @@
+{
+"anims": {
+	"idle": "images/objects/chest_idle.png",
+  "open": "images/objects/chest_open.png"
+},
+"sounds": {},
+"name": "No-name-obj",
+"desc": "No-desc-obj"
+}

@@ -1,0 +1,6 @@
+{
+"def": "fonts/default.fnt",
+"normal": "fonts/normal.fnt",
+"important": "fonts/important.fnt",
+"reading": "fonts/reading.fnt"
+}

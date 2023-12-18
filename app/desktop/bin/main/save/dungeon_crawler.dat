@@ -1,0 +1,61 @@
+{
+"progression": {
+	"level": {}
+},
+"status": {
+	"rank": "BRONZE",
+	"inventory": {
+		"data": []
+	},
+	"status": {
+		"health": 100,
+		"stamina": 100,
+		"maxHealth": 100,
+		"maxStamina": 100,
+		"phyAttack": {
+			"x": 1,
+			"y": 1
+		},
+		"phyDefense": {
+			"x": 1,
+			"y": 1
+		},
+		"elementPower": 1,
+		"element": "NONE",
+		"weakness": "NONE",
+		"action": "IDLE"
+	}
+},
+"settings": {
+	"difficulty": "NORMAL",
+	"music": 0.5,
+	"sfx": 0.5,
+	"ambient": 0.5,
+	"vSync": true,
+	"bounds": {
+		"width": 1020,
+		"height": 620
+	},
+	"desktopControls": {
+		"action": 38,
+		"left": 29,
+		"right": 32,
+		"up": 51,
+		"down": 47,
+		"confirm": 38,
+		"cancel": 111,
+		"menuLeft": 21,
+		"menuRight": 22,
+		"steerMode": 40,
+		"dash": 39,
+		"skill1": 36,
+		"skill2": 30,
+		"skill3": 42,
+		"skill4": 41
+	},
+	"screenControls": {
+		"dPadScale": 1,
+		"actionScale": 1
+	}
+}
+}
