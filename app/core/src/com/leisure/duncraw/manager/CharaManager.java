@@ -67,6 +67,7 @@ public class CharaManager {
     }
     for (Chara deadChara = deadCharas.poll(); deadChara != null; deadChara = deadCharas.poll()) {
       Logger.log("CharaManager", String.format("Killed %d", deadChara.id));
+      deadChara.onDeath();
       charas.remove(deadChara);
     }
   }
@@ -75,5 +76,11 @@ public class CharaManager {
     batch.begin();
     for (Chara chara : charas) chara.render();
     batch.end();
+  }
+  public void dispose() {
+    for (Chara chara : charas) {
+      chara.onDeath();
+    }
+    batch.dispose();
   }
 }

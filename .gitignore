@@ -9,6 +9,7 @@ hs_err_pid*
 /app/ios/robovm-build/
 
 ## GWT
+*gwt.xml
 /app/html/war/
 /app/html/gwt-unitCache/
 .apt_generated/
@@ -17,7 +18,10 @@ gwt-unitCache/
 www-test/
 .gwt-tmp/
 
+## binaries
 /builds/
+/app/desktop/bin/
+
 
 ## Android Studio and Intellij and Android in general
 /app/android/libs/armeabi-v7a/
@@ -49,6 +53,7 @@ gradle-app.setting
 Thumbs.db
 
 ## iOS
+/app/ios/data/
 /app/ios/xcode/*.xcodeproj/*
 !/app/ios/xcode/*.xcodeproj/xcshareddata
 !/app/ios/xcode/*.xcodeproj/project.pbxproj

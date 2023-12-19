@@ -24,11 +24,14 @@ public class GameApplication extends Game {
   @Override
   public void render() {
     if (screen == null) return;
-    if (((Screen)screen).hasChanged) setScreen(((Screen)screen).next());
+    if (((Screen)screen).hasChanged) {
+      setScreen(((Screen)screen).next());
+    }
     screen.render(Gdx.graphics.getDeltaTime());
   }
 	@Override
 	public void dispose () {
+    if (screen != null) screen.dispose();
     Graphics.dispose(); 
     Audio.dispose();
     Logger.log("GameApplication", "Disposed");

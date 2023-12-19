@@ -1,22 +1,29 @@
 package com.leisure.duncraw.art.chara;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.leisure.duncraw.art.chara.ai.AiContext;
 import com.leisure.duncraw.data.CharaData;
 
 import behave.execution.ExecutionContext;
 import behave.execution.Executor;
 import behave.models.Node;
 
-public class Enemy extends Chara {  
+public class Enemy extends Chara { 
+  public Node ai;
+  public Executor exec;
   public Enemy(CharaData data, SpriteBatch batch) {
     super(data, batch);
   }
-  public void startAI(Node ai, Player player) {
+  public void startAI(Node ai) {
+    this.ai = ai;
     ExecutionContext context = new ExecutionContext();
     context.setVariable("chara", this);
-    context.setVariable("player", player);
-    Executor exec = new Executor();
+    exec = new Executor();
     exec.initialize(ai, context);
     exec.start(300, 200);
+  }
+  @Override
+  public void onDeath() {
+    exec.stop();
   }
 }

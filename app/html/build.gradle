@@ -90,4 +90,3 @@ checkGwt.war = file("war")
 sourceCompatibility = 1.7
 sourceSets.main.java.srcDirs = [ "src/" ]
 
-eclipse.project.name = appName + "-html"

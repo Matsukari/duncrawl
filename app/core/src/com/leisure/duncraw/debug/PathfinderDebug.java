@@ -19,13 +19,13 @@ public class PathfinderDebug extends ToolAgent {
     Pointi end = new Pointi(start);
     end.x += 1;
     end.y += 7;
-    path = new Pathfinder(game.floorManager.getCurrentFloor().terrainSet, start, end).getPath();
+    path = new Pathfinder(game.floorManager.getCurrentFloor().terrainSet, start, end).getArrayPath();
   }
   @Override
   public void render(ShapeRenderer renderer) {
     renderer.begin(ShapeType.Filled);
     for (int i = 0; i < path.size(); i++) {
-      renderer.circle(path.get(i).x+i*32, path.get(i).y+i*32, 10);
+      renderer.circle(game.player.mapAgent.x + path.get(i).x+i*32, game.player.mapAgent.y + path.get(i).y+i*32, 4);
     }
     renderer.end();
   } 

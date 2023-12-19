@@ -1,18 +1,34 @@
 package com.leisure.duncraw.art.chara.ai.components;
 
+import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.utils.Queue;
+import com.leisure.duncraw.art.chara.ai.Pathfinder;
 import com.leisure.duncraw.art.chara.states.MoveState;
+import com.leisure.duncraw.map.Floor;
+import com.leisure.duncraw.logging.Logger;
 
 import behave.execution.ExecutionContext;
 import behave.models.Types.Status;
+import lib.math.Pointi;
 import lib.time.TimePeeker;
 
 public class PlayerNodes {
   public static class Near extends CharaLeafNode {
-    public Near(int area) {}
+    public int area;
+    public Near(int area) { 
+      this.area = area;
+    }
+    @Override
+    public void initialize(ExecutionContext context) {
+      super.initialize(context);
+    }
     @Override
     public Status tick(ExecutionContext context) {
-      if (Math.abs(chara.mapAgent.x - player.mapAgent.x) <= 5 || Math.abs(chara.mapAgent.y - player.mapAgent.y) <= 5) 
+      if (chara.mapAgent.distance(player.mapAgent) <= area) {
+        Logger.log("PlayerNodes", "Near! ");
         return Status.Success;
+      }
+      Logger.log("PlayerNodes", String.format("Too far: "));
       return Status.Failure;
     }
   }
@@ -25,16 +41,24 @@ public class PlayerNodes {
     }
     @Override
     public Status tick(ExecutionContext context) {
-      if (timer.sinceLastPeek() >= 2000) return Status.Success;
+      if (timer.sinceLastPeek() >= 500) {
+        player.status.setHealth(player.status.health - 20);
+        return Status.Success;
+      }
       return Status.Running;
     }
   } 
 
   public static class Goto extends CharaLeafNode {
+    private Queue<Pointi> path;
     @Override
     public void initialize(ExecutionContext context) {
       super.initialize(context);
-      chara.setState(new MoveState(1, 1));
+      // path = new Pathfinder(getFloor(context).terrainSet, new Pointi(chara.mapAgent.x, chara.mapAgent.y), 
+      //     new Pointi(player.mapAgent.x, player.mapAgent.y)).getQueuedPath();
+      // Pointi next = path.removeFirst();
+      Pointi step = Pathfinder.getImmediateDiagonal(new Pointi(chara.mapAgent.x, chara.mapAgent.y), new Pointi(player.mapAgent.x, player.mapAgent.y));
+      chara.setState(new MoveState(-step.x, -step.y));
     }
     @Override
     public Status tick(ExecutionContext context) {

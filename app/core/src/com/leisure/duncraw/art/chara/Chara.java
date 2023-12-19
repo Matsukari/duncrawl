@@ -52,4 +52,5 @@ public class Chara extends Art {
     state.init(this);  
     observers.notifyAll(state);
   }
+  public void onDeath() {}
 }

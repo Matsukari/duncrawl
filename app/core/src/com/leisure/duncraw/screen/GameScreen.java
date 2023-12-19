@@ -81,7 +81,7 @@ public class GameScreen extends Screen {
     int x = (int)pos.x, y = (int)pos.y;
     player.setState(new MoveState(x, y, false));
     mob.setState(new MoveState(x + 5, y + 5, false));
-    mob.startAI(new AiWanderer(), player);
+    mob.startAI(new AiWanderer(floorManager.getCurrentFloor(), player));
     npc.setState(new MoveState(x + 2, y - 1, false));
     floorManager.getCurrentFloor().terrainSet.putObject(new StaminaPotion(floorManager.batch, "dat/item/stamina_potion.dat"), (int)pos.x - 1, (int)pos.y);
     npc.observers.add(new TalkBehaviour(hudManager.dialogueHud, Conversation.fromDat("dat/convs/test.conv")));
@@ -124,6 +124,8 @@ public class GameScreen extends Screen {
   @Override
   public void dispose() {
     hudManager.dispose();
+    charaManager.dispose();
+    debugManager.dispose();
     Logger.log("GameScreen", "Dispose");
   } 
   

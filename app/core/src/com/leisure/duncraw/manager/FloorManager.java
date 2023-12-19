@@ -86,4 +86,7 @@ public class FloorManager {
     // batch.end();
 
   }
+  public void dispose() {
+    batch.dispose();
+  }
 }

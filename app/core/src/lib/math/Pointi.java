@@ -15,5 +15,11 @@ public class Pointi {
   public boolean equals(Object obj) {
     Pointi point = (Pointi)obj;
     return x == point.x && y == point.y;
-  } 
+  }
+  @Override
+  public int hashCode() {
+    return y * 1000 + x;
+  }
+  
+
 }

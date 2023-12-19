@@ -13,7 +13,7 @@ public class Movement {
   public int lastVelX = 0;
   public int lastVelY = 0;
   public boolean moveBy(int x, int y) {
-    Logger.log("Movement", String.format("Move to %d %d", x, y));
+    // Logger.log("Movement", String.format("Move to %d %d", x, y));
     velX = x;
     velY = y;
     lastVelX = velX;
@@ -21,7 +21,7 @@ public class Movement {
     return true;
   }
   public void stop() {
-    Logger.log("Movement", "Stopped");
+    // Logger.log("Movement", "Stopped");
     velX = 0;
     velY = 0;
   }

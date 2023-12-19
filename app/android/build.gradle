@@ -86,4 +86,3 @@ tasks.register('run', Exec) {
     commandLine "$adb", 'shell', 'am', 'start', '-n', 'com.leisure.duncraw/com.leisure.duncraw.AndroidLauncher'
 }
 
-eclipse.project.name = appName + "-android"
