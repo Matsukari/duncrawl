@@ -7,8 +7,10 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.leisure.duncraw.manager.FloorManager;
+import com.leisure.duncraw.map.floors.Floor1;
 import com.leisure.duncraw.map.generator.FloorGenerator;
 import com.leisure.duncraw.map.generator.RoomsBuilder;
+import com.leisure.duncraw.map.generator.TerrainSetGenerator;
 
 import imgui.ImGui;
 import imgui.type.ImInt;
@@ -18,13 +20,13 @@ import lib.tooling.ToolAgent;
 public class FloorEditor extends ToolAgent {
   public ImInt points = new ImInt(3);
   public RoomsBuilder roomsBuilder;
-  public FloorGenerator generator;
+  public TerrainSetGenerator generator;
   public FloorManager manager;
   private ShapeRenderer renderer;
   public FloorEditor(FloorManager manager, ShapeRenderer renderer) {
     super("FloorEditor");
     this.manager = manager;
-    this.generator = manager.floorGenerator;
+    this.generator = manager.getCurrentFloor().generator;
     this.roomsBuilder = generator.roomsBuilder;
     this.renderer = renderer;
     renderer.scale(0.1f, 0.1f, 1f);
@@ -36,7 +38,7 @@ public class FloorEditor extends ToolAgent {
     if (ImGui.button("Generate")) {
       // roomsBuilder.build(points.get(), new Vector2(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()), new Vector2(0.2f, 1f), new Vector2(0.2f, 1f));
       generator.data.roomsNum = points.get(); 
-      manager.setCurrentFloor(generator.gen());
+      manager.setCurrentFloor(new Floor1(generator));
     }
     for (Edge e : roomsBuilder.nodes) {
       renderer.begin(ShapeType.Line);

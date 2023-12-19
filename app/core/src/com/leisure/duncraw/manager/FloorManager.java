@@ -19,12 +19,11 @@ import com.leisure.duncraw.data.SaveData;
 import com.leisure.duncraw.data.Serializer;
 import com.leisure.duncraw.map.Floor;
 import com.leisure.duncraw.map.Tileset;
-import com.leisure.duncraw.map.generator.FloorGenerator;
+import com.leisure.duncraw.map.floors.Floor1;
 import com.leisure.duncraw.map.generator.TerrainSetGenerator;
 
 public class FloorManager {
   public SpriteBatch batch = new SpriteBatch();
-  public FloorGenerator floorGenerator;
   public Tileset tileset;
   private FrameBuffer lightBuffer;
   private TextureRegion light;
@@ -40,12 +39,10 @@ public class FloorManager {
     floorData.reset();
     try { Deserializer.load(FloorData.class, Gdx.files.local(sources.floorsDat.get(level))); }
     catch(Exception e) { Serializer.save(floorData, Gdx.files.local(sources.floorsDat.get(level))); }
-    floorGenerator = new FloorGenerator(floorData);
-    floorGenerator.grounds = (tileset.terrainTransform(tileset.filter("terrain", "ground"), batch));
-    floorGenerator.walls = (tileset.terrainTransform(tileset.filter("terrain", "wall"), batch));
-    floor = floorGenerator.gen();
-    floor.meta = floorGenerator.roomsBuilder;
-    floor.exits.addAll(TerrainSetGenerator.selectExits(floor.terrainSet));
+    TerrainSetGenerator terrainGenerator = new TerrainSetGenerator(floorData);
+    terrainGenerator.grounds = (tileset.terrainTransform(tileset.filter("terrain", "ground"), batch));
+    terrainGenerator.walls = (tileset.terrainTransform(tileset.filter("terrain", "wall"), batch));
+    floor = new Floor1(terrainGenerator);
 
     lightBuffer = new FrameBuffer(Format.RGB888, Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), false);
     Graphics.assets.load("images/lights/light_smooth.png", Texture.class);
@@ -68,6 +65,7 @@ public class FloorManager {
     batch.setProjectionMatrix(cam.combined);
     batch.setBlendFunction(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
     batch.begin();
+    floor.update();
     floor.render();
     // floorGenerator.grounds.get(0).render(0, 0);
     batch.end();

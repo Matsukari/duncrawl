@@ -10,5 +10,7 @@
 "heightRange": {
 	"x": 0.2,
 	"y": 1
-}
+},
+"maxMob": 15,
+"maxElite": 5
 }

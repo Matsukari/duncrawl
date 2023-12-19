@@ -8,6 +8,7 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.leisure.duncraw.art.chara.Chara;
 import com.leisure.duncraw.art.chara.Enemy;
+import com.leisure.duncraw.art.chara.EnemySpawner;
 import com.leisure.duncraw.art.chara.Npc;
 import com.leisure.duncraw.art.chara.Player;
 import com.leisure.duncraw.art.chara.ai.AiWanderer;
@@ -31,6 +32,8 @@ import com.leisure.duncraw.manager.FloorManager;
 import com.leisure.duncraw.manager.HudManager;
 import com.leisure.duncraw.manager.MusicManager;
 import com.leisure.duncraw.manager.StoryManager;
+
+import lib.math.Pointi;
 
 public class GameScreen extends Screen {
   protected Color backgroundColor = new Color(4/255f, 4/255f, 4/255f, 1f);
@@ -77,13 +80,14 @@ public class GameScreen extends Screen {
     Chara npc = charaManager.addFrom(charaManager.sources.ghost, Npc.class);
 
     
-    Vector2 pos = floorManager.getCurrentFloor().getTileInRandomRoom();
+    Pointi pos = floorManager.getCurrentFloor().getTileInRandomRoom();
     int x = (int)pos.x, y = (int)pos.y;
     player.setState(new MoveState(x, y, false));
     mob.setState(new MoveState(x + 5, y + 5, false));
     mob.startAI(new AiWanderer(floorManager.getCurrentFloor(), player));
     npc.setState(new MoveState(x + 2, y - 1, false));
     floorManager.getCurrentFloor().terrainSet.putObject(new StaminaPotion(floorManager.batch, "dat/item/stamina_potion.dat"), (int)pos.x - 1, (int)pos.y);
+    floorManager.getCurrentFloor().initialSpawn(new EnemySpawner(charaManager, charaManager.sources, ()->new AiWanderer(floorManager.getCurrentFloor(), player)));
     npc.observers.add(new TalkBehaviour(hudManager.dialogueHud, Conversation.fromDat("dat/convs/test.conv")));
     camera.zoom = 30f;
     floorManager.getCurrentFloor().terrainSet.putObject(new Chest("dat/obj/chest.dat", floorManager.batch), (int)pos.x + 3, (int)pos.y);
