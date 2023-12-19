@@ -39,6 +39,9 @@ public class DebugManager extends ToolAgent {
     gridLines = new GridLines(floor.terrainSet.cols, floor.terrainSet.rows, 
       floor.terrainSet.terrainWidth, floor.terrainSet.terrainHeight);
   }
+  public void debugTool(ToolAgent tool) {
+    Tooling.addAgent(tool);
+  }
   public void debugSystem() {
     Tooling.addAgent(new SystemDebug());
   }

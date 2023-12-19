@@ -1,10 +1,13 @@
 package com.leisure.duncraw;
 
+import java.util.ArrayList;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
+import com.leisure.duncraw.art.chara.ai.Pathfinder;
 import com.leisure.duncraw.art.chara.states.DashState;
 import com.leisure.duncraw.art.chara.states.InteractState;
 import com.leisure.duncraw.art.chara.states.MoveState;
@@ -12,7 +15,11 @@ import com.leisure.duncraw.art.chara.states.dark.InfuseDarknessSkill;
 import com.leisure.duncraw.art.chara.states.dark.ShadowCloakSkill;
 import com.leisure.duncraw.data.SaveData;
 import com.leisure.duncraw.data.Settings.DesktopControls;
+import com.leisure.duncraw.debug.PathfinderDebug;
 import com.leisure.duncraw.screen.GameScreen;
+
+import lib.math.Pointi;
+import lib.tooling.Tooling;
 
 public class GameScreenInput extends GameScreen implements InputProcessor {
   private int pressedKey = -1;
@@ -23,6 +30,7 @@ public class GameScreenInput extends GameScreen implements InputProcessor {
     super(save);
     Gdx.input.setInputProcessor(this);
     desktopControls = save.settings.desktopControls;
+    // Tooling.addAgent(new PathfinderDebug(this));
   } 
   @Override public void render(float delta) { 
     update();

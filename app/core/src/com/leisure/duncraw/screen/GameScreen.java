@@ -10,6 +10,7 @@ import com.leisure.duncraw.art.chara.Chara;
 import com.leisure.duncraw.art.chara.Enemy;
 import com.leisure.duncraw.art.chara.Npc;
 import com.leisure.duncraw.art.chara.Player;
+import com.leisure.duncraw.art.chara.ai.AiWanderer;
 import com.leisure.duncraw.art.chara.observers.AnimationBehaviour;
 import com.leisure.duncraw.art.chara.observers.DashBehaviour;
 import com.leisure.duncraw.art.chara.observers.TalkBehaviour;
@@ -72,7 +73,7 @@ public class GameScreen extends Screen {
     testPlaceScene();
   }
   private void testPlaceScene() {
-    Chara mob = charaManager.addFrom(charaManager.sources.ghost, Enemy.class);
+    Enemy mob = charaManager.addFrom(charaManager.sources.ghost, Enemy.class);
     Chara npc = charaManager.addFrom(charaManager.sources.ghost, Npc.class);
 
     
@@ -80,6 +81,7 @@ public class GameScreen extends Screen {
     int x = (int)pos.x, y = (int)pos.y;
     player.setState(new MoveState(x, y, false));
     mob.setState(new MoveState(x + 5, y + 5, false));
+    mob.startAI(new AiWanderer(), player);
     npc.setState(new MoveState(x + 2, y - 1, false));
     floorManager.getCurrentFloor().terrainSet.putObject(new StaminaPotion(floorManager.batch, "dat/item/stamina_potion.dat"), (int)pos.x - 1, (int)pos.y);
     npc.observers.add(new TalkBehaviour(hudManager.dialogueHud, Conversation.fromDat("dat/convs/test.conv")));

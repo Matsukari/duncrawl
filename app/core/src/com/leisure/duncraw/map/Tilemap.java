@@ -13,9 +13,18 @@ public class Tilemap {
     assert terrainSet != null;
   }
   public void render() {
+    // for (TilemapChara chara : chars) {
+    //   terrainSet.putToWorld(chara.chara, chara.x, chara.y);
+    // }
     for (Terrain terrain : terrainSet.terrains) {
       if (terrain != null) terrain.render();
     }
+    // for (int x = 0; x < terrainSet.cols; x++) {
+    //   for (int y = 0; y < terrainSet.rows; y++) {
+    //     Terrain terrain = terrainSet.getTerrain(x, terrainSet.rows - 1 - y);
+    //     if (terrain != null) terrain.render();
+    //   }
+    // }
   }
   public void putChara(TilemapChara chara) {
     if (chars.contains(chara));

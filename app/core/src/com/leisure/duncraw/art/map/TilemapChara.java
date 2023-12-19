@@ -25,6 +25,12 @@ public class TilemapChara {
     x += byX;
     y += byY;
   }
+  public int distance(TilemapChara other) {
+    return Math.abs(x - other.x) + Math.abs(y - other.y);
+  }
+  public int dirDistance(TilemapChara other) {
+    return 0;
+  }
   public Terrain getTerrainBy(int byX, int byY) {
      return map.terrainSet.getTerrain(x+byX, y+byY);
   }

@@ -6,88 +6,31 @@
 hs_err_pid*
 
 ## Robovm
-/ios/robovm-build/
+/app/ios/robovm-build/
 
 ## GWT
-/html/war/
-/html/gwt-unitCache/
+/app/html/war/
+/app/html/gwt-unitCache/
 .apt_generated/
 .gwt/
 gwt-unitCache/
 www-test/
 .gwt-tmp/
 
+/builds/
+
 ## Android Studio and Intellij and Android in general
-/android/libs/armeabi-v7a/
-/android/libs/arm64-v8a/
-/android/libs/x86/
-/android/libs/x86_64/
-/android/gen/
+/app/android/libs/armeabi-v7a/
+/app/android/libs/arm64-v8a/
+/app/android/libs/x86/
+/app/android/libs/x86_64/
+/app/android/gen/
 .idea/
 *.ipr
 *.iws
 *.iml
-/android/out/
+/app/android/out/
 com_crashlytics_export_strings.xml
-
-## Eclipse
-
-.classpath
-.project
-.metadata/
-/android/bin/
-/core/bin/
-/desktop/bin/
-/html/bin/
-/ios/bin/
-*.tmp
-*.bak
-*.swp
-*~.nib
-.settings/
-.loadpath
-.externalToolBuilders/
-*.launch
-
-## NetBeans
-
-/nbproject/private/
-/android/nbproject/private/
-/core/nbproject/private/
-/desktop/nbproject/private/
-/html/nbproject/private/
-/ios/nbproject/private/
-
-/build/
-/android/build/
-/core/build/
-/desktop/build/
-/html/build/
-/ios/build/
-
-/nbbuild/
-/android/nbbuild/
-/core/nbbuild/
-/desktop/nbbuild/
-/html/nbbuild/
-/ios/nbbuild/
-
-/dist/
-/android/dist/
-/core/dist/
-/desktop/dist/
-/html/dist/
-/ios/dist/
-
-/nbdist/
-/android/nbdist/
-/core/nbdist/
-/desktop/nbdist/
-/html/nbdist/
-/ios/nbdist/
-
-nbactions.xml
-nb-configuration.xml
 
 ## Gradle
 
@@ -95,20 +38,20 @@ nb-configuration.xml
 .gradle/
 gradle-app.setting
 /build/
-/android/build/
-/core/build/
-/desktop/build/
-/html/build/
-/ios/build/
+/app/android/build/
+/app/core/build/
+/app/desktop/build/
+/app/html/build/
+/app/ios/build/
 
 ## OS Specific
 .DS_Store
 Thumbs.db
 
 ## iOS
-/ios/xcode/*.xcodeproj/*
-!/ios/xcode/*.xcodeproj/xcshareddata
-!/ios/xcode/*.xcodeproj/project.pbxproj
-/ios/xcode/native/
-/ios/IOSLauncher.app
-/ios/IOSLauncher.app.dSYM
+/app/ios/xcode/*.xcodeproj/*
+!/app/ios/xcode/*.xcodeproj/xcshareddata
+!/app/ios/xcode/*.xcodeproj/project.pbxproj
+/app/ios/xcode/native/
+/app/ios/app/iosLauncher.app
+/app/ios/app/iosLauncher.app.dSYM

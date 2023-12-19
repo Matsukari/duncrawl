@@ -12,7 +12,6 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.leisure.duncraw.Graphics;
-import com.leisure.duncraw.art.item.items.HealthPotion;
 import com.leisure.duncraw.data.Deserializer;
 import com.leisure.duncraw.data.FloorData;
 import com.leisure.duncraw.data.FloorsData;
