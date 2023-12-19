@@ -1,10 +1,8 @@
 package com.leisure.duncraw.art.chara.ai.components;
 
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Queue;
 import com.leisure.duncraw.art.chara.ai.Pathfinder;
 import com.leisure.duncraw.art.chara.states.MoveState;
-import com.leisure.duncraw.map.Floor;
 import com.leisure.duncraw.logging.Logger;
 
 import behave.execution.ExecutionContext;

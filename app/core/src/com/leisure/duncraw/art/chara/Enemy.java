@@ -1,7 +1,6 @@
 package com.leisure.duncraw.art.chara;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.leisure.duncraw.art.chara.ai.AiContext;
 import com.leisure.duncraw.data.CharaData;
 
 import behave.execution.ExecutionContext;
