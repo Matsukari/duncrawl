@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.leisure.duncraw.Graphics;
+import com.leisure.duncraw.data.Inventory;
 
 public class WindowUi extends Hud {
   private final BitmapFont font;

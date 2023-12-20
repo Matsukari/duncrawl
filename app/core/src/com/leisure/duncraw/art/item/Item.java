@@ -50,7 +50,7 @@ public class Item extends Obj {
     if (isDrop) super.render();
   } 
   // Will be called by the UI
-  public void renderStore(int x, int y, int w, int h) {
-    batch.draw(storeAnim.current(), x, y, w, h); 
+  public void renderStore(SpriteBatch spriteBatch, float x, float y, float w, float h) {
+    spriteBatch.draw(storeAnim.current(), x, y, w, h); 
   }
 }
