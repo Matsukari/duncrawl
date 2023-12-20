@@ -1,11 +1,9 @@
 package com.leisure.duncraw.hud;
 
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.leisure.duncraw.Graphics;
 import com.leisure.duncraw.art.chara.Player;
 import com.leisure.duncraw.manager.FloorManager;
 import com.leisure.duncraw.map.Floor;
@@ -14,16 +12,12 @@ public class MapHud extends Hud {
   private Floor lastFloor;
   private final Player player;
   private final FloorManager floorManager;
-  private final BitmapFont font;
-  private final Label.LabelStyle labelStyle;
   private final Label floorLabel;
   public float minimapScale = 0.016f;
   public MapHud(Player player, FloorManager floorManager) {
     this.floorManager = floorManager;
     this.player = player;
-    font = Graphics.getFont(Graphics.fontSources.def);
-    labelStyle = new Label.LabelStyle(font, Color.WHITE);
-    floorLabel = new Label("Unknown floor", labelStyle);
+    floorLabel = createLabel("Unknown floor");
     lastFloor = null;
     add(floorLabel).right().top().expand().padTop(100);
     setVisible(true);  

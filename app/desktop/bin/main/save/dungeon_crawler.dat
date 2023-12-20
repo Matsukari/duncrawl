@@ -12,6 +12,8 @@
 		"stamina": 100,
 		"maxHealth": 100,
 		"maxStamina": 100,
+		"hpRecovery": 2,
+		"stRecovery": 3,
 		"phyAttack": {
 			"x": 1,
 			"y": 1
@@ -47,6 +49,9 @@
 		"menuLeft": 21,
 		"menuRight": 22,
 		"steerMode": 40,
+		"menuWindow": 62,
+		"inventory": 37,
+		"map": 44,
 		"dash": 39,
 		"skill1": 36,
 		"skill2": 30,

@@ -8,14 +8,13 @@ import com.leisure.duncraw.Graphics;
 import com.leisure.duncraw.data.Conversation;
 
 public class DialogueHud extends Hud {
-  private BitmapFont font;
   private ImageTextButton dialogueHandle;
   public Conversation conversation;
   public DialogueHud() {
   }
   @Override
   protected void onInit() {
-    font = Graphics.getFont(Graphics.fontSources.def);
+    BitmapFont font = Graphics.getFont(Graphics.fontSources.def);
     Image background = new Image(Graphics.getTextureRegion(data.dialogueBackground)); 
     background.setScale(2f);
     dialogueHandle = new ImageTextButton("", 
