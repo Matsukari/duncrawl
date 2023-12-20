@@ -11,6 +11,7 @@ public class FloorData extends Dat {
   public Vector2 heightRange;
   public int maxMob;
   public int maxElite;
+  public String title;
   @Override
   public void reset() {
     roomsNum = 5;
@@ -21,6 +22,7 @@ public class FloorData extends Dat {
     heightRange = new Vector2(0.2f, 1f);
     maxMob = 15;
     maxElite = 5;
+    title = "Default Floor";
   }
   public float getMaxWidth() { return tileMaxCols * tileSize; }
   public float getMaxHeight() { return tileMaxRows * tileSize; }

@@ -37,6 +37,9 @@ public class Settings {
     public int menuLeft;
     public int menuRight;
     public int steerMode;
+    public int menuWindow;
+    public int inventory;
+    public int map;
     public int dash;
     public int skill1;
     public int skill2;
@@ -53,6 +56,9 @@ public class Settings {
       menuLeft = Keys.LEFT;
       menuRight = Keys.RIGHT;
       steerMode = Keys.L;
+      menuWindow = Keys.SPACE;
+      inventory = Keys.I;
+      map = Keys.P;
       dash = Keys.K;
       skill1 = Keys.H;
       skill2 = Keys.B;

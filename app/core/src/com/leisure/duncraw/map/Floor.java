@@ -18,7 +18,6 @@ public class Floor extends Tilemap {
   public EnemySpawner spawner;
   public Tilemap foreground;
   public RoomsBuilder meta; 
-  public int level;
   public static class Exit {
     public Floor next;
     public Obj obj;
@@ -52,5 +51,10 @@ public class Floor extends Tilemap {
   }
   public void initialSpawn(EnemySpawner spawner) {
     this.spawner = spawner;
+  }
+  public String getName() { return generator.data.title; }
+  @Override
+  public boolean equals(Object obj) {
+    return getName().contains(((Floor)obj).getName());
   }
 }

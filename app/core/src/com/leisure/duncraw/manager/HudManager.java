@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.utils.Align;
 import com.leisure.duncraw.data.UiData;
 import com.leisure.duncraw.hud.DialogueHud;
 import com.leisure.duncraw.hud.MapHud;
@@ -27,7 +28,7 @@ public class HudManager {
     shapeRenderer = new ShapeRenderer();
     dialogueHud = new DialogueHud();
     statusHud = new StatusHud(game.player);
-    mapHud = new MapHud();
+    mapHud = new MapHud(game.player, game.floorManager);
     windowUi = new WindowUi();
     dialogueHud.init(stage, data, shapeRenderer);
     statusHud.init(stage, data, shapeRenderer);
@@ -35,8 +36,8 @@ public class HudManager {
     windowUi.init(stage, data, shapeRenderer);
     root = new Table();
     root.setFillParent(true);
-    root.add(dialogueHud).bottom().expand();
     root.add(statusHud).left().top().expand();
+    root.add(dialogueHud).center().bottom().expand();
     root.add(mapHud).right().top().expand();
     root.add(windowUi).center();
     stage.addActor(root);
@@ -51,6 +52,9 @@ public class HudManager {
   public void renderAvailable(Camera camera) {
     // shapeRenderer.setProjectionMatrix(batch.getProjectionMatrix());
     statusHud.drawShapes();
+    mapHud.drawShapes();
+    dialogueHud.drawShapes();
+    windowUi.drawShapes();
     stage.draw();
   }
   public void dispose() {

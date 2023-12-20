@@ -12,5 +12,6 @@
 	"y": 1
 },
 "maxMob": 15,
-"maxElite": 5
+"maxElite": 5,
+"title": "Floor 0 - Tutorial"
 }

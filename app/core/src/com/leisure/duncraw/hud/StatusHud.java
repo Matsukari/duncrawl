@@ -15,19 +15,18 @@ public class StatusHud extends Hud {
   public StatusHud(Player player) {
     this.player = player;
     font = Graphics.getFont(Graphics.fontSources.def);
-    // Image healthMask = new Image(Graphics.getTextureRegion(sources.health_mask));
     labelStyle = new Label.LabelStyle(font, Color.WHITE);
-    rankLabel = new Label("", labelStyle);
-    add(rankLabel).left().top();
+    rankLabel = new Label("Beginner", labelStyle);
+    add(rankLabel).left().top().padTop(20);
     setVisible(true);  
   }
   @Override
   public void drawShapes() {
     shapeRenderer.begin(ShapeType.Filled);
     shapeRenderer.setColor(Color.RED);
-    shapeRenderer.rect(getX(), getY()+20, player.status.health, 5);
+    shapeRenderer.rect(getX(), getY()+30, player.status.health, 5);
     shapeRenderer.setColor(Color.YELLOW);
-    shapeRenderer.rect(getX(), getY()+15, player.status.stamina, 5);
+    shapeRenderer.rect(getX(), getY()+25, player.status.stamina, 5);
     shapeRenderer.end();
   }
 

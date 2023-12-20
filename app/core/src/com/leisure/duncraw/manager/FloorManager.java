@@ -17,6 +17,7 @@ import com.leisure.duncraw.data.FloorData;
 import com.leisure.duncraw.data.FloorsData;
 import com.leisure.duncraw.data.SaveData;
 import com.leisure.duncraw.data.Serializer;
+import com.leisure.duncraw.logging.Logger;
 import com.leisure.duncraw.map.Floor;
 import com.leisure.duncraw.map.Tileset;
 import com.leisure.duncraw.map.floors.Floor1;
@@ -37,12 +38,14 @@ public class FloorManager {
     tileset = new Tileset(sources.tilesets);
     FloorData floorData = new FloorData();
     floorData.reset();
-    try { Deserializer.load(FloorData.class, Gdx.files.local(sources.floorsDat.get(level))); }
-    catch(Exception e) { Serializer.save(floorData, Gdx.files.local(sources.floorsDat.get(level))); }
+    try { floorData = Deserializer.load(FloorData.class, Gdx.files.local(sources.floorsDat.get(level))); }
+    catch(Exception e) { Serializer.save(floorData, Gdx.files.local(sources.floorsDat.get(level))); e.printStackTrace(); }
     TerrainSetGenerator terrainGenerator = new TerrainSetGenerator(floorData);
     terrainGenerator.grounds = (tileset.terrainTransform(tileset.filter("terrain", "ground"), batch));
     terrainGenerator.walls = (tileset.terrainTransform(tileset.filter("terrain", "wall"), batch));
     floor = new Floor1(terrainGenerator);
+    Logger.log("FloorManager", String.format("Current floor (%d) name : %s", level, floor.getName()));
+    Logger.log("FloorManager", String.format("Floor data %s", level, floorData.title));
 
     lightBuffer = new FrameBuffer(Format.RGB888, Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), false);
     Graphics.assets.load("images/lights/light_smooth.png", Texture.class);

@@ -6,6 +6,7 @@ public class SaveData {
   public Settings settings;
   public SaveData(com.leisure.duncraw.art.chara.Status stats, Inventory inventory) {
     progression = new Progression();
+    progression.reset();
     status = new Status(stats, inventory);
     status.init();
     settings = new Settings(); 
