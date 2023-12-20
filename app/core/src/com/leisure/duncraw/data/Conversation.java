@@ -22,8 +22,11 @@ public class Conversation extends Dat {
     return conversation;
   } 
   public void start() {
-    currIndex = -1;
+    restart();
     next();
+  }
+  public void restart() {
+    currIndex = -1;
   }
   public boolean hasEnded() { return currIndex >= messages.size(); }
   @Override

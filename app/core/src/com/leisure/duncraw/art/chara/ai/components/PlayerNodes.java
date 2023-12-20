@@ -23,10 +23,10 @@ public class PlayerNodes {
     @Override
     public Status tick(ExecutionContext context) {
       if (chara.mapAgent.distance(player.mapAgent) <= area) {
-        Logger.log("PlayerNodes", "Near! ");
+        // Logger.log("PlayerNodes", "Near! ");
         return Status.Success;
       }
-      Logger.log("PlayerNodes", String.format("Too far: "));
+      // Logger.log("PlayerNodes", String.format("Too far: "));
       return Status.Failure;
     }
   }

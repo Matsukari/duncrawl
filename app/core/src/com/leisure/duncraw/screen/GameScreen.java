@@ -56,16 +56,16 @@ public class GameScreen extends Screen {
     viewport = new ExtendViewport(saveData.settings.bounds.width, saveData.settings.bounds.height, camera);
     effectManager = new EffectManager();
     floorManager = new FloorManager(saveData, AssetSource.getFloorsData(), saveData.progression.level.floor);
-    musicManager = new MusicManager(this, AssetSource.getMusicData());
-    storyManager = new StoryManager(this, saveData.progression.level.scene);
-    hudManager = new HudManager(viewport);
-    // floorManager.setCurrentFloor(TmxLoader.load(floorManager.sources.startingHall, floorManager.batch, 32, 32));
     charaManager = new CharaManager(AssetSource.getCharasData(), floorManager.getCurrentFloor());
     charaManager.observers.add(new AnimationBehaviour(effectManager));
     player = charaManager.addFrom(charaManager.sources.player, Player.class);
     player.observers.add(new InfuseDarknessBehaviour(effectManager));
     player.observers.add(new ShadowCloakBehaviour(effectManager));
     player.observers.add(new DashBehaviour());
+    musicManager = new MusicManager(this, AssetSource.getMusicData());
+    hudManager = new HudManager(this, AssetSource.getUiData());
+    storyManager = new StoryManager(this, saveData.progression.level.scene);
+    // floorManager.setCurrentFloor(TmxLoader.load(floorManager.sources.startingHall, floorManager.batch, 32, 32));
 
 
     debugManager = new DebugManager();
@@ -84,10 +84,10 @@ public class GameScreen extends Screen {
     int x = (int)pos.x, y = (int)pos.y;
     player.setState(new MoveState(x, y, false));
     mob.setState(new MoveState(x + 5, y + 5, false));
-    mob.startAI(new AiWanderer(floorManager.getCurrentFloor(), player));
+    // mob.startAI(new AiWanderer(floorManager.getCurrentFloor(), player));
     npc.setState(new MoveState(x + 2, y - 1, false));
     floorManager.getCurrentFloor().terrainSet.putObject(new StaminaPotion(floorManager.batch, "dat/item/stamina_potion.dat"), (int)pos.x - 1, (int)pos.y);
-    floorManager.getCurrentFloor().initialSpawn(new EnemySpawner(charaManager, charaManager.sources, ()->new AiWanderer(floorManager.getCurrentFloor(), player)));
+    // floorManager.getCurrentFloor().initialSpawn(new EnemySpawner(charaManager, charaManager.sources, ()->new AiWanderer(floorManager.getCurrentFloor(), player)));
     npc.observers.add(new TalkBehaviour(hudManager.dialogueHud, Conversation.fromDat("dat/convs/test.conv")));
     camera.zoom = 30f;
     floorManager.getCurrentFloor().terrainSet.putObject(new Chest("dat/obj/chest.dat", floorManager.batch), (int)pos.x + 3, (int)pos.y);

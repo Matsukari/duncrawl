@@ -33,8 +33,9 @@ public class InteractState extends State {
       TilemapChara otherAgent = ((TilemapChara)other);
       if (otherAgent.chara instanceof Enemy) chara.setState(new AttackState(((TilemapChara)other).chara));
       else if (otherAgent.chara instanceof Npc) {
-        chara.setState(new TalkState(otherAgent.chara));
-        otherAgent.chara.setState(new TalkState(chara));
+        chara.lockState = true;
+        chara.setState(new TalkState(otherAgent.chara), true);
+        otherAgent.chara.setState(new TalkState(chara), true);
       }
       return true;
     }

@@ -1,0 +1,5 @@
+{
+"dialogueBackground": "images/ui/black_ellipsical_blur.png",
+"health_frame": "images/ui/health_frame.png",
+"health_mask": "images/ui/health_mask.png"
+}

@@ -26,7 +26,7 @@ public class AnimationBehaviour extends Observer {
   }
   @Override
   public void invoke(State state) {
-    Logger.log("AnimationBehaviour", "Invoke");
+    // Logger.log("AnimationBehaviour", "Invoke");
     if (state instanceof MoveState) chara.anims.set("move", chara.movement.velX, chara.movement.velY);
     else if (state instanceof DashState) chara.anims.set("move", chara.movement.velX, chara.movement.velY);
     else if (state instanceof IdleState) chara.anims.set("idle", chara.movement.lastVelX, chara.movement.lastVelY);

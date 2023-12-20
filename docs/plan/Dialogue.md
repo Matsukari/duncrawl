@@ -16,16 +16,13 @@ public class DialogueHud extends Hud {
   @Override
   protected void onInit() {
     font = Graphics.getFont(Graphics.fontSources.def);
+    font.setColor(Color.RED);
     Image background = new Image(Graphics.getTextureRegion(data.dialogueBackground)); 
-    background.setScale(2f);
     dialogueHandle = new ImageTextButton("", 
         new ImageTextButton.ImageTextButtonStyle(background.getDrawable(), background.getDrawable(), background.getDrawable(), font));
     // dialogueHandle.setSize(200, 200);
     dialogueHandle.getStyle().fontColor = Color.WHITE;
-    dialogueHandle.getStyle().up.setLeftWidth(100);
-    dialogueHandle.getStyle().up.setRightWidth(100);
-    dialogueHandle.getStyle().up.setMinHeight(100);
-    add(dialogueHandle).center().bottom();
+    add(dialogueHandle).center().bottom().expand();
     setVisible(false);  
   }
   public void start(Conversation conversation) {
@@ -35,15 +32,11 @@ public class DialogueHud extends Hud {
     setVisible(true);
     if (conversation.hasEnded()) setVisible(false);
   }
-  public void restart() {
-    conversation.restart();
-  }
   public boolean next() {
     if (conversation.next() == null) {
       setVisible(false);
       return false;
     }
-    dialogueHandle.setText(conversation.currMessage.message);
     setVisible(true);
     return true;
   }

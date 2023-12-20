@@ -43,12 +43,11 @@ public class GameScreenInput extends GameScreen implements InputProcessor {
   }
   @Override public boolean keyUp(int keycode) {
     // Logger.log("GameScreenInput", "Keyup");
-    if (pressedKey == desktopControls.confirm) {
-      if (hudManager.dialogueHud.isVisible() && !hudManager.dialogueHud.next()) { hudManager.dialogueHud.setVisible(false); }
-      else if (pressedKey == desktopControls.action) player.setState(new InteractState());
-    }
-    else if (pressedKey == desktopControls.action) {
-      player.setState(new InteractState());
+    // if (pressedKey == desktopControls.confirm) {
+    //   if (hudManager.dialogueHud.isVisible() && !hudManager.dialogueHud.next()) {  }
+    // }
+    if (pressedKey == desktopControls.action) {
+      player.setState(new InteractState(), true);
     }
     else if (pressedKey == desktopControls.skill1) {
       player.setState(new InfuseDarknessSkill());

@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.leisure.duncraw.data.AssetSource;
 import com.leisure.duncraw.data.FontsData;
+import com.leisure.duncraw.data.UiData;
 
 import lib.animation.LinearAnimation;
 
@@ -25,6 +26,12 @@ public class Graphics {
     assets.load(fontSources.normal, BitmapFont.class);
     assets.load(fontSources.important, BitmapFont.class);
     assets.load(fontSources.reading, BitmapFont.class);
+    assets.finishLoading();
+
+    UiData uiSources = AssetSource.getUiData();
+    assets.load(uiSources.dialogueBackground, Texture.class);
+    assets.load(uiSources.health_mask, Texture.class);
+    assets.load(uiSources.health_frame, Texture.class);
     assets.finishLoading();
   }
   public static void dispose() {

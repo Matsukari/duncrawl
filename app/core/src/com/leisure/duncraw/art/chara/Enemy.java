@@ -23,6 +23,6 @@ public class Enemy extends Chara {
   }
   @Override
   public void onDeath() {
-    exec.stop();
+    if (exec != null) exec.stop();
   }
 }

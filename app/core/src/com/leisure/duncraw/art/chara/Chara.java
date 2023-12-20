@@ -7,14 +7,17 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.leisure.duncraw.art.Art;
 import com.leisure.duncraw.art.chara.moves.LerpMovement;
 import com.leisure.duncraw.art.chara.states.IdleState;
+import com.leisure.duncraw.art.chara.states.LockState;
 import com.leisure.duncraw.art.map.TilemapChara;
 import com.leisure.duncraw.data.CharaData;
 import com.leisure.duncraw.data.DirAnimData;
+import com.leisure.duncraw.logging.Logger;
 
 public class Chara extends Art {
   public Status status;
   public State prevState;
   public State state;
+  public boolean lockState;
   public LerpMovement movement;
   public Observers observers;
   public TilemapChara mapAgent;
@@ -46,11 +49,16 @@ public class Chara extends Art {
     }
   }
   // Move the chara, attack, interact, whatever state in parallel with an observer can receive the state
-  public void setState(State s) { 
+  public void setState(State s, boolean force) { 
+    if (lockState && !force) return;
+    //   Logger.log("set state", "NOTIFIED AGAIN");
+    // }
+    Logger.log("Chara chaneg state", "Chnaged");
     prevState = state;
     state = s; 
     state.init(this);  
     observers.notifyAll(state);
   }
+  public void setState(State s) { setState(s, false); }
   public void onDeath() {}
 }

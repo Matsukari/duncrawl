@@ -20,7 +20,6 @@ www-test/
 
 ## binaries
 /builds/
-/app/desktop/bin/
 
 
 ## Android Studio and Intellij and Android in general
@@ -45,6 +44,7 @@ gradle-app.setting
 /app/android/build/
 /app/core/build/
 /app/desktop/build/
+/app/desktop/bin/
 /app/html/build/
 /app/ios/build/
 
