@@ -31,16 +31,6 @@
    <property name="terrain" value="right_wall"/>
   </properties>
  </tile>
- <tile id="86">
-  <properties>
-   <property name="terrain" value="ground"/>
-  </properties>
- </tile>
- <tile id="87">
-  <properties>
-   <property name="terrain" value="ground"/>
-  </properties>
- </tile>
  <tile id="103">
   <properties>
    <property name="terrain" value="wall_left_edge"/>
@@ -56,16 +46,6 @@
    <property name="terrain" value="wall_right_edge"/>
   </properties>
  </tile>
- <tile id="106">
-  <properties>
-   <property name="terrain" value="ground"/>
-  </properties>
- </tile>
- <tile id="107">
-  <properties>
-   <property name="terrain" value="ground"/>
-  </properties>
- </tile>
  <tile id="123">
   <properties>
    <property name="terrain" value="wall_left_corner"/>
@@ -79,11 +59,6 @@
  <tile id="125">
   <properties>
    <property name="terrain" value="wall_right_corner"/>
-  </properties>
- </tile>
- <tile id="126">
-  <properties>
-   <property name="terrain" value="ground"/>
   </properties>
  </tile>
  <tile id="127">

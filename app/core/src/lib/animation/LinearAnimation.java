@@ -12,6 +12,9 @@ public class LinearAnimation<T> {
   public LinearAnimation(float frameDur, Array<? extends T> vals, PlayMode mode) {
     data = new Animation<T>(frameDur, vals, mode);
   }
+  public LinearAnimation(LinearAnimation<T> copy) {
+    data = new Animation<T>(copy.data.getFrameDuration(), new Array<T>(copy.data.getKeyFrames()), copy.data.getPlayMode());
+  }
   @SafeVarargs
   public LinearAnimation(float frameDur, PlayMode mode, T... vals) {
     init(frameDur, mode, vals);

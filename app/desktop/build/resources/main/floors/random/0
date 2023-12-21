@@ -3,7 +3,7 @@
 "tileMaxRows": 40,
 "tileMaxCols": 50,
 "tileSize": 32,
-"normalHeight": 1,
+"normalHeight": 2,
 "widthRange": {
 	"x": 0.7,
 	"y": 1

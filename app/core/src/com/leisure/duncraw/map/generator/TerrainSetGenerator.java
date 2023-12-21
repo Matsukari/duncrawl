@@ -79,22 +79,28 @@ public class TerrainSetGenerator {
       // Go explore horizontally
       for (int col = 0; col < cols; col++) {
         Terrain terrain = walls[WallType.BODY].getVariant();
+        // terrain.canTravel = false;
         if (terrainSet.getTerrain(pos.x + col, top - 1) == null) { 
-          for (int i = 0; i < data.normalHeight; i++) terrainSet.putTerrain(terrain, pos.x + col, top - i);
-          terrainSet.putTerrain(walls[WallType.TOP_HEAD].getVariant(), pos.x + col, top - data.normalHeight + 1);
+          for (int i = 0; i < data.normalHeight-1; i++) terrainSet.putTerrain(terrain.clone(), pos.x + col, top - i);
+          terrainSet.putTerrain(walls[WallType.DOWN_EDGE].getVariant(), pos.x + col, top-data.normalHeight+1);
+          terrainSet.putTerrain(walls[WallType.TOP_HEAD].getVariant(), pos.x + col, top);
         }
         if (terrainSet.getTerrain(pos.x + col, bottom + 1) == null) {
-          for (int i = 0; i < data.normalHeight; i++) terrainSet.putTerrain(terrain, pos.x + col, bottom - i);
-          terrainSet.putTerrain(walls[WallType.TOP_HEAD].getVariant(), pos.x + col, bottom - data.normalHeight + 1);
+          for (int i = 0; i < data.normalHeight-1; i++) terrainSet.putTerrain(terrain.clone(), pos.x + col, bottom - i);
+          terrainSet.putTerrain(walls[WallType.DOWN_EDGE].getVariant(), pos.x + col, bottom-data.normalHeight+1);
+          terrainSet.putTerrain(walls[WallType.TOP_HEAD].getVariant(), pos.x + col, bottom);
         }
         
-      } 
+      }
+      
       // Go explore leftmost and rightmost tile vertiacally
       for (int row = 0; row < rows; row++) {
         Terrain leftWall = walls[WallType.LEFT_HEAD].getVariant();
         Terrain rightWall = walls[WallType.RIGHT_HEAD].getVariant();
-        if (terrainSet.getTerrain(left - 1, pos.y + row) == null) terrainSet.putTerrain(leftWall, left, pos.y + row);
-        if (terrainSet.getTerrain(right + 1, pos.y + row) == null) terrainSet.putTerrain(rightWall, right, pos.y + row);
+        if (terrainSet.getTerrain(left - 1, pos.y + row) == null || (terrainSet.getTerrain(left, pos.y+row).type.contains("wall")) )
+          terrainSet.putTerrain(leftWall, left, pos.y + row);
+        if (terrainSet.getTerrain(right + 1, pos.y + row) == null || (terrainSet.getTerrain(right, pos.y+row).type.contains("wall")) ) 
+          terrainSet.putTerrain(rightWall, right, pos.y + row);
       }
     }
   }

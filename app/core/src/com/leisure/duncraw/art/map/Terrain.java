@@ -14,6 +14,7 @@ public class Terrain extends Art {
   public ArrayList<Obj> objs = new ArrayList<>();
   public LinearAnimation<TextureRegion> anim;
   public boolean canTravel = true;
+  public String type = "none";
   public Terrain(SpriteBatch batch, LinearAnimation<TextureRegion> anim) {
     super(batch);
     this.anim = anim;
@@ -26,7 +27,11 @@ public class Terrain extends Art {
     return canTravel;
   }
   public Terrain clone() {
-    return new Terrain(batch, anim);
+    Terrain terrain = new Terrain(batch, anim);
+    terrain.canTravel = canTravel;
+    terrain.objs.addAll(objs);
+    terrain.type = new String(type);
+    return terrain;
   }
   public Obj lastObj() { 
     if (objs.isEmpty()) return null;
