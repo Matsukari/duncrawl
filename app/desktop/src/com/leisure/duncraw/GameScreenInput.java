@@ -1,6 +1,7 @@
 package com.leisure.duncraw;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.math.Vector2;
@@ -21,7 +22,8 @@ public class GameScreenInput extends GameScreen implements InputProcessor {
   private final DesktopControls desktopControls;
   public GameScreenInput(SaveData save) {
     super(save);
-    Gdx.input.setInputProcessor(this);
+    InputMultiplexer inputMultiplexer = new InputMultiplexer(hudManager.stage, this);
+    Gdx.input.setInputProcessor(inputMultiplexer);
     desktopControls = save.settings.desktopControls;
   } 
   @Override public void render(float delta) { 

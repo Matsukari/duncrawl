@@ -3,6 +3,7 @@ package com.leisure.duncraw.hud;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -25,4 +26,19 @@ public class Hud extends Table {
   protected void onInit() {}
   public void drawShapes() {}
   public void update() {}
+  // In case you are rendering by yourself
+  public float getGlobalX() { 
+    float globalX = getX();
+    for (Group parent = getParent(); parent != null; parent = parent.getParent()) {
+      globalX += parent.getX();
+    }
+    return globalX;
+  }
+  public float getGlobalY() { 
+    float globalY = getY();
+    for (Group parent = getParent(); parent != null; parent = parent.getParent()) {
+      globalY += parent.getY();
+    }
+    return globalY;
+  }
 }

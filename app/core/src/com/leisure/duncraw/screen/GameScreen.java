@@ -71,7 +71,7 @@ public class GameScreen extends Screen {
     debugManager = new DebugManager();
     debugManager.debugSystem();
     debugManager.debugPlayer(player);
-    debugManager.editFloorGen(floorManager);
+    // debugManager.editFloorGen(floorManager);
 
     testPlaceScene();
   }

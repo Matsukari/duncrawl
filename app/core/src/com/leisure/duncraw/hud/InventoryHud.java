@@ -6,6 +6,8 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.leisure.duncraw.art.item.Item;
 import com.leisure.duncraw.data.Inventory;
+import com.leisure.duncraw.helper.IdGenerator;
+import com.leisure.duncraw.logging.Logger;
 
 public class InventoryHud extends Hud {
   protected Label titleLabel;
@@ -27,26 +29,28 @@ public class InventoryHud extends Hud {
     itemPadding = 5;
     add(titleLabel).center().top().expand();
     setVisible(false);  
+    id = IdGenerator.gen();
   }
+  public int id;
   @Override
   public void drawShapes() {
     if (!isVisible()) return;
     // Shape and sprites don't render together
     shapeRenderer.begin(ShapeType.Filled);
     shapeRenderer.setColor(containerBgColor);
-    shapeRenderer.rect(getX(), getTop()-400, getWidth(), 400);
+    shapeRenderer.rect(getGlobalX(), getGlobalY(), getWidth(), getHeight());
     shapeRenderer.setColor(itemBgColor);
     for (int i = 0; i < inventory.capacity; i++) {
-      float x = getX()+ ((i%cols) * (itemSize + itemPadding + 5)) + itemPadding;
-      float y = getTop() - itemSize - itemPadding - ((i/cols) * itemSize);
+      float x = getGlobalX()+ ((i%cols) * (itemSize + itemPadding + 5)) + itemPadding;
+      float y = getGlobalY() + getHeight() - itemSize - itemPadding - ((i/cols) * itemSize);
       shapeRenderer.circle(x+(itemSize/2), y+(itemSize/2), itemSize/2+itemPadding);
     }
     shapeRenderer.end();
     batch.begin();
     for (int i = 0; i < inventory.data.size(); i++) {
       Item item = inventory.data.get(i); 
-      float x = getX()+ ((i%cols) * (itemSize + itemPadding + 5)) * itemPadding;
-      float y = getTop() - itemSize - itemPadding - ((i/cols) * itemSize);
+      float x = getGlobalX()+ ((i%cols) * (itemSize + itemPadding + 5)) * itemPadding;
+      float y = getGlobalY() + getHeight() - itemSize - itemPadding - ((i/cols) * itemSize);
       item.renderStore(batch, x, y, itemSize, itemSize);
     }
     batch.end();

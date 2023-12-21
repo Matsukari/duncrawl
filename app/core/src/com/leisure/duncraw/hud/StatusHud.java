@@ -18,9 +18,9 @@ public class StatusHud extends Hud {
   public void drawShapes() {
     shapeRenderer.begin(ShapeType.Filled);
     shapeRenderer.setColor(Color.RED);
-    shapeRenderer.rect(getX(), getY()+30, player.status.health, 5);
+    shapeRenderer.rect(getGlobalX(), getGlobalY()+30, player.status.health, 5);
     shapeRenderer.setColor(Color.YELLOW);
-    shapeRenderer.rect(getX(), getY()+25, player.status.stamina, 5);
+    shapeRenderer.rect(getGlobalX(), getGlobalY()+25, player.status.stamina, 5);
     shapeRenderer.end();
   }
 

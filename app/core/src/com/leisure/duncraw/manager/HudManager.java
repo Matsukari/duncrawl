@@ -3,12 +3,14 @@ package com.leisure.duncraw.manager;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Stack;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.Value;
 import com.badlogic.gdx.scenes.scene2d.ui.VerticalGroup;
 import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.leisure.duncraw.data.UiData;
 import com.leisure.duncraw.hud.DialogueHud;
 import com.leisure.duncraw.hud.Hud;
@@ -16,6 +18,7 @@ import com.leisure.duncraw.hud.InventoryHud;
 import com.leisure.duncraw.hud.MapHud;
 import com.leisure.duncraw.hud.StatusHud;
 import com.leisure.duncraw.hud.WindowUi;
+import com.leisure.duncraw.logging.Logger;
 import com.leisure.duncraw.screen.GameScreen;
 
 public class HudManager {
@@ -53,15 +56,17 @@ public class HudManager {
     row.add(mapHud).right().top().expandX().height(100).padRight(10);
     root.add(row).fillX().expandX();
     
-    Stack stack = new Stack(inventoryHud, windowUi);
-    root.row();
-    root.add(stack).center().fill().expand().padLeft(100).padRight(100);
+    Stack stack = new Stack(inventoryHud, windowUi); 
+    inventoryHud.setSize(stage.getWidth()-200, 400);
+    windowUi.setSize(stage.getWidth()-200, 500);
+    root.row().expand();
+    root.add(stack).center().fill().expand().padLeft(100).padRight(100).height(500);
 
-    root.row();
+    root.row().expand();
     root.add(dialogueHud).bottom().expandX().height(100);
-
+    
     stage.addActor(root);
-    root.debugAll();
+    // root.debugAll();
   }
   // Permission to pop modals
   public void toogleModal(Hud modal) { 
@@ -85,7 +90,6 @@ public class HudManager {
     stage.act(dt);
   }
   public void renderAvailable(Camera camera) {
-    // shapeRenderer.setProjectionMatrix(batch.getProjectionMatrix());
     statusHud.drawShapes();
     mapHud.drawShapes();
     dialogueHud.drawShapes();
