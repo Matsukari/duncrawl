@@ -6,6 +6,7 @@ import com.leisure.duncraw.data.Deserializer;
 import com.leisure.duncraw.data.GeneralAnimation;
 import com.leisure.duncraw.data.ObjData;
 import com.leisure.duncraw.data.Serializer;
+import com.leisure.duncraw.logging.Logger;
 
 import lib.animation.LinearAnimation;
 
@@ -14,7 +15,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class Obj extends Art {
-  public Obj next;
   public ObjData dat;
   public LinearAnimation<TextureRegion> idle;
   public LinearAnimation<TextureRegion> anim;
@@ -34,16 +34,10 @@ public class Obj extends Art {
     dat = data;
     anim = idle;
   }
-  public Obj getTail() {
-    Obj node = this;
-    while (node.next != null) node = node.next;
-    return node;
-  }
   @Override
   public void render() {
     batch.draw(anim.current(), bounds.x, bounds.y, bounds.width, bounds.height);
     // for (Terrain node = next; node != null; node = node.next) node.render();
-    if (next != null) next.render();
   }
   public void update(float dt) {}
   public void onCharaOccupy(Chara chara) {}

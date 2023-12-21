@@ -12,6 +12,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.leisure.duncraw.Graphics;
+import com.leisure.duncraw.art.map.Terrain;
 import com.leisure.duncraw.data.Deserializer;
 import com.leisure.duncraw.data.FloorData;
 import com.leisure.duncraw.data.FloorsData;
@@ -19,7 +20,9 @@ import com.leisure.duncraw.data.SaveData;
 import com.leisure.duncraw.data.Serializer;
 import com.leisure.duncraw.logging.Logger;
 import com.leisure.duncraw.map.Floor;
+import com.leisure.duncraw.map.TerrainVariants;
 import com.leisure.duncraw.map.Tileset;
+import com.leisure.duncraw.map.WallType;
 import com.leisure.duncraw.map.floors.Floor1;
 import com.leisure.duncraw.map.generator.TerrainSetGenerator;
 
@@ -34,16 +37,18 @@ public class FloorManager {
   public FloorManager(SaveData save, FloorsData sources, int levelStart) {
     this.sources = sources;
     this.level = levelStart;
+
     
+    Logger.hide("RoomsBuilder");
     tileset = new Tileset(sources.tilesets);
     FloorData floorData = new FloorData();
     floorData.reset();
     try { floorData = Deserializer.load(FloorData.class, Gdx.files.local(sources.floorsDat.get(level))); }
     catch(Exception e) { Serializer.save(floorData, Gdx.files.local(sources.floorsDat.get(level))); e.printStackTrace(); }
     TerrainSetGenerator terrainGenerator = new TerrainSetGenerator(floorData);
-    terrainGenerator.grounds = (tileset.terrainTransform(tileset.filter("terrain", "ground"), batch));
-    terrainGenerator.walls = (tileset.terrainTransform(tileset.filter("terrain", "wall"), batch));
-    terrainGenerator.sideHeads = (tileset.terrainTransform(tileset.filter("terrain", "sideWall"), batch));
+    terrainGenerator.grounds = new TerrainVariants(tileset.terrainTransform(tileset.filter("terrain", "ground"), batch));
+    terrainGenerator.walls = WallType.getAllWallTypes(tileset, batch);
+
     floor = new Floor1(terrainGenerator);
     Logger.log("FloorManager", String.format("Current floor (%d) name : %s", level, floor.getName()));
     Logger.log("FloorManager", String.format("Floor data %s", level, floorData.title));

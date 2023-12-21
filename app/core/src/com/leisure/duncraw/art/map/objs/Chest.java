@@ -3,6 +3,7 @@ package com.leisure.duncraw.art.map.objs;
 import com.leisure.duncraw.art.chara.Chara;
 import com.leisure.duncraw.art.map.Obj;
 import com.leisure.duncraw.data.GeneralAnimation;
+import com.leisure.duncraw.logging.Logger;
 
 import lib.animation.LinearAnimation;
 
@@ -23,5 +24,10 @@ public class Chest extends Obj {
   public void onCharaInteract(Chara chara) {
     anim = open;
     anim.reset();
+  }
+  @Override
+  public void render() {
+    super.render();
+    // Logger.log("Obj", "Rendering at " + bounds.toString());
   }
 }

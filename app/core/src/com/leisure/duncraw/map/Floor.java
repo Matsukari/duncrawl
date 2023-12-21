@@ -6,7 +6,6 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.leisure.duncraw.art.chara.EnemySpawner;
 import com.leisure.duncraw.art.map.Obj;
-import com.leisure.duncraw.map.generator.FloorGenerator;
 import com.leisure.duncraw.map.generator.RoomsBuilder;
 import com.leisure.duncraw.map.generator.TerrainSetGenerator;
 

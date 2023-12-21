@@ -24,6 +24,7 @@ import com.leisure.duncraw.data.AssetSource;
 import com.leisure.duncraw.data.Conversation;
 import com.leisure.duncraw.data.SaveData;
 import com.leisure.duncraw.data.Serializer;
+import com.leisure.duncraw.debug.TerrainSetDebug;
 import com.leisure.duncraw.logging.Logger;
 import com.leisure.duncraw.manager.CharaManager;
 import com.leisure.duncraw.manager.DebugManager;
@@ -72,6 +73,7 @@ public class GameScreen extends Screen {
     debugManager.debugSystem();
     debugManager.debugPlayer(player);
     debugManager.editFloorGen(floorManager);
+    debugManager.debugTool(new TerrainSetDebug(floorManager.getCurrentFloor().terrainSet));
 
     testPlaceScene();
   }

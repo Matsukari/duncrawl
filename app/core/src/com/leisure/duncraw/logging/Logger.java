@@ -1,18 +1,16 @@
 package com.leisure.duncraw.logging;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map.Entry;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.maps.Map;
 
 import imgui.ImGui;
 import imgui.flag.ImGuiTreeNodeFlags;
-import imgui.flag.ImGuiWindowFlags;
 import lib.tooling.ToolAgent;
 
 public class Logger extends ToolAgent {
+  private static ArrayList<String> hidden = new ArrayList<>();
+  public static final ArrayList<String> logList = new ArrayList<>();
   public Logger() {
     size.y = Gdx.graphics.getHeight() - 100;
   }
@@ -25,8 +23,11 @@ public class Logger extends ToolAgent {
       ImGui.endChild();
     }
   }
-  public static final ArrayList<String> logList = new ArrayList<>();
+  public static void hide(String tag) {
+    hidden.add(tag);
+  }
   public static void log(String tag, String msg) { 
+    if (hidden.contains(tag)) return;
     logList.add(String.format("[%s] %s", tag, msg));
     Gdx.app.log(tag, msg); 
   }

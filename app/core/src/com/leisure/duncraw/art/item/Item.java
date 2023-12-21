@@ -10,6 +10,7 @@ import com.leisure.duncraw.data.Deserializer;
 import com.leisure.duncraw.data.GeneralAnimation;
 import com.leisure.duncraw.data.ItemData;
 import com.leisure.duncraw.data.Serializer;
+import com.leisure.duncraw.logging.Logger;
 
 import lib.animation.LinearAnimation;
 
@@ -48,6 +49,7 @@ public class Item extends Obj {
   @Override
   public void render() {
     if (isDrop) super.render();
+    // Logger.log("Item", "Rendered at: " + bounds.toString());
   } 
   // Will be called by the UI
   public void renderStore(SpriteBatch spriteBatch, float x, float y, float w, float h) {

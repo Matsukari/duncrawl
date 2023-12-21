@@ -12,7 +12,6 @@ import lib.animation.LinearAnimation;
 public class Terrain extends Art {
   // A snigle block (terrain) can contain mulitple objs (usuallyloots)
   public ArrayList<Obj> objs = new ArrayList<>();
-  public Terrain next = null;
   public LinearAnimation<TextureRegion> anim;
   public boolean canTravel = true;
   public Terrain(SpriteBatch batch, LinearAnimation<TextureRegion> anim) {
@@ -29,11 +28,6 @@ public class Terrain extends Art {
   public Terrain clone() {
     return new Terrain(batch, anim);
   }
-  public Terrain getTail() {
-    Terrain node = this;
-    while (node.next != null) node = node.next;
-    return node;
-  }
   public Obj lastObj() { 
     if (objs.isEmpty()) return null;
     return objs.get(objs.size()-1); 
@@ -42,7 +36,6 @@ public class Terrain extends Art {
   public void render() {
     batch.draw(anim.current(), bounds.x, bounds.y, bounds.width, bounds.height);
     for (Obj obj : objs) obj.render();
-    // for (Terrain node = next; node != null; node = node.next) node.render();
   }
   public void render(int x, int y) {
     bounds.x = x;

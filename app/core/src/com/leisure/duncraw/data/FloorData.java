@@ -1,5 +1,7 @@
 package com.leisure.duncraw.data;
 
+import java.util.HashMap;
+
 import com.badlogic.gdx.math.Vector2;
 
 public class FloorData extends Dat {
@@ -12,6 +14,8 @@ public class FloorData extends Dat {
   public int maxMob;
   public int maxElite;
   public String title;
+  public int normalHeight;
+  public HashMap<String, Integer> customHeight;
   @Override
   public void reset() {
     roomsNum = 5;
@@ -22,6 +26,8 @@ public class FloorData extends Dat {
     heightRange = new Vector2(0.2f, 1f);
     maxMob = 15;
     maxElite = 5;
+    normalHeight = 2;
+    customHeight = new HashMap<>();
     title = "Default Floor";
   }
   public float getMaxWidth() { return tileMaxCols * tileSize; }

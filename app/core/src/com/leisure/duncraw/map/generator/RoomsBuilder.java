@@ -205,7 +205,7 @@ public class RoomsBuilder {
       expanded.add(new Rectangle(start.x, start.y, width, height));
 
       // How much would I need to stain my hands? 
-      Logger.log("RoomsBuilder expandCorridors", 
+      Logger.log("RoomsBuilder", 
           String.format("<%2d><%10s> (%-4d %-4d %-4d %-4d) - edge A(%-4d %-4d ) B (%-4d %-4d )  ==   start (%-4d %-4d ) -> distance (%-4d %-4d )", 
             expanded.size() , 
             type,
