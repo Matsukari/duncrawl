@@ -18,7 +18,6 @@ public class GameApplication extends Game {
     AssetSource.init(Gdx.files.local("dungeon_crawler.ini"));
     Graphics.init();
     Audio.init();
-    Audio.applyMusicVolume(AssetSource.getSaveData().settings.music, AssetSource.getMusicData());
     setScreen(nextScreen.instance());
   }	
   @Override

@@ -11,12 +11,15 @@ import com.leisure.duncraw.screen.GameScreen;
 public class MusicManager {
   private final GameScreen game;
   public final MusicData sources;
-  public MusicManager(GameScreen game, MusicData data) {
+  public float volume;
+  public MusicManager(GameScreen game, MusicData data, float volume) {
     this.game = game;
     this.sources = data;
+    this.volume = volume;
     String source = getSource(sources.earlyGame);
     Audio.getManager().load(source, Music.class);
     Audio.getManager().finishLoading();
+    Audio.applyMusicVolume(volume, data); 
     Music music = Audio.getMusic(source);
     music.setLooping(true);
     music.play();

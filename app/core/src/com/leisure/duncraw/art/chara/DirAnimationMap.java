@@ -16,7 +16,6 @@ public class DirAnimationMap {
   }
   public DirAnimation get(String anim) { return get(anim, 0, 0); }
   public DirAnimation get(String anim, int dirX, int dirY) { 
-    Logger.log("DirAnimation", "Get " + anim);
     DirAnimation a = data.get(anim);
     if (a == null) return null;
     a.face(dirX, dirY);

@@ -33,7 +33,7 @@ public class Audio {
     try {
       for (String m : data.earlyGame) assets.get(m, Music.class).setVolume(volume);
       for (String m : data.midGame) assets.get(m, Music.class).setVolume(volume);
-    } catch (Exception e) { e.printStackTrace(); }
+    } catch (Exception e) { }
   }
   public static void dispose() {
     assets.dispose();

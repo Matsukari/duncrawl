@@ -12,6 +12,8 @@ import com.leisure.duncraw.data.FloorData;
 import com.leisure.duncraw.logging.Logger;
 import com.leisure.duncraw.map.TerrainSet;
 
+import lib.math.Pointi;
+
 public class TerrainSetGenerator {
   public RoomsBuilder roomsBuilder;
   public FloorData data;
@@ -20,37 +22,38 @@ public class TerrainSetGenerator {
   public ArrayList<Terrain> grounds = new ArrayList<>();
   public ArrayList<Terrain> walls = new ArrayList<>();
   public static String headsOrder = "><-|";
+  public int genFails = 0;
   public TerrainSetGenerator(FloorData data) {
     this.data = data;
     roomsBuilder = new RoomsBuilder(data.tileSize);
   }
   public TerrainSet gen() {
     roomsBuilder.build(data.roomsNum, new Vector2(data.getMaxWidth(), data.getMaxHeight()), data.widthRange, data.heightRange);
-    Rectangle floorRect = roomsBuilder.rect;
-    floorRect.width *= 2;
-    floorRect.height *= 2;
-    TerrainSet terrainSet = new TerrainSet((int)(floorRect.width/data.tileSize), (int)(floorRect.height/data.tileSize), data.tileSize, data.tileSize);
+    TerrainSet terrainSet = new TerrainSet(
+        (int)(roomsBuilder.rect.width/data.tileSize)+1, 
+        (int)(roomsBuilder.rect.height/data.tileSize)+1, 
+        data.tileSize, data.tileSize);
     Logger.log("TerrainSetGenerator", String.format("Size of terrain be generated: %d %d", terrainSet.cols, terrainSet.rows));
-    Logger.log("TerrainSetGenerator", floorRect.toString());
+    Logger.log("TerrainSetGenerator", roomsBuilder.rect.toString());
     ArrayList<Rectangle> expandedCorridors = roomsBuilder.expandCorridors(4, false);
     roomsBuilder.rooms.addAll(expandedCorridors);
     try { 
       placeGrounds(terrainSet); 
       placeWalls(terrainSet);
+    } catch (Exception e) { 
+      if (genFails >= 10) 
+        Logger.log("TerrainSetGenerator", "Error: generation repeated too much");
+      genFails++; 
+      gen(); 
     }
-    catch (Exception e) { gen(); }
     
     return terrainSet;
   }
   public void placeGrounds(TerrainSet terrainSet) throws Exception {
     roomsBuilder.forEachTileInRooms(roomsBuilder.rooms, (room, col, row)->{
-      Vector2 pos = roomsBuilder.getRoomRelTilePos(room);
+      Pointi pos = roomsBuilder.getRoomRelTilePos(room);
       Terrain terrain = grounds.get(MathUtils.random(0, grounds.size()-1)).clone();
-      if ( pos.x < 0 || pos.y < 0 ) Logger.log("TerrainSetGenerator", "1");
-      if ( col < 0 || row < 0 ) Logger.log("TerrainSetGenerator", "2");
-      if ( pos.y + row < 0f ) Logger.log("TerrainSetGenerator", "3");
-      if ( pos.x + col < 0f ) Logger.log("TerrainSetGenerator", "4");
-      try { terrainSet.putTerrain(terrain, (int)pos.x + col, (int)pos.y + row); } 
+      try { terrainSet.putTerrain(terrain, pos.x + col, pos.y + row); } 
       catch (Exception e) { throw new Exception(); }
     }); 
   }
@@ -62,11 +65,11 @@ public class TerrainSetGenerator {
       int rows = (int)(room.height / data.tileSize);
       for (int col = 0; col < cols; col++) {
         Terrain terrain = walls.get(MathUtils.random(0, walls.size()-1)).clone();
-        Vector2 pos = roomsBuilder.getRoomRelTilePos(room);
-        int top = (int)pos.y;
-        int bottom = (int)pos.y + rows;
-        if (terrainSet.getTerrain((int)pos.x + col, top - 1) == null) terrainSet.putTerrain(terrain, (int)pos.x + col, top);
-        if (terrainSet.getTerrain((int)pos.x + col, bottom + 1) == null) terrainSet.putTerrain(terrain, (int)pos.x + col, bottom);
+        Pointi pos = roomsBuilder.getRoomRelTilePos(room);
+        int top = pos.y;
+        int bottom = pos.y + rows;
+        if (terrainSet.getTerrain(pos.x + col, top - 1) == null) terrainSet.putTerrain(terrain, pos.x + col, top);
+        if (terrainSet.getTerrain(pos.x + col, bottom + 1) == null) terrainSet.putTerrain(terrain, pos.x + col, bottom);
       }
       for (int row = 0; row < rows; row++) {
         float rightX;

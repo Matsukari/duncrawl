@@ -12,9 +12,9 @@ import lib.animation.LinearAnimation;
 
 public class GeneralAnimation {
   public static LinearAnimation<TextureRegion> line(String source, PlayMode mode, int size) {
-    Logger.log("GeneralAnimation", "Creating animation for: " + source);
     Texture texture = Graphics.assets.get(source, Texture.class, false);
     if (texture == null) {
+      Logger.log("GeneralAnimation", "Loading animation for: " + source);
       Graphics.assets.load(source, Texture.class);
       Graphics.assets.finishLoadingAsset(source);
     }

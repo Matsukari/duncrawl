@@ -29,7 +29,7 @@ public class DebugManager extends ToolAgent {
     Tooling.addAgent(new PlayerDebug(player));
   }
   public void editFloorGen(FloorManager floorGenerator) {
-    Tooling.addAgent(new FloorEditor(floorGenerator, renderer));  
+    Tooling.addAgent(new FloorEditor(floorGenerator));  
   }
   public void debugChara(Chara chara) {
     Tooling.addAgent(new CharaDebug(chara));

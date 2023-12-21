@@ -51,9 +51,6 @@ public class Chara extends Art {
   // Move the chara, attack, interact, whatever state in parallel with an observer can receive the state
   public void setState(State s, boolean force) { 
     if (lockState && !force) return;
-    //   Logger.log("set state", "NOTIFIED AGAIN");
-    // }
-    Logger.log("Chara chaneg state", "Chnaged");
     prevState = state;
     state = s; 
     state.init(this);  

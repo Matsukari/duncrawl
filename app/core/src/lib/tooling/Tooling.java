@@ -2,8 +2,8 @@ package lib.tooling;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Graphics;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.math.Vector2;
 
 import imgui.ImGui;
 import imgui.ImGuiIO;
@@ -18,6 +18,7 @@ public class Tooling {
   private Array<ToolAgent> tools;
   private static Tooling tooling;
   private ShapeRenderer renderer;
+  private SpriteBatch batch;
 
   public static void addAgent(ToolAgent tool) {
     assert tooling != null;
@@ -36,6 +37,7 @@ public class Tooling {
     glfw = new ImGuiImplGlfw();
     gl = new ImGuiImplGl3();
     renderer = new ShapeRenderer();
+    batch = new SpriteBatch();
     long windowHandle = ((Lwjgl3Graphics)Gdx.graphics).getWindow().getWindowHandle();
     ImGui.createContext();
     ImGuiIO io = ImGui.getIO();
@@ -56,6 +58,9 @@ public class Tooling {
       if (ImGui.collapsingHeader(tools.get(i).id, ImGuiTreeNodeFlags.DefaultOpen)) {
         tools.get(i).tool();
         tools.get(i).render(renderer);
+        batch.begin();
+        tools.get(i).render(batch);
+        batch.end();
       }
     }
     ImGui.end();

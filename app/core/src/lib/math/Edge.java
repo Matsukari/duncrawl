@@ -9,6 +9,10 @@ public class Edge {
     this.p1 = p1;
     this.p2 = p2;
   }
+  public Edge(Edge e) {
+    this.p1 = new Vector2(e.p1);
+    this.p2 = new Vector2(e.p2);
+  }
   public boolean isBoundary() {
     // Implement the check for whether the edge is a boundary edge
     return true;

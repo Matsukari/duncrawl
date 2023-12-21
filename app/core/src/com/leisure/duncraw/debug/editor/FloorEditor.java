@@ -2,10 +2,13 @@ package com.leisure.duncraw.debug.editor;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.leisure.duncraw.Graphics;
 import com.leisure.duncraw.manager.FloorManager;
 import com.leisure.duncraw.map.floors.Floor1;
 import com.leisure.duncraw.map.generator.FloorGenerator;
@@ -22,47 +25,88 @@ public class FloorEditor extends ToolAgent {
   public RoomsBuilder roomsBuilder;
   public TerrainSetGenerator generator;
   public FloorManager manager;
-  private ShapeRenderer renderer;
-  public FloorEditor(FloorManager manager, ShapeRenderer renderer) {
+  public BitmapFont font;
+  public boolean hideShapes = false;
+  public FloorEditor(FloorManager manager) {
     super("FloorEditor");
     this.manager = manager;
     this.generator = manager.getCurrentFloor().generator;
     this.roomsBuilder = generator.roomsBuilder;
-    this.renderer = renderer;
-    renderer.scale(0.1f, 0.1f, 1f);
     generator.roomsBuilder = roomsBuilder;
+    font = Graphics.getFont(Graphics.fontSources.def);
   }
   @Override
   public void tool() {
     ImGui.inputInt("Rooms", points);
+    if (ImGui.button("Hide shapes")) {
+      hideShapes = !hideShapes;
+    }
     if (ImGui.button("Generate")) {
       // roomsBuilder.build(points.get(), new Vector2(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()), new Vector2(0.2f, 1f), new Vector2(0.2f, 1f));
       generator.data.roomsNum = points.get(); 
       manager.setCurrentFloor(new Floor1(generator));
     }
+  }
+  @Override
+  public void render(ShapeRenderer renderer) {
+    if (hideShapes) return;
     for (Edge e : roomsBuilder.nodes) {
+      Edge edge = new Edge(e);
+      edge.p1.x /= 10;
+      edge.p1.y /= 10;
+      edge.p2.x /= 10;
+      edge.p2.y /= 10;
       renderer.begin(ShapeType.Line);
       renderer.setColor(Color.DARK_GRAY);
-      renderer.line(e.p1.x, e.p1.y, e.p2.x, e.p2.y);
+      renderer.line(edge.p1.x, edge.p1.y, edge.p2.x, edge.p2.y);
       renderer.setColor(Color.SCARLET);
       renderer.end();
       renderer.begin(ShapeType.Filled);
-      renderer.circle(e.p1.x, e.p1.y, 2);
+      renderer.circle(edge.p1.x, edge.p1.y, 2);
       renderer.end();
     }
-    renderer.begin(ShapeType.Line);
+    renderer.begin(ShapeType.Filled);
     renderer.setColor(Color.ORANGE);
-    for (Edge line : roomsBuilder.corridors) {
-      renderer.line(line.p1, line.p2);
+    for (int i = 0; i < roomsBuilder.corridors.size(); i++) {
+      Edge edge = new Edge(roomsBuilder.corridors.get(i));
+      edge.p1.x /= 10;
+      edge.p1.y /= 10;
+      edge.p2.x /= 10;
+      edge.p2.y /= 10;
+      renderer.rectLine(edge.p1, edge.p2, 10);
     }
-    renderer.setColor(Color.WHITE);
-    for (Rectangle rect : roomsBuilder.rooms) {
-      renderer.rect(rect.x, rect.y, rect.width, rect.height);
-    }
+    renderer.end();
+    renderer.begin(ShapeType.Filled);
     renderer.setColor(Color.GREEN);
-    for (Rectangle rect : roomsBuilder.mainRooms) {
-      renderer.rect(rect.x, rect.y, rect.width, rect.height);
+    for (Rectangle rect : roomsBuilder.mainRooms) { 
+      Rectangle r = new Rectangle(rect);
+      r.x /= 10;
+      r.y /= 10;
+      r.width /= 10;
+      r.height /= 10;
+      renderer.rect(r.x, r.y, r.width, r.height);
+    }
+    renderer.setColor(Color.GRAY);
+    for (Rectangle rect : roomsBuilder.subRooms) {
+      Rectangle r = new Rectangle(rect);
+      r.x /= 10;
+      r.y /= 10;
+      r.width /= 10;
+      r.height /= 10;
+      renderer.rect(r.x, r.y, r.width, r.height);
     }
     renderer.end(); 
+  }
+  @Override
+  public void render(SpriteBatch batch) {
+    if (hideShapes) return;
+    for (int i = 0; i < roomsBuilder.corridors.size(); i++) {
+      Edge edge = new Edge(roomsBuilder.corridors.get(i));
+      edge.p1.x /= 10;
+      edge.p1.y /= 10;
+      edge.p2.x /= 10;
+      edge.p2.y /= 10;
+      font.draw(batch, Integer.toString(i), edge.left().x, edge.bottom().y);
+    }
   }
 }

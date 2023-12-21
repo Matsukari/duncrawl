@@ -62,7 +62,7 @@ public class GameScreen extends Screen {
     player.observers.add(new InfuseDarknessBehaviour(effectManager));
     player.observers.add(new ShadowCloakBehaviour(effectManager));
     player.observers.add(new DashBehaviour());
-    musicManager = new MusicManager(this, AssetSource.getMusicData());
+    musicManager = new MusicManager(this, AssetSource.getMusicData(), saveData.settings.music);
     hudManager = new HudManager(this, AssetSource.getUiData());
     storyManager = new StoryManager(this, saveData.progression.level.scene);
     // floorManager.setCurrentFloor(TmxLoader.load(floorManager.sources.startingHall, floorManager.batch, 32, 32));
@@ -71,7 +71,7 @@ public class GameScreen extends Screen {
     debugManager = new DebugManager();
     debugManager.debugSystem();
     debugManager.debugPlayer(player);
-    // debugManager.editFloorGen(floorManager);
+    debugManager.editFloorGen(floorManager);
 
     testPlaceScene();
   }

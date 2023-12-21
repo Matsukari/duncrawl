@@ -19,7 +19,7 @@ public class SoundBehaviour extends Observer {
       attackSound = Audio.getSound(chara.sounds.get("attack"));
       hurtSound = Audio.getSound(chara.sounds.get("hurt"));
     } catch (Exception e) {}
-    if (attackSound == null) Logger.log("SoundBehaviour", "Got attack sound");
+    // if (attackSound == null) Logger.log("SoundBehaviour", "Got attack sound");
   }
   @Override
   public void invoke(State state) {

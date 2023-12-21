@@ -43,6 +43,7 @@ public class FloorManager {
     TerrainSetGenerator terrainGenerator = new TerrainSetGenerator(floorData);
     terrainGenerator.grounds = (tileset.terrainTransform(tileset.filter("terrain", "ground"), batch));
     terrainGenerator.walls = (tileset.terrainTransform(tileset.filter("terrain", "wall"), batch));
+    terrainGenerator.sideHeads = (tileset.terrainTransform(tileset.filter("terrain", "sideWall"), batch));
     floor = new Floor1(terrainGenerator);
     Logger.log("FloorManager", String.format("Current floor (%d) name : %s", level, floor.getName()));
     Logger.log("FloorManager", String.format("Floor data %s", level, floorData.title));

@@ -19,7 +19,9 @@ import com.leisure.duncraw.logging.Logger;
 import lib.math.Circle;
 import lib.math.DelaunayTriangulator;
 import lib.math.Edge;
+import lib.math.Pointi;
 
+// Gods, you must believe if I tell you how much TIME I spent to caress this already BIG BOY!
 public class RoomsBuilder {
   public ArrayList<Edge> nodes = new ArrayList<>();
   public ArrayList<Edge> corridors = new ArrayList<>();
@@ -49,7 +51,6 @@ public class RoomsBuilder {
 
     roomConnections = createPaths(nodes);
     corridors = createCorridors(roomConnections);
-    rect = getRect();
     
     ArrayList<Rectangle> trimmedSubRooms = new ArrayList<>();
     // Trim; delete rooms that aren't connected by corridors; ie., rooms that are unreachable
@@ -61,6 +62,8 @@ public class RoomsBuilder {
     } }
     subRooms = trimmedSubRooms;
     rooms.addAll(subRooms);
+    // After the rooms are finalized
+    rect = getRect();
     // Logger.log("RoomsBuilder", String.format("Rooms %d left", rooms.size()));
   }
   // Main rooms scattered
@@ -166,6 +169,8 @@ public class RoomsBuilder {
     }
     return rConnections;
   }
+  // Gods, may the corridors (line) that are passed onto this totem straighten themselves, the line MUST ONLY GO FROM ONE DIRECTION
+  // either horizontal or vertical, never diagonal
   public ArrayList<Rectangle> expandCorridors(int span, boolean center) { 
     assert (span < 1 || span >= 100);
     ArrayList<Rectangle> expanded = new ArrayList<>();
@@ -177,29 +182,46 @@ public class RoomsBuilder {
       float width = 0;
       float height = 0;
       Vector2 breadth = new Vector2();
+      String type = "Vertical";
+      // One axis must be aligned to the other one, going ONLY to ONE direction
+      assert disX == 0 || disY == 0;
       // Corridor is vertical
-      if (disX < disY) {
+      if (Math.abs(disX) < Math.abs(disY)) {
         breadth.x = span;
         width = breadth.x;
         height = Math.abs(disY);
-        // negative; then inverese the direction of rectangle
-        // if (disY < 0) start.y -= height;
-      }
-      // Horizontal
+      } // Horizontal
       else {
+        type = "Horizontal";
         breadth.y = span;
-        width = Math.abs(disX);
         height = breadth.y;
-        // if (disX < 0) start.x -= width;
+        width = Math.abs(disX);
       }
     
       if (center) {
-        start.x -= breadth.x / 2 * tileSize;
-        start.y -= breadth.y / 2 * tileSize;
-      }
-      
+        start.x -= breadth.x / 2;
+        start.y -= breadth.y / 2;
+      } 
       expanded.add(new Rectangle(start.x, start.y, width, height));
-      Logger.log("RoomsBuilder expandCorridors", String.format("Expanded %d. ", expanded.size()) + expanded.get(expanded.size()-1).toString());
+
+      // How much would I need to stain my hands? 
+      Logger.log("RoomsBuilder expandCorridors", 
+          String.format("<%2d><%10s> (%-4d %-4d %-4d %-4d) - edge A(%-4d %-4d ) B (%-4d %-4d )  ==   start (%-4d %-4d ) -> distance (%-4d %-4d )", 
+            expanded.size() , 
+            type,
+            (int)expanded.get(expanded.size()-1).x ,  
+            (int)expanded.get(expanded.size()-1).y ,  
+            (int)expanded.get(expanded.size()-1).width ,  
+            (int)expanded.get(expanded.size()-1).height,
+            (int)corridor.p1.x,
+            (int)corridor.p1.y,
+            (int)corridor.p2.x,
+            (int)corridor.p2.y,
+            (int)start.x,
+            (int)start.y,
+            (int)disX,
+            (int)disY
+          ));
     }
     return expanded;
   }
@@ -208,7 +230,7 @@ public class RoomsBuilder {
     for (Rectangle room : roomsDiv) {
       int cols = (int)(room.width / tileSize);
       int rows = (int)(room.height / tileSize);
-      Logger.log("Room", Integer.toString(i) + " - " + room.toString());
+      // Logger.log("Room", Integer.toString(i) + " - " + room.toString());
       i++;
       for (int col = 0; col < cols; col++) {
         for (int row = 0; row < rows; row++) { 
@@ -248,8 +270,11 @@ public class RoomsBuilder {
     // rect.height = Math.abs(rect.height);
     return rect;
   }
-  public Vector2 getRoomRelTilePos(Rectangle room) {
-    Vector2 pos = new Vector2(
+  // Returns grid position relative to room, never < 0
+  public Pointi getRoomRelTilePos(Rectangle room) {
+    // Assume that the minimuma and maximum position (getRect) has been called or processed validly
+    assert rect.x > room.x && rect.y > room.y;
+    Pointi pos = new Pointi(
       (int)((room.x - rect.x) / tileSize), 
       (int)((room.y - rect.y) / tileSize) );
     // pos.y = rect.height / tileSize - pos.y;

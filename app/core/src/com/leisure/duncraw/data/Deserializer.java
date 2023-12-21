@@ -11,11 +11,11 @@ public class Deserializer {
     Json json = new Json(OutputType.json);
     T data = json.fromJson(tClass, file);
     if (data != null) {
-      Logger.log("Deserializer", "Loaded data");
+      Logger.log("Deserializer", "Loaded data -> " + tClass.getSimpleName());
       return data;
     }
     else {
-      Logger.log("Deserializer", "Loading failed");
+      Logger.log("Deserializer", String.format("Loading failed (%s)", tClass.getSimpleName()));
       throw new Exception();
     }
   }
