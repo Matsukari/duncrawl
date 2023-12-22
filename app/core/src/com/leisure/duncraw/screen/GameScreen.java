@@ -19,6 +19,7 @@ import com.leisure.duncraw.art.chara.observers.dark.InfuseDarknessBehaviour;
 import com.leisure.duncraw.art.chara.observers.dark.ShadowCloakBehaviour;
 import com.leisure.duncraw.art.chara.states.MoveState;
 import com.leisure.duncraw.art.item.items.StaminaPotion;
+import com.leisure.duncraw.art.lighting.LightEnvironment;
 import com.leisure.duncraw.art.map.objs.Chest;
 import com.leisure.duncraw.data.AssetSource;
 import com.leisure.duncraw.data.Conversation;
@@ -68,7 +69,6 @@ public class GameScreen extends Screen {
     hudManager = new HudManager(this, AssetSource.getUiData());
     storyManager = new StoryManager(this, saveData.progression.level.scene);
 
-
     debugManager = new DebugManager();
     debugManager.debugSystem();
     debugManager.debugPlayer(player);
@@ -80,21 +80,17 @@ public class GameScreen extends Screen {
   }
   private void testPlaceScene() {
     Enemy mob = charaManager.addFrom(charaManager.sources.ghost, Enemy.class);
-    Chara npc = charaManager.addFrom(charaManager.sources.ghost, Npc.class);
-
-    
+    Chara npc = charaManager.addFrom(charaManager.sources.ghost, Npc.class); 
     Pointi pos = floorManager.getCurrentFloor().getTileInRandomRoom();
-    int x = (int)pos.x, y = (int)pos.y;
-    player.setState(new MoveState(x, y, false));
-    mob.setState(new MoveState(x + 5, y + 5, false));
+    player.setState(new MoveState(pos.x, pos.y, false));
+    mob.setState(new MoveState(pos.x + 5, pos.y + 5, false));
+    npc.setState(new MoveState(pos.x + 2, pos.y - 1, false));
     // mob.startAI(new AiWanderer(floorManager.getCurrentFloor(), player));
-    npc.setState(new MoveState(x + 2, y - 1, false));
-    floorManager.getCurrentFloor().background.putObject(new StaminaPotion("dat/item/stamina_potion.dat"), (int)pos.x - 1, (int)pos.y);
-    // floorManager.getCurrentFloor().initialSpawn(new EnemySpawner(charaManager, charaManager.sources, ()->new AiWanderer(floorManager.getCurrentFloor(), player)));
+    floorManager.getCurrentFloor().background.putObject(new StaminaPotion("dat/item/stamina_potion.dat"), pos.x - 1, pos.y);
+    floorManager.getCurrentFloor().background.putObject(new Chest("dat/obj/chest.dat"), pos.x + 3, pos.y);
+    // floorManager.getCurrentFloor().initialSpawn(new EnemySpawner(charaManager, charaManager.sources, ()->new AiWanderer(floorManager.getCurrentFloor(), player));
     npc.observers.add(new TalkBehaviour(hudManager.dialogueHud, Conversation.fromDat("dat/convs/test.conv")));
     camera.zoom = 30f;
-    floorManager.getCurrentFloor().background.putObject(new Chest("dat/obj/chest.dat"), (int)pos.x + 3, (int)pos.y);
-    Logger.log("Playerpos", player.bounds.toString());
     debugManager.debugChara(mob);
   }
   @Override

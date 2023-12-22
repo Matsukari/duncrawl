@@ -2,6 +2,7 @@ package com.leisure.duncraw.data;
 
 import java.util.HashMap;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 
 public class FloorData extends Dat {
@@ -17,6 +18,13 @@ public class FloorData extends Dat {
   public int normalHeight;
   public HashMap<String, Integer> customHeight;
   public HashMap<String, String> prefabRooms;
+  public static FloorData fromDat(String source) {
+    FloorData data = new FloorData();
+    data.reset();
+    try { data = Deserializer.load(FloorData.class, Gdx.files.local(source)); } 
+    catch (Exception e) { Serializer.save(data, Gdx.files.local(source)); }
+    return data;
+  }
   @Override
   public void reset() {
     roomsNum = 5;

@@ -48,6 +48,8 @@ public class TerrainSet {
     else 
       Logger.log("TerrainSet", "cannot put obj");
   }
+  public float getWidth() { return cols * terrainWidth; }
+  public float getHeight() { return rows * terrainHeight; }
   public int getTilesNum() { return cols * rows; }
   public Terrain getTerrain(int x, int y) { 
     try { return terrains[y*cols+x]; } 

@@ -18,6 +18,15 @@ public class Graphics {
   public static BitmapFont defFont;
   public static HashMap<String, LinearAnimation<TextureRegion>> anims = new HashMap<>();
   public static TextureRegion getTextureRegion(String file) { return new TextureRegion(assets.get(file, Texture.class)); }
+  public static TextureRegion getSafeTextureRegion(String file) {
+    Texture texture = Graphics.assets.get(file, Texture.class, false);
+    if (texture == null) {
+      Graphics.assets.load(file, Texture.class);
+      Graphics.assets.finishLoadingAsset(file);
+    }
+    return getTextureRegion(file);
+
+  } 
   public static BitmapFont getFont(String source) { return assets.get(source, BitmapFont.class); }
   public static void init () {
     assets = new AssetManager();
