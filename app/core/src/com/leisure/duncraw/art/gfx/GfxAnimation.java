@@ -9,13 +9,9 @@ import lib.animation.LinearAnimation;
 public class GfxAnimation extends Gfx {
   public LinearAnimation<TextureRegion> anim;
   public boolean loop = false;
-  public GfxAnimation(SpriteBatch batch, LinearAnimation<TextureRegion> anim, boolean loop) {
-    super(batch);
+  public GfxAnimation(LinearAnimation<TextureRegion> anim, boolean loop) {
     this.anim = anim;
     setLoop(loop);
-  }
-  public GfxAnimation(SpriteBatch batch) {
-    super(batch);
   }
   public void setLoop(boolean val) {
     loop = val;
@@ -32,7 +28,7 @@ public class GfxAnimation extends Gfx {
     return anim.isFinished();
   }
   @Override
-  public void render() {
+  public void render(SpriteBatch batch) {
     if (anim != null) batch.draw(anim.current(), bounds.x, bounds.y, bounds.width, bounds.height);
   }
 }

@@ -3,7 +3,6 @@ package com.leisure.duncraw.map.generator;
 import java.util.ArrayList;
 
 import com.leisure.duncraw.art.map.Obj;
-import com.leisure.duncraw.map.Room;
 
 public class RoomStyler {
   public ArrayList<ObjStyle> requires;
@@ -16,7 +15,7 @@ public class RoomStyler {
       WALL_OBJ, SECRET_OBJ, HIDDEN_OBJ, CORNER_OBJ, CENTER_OBJ
     };
   }
-  public void style(Room room) {
+  public void style() {
     
   }
 }

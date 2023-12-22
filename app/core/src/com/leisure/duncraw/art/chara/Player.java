@@ -9,8 +9,8 @@ import com.leisure.duncraw.logging.Logger;
 public class Player extends Chara {
   public Inventory inventory = new Inventory();
   public Item itemSel = null;
-  public Player(CharaData data, SpriteBatch batch) {
-    super(data, batch);
+  public Player(CharaData data) {
+    super(data);
     inventory.reset();
     movement.stepDuration = 3.5f;
     anims.get("move").setAnimDur(0.08f);

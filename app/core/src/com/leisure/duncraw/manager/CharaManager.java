@@ -45,7 +45,7 @@ public class CharaManager {
     try { data = Deserializer.load(CharaData.class, Gdx.files.local(source)); }
     catch(Exception e) { Serializer.save(data, Gdx.files.local(source)); }
     try {
-      T chara = clazz.getDeclaredConstructor(CharaData.class, SpriteBatch.class).newInstance(data, batch);
+      T chara = clazz.getDeclaredConstructor(CharaData.class).newInstance(data);
       chara.bounds.setSize(32, 32);
       chara.mapAgent = new TilemapChara(chara, floor);
       floor.putChara(chara.mapAgent); 
@@ -74,7 +74,7 @@ public class CharaManager {
   public void renderAll(Camera cam) {
     batch.setProjectionMatrix(cam.combined);
     batch.begin();
-    for (Chara chara : charas) chara.render();
+    for (Chara chara : charas) chara.render(batch);
     batch.end();
   }
   public void dispose() {

@@ -34,8 +34,9 @@ public class MapHud extends Hud {
   public void drawShapes() {
     shapeRenderer.begin(ShapeType.Filled);
     shapeRenderer.setColor(Color.GRAY);
-    for (Rectangle room : lastFloor.meta.rooms) {
-      shapeRenderer.rect(getGlobalX() + room.x*minimapScale, getGlobalY() + room.y*minimapScale, room.width*minimapScale, room.height*minimapScale);
+    if (lastFloor.generator != null)
+      for (Rectangle room : lastFloor.generator.roomsBuilder.rooms) {
+        shapeRenderer.rect(getGlobalX() + room.x*minimapScale, getGlobalY() + room.y*minimapScale, room.width*minimapScale, room.height*minimapScale);
     }
     shapeRenderer.setColor(Color.GREEN);
     shapeRenderer.circle(getGlobalX() + player.bounds.x*minimapScale, getGlobalY() + player.bounds.y*minimapScale, 2);

@@ -31,7 +31,7 @@ public class InfuseDarknessBehaviour extends Observer {
       sustainTimer.peek();
       invoked = true;
       if (effectManager != null && stack == 1) {
-        effect = new GfxAnimation(effectManager.batch);
+        effect = new GfxAnimation(null, false);
         effect.bounds.setPosition(chara.bounds.x, chara.bounds.y);
         effect.bounds.setSize(chara.bounds.width);
         changeEffectDir();

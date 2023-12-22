@@ -50,7 +50,7 @@ public class Tileset {
   public ArrayList<Terrain> terrainTransform(ArrayList<TiledMapTile> tiles, SpriteBatch batch) {
     ArrayList<Terrain> terrains = new ArrayList<>();
     for (TiledMapTile tile : tiles) {
-      Terrain terrain = new Terrain(batch, new LinearAnimation<TextureRegion>(tile.getTextureRegion()));
+      Terrain terrain = new Terrain(new LinearAnimation<TextureRegion>(tile.getTextureRegion()));
       terrain.type = tile.getProperties().get("terrain", String.class);
       Logger.log("Tileset", "Got terrain type : " + terrain.type);
       terrain.bounds.setSize(tile.getTextureRegion().getRegionWidth(), tile.getTextureRegion().getRegionHeight());

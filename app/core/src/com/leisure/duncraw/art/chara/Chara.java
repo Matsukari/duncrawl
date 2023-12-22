@@ -23,8 +23,7 @@ public class Chara extends Art {
   public TilemapChara mapAgent;
   public final HashMap<String, String> sounds;  
   public final DirAnimationMap anims = new DirAnimationMap();
-  public Chara(CharaData data, SpriteBatch batch) {
-    super(batch);
+  public Chara(CharaData data) {
     status = data.status;
     sounds = data.sounds;
     for (Map.Entry<String, DirAnimData> anim : data.anims.entrySet()) 
@@ -35,7 +34,7 @@ public class Chara extends Art {
     setState(new IdleState());
   }
   @Override
-  public void render() {
+  public void render(SpriteBatch batch) {
     batch.draw(anims.current.currentDir.current(), bounds.x, bounds.y, bounds.width, bounds.height);  
   }
   // This must be called after all operations are done to this chara

@@ -24,6 +24,7 @@ import com.leisure.duncraw.data.AssetSource;
 import com.leisure.duncraw.data.Conversation;
 import com.leisure.duncraw.data.SaveData;
 import com.leisure.duncraw.data.Serializer;
+import com.leisure.duncraw.debug.SpriteBatchDebug;
 import com.leisure.duncraw.debug.TerrainSetDebug;
 import com.leisure.duncraw.logging.Logger;
 import com.leisure.duncraw.manager.CharaManager;
@@ -72,7 +73,8 @@ public class GameScreen extends Screen {
     debugManager.debugSystem();
     debugManager.debugPlayer(player);
     debugManager.editFloorGen(floorManager);
-    debugManager.debugTool(new TerrainSetDebug(floorManager.getCurrentFloor().terrainSet));
+    debugManager.debugTool(new TerrainSetDebug(floorManager.getCurrentFloor().background));
+    debugManager.debugTool(new SpriteBatchDebug(floorManager.batch));
 
     testPlaceScene();
   }
@@ -87,11 +89,11 @@ public class GameScreen extends Screen {
     mob.setState(new MoveState(x + 5, y + 5, false));
     // mob.startAI(new AiWanderer(floorManager.getCurrentFloor(), player));
     npc.setState(new MoveState(x + 2, y - 1, false));
-    floorManager.getCurrentFloor().terrainSet.putObject(new StaminaPotion(floorManager.batch, "dat/item/stamina_potion.dat"), (int)pos.x - 1, (int)pos.y);
+    floorManager.getCurrentFloor().background.putObject(new StaminaPotion("dat/item/stamina_potion.dat"), (int)pos.x - 1, (int)pos.y);
     // floorManager.getCurrentFloor().initialSpawn(new EnemySpawner(charaManager, charaManager.sources, ()->new AiWanderer(floorManager.getCurrentFloor(), player)));
     npc.observers.add(new TalkBehaviour(hudManager.dialogueHud, Conversation.fromDat("dat/convs/test.conv")));
     camera.zoom = 30f;
-    floorManager.getCurrentFloor().terrainSet.putObject(new Chest("dat/obj/chest.dat", floorManager.batch), (int)pos.x + 3, (int)pos.y);
+    floorManager.getCurrentFloor().background.putObject(new Chest("dat/obj/chest.dat"), (int)pos.x + 3, (int)pos.y);
     Logger.log("Playerpos", player.bounds.toString());
     debugManager.debugChara(mob);
   }

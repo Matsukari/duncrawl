@@ -39,7 +39,7 @@ public class FloorManager {
     this.level = levelStart;
 
     Logger.hide("RoomsBuilder");
-    batch = new SpriteBatch(); 
+    batch = new SpriteBatch();
     tileset = new Tileset(sources.tilesets);
     FloorData floorData = new FloorData();
     floorData.reset();
@@ -53,19 +53,19 @@ public class FloorManager {
     // Logger.log("FloorManager", String.format("Current floor (%d) name : %s", level, floor.getName()));
     // Logger.log("FloorManager", String.format("Floor data %s", level, floorData.title));
 
-    lightBuffer = new FrameBuffer(Format.RGB888, Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), false);
-    Graphics.assets.load("images/lights/light_smooth.png", Texture.class);
-    Graphics.assets.finishLoadingAsset("images/lights/light_smooth.png");
-    Gdx.gl.glEnable(GL20.GL_BLEND);
-    light = new TextureRegion(Graphics.assets.get("images/lights/light_smooth.png", Texture.class));
-    batch.enableBlending();
-    lightBuffer.begin();
-    ScreenUtils.clear(color);
-    batch.begin();
-    batch.setBlendFunction(GL20.GL_SRC_ALPHA, GL20.GL_ONE);
-    batch.draw(light, 0, 0, 500, 500);
-    batch.end();
-    lightBuffer.end();
+    // lightBuffer = new FrameBuffer(Format.RGB888, Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), false);
+    // Graphics.assets.load("images/lights/light_smooth.png", Texture.class);
+    // Graphics.assets.finishLoadingAsset("images/lights/light_smooth.png");
+    // Gdx.gl.glEnable(GL20.GL_BLEND);
+    // light = new TextureRegion(Graphics.assets.get("images/lights/light_smooth.png", Texture.class));
+    // batch.enableBlending();
+    // lightBuffer.begin();
+    // ScreenUtils.clear(color);
+    // batch.begin();
+    // batch.setBlendFunction(GL20.GL_SRC_ALPHA, GL20.GL_ONE);
+    // batch.draw(light, 0, 0, 500, 500);
+    // batch.end();
+    // lightBuffer.end();
 
   }
   public void setCurrentFloor(Floor f) { floor = f; }
@@ -75,7 +75,7 @@ public class FloorManager {
     batch.setBlendFunction(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
     batch.begin();
     floor.update();
-    floor.render();
+    floor.render(batch, floor.background);
     // floorGenerator.grounds.get(0).render(0, 0);
     batch.end();
   }

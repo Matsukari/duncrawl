@@ -1,6 +1,5 @@
 package com.leisure.duncraw.map.loader;
 
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.tiled.TiledMap;
@@ -16,7 +15,7 @@ import com.leisure.duncraw.map.TerrainSet;
 import lib.animation.LinearAnimation;
 
 public class TmxLoader {
-  public static TerrainSet[] load(String file, SpriteBatch batch, int width, int height) {
+  public static TerrainSet[] load(String file, int width, int height) {
     TiledMap tiled = new TmxMapLoader().load(file);
     TiledMapTileLayer defLayer = (TiledMapTileLayer)tiled.getLayers().get(0);
     TerrainSet terrainSet = new TerrainSet(defLayer.getWidth(), defLayer.getHeight(), width, height);
@@ -38,11 +37,11 @@ public class TmxLoader {
             if (l.getName().contains("bg")) terrainLayer = terrainSet;
             else terrainLayer = foreground;
 
-            if (objType != null && objDat != null) obj = ObjParser.from(objType, objDat, batch);
-            else if (itemType != null && objDat != null) obj = ItemParser.from(itemType, objDat, batch);
+            if (objType != null && objDat != null) obj = ObjParser.from(objType, objDat);
+            else if (itemType != null && objDat != null) obj = ItemParser.from(itemType, objDat);
             else {
               String terrainType = cell.getTile().getProperties().get("terrain", String.class);
-              Terrain terrain = new Terrain(batch, new LinearAnimation<TextureRegion>(cell.getTile().getTextureRegion()));
+              Terrain terrain = new Terrain(new LinearAnimation<TextureRegion>(cell.getTile().getTextureRegion()));
               if (terrainType != null && terrainType.contains("wall") && l.getName().contains("nopass")) terrain.canTravel = false;
               terrain.bounds.setSize(width, height);
               terrainLayer.putTerrain(terrain, x, y); 

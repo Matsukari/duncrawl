@@ -30,7 +30,7 @@ public class EffectManager {
   public void renderAll(Camera camera) {
     batch.setProjectionMatrix(camera.combined);
     batch.begin();
-    for (Gfx effect : effects) effect.render(); 
+    for (Gfx effect : effects) effect.render(batch); 
     batch.end();
   }
 }

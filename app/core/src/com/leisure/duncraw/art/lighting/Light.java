@@ -7,7 +7,7 @@ import com.leisure.duncraw.art.map.Obj;
 import lib.animation.LinearAnimation;
 
 public class Light extends Obj {  
-  public Light(SpriteBatch batch, LinearAnimation<TextureRegion> anim) {
-    super(batch, anim);
+  public Light(LinearAnimation<TextureRegion> anim) {
+    super(anim);
   }
 }

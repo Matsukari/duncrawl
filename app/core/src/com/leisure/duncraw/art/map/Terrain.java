@@ -15,13 +15,12 @@ public class Terrain extends Art {
   public LinearAnimation<TextureRegion> anim;
   public boolean canTravel = true;
   public String type = "none";
-  public Terrain(SpriteBatch batch, LinearAnimation<TextureRegion> anim) {
-    super(batch);
+  public Terrain(LinearAnimation<TextureRegion> anim) {
     this.anim = anim;
   }
   public void putObj(Obj obj) {
-    obj.bounds.x = bounds.x;
-    obj.bounds.y = bounds.y;
+    // obj.bounds.x = bounds.x;
+    // obj.bounds.y = bounds.y;
     objs.add(obj); 
     if (!(obj instanceof Item)) canTravel = false;
   }
@@ -33,7 +32,7 @@ public class Terrain extends Art {
     return canTravel;
   }
   public Terrain clone() {
-    Terrain terrain = new Terrain(batch, anim);
+    Terrain terrain = new Terrain(anim);
     terrain.objs.addAll(objs);
     terrain.canTravel = canTravel;
     terrain.type = new String(type);
@@ -44,13 +43,13 @@ public class Terrain extends Art {
     return objs.get(objs.size()-1); 
   }
   @Override
-  public void render() {
+  public void render(SpriteBatch batch) {
     batch.draw(anim.current(), bounds.x, bounds.y, bounds.width, bounds.height);
-    for (Obj obj : objs) obj.render();
-  }
-  public void render(int x, int y) {
-    bounds.x = x;
-    bounds.y = y;
-    render();
+    for (Obj obj : objs) {
+      obj.bounds.x = bounds.x;
+      obj.bounds.y = bounds.y;
+      obj.bounds.setSize(bounds.width, bounds.height);
+      obj.render(batch);
+    }
   }
 }

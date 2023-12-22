@@ -11,7 +11,6 @@ import com.badlogic.gdx.math.Vector2;
 import com.leisure.duncraw.Graphics;
 import com.leisure.duncraw.manager.FloorManager;
 import com.leisure.duncraw.map.floors.Floor1;
-import com.leisure.duncraw.map.generator.FloorGenerator;
 import com.leisure.duncraw.map.generator.RoomsBuilder;
 import com.leisure.duncraw.map.generator.TerrainSetGenerator;
 

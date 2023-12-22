@@ -7,7 +7,7 @@ import com.badlogic.gdx.utils.Array;
 
 public class LinearAnimation<T> {
   public Animation<T> data;
-  float stateTime = 0f;
+  public float stateTime = 0f;
 
   public LinearAnimation(float frameDur, Array<? extends T> vals, PlayMode mode) {
     data = new Animation<T>(frameDur, vals, mode);

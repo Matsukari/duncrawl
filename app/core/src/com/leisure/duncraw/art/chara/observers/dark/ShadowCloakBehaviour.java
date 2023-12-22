@@ -32,7 +32,7 @@ public class ShadowCloakBehaviour extends Observer {
       DirAnimation dirAnimation = chara.anims.get("skill2");
       if (dirAnimation != null && effectManager != null) {
         dirAnimation.face(chara.movement.lastVelX, chara.movement.lastVelY);
-        effect = new GfxAnimation(effectManager.batch, dirAnimation.currentDir, true);
+        effect = new GfxAnimation(dirAnimation.currentDir, true);
         effect.bounds.setPosition(chara.bounds.x, chara.bounds.y);
         effect.bounds.setSize(chara.bounds.width);
         effectManager.start(effect);

@@ -2,11 +2,13 @@ package com.leisure.duncraw.art.map;
 
 import java.util.ArrayList;
 
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+
 public class LayeredTerrain extends Terrain {
   // A snigle block (terrain) can contain mulitple objs (usuallyloots)
   public ArrayList<Terrain> overlays = new ArrayList<>();
   public LayeredTerrain(Terrain ... overs) {
-    super(null, null);
+    super(null);
     for (Terrain terrain : overs) overlays.add(terrain);
   }
   public void add(Terrain over) { overlays.add(over); }
@@ -28,8 +30,8 @@ public class LayeredTerrain extends Terrain {
     return overlays.get(0).clone();
   }
   @Override
-  public void render() {
-    for (Terrain terrain : overlays) terrain.render();
+  public void render(SpriteBatch batch) {
+    for (Terrain terrain : overlays) terrain.render(batch);
   }
 }
 

@@ -10,8 +10,8 @@ import behave.models.Node;
 public class Enemy extends Chara { 
   public Node ai;
   public Executor exec;
-  public Enemy(CharaData data, SpriteBatch batch) {
-    super(data, batch);
+  public Enemy(CharaData data) {
+    super(data);
   }
   public void startAI(Node ai) {
     this.ai = ai;

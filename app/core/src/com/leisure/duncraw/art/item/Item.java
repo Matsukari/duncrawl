@@ -20,8 +20,8 @@ public class Item extends Obj {
   public ItemData itemData;
   public LinearAnimation<TextureRegion> dropAnim; 
   public LinearAnimation<TextureRegion> storeAnim;
-  public Item(SpriteBatch batch, String datFile) {
-    super(batch, datFile);
+  public Item(String datFile) {
+    super(datFile);
     idle = GeneralAnimation.line(dat.anims.get("drop"));
     storeAnim = GeneralAnimation.line(dat.anims.get("store"));
     anim = idle;
@@ -43,12 +43,11 @@ public class Item extends Obj {
       if (player.itemSel == null) player.equip(this);
     }
   }
-  public void use() {
-  }
+  public void use() {}
   // Will be called by Terrain
   @Override
-  public void render() {
-    if (isDrop) super.render();
+  public void render(SpriteBatch batch) {
+    if (isDrop) super.render(batch);
     // Logger.log("Item", "Rendered at: " + bounds.toString());
   } 
   // Will be called by the UI

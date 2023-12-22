@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.leisure.duncraw.data.CharaData;
 
 public class Npc extends Chara {  
-  public Npc(CharaData data, SpriteBatch batch) {
-    super(data, batch);
+  public Npc(CharaData data) {
+    super(data);
   }
 }

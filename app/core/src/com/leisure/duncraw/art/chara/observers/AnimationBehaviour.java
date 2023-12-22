@@ -43,7 +43,7 @@ public class AnimationBehaviour extends Observer {
 
       AttackState attackState = (AttackState)state;
       attackEffAnim.face(chara.movement.lastVelX, chara.movement.lastVelY);
-      attackEffect = new GfxAnimation(effectManager.batch, attackEffAnim.currentDir, false);
+      attackEffect = new GfxAnimation(attackEffAnim.currentDir, false);
       attackEffect.bounds.setPosition(attackState.target.bounds.x, attackState.target.bounds.y);
       attackEffect.bounds.setSize(chara.bounds.width);
       effectManager.start(attackEffect);

@@ -4,8 +4,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.leisure.duncraw.art.item.Item;
 
 public class StaminaPotion extends Item {
-  public StaminaPotion(SpriteBatch batch, String datFile) {
-    super(batch, datFile);
+  public StaminaPotion(String datFile) {
+    super(datFile);
   }
   @Override
   public void use() {

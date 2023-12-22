@@ -18,11 +18,10 @@ public class Obj extends Art {
   public ObjData dat;
   public LinearAnimation<TextureRegion> idle;
   public LinearAnimation<TextureRegion> anim;
-  public Obj(SpriteBatch batch, String datFile) {
-    super(batch); load(datFile);
+  public Obj(String datFile) {
+    load(datFile);
   }
-  public Obj(SpriteBatch batch, LinearAnimation<TextureRegion> anim) {
-    super(batch);
+  public Obj(LinearAnimation<TextureRegion> anim) {
     this.anim = anim;
     idle = anim;
   }
@@ -35,9 +34,8 @@ public class Obj extends Art {
     anim = idle;
   }
   @Override
-  public void render() {
+  public void render(SpriteBatch batch) {
     batch.draw(anim.current(), bounds.x, bounds.y, bounds.width, bounds.height);
-    // for (Terrain node = next; node != null; node = node.next) node.render();
   }
   public void update(float dt) {}
   public void onCharaOccupy(Chara chara) {}
