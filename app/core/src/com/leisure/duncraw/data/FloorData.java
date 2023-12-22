@@ -16,11 +16,12 @@ public class FloorData extends Dat {
   public String title;
   public int normalHeight;
   public HashMap<String, Integer> customHeight;
+  public HashMap<String, String> prefabRooms;
   @Override
   public void reset() {
     roomsNum = 5;
-    tileMaxCols = 60;
-    tileMaxRows = 60;
+    tileMaxCols = 32;
+    tileMaxRows = 32;
     tileSize = 32;
     widthRange = new Vector2(0.2f, 1f);
     heightRange = new Vector2(0.2f, 1f);
@@ -28,6 +29,7 @@ public class FloorData extends Dat {
     maxElite = 5;
     normalHeight = 2;
     customHeight = new HashMap<>();
+    prefabRooms = new HashMap<>();
     title = "Default Floor";
   }
   public float getMaxWidth() { return tileMaxCols * tileSize; }

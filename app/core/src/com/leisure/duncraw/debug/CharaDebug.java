@@ -25,7 +25,7 @@ public class CharaDebug extends ToolAgent {
       ImGui.labelText("Bonus Defense", Float.toString(chara.status.bonusDefense));
     }
     if (ImGui.collapsingHeader("Condition" + id)) {
-      ImGui.labelText("World pos", String.format("%f %f", chara.bounds.x, chara.bounds.y));
+      ImGui.labelText("World pos", String.format("%d %d", (int)chara.bounds.x, (int)chara.bounds.y));
       ImGui.labelText("Floor pos", String.format("%d %d", chara.mapAgent.x, chara.mapAgent.y));
     }
 

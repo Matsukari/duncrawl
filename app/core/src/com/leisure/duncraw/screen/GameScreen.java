@@ -66,7 +66,6 @@ public class GameScreen extends Screen {
     musicManager = new MusicManager(this, AssetSource.getMusicData(), saveData.settings.music);
     hudManager = new HudManager(this, AssetSource.getUiData());
     storyManager = new StoryManager(this, saveData.progression.level.scene);
-    // floorManager.setCurrentFloor(TmxLoader.load(floorManager.sources.startingHall, floorManager.batch, 32, 32));
 
 
     debugManager = new DebugManager();

@@ -25,7 +25,7 @@ public class LerpMovement extends Movement {
     lastVelX = x;
     lastVelY = y;
     Terrain terrain = chara.mapAgent.getTerrainBy(x, y);
-    if (terrain != null && terrain.traversable()) {
+    if (terrain != null && terrain.traversable() && chara.mapAgent.map.getChara(chara.mapAgent.x + x, chara.mapAgent.y+y) == null) {
       // Logger.log("Position of player", String.format("%d %d", chara.mapAgent.x, chara.mapAgent.y)); 
       super.moveBy(x, y);
       return true;

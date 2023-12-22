@@ -11,13 +11,12 @@ import com.leisure.duncraw.art.item.ItemParser;
 import com.leisure.duncraw.art.map.Obj;
 import com.leisure.duncraw.art.map.ObjParser;
 import com.leisure.duncraw.art.map.Terrain;
-import com.leisure.duncraw.map.Floor;
 import com.leisure.duncraw.map.TerrainSet;
 
 import lib.animation.LinearAnimation;
 
 public class TmxLoader {
-  public static Floor load(String file, SpriteBatch batch, int width, int height) {
+  public static TerrainSet[] load(String file, SpriteBatch batch, int width, int height) {
     TiledMap tiled = new TmxMapLoader().load(file);
     TiledMapTileLayer defLayer = (TiledMapTileLayer)tiled.getLayers().get(0);
     TerrainSet terrainSet = new TerrainSet(defLayer.getWidth(), defLayer.getHeight(), width, height);
@@ -61,7 +60,6 @@ public class TmxLoader {
     }
 
     // Logger.log("TmxLoader", ar);
-    // return new TerrainSet[]{terrainSet, foreground};
-    return new Floor(terrainSet, foreground);
+    return new TerrainSet[]{terrainSet, foreground};
   }
 }

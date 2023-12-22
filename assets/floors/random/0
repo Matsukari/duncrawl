@@ -1,18 +1,22 @@
 {
 "roomsNum": 5,
-"tileMaxRows": 40,
-"tileMaxCols": 50,
+"tileMaxRows": 32,
+"tileMaxCols": 32,
 "tileSize": 32,
-"normalHeight": 2,
 "widthRange": {
-	"x": 0.7,
+	"x": 0.2,
 	"y": 1
 },
 "heightRange": {
-	"x": 0.7,
+	"x": 0.2,
 	"y": 1
 },
 "maxMob": 15,
 "maxElite": 5,
-"title": "Floor 0 - Tutorial"
+"title": "Floor 0 : Tutorial",
+"normalHeight": 2,
+"customHeight": {},
+"prefabRooms": {
+  "startRoom": "floors/starting_room.tmx"
+}
 }

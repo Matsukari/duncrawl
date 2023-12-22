@@ -44,7 +44,7 @@ public class FloorEditor extends ToolAgent {
     if (ImGui.button("Generate")) {
       // roomsBuilder.build(points.get(), new Vector2(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()), new Vector2(0.2f, 1f), new Vector2(0.2f, 1f));
       generator.data.roomsNum = points.get(); 
-      manager.setCurrentFloor(new Floor1(generator));
+      manager.setCurrentFloor(new Floor1(generator, manager.batch));
     }
   }
   @Override

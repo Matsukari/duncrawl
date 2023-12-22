@@ -38,7 +38,7 @@ public class TerrainSetGenerator {
         (int)(roomsBuilder.rect.height/data.tileSize)+1, 
         data.tileSize, data.tileSize);
     Logger.log("TerrainSetGenerator", String.format("Size of terrain be generated: %d %d", terrainSet.cols, terrainSet.rows));
-    Logger.log("TerrainSetGenerator", roomsBuilder.rect.toString());
+    // Logger.log("TerrainSetGenerator", roomsBuilder.rect.toString());
     ArrayList<Rectangle> expandedCorridors = roomsBuilder.expandCorridors(4, false);
     roomsBuilder.rooms.addAll(expandedCorridors);
     try { 
@@ -105,7 +105,25 @@ public class TerrainSetGenerator {
     }
   }
 
-  public static void combine(TerrainSet base, TerrainSet add) {
+  // Call before styling anything (before placing any terrains based on created rooms)
+  public static void combine(TerrainSet base, TerrainSet add, RoomsBuilder roomsBuilder, Rectangle replacedRoom) {
+    roomsBuilder.rooms.remove(replacedRoom);
+    Pointi replacedRoomPos = roomsBuilder.getRoomRelTilePos(replacedRoom);
+    int rCols = (int)replacedRoom.width / roomsBuilder.tileSize;
+    int rRows = (int)replacedRoom.height / roomsBuilder.tileSize;
+    // Origin on center of the replaced room
+    int rCenterX = replacedRoomPos.x + rCols / 2;
+    int rCenterY = replacedRoomPos.y + rRows / 2;
+    int startX = rCenterX - add.cols / 2;
+    int startY = rCenterY - add.rows / 2;
+    int endX = startX + add.cols;
+    int endY = startY + add.rows;
+
+    for (int x = startX; x < endX; x++) {
+      for (int y = startY; y < endY; y++) {
+        base.putTerrain(add.getTerrain(x-startX, y-startY).clone(), x, y);
+      }
+    }
     
   }
   public static TerrainSet blank() {

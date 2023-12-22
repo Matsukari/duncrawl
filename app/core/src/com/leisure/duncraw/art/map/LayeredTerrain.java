@@ -20,6 +20,10 @@ public class LayeredTerrain extends Terrain {
     return true;
   }
   @Override
+  public Obj lastObj() {
+    return overlays.get(0).lastObj();
+  }
+  @Override
   public Terrain clone() {
     return overlays.get(0).clone();
   }

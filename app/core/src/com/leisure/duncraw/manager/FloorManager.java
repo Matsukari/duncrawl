@@ -27,7 +27,7 @@ import com.leisure.duncraw.map.floors.Floor1;
 import com.leisure.duncraw.map.generator.TerrainSetGenerator;
 
 public class FloorManager {
-  public SpriteBatch batch = new SpriteBatch();
+  public final SpriteBatch batch;
   public Tileset tileset;
   private FrameBuffer lightBuffer;
   private TextureRegion light;
@@ -38,8 +38,8 @@ public class FloorManager {
     this.sources = sources;
     this.level = levelStart;
 
-    
     Logger.hide("RoomsBuilder");
+    batch = new SpriteBatch(); 
     tileset = new Tileset(sources.tilesets);
     FloorData floorData = new FloorData();
     floorData.reset();
@@ -49,9 +49,9 @@ public class FloorManager {
     terrainGenerator.grounds = new TerrainVariants(tileset.terrainTransform(tileset.filter("terrain", "ground"), batch));
     terrainGenerator.walls = WallType.getAllWallTypes(tileset, batch);
 
-    floor = new Floor1(terrainGenerator);
-    Logger.log("FloorManager", String.format("Current floor (%d) name : %s", level, floor.getName()));
-    Logger.log("FloorManager", String.format("Floor data %s", level, floorData.title));
+    floor = new Floor1(terrainGenerator, batch);
+    // Logger.log("FloorManager", String.format("Current floor (%d) name : %s", level, floor.getName()));
+    // Logger.log("FloorManager", String.format("Floor data %s", level, floorData.title));
 
     lightBuffer = new FrameBuffer(Format.RGB888, Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), false);
     Graphics.assets.load("images/lights/light_smooth.png", Texture.class);

@@ -239,7 +239,7 @@ public class RoomsBuilder {
         }
       }
     }
-    Logger.log("FloorGenerator", "finished generating" + Integer.toString(j));
+    Logger.log("RoomsBuilder", "finished generating " + Integer.toString(j) + " tiles");
   }
   public float getTileValue(float x) {
     return MathUtils.floor(x / tileSize) * tileSize;

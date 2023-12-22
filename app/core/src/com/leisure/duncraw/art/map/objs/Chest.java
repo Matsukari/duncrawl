@@ -3,7 +3,6 @@ package com.leisure.duncraw.art.map.objs;
 import com.leisure.duncraw.art.chara.Chara;
 import com.leisure.duncraw.art.map.Obj;
 import com.leisure.duncraw.data.GeneralAnimation;
-import com.leisure.duncraw.logging.Logger;
 
 import lib.animation.LinearAnimation;
 
