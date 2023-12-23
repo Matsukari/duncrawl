@@ -30,6 +30,7 @@ import com.leisure.duncraw.data.SaveData;
 import com.leisure.duncraw.data.Serializer;
 import com.leisure.duncraw.debug.SpriteBatchDebug;
 import com.leisure.duncraw.debug.TerrainSetDebug;
+import com.leisure.duncraw.debug.editor.LightEnvEditor;
 import com.leisure.duncraw.logging.Logger;
 import com.leisure.duncraw.manager.CharaManager;
 import com.leisure.duncraw.manager.DebugManager;
@@ -80,6 +81,7 @@ public class GameScreen extends Screen {
     debugManager.editFloorGen(floorManager);
     debugManager.debugTool(new TerrainSetDebug(floorManager.getCurrentFloor().background));
     debugManager.debugTool(new SpriteBatchDebug(floorManager.batch));
+    debugManager.debugTool(new LightEnvEditor(floorManager.lightEnvironment));
     
     testPlaceScene();
   }
@@ -120,15 +122,12 @@ public class GameScreen extends Screen {
     storyManager.updateScene();
     hudManager.update(delta);
     musicManager.update();
-    // Chars, obj, terrain interaction
 
     ScreenUtils.clear(backgroundColor);
     floorManager.renderBackground(camera);
     charaManager.renderAll(camera);
     effectManager.renderAll(camera);
     floorManager.renderForeground(camera);
-    floorManager.lightEnvironment.update();
-    floorManager.lightEnvironment.cast(viewport);
     hudManager.renderAvailable(camera);
     debugManager.render(camera);
   }
