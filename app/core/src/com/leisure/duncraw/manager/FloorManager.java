@@ -22,7 +22,7 @@ import com.leisure.duncraw.map.floors.Floor1;
 import com.leisure.duncraw.map.generator.TerrainSetGenerator;
 
 public class FloorManager {
-  private LightEnvironment lightEnvironment; 
+  public final LightEnvironment lightEnvironment; 
   public final FloorsData sources;
   public final SpriteBatch batch;
   public Tileset tileset;
@@ -39,9 +39,7 @@ public class FloorManager {
     terrainGenerator.grounds = new TerrainVariants(tileset.terrainTransform(tileset.filter("terrain", "ground"), batch));
     terrainGenerator.walls = WallType.getAllWallTypes(tileset, batch);
     floor = new Floor1(terrainGenerator, batch); 
-    lightEnvironment = new LightEnvironment(new Color(0.3f, 0.3f, 0.3f, 0.4f), new Rectangle(0, 0, floor.background.getWidth(), floor.background.getHeight()), batch);
-    lightEnvironment.addLight(new PointLight(Graphics.getSafeTextureRegion("images/lights/light_smooth.png")));
-    lightEnvironment.update();
+    lightEnvironment = new LightEnvironment(new Color(0.3f, 0.3f, 0.35f, 0.4f), new Rectangle(0, 0, floor.background.getWidth(), floor.background.getHeight()), batch);
     // Logger.log("FloorManager", String.format("Current floor (%d) name : %s", level, floor.getName()));
     // Logger.log("FloorManager", String.format("Floor data %s", level, floorData.title));
   }
@@ -60,7 +58,8 @@ public class FloorManager {
       floor.render(batch, floor.foreground);
       batch.end();
     }
-    lightEnvironment.cast(batch);
+    // lightEnvironment.update();
+    // lightEnvironment.cast();
   }
   public void dispose() {
     batch.dispose();

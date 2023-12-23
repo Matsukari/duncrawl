@@ -14,6 +14,7 @@ public class GfxAnimation extends Gfx {
     setLoop(loop);
   }
   public void setLoop(boolean val) {
+    if (anim == null) return;
     loop = val;
     if (!loop) anim.data.setPlayMode(PlayMode.NORMAL);
     else anim.data.setPlayMode(PlayMode.LOOP);

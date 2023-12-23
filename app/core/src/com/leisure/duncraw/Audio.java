@@ -31,8 +31,8 @@ public class Audio {
   }
   public static void applyMusicVolume(float volume, MusicData data) {
     try {
-      for (String m : data.earlyGame) assets.get(m, Music.class).setVolume(volume);
-      for (String m : data.midGame) assets.get(m, Music.class).setVolume(volume);
+      for (String m : data.earlyGame) assets.get(m, Music.class).setVolume(volume/3);
+      for (String m : data.midGame) assets.get(m, Music.class).setVolume(volume/3);
     } catch (Exception e) { }
   }
   public static void dispose() {

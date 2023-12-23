@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
+import com.leisure.duncraw.Graphics;
 import com.leisure.duncraw.art.chara.Chara;
 import com.leisure.duncraw.art.chara.Enemy;
 import com.leisure.duncraw.art.chara.EnemySpawner;
@@ -14,12 +15,14 @@ import com.leisure.duncraw.art.chara.Player;
 import com.leisure.duncraw.art.chara.ai.AiWanderer;
 import com.leisure.duncraw.art.chara.observers.AnimationBehaviour;
 import com.leisure.duncraw.art.chara.observers.DashBehaviour;
+import com.leisure.duncraw.art.chara.observers.IlluminateBehaviour;
 import com.leisure.duncraw.art.chara.observers.TalkBehaviour;
 import com.leisure.duncraw.art.chara.observers.dark.InfuseDarknessBehaviour;
 import com.leisure.duncraw.art.chara.observers.dark.ShadowCloakBehaviour;
 import com.leisure.duncraw.art.chara.states.MoveState;
 import com.leisure.duncraw.art.item.items.StaminaPotion;
 import com.leisure.duncraw.art.lighting.LightEnvironment;
+import com.leisure.duncraw.art.lighting.PointLight;
 import com.leisure.duncraw.art.map.objs.Chest;
 import com.leisure.duncraw.data.AssetSource;
 import com.leisure.duncraw.data.Conversation;
@@ -57,6 +60,7 @@ public class GameScreen extends Screen {
     this.saveData = saveData;
     camera = new OrthographicCamera();
     viewport = new ExtendViewport(saveData.settings.bounds.width, saveData.settings.bounds.height, camera);
+    viewport.apply();
     effectManager = new EffectManager();
     floorManager = new FloorManager(saveData, AssetSource.getFloorsData(), saveData.progression.level.floor);
     charaManager = new CharaManager(AssetSource.getCharasData(), floorManager.getCurrentFloor());
@@ -65,6 +69,7 @@ public class GameScreen extends Screen {
     player.observers.add(new InfuseDarknessBehaviour(effectManager));
     player.observers.add(new ShadowCloakBehaviour(effectManager));
     player.observers.add(new DashBehaviour());
+    player.observers.add(new IlluminateBehaviour(floorManager.lightEnvironment, new PointLight(Graphics.getSafeTextureRegion("images/lights/light_smooth.png"))));
     musicManager = new MusicManager(this, AssetSource.getMusicData(), saveData.settings.music);
     hudManager = new HudManager(this, AssetSource.getUiData());
     storyManager = new StoryManager(this, saveData.progression.level.scene);
@@ -75,7 +80,7 @@ public class GameScreen extends Screen {
     debugManager.editFloorGen(floorManager);
     debugManager.debugTool(new TerrainSetDebug(floorManager.getCurrentFloor().background));
     debugManager.debugTool(new SpriteBatchDebug(floorManager.batch));
-
+    
     testPlaceScene();
   }
   private void testPlaceScene() {
@@ -88,6 +93,7 @@ public class GameScreen extends Screen {
     // mob.startAI(new AiWanderer(floorManager.getCurrentFloor(), player));
     floorManager.getCurrentFloor().background.putObject(new StaminaPotion("dat/item/stamina_potion.dat"), pos.x - 1, pos.y);
     floorManager.getCurrentFloor().background.putObject(new Chest("dat/obj/chest.dat"), pos.x + 3, pos.y);
+    
     // floorManager.getCurrentFloor().initialSpawn(new EnemySpawner(charaManager, charaManager.sources, ()->new AiWanderer(floorManager.getCurrentFloor(), player));
     npc.observers.add(new TalkBehaviour(hudManager.dialogueHud, Conversation.fromDat("dat/convs/test.conv")));
     camera.zoom = 30f;
@@ -121,6 +127,8 @@ public class GameScreen extends Screen {
     charaManager.renderAll(camera);
     effectManager.renderAll(camera);
     floorManager.renderForeground(camera);
+    floorManager.lightEnvironment.update();
+    floorManager.lightEnvironment.cast(viewport);
     hudManager.renderAvailable(camera);
     debugManager.render(camera);
   }

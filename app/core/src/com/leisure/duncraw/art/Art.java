@@ -12,6 +12,12 @@ public abstract class Art {
   public Art() {
     id = IdGenerator.gen();
   }
+  public void centerTo(Rectangle other) {
+    bounds.x = other.x - bounds.width/2;
+    bounds.y = other.y - bounds.height/2;
+    bounds.x += other.width/2;
+    bounds.y += other.height/2;
+  }
   @Override
   public boolean equals(Object obj) {
     return id == ((Art)obj).id;
