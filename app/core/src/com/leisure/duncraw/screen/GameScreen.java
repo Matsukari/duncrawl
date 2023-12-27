@@ -70,7 +70,7 @@ public class GameScreen extends Screen {
     player = charaManager.addFrom(charaManager.sources.player, Player.class);
     player.observers.add(new InfuseDarknessBehaviour(effectManager));
     player.observers.add(new ShadowCloakBehaviour(effectManager));
-    player.observers.add(new DashBehaviour());
+    player.observers.add(new DashBehaviour(effectManager));
     player.observers.add(new IlluminateBehaviour(floorManager.lightEnvironment, new PointLight(Graphics.getSafeTextureRegion("images/lights/light_smooth.png"))));
     musicManager = new MusicManager(this, AssetSource.getMusicData(), saveData.settings.music);
     hudManager = new HudManager(this, AssetSource.getUiData());

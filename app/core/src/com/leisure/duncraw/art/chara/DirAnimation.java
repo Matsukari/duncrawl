@@ -38,8 +38,8 @@ public class DirAnimation {
     return anims[SIDE];
   }
   public void face(int x, int y) {
-    if (x != 0) currentDir = getSideFlip(x);
-    else if (y < 0) currentDir = anims[DirAnimation.FRONT];
-    else if (y > 0) currentDir = anims[DirAnimation.BACK];
+    if (x != 0) currentDir = getSideFlip(x).clone();
+    else if (y < 0) currentDir = anims[DirAnimation.FRONT].clone();
+    else if (y > 0) currentDir = anims[DirAnimation.BACK].clone();
   }
 }
