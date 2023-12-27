@@ -2,7 +2,8 @@
 "anims": {
 	"idle": "images/objects/lamp_stand.png",
 	"light": "images/lights/light_smooth.png",
-	"fire": "particles/fire.p"
+  "fire": "images/objects/lamp_fire.png",
+	"fire2": "particles/fire.p"
 },
 "sounds": {},
 "name": "No-name-obj",

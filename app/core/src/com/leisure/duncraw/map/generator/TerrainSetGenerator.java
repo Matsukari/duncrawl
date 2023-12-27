@@ -19,6 +19,7 @@ import lib.math.Pointi;
 public class TerrainSetGenerator {
   public RoomsBuilder roomsBuilder;
   public FloorData data;
+  public final TerrainFurnishers wallFurnishers = new TerrainFurnishers();
   // 0-5 for a grid representation of the body of a wall
   // 0 1 2 
   // 3 4 5
@@ -26,12 +27,11 @@ public class TerrainSetGenerator {
   // 6 7 
   public TerrainVariants walls[] = new TerrainVariants[8];
   public TerrainVariants grounds = new TerrainVariants();
-  public int genFails = 0;
   public TerrainSetGenerator(FloorData data) {
     this.data = data;
     roomsBuilder = new RoomsBuilder(data.tileSize);
   }
-  public TerrainSet gen() {
+  public TerrainSet prepare() {
     roomsBuilder.build(data.roomsNum, new Vector2(data.getMaxWidth(), data.getMaxHeight()), data.widthRange, data.heightRange);
     TerrainSet terrainSet = new TerrainSet(
         (int)(roomsBuilder.rect.width/data.tileSize)+1, 
@@ -41,20 +41,17 @@ public class TerrainSetGenerator {
     // Logger.log("TerrainSetGenerator", roomsBuilder.rect.toString());
     ArrayList<Rectangle> expandedCorridors = roomsBuilder.expandCorridors(4, false);
     roomsBuilder.rooms.addAll(expandedCorridors);
-    try { 
-      placeGrounds(terrainSet); 
-      placeWalls(terrainSet);
-    } catch (Exception e) { 
-      if (genFails >= 10) {
-        e.printStackTrace();
-        Logger.log("TerrainSetGenerator", "Error: generation repeated too much");
-        System.exit(-1);
-      }
-      genFails++; 
-      gen(); 
-    }
     
     return terrainSet;
+  }
+  public void populate(TerrainSet terrainSet) {
+    try { 
+      placeGrounds(terrainSet);
+      placeWalls(terrainSet, wallFurnishers);
+    } catch (Exception e) { 
+      e.printStackTrace();
+      System.exit(-1);
+    }
   }
   public void placeGrounds(TerrainSet terrainSet) throws Exception {
     roomsBuilder.forEachTileInRooms(roomsBuilder.rooms, (room, col, row)->{
@@ -64,7 +61,11 @@ public class TerrainSetGenerator {
       catch (Exception e) { throw new Exception(); }
     }); 
   }
-  public void placeWalls(TerrainSet terrainSet) throws Exception {
+  public void putTerrain(TerrainSet terrainSet, Terrain terrain, int x, int y, TerrainFurnishers furnishers) {
+    terrainSet.putTerrain(terrain, x, y);
+    if (furnishers != null) furnishers.furnish(terrainSet, roomsBuilder, terrain, x, y);
+  }
+  public void placeWalls(TerrainSet terrainSet, TerrainFurnishers furnishers) throws Exception {
     // Logger.log("Rooms before", )
     roomsBuilder.rooms.sort((a, b)-> (a.y > b.y) ? 1 : (b.y > a.y) ? -1 : 0 );
     for (Rectangle room : roomsBuilder.rooms) {
@@ -81,14 +82,14 @@ public class TerrainSetGenerator {
         Terrain terrain = walls[WallType.BODY].getVariant();
         // terrain.canTravel = false;
         if (terrainSet.getTerrain(pos.x + col, top - 1) == null) { 
-          for (int i = 0; i < data.normalHeight-1; i++) terrainSet.putTerrain(terrain.clone(), pos.x + col, top - i);
-          terrainSet.putTerrain(walls[WallType.DOWN_EDGE].getVariant(), pos.x + col, top-data.normalHeight+1);
-          terrainSet.putTerrain(walls[WallType.TOP_HEAD].getVariant(), pos.x + col, top);
+          for (int i = 0; i < data.normalHeight-1; i++) putTerrain(terrainSet, terrain.clone(), pos.x + col, top - i, furnishers);
+          putTerrain(terrainSet, walls[WallType.DOWN_EDGE].getVariant(), pos.x + col, top-data.normalHeight+1, furnishers);
+          putTerrain(terrainSet, walls[WallType.TOP_HEAD].getVariant(), pos.x + col, top, furnishers);
         }
         if (terrainSet.getTerrain(pos.x + col, bottom + 1) == null) {
-          for (int i = 0; i < data.normalHeight-1; i++) terrainSet.putTerrain(terrain.clone(), pos.x + col, bottom - i);
-          terrainSet.putTerrain(walls[WallType.DOWN_EDGE].getVariant(), pos.x + col, bottom-data.normalHeight+1);
-          terrainSet.putTerrain(walls[WallType.TOP_HEAD].getVariant(), pos.x + col, bottom);
+          for (int i = 0; i < data.normalHeight-1; i++) putTerrain(terrainSet, terrain.clone(), pos.x + col, bottom - i, furnishers);
+          putTerrain(terrainSet, walls[WallType.DOWN_EDGE].getVariant(), pos.x + col, bottom-data.normalHeight+1, furnishers);
+          putTerrain(terrainSet, walls[WallType.TOP_HEAD].getVariant(), pos.x + col, bottom, furnishers);
         }
         
       }
@@ -98,9 +99,9 @@ public class TerrainSetGenerator {
         Terrain leftWall = walls[WallType.LEFT_HEAD].getVariant();
         Terrain rightWall = walls[WallType.RIGHT_HEAD].getVariant();
         if (terrainSet.getTerrain(left - 1, pos.y + row) == null || (terrainSet.getTerrain(left, pos.y+row).type.contains("wall")) )
-          terrainSet.putTerrain(leftWall, left, pos.y + row);
+          putTerrain(terrainSet, leftWall, left, pos.y + row, furnishers);
         if (terrainSet.getTerrain(right + 1, pos.y + row) == null || (terrainSet.getTerrain(right, pos.y+row).type.contains("wall")) ) 
-          terrainSet.putTerrain(rightWall, right, pos.y + row);
+          putTerrain(terrainSet, rightWall, right, pos.y + row, furnishers);
       }
     }
   }

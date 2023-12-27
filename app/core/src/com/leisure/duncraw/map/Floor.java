@@ -27,17 +27,11 @@ public class Floor {
   }
   public Floor(TerrainSetGenerator generator) {
     this.generator = generator;
-    background = generator.gen();
+    background = generator.prepare();
     foreground = null;
   }
-  public Pointi getTileInRandomRoom() {
-    Pointi tile = new Pointi(0, 0);
-    if (generator == null) return tile;
-    Rectangle room = generator.roomsBuilder.rooms.get(MathUtils.random(generator.roomsBuilder.mainRooms.size()-1));
-    tile.x = (int)(MathUtils.random(room.x, room.x + room.width) - generator.roomsBuilder.min.x) / background.terrainWidth;
-    tile.y = (int)(MathUtils.random(room.y, room.y + room.height) - generator.roomsBuilder.min.y) / background.terrainHeight;
-    if (!background.isWithin((int)tile.x, (int)tile.y)) getTileInRandomRoom();
-    return tile;
+  public void stage() {
+    generator.populate(background);
   }
   public void render(SpriteBatch batch, TerrainSet layer) {
     for (Terrain terrain : layer.terrains) {
@@ -56,6 +50,15 @@ public class Floor {
   }
   public void update() {}
   public void initialSpawn(EnemySpawner spawner) { this.spawner = spawner; }
+  public Pointi getTileInRandomRoom() {
+    Pointi tile = new Pointi(0, 0);
+    if (generator == null) return tile;
+    Rectangle room = generator.roomsBuilder.rooms.get(MathUtils.random(generator.roomsBuilder.mainRooms.size()-1));
+    tile.x = (int)(MathUtils.random(room.x, room.x + room.width) - generator.roomsBuilder.min.x) / background.terrainWidth;
+    tile.y = (int)(MathUtils.random(room.y, room.y + room.height) - generator.roomsBuilder.min.y) / background.terrainHeight;
+    if (!background.isWithin((int)tile.x, (int)tile.y)) getTileInRandomRoom();
+    return tile;
+  }
   public String getName() { return generator.data.title; }
   @Override public boolean equals(Object obj) {
     return getName().contains(((Floor)obj).getName());

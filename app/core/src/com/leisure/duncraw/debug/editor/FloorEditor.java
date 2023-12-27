@@ -25,7 +25,7 @@ public class FloorEditor extends ToolAgent {
   public TerrainSetGenerator generator;
   public FloorManager manager;
   public BitmapFont font;
-  public boolean hideShapes = false;
+  public boolean hideShapes = true;
   public FloorEditor(FloorManager manager) {
     super("FloorEditor");
     this.manager = manager;

@@ -11,6 +11,7 @@ public class LightEnvEditor extends ToolAgent {
   private float modulate[] = { 0.033f, 0.033f, 0.100f, 0.2f };
   public LightEnvEditor(LightEnvironment environment) {
     this.environment = environment;
+    this.id = "LightEnvEditor";
   }
   @Override
   public void tool() {

@@ -1,24 +1,20 @@
 package com.leisure.duncraw.manager;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
-import com.leisure.duncraw.Graphics;
 import com.leisure.duncraw.art.lighting.LightEnvironment;
-import com.leisure.duncraw.art.lighting.PointLight;
-import com.leisure.duncraw.data.Deserializer;
 import com.leisure.duncraw.data.FloorData;
 import com.leisure.duncraw.data.FloorsData;
 import com.leisure.duncraw.data.SaveData;
-import com.leisure.duncraw.data.Serializer;
 import com.leisure.duncraw.logging.Logger;
 import com.leisure.duncraw.map.Floor;
 import com.leisure.duncraw.map.TerrainVariants;
 import com.leisure.duncraw.map.Tileset;
 import com.leisure.duncraw.map.WallType;
 import com.leisure.duncraw.map.floors.Floor1;
+import com.leisure.duncraw.map.generator.LightSourcesFurnisher;
 import com.leisure.duncraw.map.generator.TerrainSetGenerator;
 
 public class FloorManager {
@@ -28,7 +24,7 @@ public class FloorManager {
   public Tileset tileset;
   public int level;
   private Floor floor; 
-  public FloorManager(SaveData save, FloorsData sources, int levelStart) {
+  public FloorManager(SaveData save, FloorsData sources, int levelStart, EffectManager effectManager) {
     this.sources = sources;
     this.level = levelStart;
 
@@ -39,7 +35,10 @@ public class FloorManager {
     terrainGenerator.grounds = new TerrainVariants(tileset.terrainTransform(tileset.filter("terrain", "ground"), batch));
     terrainGenerator.walls = WallType.getAllWallTypes(tileset, batch);
     floor = new Floor1(terrainGenerator, batch); 
-    lightEnvironment = new LightEnvironment(new Color(0.3f, 0.3f, 0.35f, 0.4f), new Rectangle(0, 0, floor.background.getWidth(), floor.background.getHeight()), batch);
+    lightEnvironment = new LightEnvironment(new Color(1, 1, 1, 1), new Rectangle(0, 0, floor.background.getWidth(), floor.background.getHeight()), batch);
+
+    floor.generator.wallFurnishers.add(new LightSourcesFurnisher(lightEnvironment, effectManager));
+    floor.stage();
     // Logger.log("FloorManager", String.format("Current floor (%d) name : %s", level, floor.getName()));
     // Logger.log("FloorManager", String.format("Floor data %s", level, floorData.title));
   }

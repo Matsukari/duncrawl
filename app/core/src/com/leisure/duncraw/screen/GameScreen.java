@@ -64,7 +64,7 @@ public class GameScreen extends Screen {
     viewport = new ExtendViewport(saveData.settings.bounds.width, saveData.settings.bounds.height, camera);
     viewport.apply();
     effectManager = new EffectManager();
-    floorManager = new FloorManager(saveData, AssetSource.getFloorsData(), saveData.progression.level.floor);
+    floorManager = new FloorManager(saveData, AssetSource.getFloorsData(), saveData.progression.level.floor, effectManager);
     charaManager = new CharaManager(AssetSource.getCharasData(), floorManager.getCurrentFloor());
     charaManager.observers.add(new AnimationBehaviour(effectManager));
     player = charaManager.addFrom(charaManager.sources.player, Player.class);
@@ -80,7 +80,6 @@ public class GameScreen extends Screen {
     debugManager.debugSystem();
     debugManager.debugPlayer(player);
     debugManager.editFloorGen(floorManager);
-    debugManager.debugTool(new TerrainSetDebug(floorManager.getCurrentFloor().background));
     debugManager.debugTool(new SpriteBatchDebug(floorManager.batch));
     debugManager.debugTool(new LightEnvEditor(floorManager.lightEnvironment));
     
