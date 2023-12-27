@@ -8,6 +8,7 @@ import com.leisure.duncraw.art.chara.states.MoveState;
 import com.leisure.duncraw.art.chara.states.dark.InfuseDarknessSkill;
 import com.leisure.duncraw.art.gfx.Gfx;
 import com.leisure.duncraw.art.gfx.GfxAnimation;
+import com.leisure.duncraw.logging.Logger;
 import com.leisure.duncraw.manager.EffectManager;
 import lib.time.TimePeeker;
 
@@ -18,6 +19,7 @@ public class InfuseDarknessBehaviour extends Observer {
   private EffectManager effectManager;
   public GfxAnimation effect; 
   public int stack = 1;
+  public int maxStack = 5;
   public int cost = 10; // per second
   public InfuseDarknessBehaviour(EffectManager effectManager) {
     this.effectManager = effectManager;
@@ -26,14 +28,18 @@ public class InfuseDarknessBehaviour extends Observer {
   @Override
   public void invoke(State state) {
     if (state instanceof InfuseDarknessSkill && chara.status.canDo(cost)) {
-      if (invoked && isActive()) stack++;
+      if (invoked && isActive() && stack <= maxStack) {
+        Logger.log("InfuseDarknessBehaviour", "Stack ");
+        stack++;
+      }
       timer.peek();
       sustainTimer.peek();
       invoked = true;
       if (effectManager != null && stack == 1) {
         effect = new GfxAnimation(null, true);
-        effect.bounds.setPosition(chara.bounds.x, chara.bounds.y);
-        effect.bounds.setSize(chara.bounds.width);
+        // effect.bounds.setPosition(chara.bounds.x, chara.bounds.y);
+        effect.centerTo(chara.bounds);
+        effect.bounds.setSize(chara.bounds.width / 2 * stack);
         changeEffectDir();
         effect.setLoop(true);
         effectManager.start(effect);
@@ -56,7 +62,11 @@ public class InfuseDarknessBehaviour extends Observer {
       sustainTimer.peek();
     }
     if (!isActive()) stop(); 
-    else effect.bounds.setPosition(chara.bounds.x, chara.bounds.y);
+    else {
+      effect.centerTo(chara.bounds);
+      effect.bounds.setSize(chara.bounds.width + (stack * (chara.bounds.width/maxStack)));
+      // effect.bounds.setPosition(chara.bounds.x, chara.bounds.y);
+    }
   }
   @Override
   public Observer copy() {
