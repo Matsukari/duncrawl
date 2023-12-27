@@ -24,6 +24,7 @@ import com.leisure.duncraw.art.item.items.StaminaPotion;
 import com.leisure.duncraw.art.lighting.LightEnvironment;
 import com.leisure.duncraw.art.lighting.PointLight;
 import com.leisure.duncraw.art.map.objs.Chest;
+import com.leisure.duncraw.art.map.objs.Lamp;
 import com.leisure.duncraw.data.AssetSource;
 import com.leisure.duncraw.data.Conversation;
 import com.leisure.duncraw.data.SaveData;
@@ -95,6 +96,7 @@ public class GameScreen extends Screen {
     // mob.startAI(new AiWanderer(floorManager.getCurrentFloor(), player));
     floorManager.getCurrentFloor().background.putObject(new StaminaPotion("dat/item/stamina_potion.dat"), pos.x - 1, pos.y);
     floorManager.getCurrentFloor().background.putObject(new Chest("dat/obj/chest.dat"), pos.x + 3, pos.y);
+    floorManager.getCurrentFloor().background.putObject(new Lamp("dat/obj/lamp.dat", floorManager.lightEnvironment, effectManager), pos.x - 3, pos.y);
     
     // floorManager.getCurrentFloor().initialSpawn(new EnemySpawner(charaManager, charaManager.sources, ()->new AiWanderer(floorManager.getCurrentFloor(), player));
     npc.observers.add(new TalkBehaviour(hudManager.dialogueHud, Conversation.fromDat("dat/convs/test.conv")));
@@ -126,8 +128,8 @@ public class GameScreen extends Screen {
     ScreenUtils.clear(backgroundColor);
     floorManager.renderBackground(camera);
     charaManager.renderAll(camera);
-    effectManager.renderAll(camera);
     floorManager.renderForeground(camera);
+    effectManager.renderAll(camera);
     hudManager.renderAvailable(camera);
     debugManager.render(camera);
   }

@@ -8,7 +8,6 @@ import lib.animation.LinearAnimation;
 
 public class GfxAnimation extends Gfx {
   public LinearAnimation<TextureRegion> anim;
-  public boolean loop = false;
   public GfxAnimation(LinearAnimation<TextureRegion> anim, boolean loop) {
     this.anim = anim;
     setLoop(loop);
