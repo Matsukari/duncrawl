@@ -1,6 +1,7 @@
 package com.leisure.duncraw.art.chara.observers;
 
 import com.badlogic.gdx.graphics.g2d.Animation.PlayMode;
+import com.badlogic.gdx.math.MathUtils;
 import com.leisure.duncraw.art.chara.Chara;
 import com.leisure.duncraw.art.chara.DirAnimation;
 import com.leisure.duncraw.art.chara.Observer;
@@ -17,7 +18,7 @@ import com.leisure.duncraw.manager.EffectManager;
 
 public class AnimationBehaviour extends Observer {
   private final EffectManager effectManager;
-  private Gfx attackEffect;
+  private GfxAnimation attackEffect;
   private DirAnimation attackEffAnim;
   public AnimationBehaviour(EffectManager effectManager) { this.effectManager = effectManager; }
   @Override
@@ -44,6 +45,7 @@ public class AnimationBehaviour extends Observer {
       AttackState attackState = (AttackState)state;
       attackEffAnim.face(chara.movement.lastVelX, chara.movement.lastVelY);
       attackEffect = new GfxAnimation(attackEffAnim.currentDir, false);
+      attackEffect.rotation = MathUtils.random(0, 90);
       attackEffect.bounds.setPosition(attackState.target.bounds.x, attackState.target.bounds.y);
       attackEffect.bounds.setSize(chara.bounds.width);
       effectManager.start(attackEffect);

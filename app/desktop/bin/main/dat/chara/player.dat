@@ -15,6 +15,16 @@
 		"back": "images/characters/player/player_attack_back.png",
 		"front": "images/characters/player/player_attack_front.png"
   },
+  "teleport_from": {
+		"side": "images/effects/teleport_from.png",
+		"back": "images/effects/teleport_from.png",
+		"front": "images/effects/teleport_from.png"
+	},
+	"teleport_to": {
+		"side": "images/effects/teleport_to.png",
+		"back": "images/effects/teleport_to.png",
+		"front": "images/effects/teleport_to.png"
+	},
 	"attack_effect": {
 		"side": "images/effects/strike_effect.png",
 		"back": "images/effects/strike_effect.png",

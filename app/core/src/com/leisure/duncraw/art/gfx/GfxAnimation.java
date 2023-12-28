@@ -8,6 +8,7 @@ import lib.animation.LinearAnimation;
 
 public class GfxAnimation extends Gfx {
   public LinearAnimation<TextureRegion> anim;
+  public float rotation = 0;
   public GfxAnimation(LinearAnimation<TextureRegion> anim, boolean loop) {
     this.anim = anim;
     setLoop(loop);
@@ -29,6 +30,6 @@ public class GfxAnimation extends Gfx {
   }
   @Override
   public void render(SpriteBatch batch) {
-    if (anim != null) batch.draw(anim.current(), bounds.x, bounds.y, bounds.width, bounds.height);
+    if (anim != null) batch.draw(anim.current(), bounds.x, bounds.y, bounds.width/2, bounds.height/2, bounds.width, bounds.height, 1f, 1f, rotation);
   }
 }

@@ -15,10 +15,12 @@ import com.leisure.duncraw.data.SaveData;
 import com.leisure.duncraw.data.Settings.DesktopControls;
 import com.leisure.duncraw.screen.GameScreen;
 
+import lib.time.Timer;
+
 public class GameScreenInput extends GameScreen implements InputProcessor {
   private int pressedKey = -1;
   private Vector3 cameraStartDrag = Vector3.Zero;
-  private Vector2 startDrag = Vector2.Zero; 
+  private Vector2 startDrag = Vector2.Zero;
   private final DesktopControls desktopControls;
   public GameScreenInput(SaveData save) {
     super(save);
