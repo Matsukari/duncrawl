@@ -49,6 +49,7 @@ public class Terrain extends Art {
       obj.bounds.x = bounds.x;
       obj.bounds.y = bounds.y;
       obj.bounds.setSize(bounds.width, bounds.height);
+      
       obj.render(batch);
     }
   }

@@ -6,6 +6,7 @@ import com.leisure.duncraw.data.Deserializer;
 import com.leisure.duncraw.data.GeneralAnimation;
 import com.leisure.duncraw.data.ObjData;
 import com.leisure.duncraw.data.Serializer;
+import com.leisure.duncraw.helper.SString;
 import com.leisure.duncraw.logging.Logger;
 
 import lib.animation.LinearAnimation;

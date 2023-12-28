@@ -57,8 +57,7 @@ public class TerrainSetGenerator {
     roomsBuilder.forEachTileInRooms(roomsBuilder.rooms, (room, col, row)->{
       Pointi pos = roomsBuilder.getRoomRelTilePos(room);
       Terrain terrain = grounds.get(MathUtils.random(0, grounds.size()-1)).clone();
-      try { terrainSet.putTerrain(terrain, pos.x + col, pos.y + row); } 
-      catch (Exception e) { throw new Exception(); }
+      if (terrainSet.getTerrain(pos.x + col, pos.y + row) == null) terrainSet.putTerrain(terrain, pos.x + col, pos.y + row);  
     }); 
   }
   public void putTerrain(TerrainSet terrainSet, Terrain terrain, int x, int y, TerrainFurnishers furnishers) {
