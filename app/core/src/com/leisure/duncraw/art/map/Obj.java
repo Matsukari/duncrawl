@@ -16,9 +16,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class Obj extends Art {
-  public ObjData dat;
-  public LinearAnimation<TextureRegion> idle;
-  public LinearAnimation<TextureRegion> anim;
+  public transient ObjData dat;
+  public transient LinearAnimation<TextureRegion> idle;
+  public transient LinearAnimation<TextureRegion> anim;
   public Obj(String datFile) {
     load(datFile);
   }

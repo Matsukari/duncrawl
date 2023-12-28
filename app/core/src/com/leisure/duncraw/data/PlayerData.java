@@ -1,17 +1,22 @@
 package com.leisure.duncraw.data;
 
-public class Status {
+import com.leisure.duncraw.art.chara.Status;
+
+public class PlayerData extends Dat {
   public GeneralRank rank;
   public Inventory inventory;
-  public com.leisure.duncraw.art.chara.Status status;
-  public Status(com.leisure.duncraw.art.chara.Status status, Inventory inventory) {
+  public Status status;
+  public PlayerData(Status status, Inventory inventory) {
     this.status = status;
     this.inventory = inventory;
   }
-  public Status() {}
-  public void init() {
+  public PlayerData() {
+
+  }
+  @Override
+  public void reset() {
     rank = GeneralRank.BRONZE;
-    status = new com.leisure.duncraw.art.chara.Status();
+    status = new Status();
     inventory = new Inventory();
     status.reset();
     inventory.reset();

@@ -1,14 +1,16 @@
 package com.leisure.duncraw.data;
 
+import com.leisure.duncraw.art.chara.Status;
+
 public class SaveData {
   public Progression progression;
-  public Status status;
+  public PlayerData player;
   public Settings settings;
-  public SaveData(com.leisure.duncraw.art.chara.Status stats, Inventory inventory) {
+  public SaveData(Status stats, Inventory inventory) {
     progression = new Progression();
     progression.reset();
-    status = new Status(stats, inventory);
-    status.init();
+    player = new PlayerData(stats, inventory);
+    player.reset();
     settings = new Settings(); 
     settings.reset();
   }

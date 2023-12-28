@@ -16,23 +16,30 @@ import lib.animation.LinearAnimation;
 
 public class Item extends Obj {
   public boolean isDrop = true;
-  public Player owner;
-  public ItemData itemData;
-  public LinearAnimation<TextureRegion> dropAnim; 
-  public LinearAnimation<TextureRegion> storeAnim;
+  public int quantity;
+  public int maxQuantity;
+  public String datFile;
+  public transient Player owner;
+  public transient ItemData itemData;
+  public transient LinearAnimation<TextureRegion> dropAnim; 
+  public transient LinearAnimation<TextureRegion> storeAnim;
   public Item(String datFile) {
     super(datFile);
-    idle = GeneralAnimation.line(dat.anims.get("drop"));
-    storeAnim = GeneralAnimation.line(dat.anims.get("store"));
     anim = idle;
+    maxQuantity = 99;
+    quantity = 0;
     // animation = storeAnim;
   }
+  public Item() { super((LinearAnimation<TextureRegion>)null); }
   @Override
   public void load(String datFile) {
+    this.datFile = datFile;
     itemData = new ItemData();
     itemData.reset();
     try { itemData = Deserializer.load(ItemData.class, Gdx.files.local(datFile)); } catch(Exception e) { Serializer.save(itemData, Gdx.files.local(datFile)); };
     dat = itemData;
+    idle = GeneralAnimation.line(dat.anims.get("drop"));
+    storeAnim = GeneralAnimation.line(dat.anims.get("store"));
   }
   @Override
   public void onCharaOccupy(Chara chara) {
@@ -43,7 +50,17 @@ public class Item extends Obj {
       if (player.itemSel == null) player.equip(this);
     }
   }
+  public Item clone() {
+    Item item = new Item(datFile);
+    item.maxQuantity = maxQuantity;
+    item.quantity = quantity;
+    return item;
+  }
   public void use() {}
+  @Override
+  public boolean equals(Object obj) {
+    return datFile.equals(((Item)obj).datFile);
+  }
   // Will be called by Terrain
   @Override
   public void render(SpriteBatch batch) {

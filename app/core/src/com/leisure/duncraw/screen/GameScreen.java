@@ -26,6 +26,7 @@ import com.leisure.duncraw.art.lighting.PointLight;
 import com.leisure.duncraw.art.map.objs.Chest;
 import com.leisure.duncraw.art.map.objs.Lamp;
 import com.leisure.duncraw.data.AssetSource;
+import com.leisure.duncraw.data.CharaData;
 import com.leisure.duncraw.data.Conversation;
 import com.leisure.duncraw.data.SaveData;
 import com.leisure.duncraw.data.Serializer;
@@ -67,7 +68,7 @@ public class GameScreen extends Screen {
     floorManager = new FloorManager(saveData, AssetSource.getFloorsData(), saveData.progression.level.floor, effectManager);
     charaManager = new CharaManager(AssetSource.getCharasData(), floorManager.getCurrentFloor());
     charaManager.observers.add(new AnimationBehaviour(effectManager));
-    player = charaManager.addFrom(charaManager.sources.player, Player.class);
+    player = charaManager.add(new Player(CharaData.fromDat(charaManager.sources.player), saveData));
     player.observers.add(new InfuseDarknessBehaviour(effectManager));
     player.observers.add(new ShadowCloakBehaviour(effectManager));
     player.observers.add(new DashBehaviour(effectManager));

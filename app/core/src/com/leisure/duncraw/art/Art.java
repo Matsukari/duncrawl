@@ -5,8 +5,8 @@ import com.badlogic.gdx.math.Rectangle;
 import com.leisure.duncraw.helper.IdGenerator;
 
 public abstract class Art {
-  public final int id;
-  public Rectangle bounds = new Rectangle(0, 0, 100f, 100f);
+  public transient final int id;
+  public transient Rectangle bounds = new Rectangle(0, 0, 100f, 100f);
   public Art() {
     id = IdGenerator.gen();
   }

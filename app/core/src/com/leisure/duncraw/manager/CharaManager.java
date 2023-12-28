@@ -56,6 +56,13 @@ public class CharaManager {
     return null;
   }
   public Chara addFrom(String source) { return addFrom(source, Chara.class); }
+  public <T extends Chara> T add(T chara) { 
+    charas.add(chara);
+    chara.bounds.setSize(32, 32);
+    chara.mapAgent = new TilemapChara(chara, floor);
+    for (Observer observer : observers) chara.observers.add(observer.copy());
+    return chara;
+  }
   public void kill(int id) {}
   public void updateAll(float dt) {
     for (Chara chara : charas) {

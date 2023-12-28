@@ -25,8 +25,8 @@ public class PlayerDebug extends CharaDebug {
     ImGui.sliderFloat("Light Size", lightSize, 100f, 800f);
     player.observers.get(IlluminateBehaviour.class).light.tint.set(modulate[0], modulate[1], modulate[2], modulate[3]);
     player.observers.get(IlluminateBehaviour.class).light.bounds.setSize(lightSize[0], lightSize[0]);
-    ImGui.beginChild("Scroll panel", size.x, player.inventory.data.size() * 10 + 10);
-    for (Item item : player.inventory.data) ImGui.text(String.format("%s", item.dat.name));
+    ImGui.beginChild("Scroll panel", size.x, player.inventory.items.size() * 10 + 10);
+    for (Item item : player.inventory.items) ImGui.text(String.format("%s", item.dat.name));
     ImGui.endChild();
     if (player.itemSel != null) ImGui.labelText("Equip", player.itemSel.dat.name);
   
