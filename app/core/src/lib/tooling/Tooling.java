@@ -1,6 +1,7 @@
 package lib.tooling;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Graphics;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -11,14 +12,23 @@ import imgui.flag.ImGuiTreeNodeFlags;
 import imgui.gl3.ImGuiImplGl3;
 import imgui.glfw.ImGuiImplGlfw;
 import com.badlogic.gdx.utils.Array;
+import com.leisure.duncraw.logging.Logger;
 
-public class Tooling {
+public class Tooling extends InputAdapter {
   private ImGuiImplGlfw glfw;
   private ImGuiImplGl3 gl;
   private Array<ToolAgent> tools;
   private static Tooling tooling;
   private ShapeRenderer renderer;
   private SpriteBatch batch;
+  private boolean isFocused;
+  
+  @Override public boolean mouseMoved(int screenX, int screenY) { return isFocused; }
+  @Override public boolean keyDown(int keycode) { return isFocused; }
+  @Override public boolean keyUp(int keycode) { return isFocused; }
+  @Override public boolean touchDragged(int screenX, int screenY, int pointer) { return isFocused; }
+  @Override public boolean touchDown(int screenX, int screenY, int pointer, int button) { return isFocused; } 
+  @Override public boolean touchUp(int screenX, int screenY, int pointer, int button) { return isFocused; }
 
   public static void addAgent(ToolAgent tool) {
     assert tooling != null;
@@ -68,8 +78,10 @@ public class Tooling {
     gl.renderDrawData(ImGui.getDrawData());
 
     if (ImGui.getIO().getWantCaptureKeyboard() || ImGui.getIO().getWantCaptureMouse()) {
-      
+      isFocused = true;
+      // Logger.log("Tooling", "Capture"); 
     }
+    else isFocused = false;
   }
   public void dispose() {
     gl.dispose();

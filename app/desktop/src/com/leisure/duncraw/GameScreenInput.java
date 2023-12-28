@@ -16,6 +16,7 @@ import com.leisure.duncraw.data.Settings.DesktopControls;
 import com.leisure.duncraw.screen.GameScreen;
 
 import lib.time.Timer;
+import lib.tooling.Tooling;
 
 public class GameScreenInput extends GameScreen implements InputProcessor {
   private int pressedKey = -1;
@@ -24,7 +25,7 @@ public class GameScreenInput extends GameScreen implements InputProcessor {
   private final DesktopControls desktopControls;
   public GameScreenInput(SaveData save) {
     super(save);
-    InputMultiplexer inputMultiplexer = new InputMultiplexer(hudManager.stage, this);
+    InputMultiplexer inputMultiplexer = new InputMultiplexer(debugManager.tooling, hudManager.stage, this);
     Gdx.input.setInputProcessor(inputMultiplexer);
     desktopControls = save.settings.desktopControls;
   } 

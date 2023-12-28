@@ -8,7 +8,7 @@
 		"items": [
 			{
 				"isDrop": false,
-				"quantity": 1,
+				"quantity": 2,
 				"maxQuantity": 99,
 				"datFile": "dat/item/stamina_potion.dat"
 			}
