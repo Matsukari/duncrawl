@@ -1,6 +1,7 @@
 package com.leisure.duncraw.map;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.leisure.duncraw.art.map.Terrain;
 
 public class WallType {
   public static int LEFT_EDGE = 0;
@@ -18,6 +19,7 @@ public class WallType {
   public static TerrainVariants[] getAllWallTypes(Tileset tileset, SpriteBatch batch) {
     TerrainVariants types[] = new TerrainVariants[getTotal()];
     types[WallType.BODY] = tileset.getTerrainVariants("wall", batch);
+    types[WallType.BODY].get(0).canTravel = false;
     types[WallType.LEFT_EDGE] = tileset.getTerrainVariants("wall_left_edge", batch);
     types[WallType.LEFT_CORNER] = tileset.getTerrainVariants("wall_left_corner", batch);
     types[WallType.LEFT_HEAD] = tileset.getTerrainVariants("left_wall", batch);
@@ -28,6 +30,9 @@ public class WallType {
     types[WallType.SINGLE_DOWN] = tileset.getTerrainVariants("wall_single_down", batch);
     types[WallType.DOWN_EDGE] = tileset.getTerrainVariants("wall_down_edge", batch);
     types[WallType.TOP_HEAD] = tileset.getTerrainVariants("top_wall", batch);
+    for (TerrainVariants wallVar : types) {
+      for (Terrain wall : wallVar) wall.canTravel = false;
+    }
     return types; 
      
   } 
