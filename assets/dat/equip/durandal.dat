@@ -1,12 +1,12 @@
 {
 "anims": {
-	"drop": "images/items/consumables/magic_dust.png",
-	"store": "images/items/consumables/magic_dust.png"
+	"drop": "images/items/daggers/durandal.png",
+	"store": "images/items/daggers/durandal.png"
 },
 "sounds": {
 	"store": ""
 },
-"name": "Magic Dust",
+"name": "Durandal",
 "desc": "Lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi Lorem pariatur mollit ex esse exercitation amet. Nisi anim cupidatat excepteur officia. Reprehenderit nostrud nostrud ipsum Lorem est aliquip amet voluptate voluptate dolor minim nulla est .",
 "size": {
   "x": 1,

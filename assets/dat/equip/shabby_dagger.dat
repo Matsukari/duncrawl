@@ -1,12 +1,12 @@
 {
 "anims": {
-	"drop": "images/items/consumables/magic_dust.png",
-	"store": "images/items/consumables/magic_dust.png"
+	"drop": "images/items/daggers/shabby_dagger.png",
+	"store": "images/items/daggers/shabby_dagger.png"
 },
 "sounds": {
 	"store": ""
 },
-"name": "Magic Dust",
+"name": "Shabby Dagger",
 "desc": "Lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi Lorem pariatur mollit ex esse exercitation amet. Nisi anim cupidatat excepteur officia. Reprehenderit nostrud nostrud ipsum Lorem est aliquip amet voluptate voluptate dolor minim nulla est .",
 "size": {
   "x": 1,

@@ -9,6 +9,6 @@ public class ExpansionBag extends Item {
   }
   @Override
   public void onUse() {
-    owner.inventory.capacity += 20;
+    owner.inventory.capacity += 5;
   }
 }

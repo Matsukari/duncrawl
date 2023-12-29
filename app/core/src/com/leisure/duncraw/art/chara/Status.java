@@ -36,11 +36,11 @@ public class Status {
   public float getAttack() { return phyAttack.x + bonusAttack; }
   public float getDefense() { return phyDefense.x + bonusDefense; }
   public void update(float dt) {
-    if (healthTimer.sinceLastPeek() >= 5000) {
+    if (healthTimer.sinceLastPeek() >= 10000) {
       setHealth(health + hpRecovery);
       healthTimer.peek();
     }
-    if (staminaTimer.sinceLastPeek() >= 3000) {
+    if (staminaTimer.sinceLastPeek() >= 7000) {
       setStamina(stamina + stRecovery);
       staminaTimer.peek();
     }
@@ -53,7 +53,7 @@ public class Status {
     stRecovery = 3;
     maxStamina = 100;
     phyAttack = new Vector2(1, 1);
-    phyDefense = new Vector2(1, 1);
+    phyDefense = new Vector2(0, 0);
     elementPower = 1;
     dead = false;
     element = Element.NONE;
