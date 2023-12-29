@@ -9,6 +9,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.leisure.duncraw.art.chara.Chara;
 import com.leisure.duncraw.art.chara.EnemySpawner;
 import com.leisure.duncraw.art.item.Item;
+import com.leisure.duncraw.art.map.Decoration;
 import com.leisure.duncraw.art.map.Obj;
 import com.leisure.duncraw.art.map.Terrain;
 import com.leisure.duncraw.art.map.TilemapChara;
@@ -62,7 +63,7 @@ public class Floor {
     TilemapChara chara = getChara(x, y);
     boolean traversable = true;
     if (terrain != null && !terrain.traversable()) traversable = false;
-    if (obj != null && !(obj instanceof Item)) traversable = false;
+    if (obj != null && !(obj instanceof Item) && !(obj instanceof Decoration)) traversable = false;
     if (chara != null) traversable = false;
     return traversable;
   }

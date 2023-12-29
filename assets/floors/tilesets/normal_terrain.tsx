@@ -46,6 +46,21 @@
    <property name="terrain" value="wall_right_edge"/>
   </properties>
  </tile>
+ <tile id="106">
+  <properties>
+   <property name="terrain" value="ground"/>
+  </properties>
+ </tile>
+ <tile id="107">
+  <properties>
+   <property name="terrain" value="ground"/>
+  </properties>
+ </tile>
+ <tile id="108">
+  <properties>
+   <property name="terrain" value="ground"/>
+  </properties>
+ </tile>
  <tile id="123">
   <properties>
    <property name="terrain" value="wall_left_corner"/>
@@ -61,7 +76,17 @@
    <property name="terrain" value="wall_right_corner"/>
   </properties>
  </tile>
+ <tile id="126">
+  <properties>
+   <property name="terrain" value="ground"/>
+  </properties>
+ </tile>
  <tile id="127">
+  <properties>
+   <property name="terrain" value="ground"/>
+  </properties>
+ </tile>
+ <tile id="128">
   <properties>
    <property name="terrain" value="ground"/>
   </properties>
@@ -71,9 +96,39 @@
    <property name="terrain" value="wall_single_body"/>
   </properties>
  </tile>
+ <tile id="146">
+  <properties>
+   <property name="terrain" value="ground"/>
+  </properties>
+ </tile>
+ <tile id="147">
+  <properties>
+   <property name="terrain" value="ground"/>
+  </properties>
+ </tile>
+ <tile id="148">
+  <properties>
+   <property name="terrain" value="ground"/>
+  </properties>
+ </tile>
  <tile id="165">
   <properties>
    <property name="terrain" value="wall_single_down"/>
+  </properties>
+ </tile>
+ <tile id="166">
+  <properties>
+   <property name="terrain" value="ground"/>
+  </properties>
+ </tile>
+ <tile id="167">
+  <properties>
+   <property name="terrain" value="ground"/>
+  </properties>
+ </tile>
+ <tile id="168">
+  <properties>
+   <property name="terrain" value="ground"/>
   </properties>
  </tile>
 </tileset>

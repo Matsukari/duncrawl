@@ -6,6 +6,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.leisure.duncraw.art.map.LayeredTerrain;
 import com.leisure.duncraw.art.map.Obj;
 import com.leisure.duncraw.art.map.Terrain;
 import com.leisure.duncraw.data.FloorData;
@@ -94,18 +95,35 @@ public class TerrainSetGenerator {
         
       }
       
+    }
+    for (Rectangle room : roomsBuilder.rooms) {
+      int cols = (int)(room.width / data.tileSize);
+      int rows = (int)(room.height / data.tileSize);
+      // Go explore topmost and bottommost tile in room horizontally
+      Pointi pos = roomsBuilder.getRoomRelTilePos(room);
+      pos.y += data.normalHeight - 1;
+      int left = pos.x;
+      int right = pos.x + cols - 1;
       // Go explore leftmost and rightmost tile vertiacally
       for (int row = 0; row < rows; row++) {
         Terrain leftWall = walls[WallType.LEFT_HEAD].getVariant();
         Terrain rightWall = walls[WallType.RIGHT_HEAD].getVariant();
-        if (terrainSet.getTerrain(left - 1, pos.y + row) == null || (terrainSet.getTerrain(left, pos.y+row).type.contains("wall")) )
-          putTerrain(terrainSet, leftWall, left, pos.y + row, furnishers);
-        if (terrainSet.getTerrain(right + 1, pos.y + row) == null || (terrainSet.getTerrain(right, pos.y+row).type.contains("wall")) ) 
-          putTerrain(terrainSet, rightWall, right, pos.y + row, furnishers);
+        if (terrainSet.getTerrain(left - 1, pos.y + row) == null ||
+            terrainTypeHas("wall", terrainSet.getTerrain(left-1, pos.y+row))
+            )
+          putTerrain(terrainSet, rightWall, left-1, pos.y + row, furnishers);
+        if (terrainSet.getTerrain(right + 1, pos.y + row) == null || 
+            terrainTypeHas("wall", terrainSet.getTerrain(right+1, pos.y+row))
+            )
+          putTerrain(terrainSet, leftWall, right+1, pos.y + row, furnishers);
       }
+
     }
   }
-
+  private boolean terrainTypeHas(String type, Terrain terrain) {
+    if (terrain instanceof LayeredTerrain) return ((LayeredTerrain)terrain).containsWType(type);
+    return terrain.type.contains(type);
+  }
   // Call before styling anything (before placing any terrains based on created rooms)
   public static void combine(TerrainSet base, TerrainSet add, RoomsBuilder roomsBuilder, Rectangle replacedRoom) {
     roomsBuilder.rooms.remove(replacedRoom);

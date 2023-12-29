@@ -16,6 +16,10 @@ public class LayeredTerrain extends Terrain {
   // public void putObj(Obj obj) {
   //   overlays.get(0).putObj(obj);
   // }
+  public boolean containsWType(String type) {
+    for (Terrain terrain : overlays)  if (terrain.type.contains(type)) return true;
+    return false;
+  }
   @Override
   public boolean traversable() {
     for (Terrain terrain : overlays) if (!terrain.traversable()) return false;
