@@ -1,7 +1,6 @@
 {
 "anims": {
-	"idle": "images/objects/chest_idle.png",
-  "open": "images/objects/chest_open.png"
+	"idle": "images/objects/rock_2.png",
 },
 "sounds": {},
 "name": "No-name-obj",

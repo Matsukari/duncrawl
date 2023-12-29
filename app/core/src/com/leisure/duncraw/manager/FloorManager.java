@@ -14,7 +14,9 @@ import com.leisure.duncraw.map.TerrainVariants;
 import com.leisure.duncraw.map.Tileset;
 import com.leisure.duncraw.map.WallType;
 import com.leisure.duncraw.map.floors.Floor1;
+import com.leisure.duncraw.map.generator.DeadBodiesFurnisher;
 import com.leisure.duncraw.map.generator.LightSourcesFurnisher;
+import com.leisure.duncraw.map.generator.MiscDecorationFurnisher;
 import com.leisure.duncraw.map.generator.TerrainSetGenerator;
 
 public class FloorManager {
@@ -38,6 +40,8 @@ public class FloorManager {
     lightEnvironment = new LightEnvironment(new Color(1, 1, 1, 1), new Rectangle(0, 0, floor.background.getWidth(), floor.background.getHeight()), batch);
 
     floor.generator.wallFurnishers.add(new LightSourcesFurnisher(lightEnvironment, effectManager));
+    floor.generator.groundFurnishers.add(new DeadBodiesFurnisher());
+    floor.generator.groundFurnishers.add(new MiscDecorationFurnisher());
     floor.stage();
     // Logger.log("FloorManager", String.format("Current floor (%d) name : %s", level, floor.getName()));
     // Logger.log("FloorManager", String.format("Floor data %s", level, floorData.title));

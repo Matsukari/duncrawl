@@ -94,9 +94,9 @@ public class GameScreen extends Screen {
     mob.setState(new MoveState(pos.x + 5, pos.y + 5, false));
     npc.setState(new MoveState(pos.x + 2, pos.y - 1, false));
     // mob.startAI(new AiWanderer(floorManager.getCurrentFloor(), player));
-    floorManager.getCurrentFloor().background.putObject(new StaminaPotion("dat/item/stamina_potion.dat"), pos.x - 1, pos.y);
-    floorManager.getCurrentFloor().background.putObject(new Chest("dat/obj/chest.dat"), pos.x + 3, pos.y);
-    floorManager.getCurrentFloor().background.putObject(new Lamp("dat/obj/lamp.dat", floorManager.lightEnvironment, effectManager), pos.x - 3, pos.y);
+    floorManager.getCurrentFloor().background.putObject(new StaminaPotion(Graphics.objsSources.lowStaminaPotion), pos.x - 1, pos.y);
+    floorManager.getCurrentFloor().background.putObject(new Chest(Graphics.objsSources.chest), pos.x + 3, pos.y);
+    // floorManager.getCurrentFloor().background.putObject(new Lamp("dat/obj/lamp.dat", floorManager.lightEnvironment, effectManager), pos.x - 3, pos.y);
     
     // floorManager.getCurrentFloor().initialSpawn(new EnemySpawner(charaManager, charaManager.sources, ()->new AiWanderer(floorManager.getCurrentFloor(), player));
     npc.observers.add(new TalkBehaviour(hudManager.dialogueHud, Conversation.fromDat("dat/convs/test.conv")));

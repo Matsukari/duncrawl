@@ -1,0 +1,44 @@
+{
+"chest": "dat/obj/chest.dat",
+"magicDust": "dat/item/magic_dust.dat",
+"magicOre": "dat/obj/magic_dust.dat",
+"bronzeMonsterCore": "dat/item/monster_core_bronze.dat",
+"silverMonsterCore": "dat/item/monster_core_silver.dat",
+"goldMonsterCore": "dat/item/monster_core_gold/.dat",
+"bronzeKey": "dat/item/key_bronze.dat",
+"silverKey": "dat/item/key_silver.dat",
+"goldKey": "dat/item/key_gold.dat",
+"ominousKey": "dat/item/key_ominous.dat",
+"shabbyDagger": "dat/equip/shabby_dagger.dat",
+"assasinPride": "dat/equip/assasins_pride.dat",
+"sharpDagger": "dat/equip/sharp_dagger.dat",
+"durandal": "dat/equip/durandal.dat",
+"greenSteel": "dat/equip/green_steel.dat",
+"vampireFang": "dat/equip/vampire_fang.dat",
+"edibleFlesh": "dat/item/edible_flesh.dat",
+"greenMeat": "dat/item/green_meat.dat",
+"lowHealthPotion": "dat/item/health_low.dat",
+"lowStaminaPotion": "dat/item/stam_low.dat",
+"midHealthPotion": "dat/item/health_mid.dat",
+"midStaminaPotion": "dat/item/stam_mid.dat",
+"highStaminaPotion": "dat/item/stam_high.dat",
+"highHealthPotion": "dat/item/health_high.dat",
+"expansionBag": "dat/item/expansion_bag.dat",
+"rocks": [
+	"dat/obj/rock_1.dat",
+  "dat/obj/rock_2.dat",
+	"dat/obj/rock_3.dat"
+],
+"corpses": [
+	"dat/obj/corpse_1.dat",
+	"dat/obj/corpse_2.dat",
+	"dat/obj/corpse_3.dat",
+	"dat/obj/corpse_4.dat"
+],
+"totems": [
+	"dat/obj/totem_1.dat"
+],
+"flowers": [
+	"dat/obj/flower_1.dat"
+]
+}

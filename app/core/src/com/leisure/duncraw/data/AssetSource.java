@@ -31,6 +31,8 @@ public class AssetSource {
   }
   public static void save() { Serializer.save(instance, instance.ini); }
   public static AssetSource load() throws Exception { return Deserializer.load(AssetSource.class, instance.ini); }
+  public static ObjsData getObjsData() 
+  { return getGenericData(ObjsData.class, instance.objects, ()->{ObjsData dat = new ObjsData(); dat.reset(); return dat;}); }
   public static FloorsData getFloorsData() 
   { return getGenericData(FloorsData.class, instance.floors, ()->{FloorsData dat = new FloorsData(); dat.reset(); return dat;}); }
   public static CharasData getCharasData() 

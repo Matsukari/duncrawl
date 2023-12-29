@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.leisure.duncraw.data.AssetSource;
 import com.leisure.duncraw.data.FontsData;
+import com.leisure.duncraw.data.ObjsData;
 import com.leisure.duncraw.data.UiData;
 
 import lib.animation.LinearAnimation;
@@ -16,6 +17,7 @@ import lib.animation.LinearAnimation;
 public class Graphics {
   public static AssetManager assets;
   public static FontsData fontSources;
+  public static ObjsData objsSources;
   public static BitmapFont defFont;
   public static HashMap<String, LinearAnimation<TextureRegion>> anims = new HashMap<>();
   private static <T> String getSafe(String file, Class<T> clazz) {
@@ -38,6 +40,7 @@ public class Graphics {
   public static void init () {
     assets = new AssetManager();
     fontSources = AssetSource.getFontsData();
+    objsSources = AssetSource.getObjsData();
     assets.load(fontSources.def, BitmapFont.class);
     assets.load(fontSources.normal, BitmapFont.class);
     assets.load(fontSources.important, BitmapFont.class);

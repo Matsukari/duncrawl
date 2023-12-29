@@ -20,6 +20,7 @@ public class TerrainSetGenerator {
   public RoomsBuilder roomsBuilder;
   public FloorData data;
   public final TerrainFurnishers wallFurnishers = new TerrainFurnishers();
+  public final TerrainFurnishers groundFurnishers = new TerrainFurnishers();
   // 0-5 for a grid representation of the body of a wall
   // 0 1 2 
   // 3 4 5
@@ -46,18 +47,18 @@ public class TerrainSetGenerator {
   }
   public void populate(TerrainSet terrainSet) {
     try { 
-      placeGrounds(terrainSet);
+      placeGrounds(terrainSet, groundFurnishers);
       placeWalls(terrainSet, wallFurnishers);
     } catch (Exception e) { 
       e.printStackTrace();
       System.exit(-1);
     }
   }
-  public void placeGrounds(TerrainSet terrainSet) throws Exception {
+  public void placeGrounds(TerrainSet terrainSet, TerrainFurnishers furnishers) throws Exception {
     roomsBuilder.forEachTileInRooms(roomsBuilder.rooms, (room, col, row)->{
       Pointi pos = roomsBuilder.getRoomRelTilePos(room);
       Terrain terrain = grounds.get(MathUtils.random(0, grounds.size()-1)).clone();
-      if (terrainSet.getTerrain(pos.x + col, pos.y + row) == null) terrainSet.putTerrain(terrain, pos.x + col, pos.y + row);  
+      if (terrainSet.getTerrain(pos.x + col, pos.y + row) == null) putTerrain(terrainSet, terrain, pos.x + col, pos.y + row, furnishers);  
     }); 
   }
   public void putTerrain(TerrainSet terrainSet, Terrain terrain, int x, int y, TerrainFurnishers furnishers) {

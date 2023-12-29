@@ -9,7 +9,7 @@
 			{
 				"datFile": "dat/item/stamina_potion.dat",
 				"classname": "com.leisure.duncraw.art.item.items.StaminaPotion",
-				"quantity": 2,
+				"quantity": 1,
 				"maxQuantity": 99
 			}
 		],
@@ -17,7 +17,7 @@
 	},
 	"status": {
 		"health": 100,
-		"stamina": 54,
+		"stamina": 100,
 		"maxHealth": 100,
 		"maxStamina": 100,
 		"hpRecovery": 2,
