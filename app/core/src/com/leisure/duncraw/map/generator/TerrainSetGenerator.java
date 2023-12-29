@@ -47,7 +47,7 @@ public class TerrainSetGenerator {
     return terrainSet;
   }
   public void populate(TerrainSet terrainSet) {
-    try { 
+    try {
       placeGrounds(terrainSet, groundFurnishers);
       placeWalls(terrainSet, wallFurnishers);
     } catch (Exception e) { 
@@ -56,11 +56,13 @@ public class TerrainSetGenerator {
     }
   }
   public void placeGrounds(TerrainSet terrainSet, TerrainFurnishers furnishers) throws Exception {
+    groundFurnishers.start(terrainSet, roomsBuilder);
     roomsBuilder.forEachTileInRooms(roomsBuilder.rooms, (room, col, row)->{
       Pointi pos = roomsBuilder.getRoomRelTilePos(room);
       Terrain terrain = grounds.get(MathUtils.random(0, grounds.size()-1)).clone();
       if (terrainSet.getTerrain(pos.x + col, pos.y + row) == null) putTerrain(terrainSet, terrain, pos.x + col, pos.y + row, furnishers);  
     }); 
+    groundFurnishers.finish(terrainSet, roomsBuilder);
   }
   public void putTerrain(TerrainSet terrainSet, Terrain terrain, int x, int y, TerrainFurnishers furnishers) {
     terrainSet.putTerrain(terrain, x, y);
@@ -68,6 +70,7 @@ public class TerrainSetGenerator {
   }
   public void placeWalls(TerrainSet terrainSet, TerrainFurnishers furnishers) throws Exception {
     // Logger.log("Rooms before", )
+    wallFurnishers.start(terrainSet, roomsBuilder);
     roomsBuilder.rooms.sort((a, b)-> (a.y > b.y) ? 1 : (b.y > a.y) ? -1 : 0 );
     for (Rectangle room : roomsBuilder.rooms) {
       int cols = (int)(room.width / data.tileSize);
@@ -119,6 +122,7 @@ public class TerrainSetGenerator {
       }
 
     }
+    wallFurnishers.finish(terrainSet, roomsBuilder);
   }
   private boolean terrainTypeHas(String type, Terrain terrain) {
     if (terrain instanceof LayeredTerrain) return ((LayeredTerrain)terrain).containsWType(type);

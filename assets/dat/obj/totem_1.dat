@@ -1,0 +1,12 @@
+{
+"anims": {
+	"idle": "images/objects/totem_1.png"
+},
+"sounds": {},
+"name": "No-name-obj",
+"desc": "No-desc-obj",
+"size": {
+	"x": 2,
+	"y": 2
+}
+}

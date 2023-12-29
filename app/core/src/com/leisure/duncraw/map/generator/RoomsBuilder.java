@@ -287,7 +287,15 @@ public class RoomsBuilder {
     }
     return null;
   }
-
+  public Pointi getRandomTileInMainRooms() {
+    return getRandomTileInRoom(mainRooms.get(MathUtils.random(mainRooms.size()-1)));
+  }
+  public Pointi getRandomTileInRoom(Rectangle room) {
+    Pointi tile = new Pointi(0, 0);
+    tile.x = (int)(MathUtils.random(room.x, room.x + room.width) - min.x) / tileSize;
+    tile.y = (int)(MathUtils.random(room.y, room.y + room.height) - min.y) / tileSize;
+    return tile;
+  }
 }
 
 

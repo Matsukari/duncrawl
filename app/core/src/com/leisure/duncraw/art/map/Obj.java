@@ -14,6 +14,7 @@ import lib.animation.LinearAnimation;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.g2d.Animation.PlayMode;
 
 public class Obj extends Art {
   public transient ObjData dat;
@@ -34,7 +35,7 @@ public class Obj extends Art {
     ObjData data = new ObjData(); 
     data.reset();
     try { data = Deserializer.load(ObjData.class, Gdx.files.local(datFile)); } catch(Exception e) { Serializer.save(data, Gdx.files.local(datFile)); }
-    idle = GeneralAnimation.line(data.anims.get("idle"));
+    idle = GeneralAnimation.line(data.anims.get("idle"), PlayMode.LOOP, Math.max(data.size.x, data.size.y) * 16);
     dat = data;
     anim = idle;
   }

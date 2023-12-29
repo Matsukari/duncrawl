@@ -52,8 +52,8 @@ public class TerrainSet {
       // Expand and center to origin (x, y will still be topleft but interaction will be done in origin plus it's radius (block size)) 
       if (snapSize) {
         obj.bounds.setPosition(
-            (x * terrainWidth) + (obj.dat.size.x-1) * terrainWidth/2, 
-            (y * terrainHeight) + (obj.dat.size.y-1) * terrainHeight/2
+            (x * terrainWidth) - (obj.dat.size.x-1) * terrainWidth/2, 
+            (y * terrainHeight) - (obj.dat.size.y-1) * terrainHeight/2
             );
         obj.bounds.setSize(terrainWidth * obj.dat.size.x, terrainHeight * obj.dat.size.y);
       }

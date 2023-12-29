@@ -36,7 +36,8 @@
 	"dat/obj/corpse_4.dat"
 ],
 "totems": [
-	"dat/obj/totem_1.dat"
+	"dat/obj/totem_1.dat",
+	"dat/obj/totem_2.dat"
 ],
 "flowers": [
 	"dat/obj/flower_1.dat"
