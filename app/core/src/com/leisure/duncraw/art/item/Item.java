@@ -1,15 +1,15 @@
 package com.leisure.duncraw.art.item;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.g2d.Animation.PlayMode;
 import com.leisure.duncraw.art.chara.Chara;
 import com.leisure.duncraw.art.chara.Player;
 import com.leisure.duncraw.art.map.Obj;
 import com.leisure.duncraw.data.Deserializer;
 import com.leisure.duncraw.data.GeneralAnimation;
 import com.leisure.duncraw.data.ItemData;
-import com.leisure.duncraw.data.Serializer;
+import com.leisure.duncraw.data.ObjData;
 import com.leisure.duncraw.logging.Logger;
 
 import lib.animation.LinearAnimation;
@@ -24,22 +24,26 @@ public class Item extends Obj {
   public transient LinearAnimation<TextureRegion> dropAnim; 
   public transient LinearAnimation<TextureRegion> storeAnim;
   public Item(String datFile) {
-    super(datFile);
+    load(datFile);
     anim = idle;
-    maxQuantity = 99;
-    quantity = 0;
     // animation = storeAnim;
   }
-  public Item() { super((LinearAnimation<TextureRegion>)null); }
+  public Item() {} 
+  {
+    maxQuantity = 16;
+    quantity = 0;
+  }
   @Override
   public void load(String datFile) {
-    this.datFile = datFile;
-    itemData = new ItemData();
-    itemData.reset();
-    try { itemData = Deserializer.load(ItemData.class, Gdx.files.local(datFile)); } catch(Exception e) { Serializer.save(itemData, Gdx.files.local(datFile)); };
-    dat = itemData;
-    idle = GeneralAnimation.line(dat.anims.get("drop"));
-    storeAnim = GeneralAnimation.line(dat.anims.get("store"));
+    loadType(datFile, ItemData.class);
+  }
+  @Override
+  protected <T extends ObjData> T loadType(String datFile, Class<T> clazz) {
+    T type = super.loadType(datFile, clazz);
+    dropAnim = GeneralAnimation.line(dat.anims.get("drop"), PlayMode.LOOP, Math.max(dat.size.x, dat.size.y) * 16); 
+    storeAnim = GeneralAnimation.line(dat.anims.get("store"), PlayMode.LOOP, Math.max(dat.size.x, dat.size.y) * 16); 
+    anim = dropAnim;
+    return type;
   }
   @Override
   public void onCharaOccupy(Chara chara) {
@@ -50,7 +54,13 @@ public class Item extends Obj {
     }
   }
   public Item clone() {
-    Item item = new Item(datFile);
+    Item item = new Item();
+    item.datFile = datFile;
+    item.dat = dat;
+    item.anim = anim;
+    item.idle = idle;
+    item.dropAnim = dropAnim;
+    item.storeAnim = storeAnim;
     item.isDrop = isDrop;
     item.maxQuantity = maxQuantity;
     item.quantity = quantity;

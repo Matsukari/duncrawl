@@ -1,22 +1,20 @@
 package com.leisure.duncraw.art.item.items;
 
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.leisure.duncraw.art.item.Item;
-import com.leisure.duncraw.helper.SString;
-import com.leisure.duncraw.logging.Logger;
+import com.leisure.duncraw.data.ItemValuedData;
 
 public class StaminaPotion extends Item {
+  public int value;
   public StaminaPotion(String datFile) {
-    super(datFile);
+    load(datFile);
   }
   @Override
+  public void load(String datFile) {
+    ItemValuedData itemValuedData = loadType(datFile, ItemValuedData.class);
+    value = itemValuedData.value;
+  }
   public void onUse() {
-    owner.status.setStamina(owner.status.stamina + 19); 
-    Logger.log("StaminaPotion", "Used");
+    owner.status.setStamina(owner.status.stamina + value); 
   }
-  @Override
-  public void render(SpriteBatch batch) {
-    super.render(batch);
-    // Logger.log("StaminaPotion", "Rendered at " + SString.toString(bounds));
-  }
+
 }

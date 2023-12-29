@@ -55,15 +55,14 @@ public class Inventory extends Dat {
   // Cast into dynamic object, child of Item so it can use it's virtual method .use()
   public Inventory populate(Player owner) {
     this.owner = owner;
-    for (Object i : itemsData) {
-      InventoryItemData itemData = (InventoryItemData)i;
+    for (InventoryItemData itemData : itemsData) {
       try {
         Item item = (Item)Class.forName(itemData.classname).getDeclaredConstructor(String.class).newInstance(itemData.datFile);
         item.quantity = itemData.quantity;
         item.maxQuantity = itemData.maxQuantity;
         item.owner = owner;
         items.add(item);
-      } catch (Exception e) { e.printStackTrace(); }
+      } catch (Exception e) { e.printStackTrace(); System.exit(-1); }
     }
     return this;
   }

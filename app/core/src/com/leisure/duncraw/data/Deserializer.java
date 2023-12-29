@@ -1,9 +1,11 @@
 package com.leisure.duncraw.data;
 
+import java.lang.reflect.InvocationTargetException;
+
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonWriter.OutputType;
-import com.badlogic.gdx.files.FileHandle;
 import com.leisure.duncraw.logging.Logger;
 
 public class Deserializer {
@@ -19,4 +21,26 @@ public class Deserializer {
       throw new Exception();
     }
   }
+  // :)
+  // Guranties return non-null since the application will quit before ever reaching default return
+  public static <T extends Dat> T safeLoad(Class<T> tClass, FileHandle file) {
+    // Must have default constructor
+    T instance;
+    try {
+      instance = load(tClass, file);
+      return instance;
+    } 
+    catch (InvocationTargetException e) { e.printStackTrace(); System.exit(-1); }
+    catch (Exception e) { 
+      try { 
+        instance = tClass.getDeclaredConstructor().newInstance(); 
+        instance.reset();
+        Serializer.save(instance, file); 
+      }
+      catch (Exception e2) { e2.printStackTrace(); System.exit(-1); }
+    }
+    return null;
+  }
+  // Local directory
+  public static <T extends Dat> T safeLoad(Class<T> clazz, String file) { return safeLoad(clazz, Gdx.files.local(file)); }
 }

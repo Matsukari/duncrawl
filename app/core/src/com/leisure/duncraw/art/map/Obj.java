@@ -5,13 +5,9 @@ import com.leisure.duncraw.art.chara.Chara;
 import com.leisure.duncraw.data.Deserializer;
 import com.leisure.duncraw.data.GeneralAnimation;
 import com.leisure.duncraw.data.ObjData;
-import com.leisure.duncraw.data.Serializer;
-import com.leisure.duncraw.helper.SString;
-import com.leisure.duncraw.logging.Logger;
 
 import lib.animation.LinearAnimation;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.Animation.PlayMode;
@@ -30,14 +26,16 @@ public class Obj extends Art {
     this.anim = anim;
     idle = anim;
   }
-  public void load(String datFile) {
-    this.datFile = datFile;
-    ObjData data = new ObjData(); 
-    data.reset();
-    try { data = Deserializer.load(ObjData.class, Gdx.files.local(datFile)); } catch(Exception e) { Serializer.save(data, Gdx.files.local(datFile)); }
-    idle = GeneralAnimation.line(data.anims.get("idle"), PlayMode.LOOP, Math.max(data.size.x, data.size.y) * 16);
-    dat = data;
+  public Obj() {}
+  public void load(String datFile) { loadType(datFile, ObjData.class); }
+  protected <T extends ObjData> T loadType(String datFile, Class<T> clazz) {
+    this.datFile = datFile; 
+    T typeData = Deserializer.safeLoad(clazz, datFile);
+    dat = typeData;
+    try { idle = GeneralAnimation.line(dat.anims.get("idle"), PlayMode.LOOP, Math.max(dat.size.x, dat.size.y) * 16); }
+    catch (Exception e) {}
     anim = idle;
+    return typeData;
   }
   @Override
   public void render(SpriteBatch batch) {

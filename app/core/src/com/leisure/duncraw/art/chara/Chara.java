@@ -7,11 +7,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.leisure.duncraw.art.Art;
 import com.leisure.duncraw.art.chara.moves.LerpMovement;
 import com.leisure.duncraw.art.chara.states.IdleState;
-import com.leisure.duncraw.art.chara.states.LockState;
 import com.leisure.duncraw.art.map.TilemapChara;
 import com.leisure.duncraw.data.CharaData;
 import com.leisure.duncraw.data.DirAnimData;
-import com.leisure.duncraw.logging.Logger;
 
 public class Chara extends Art {
   public Status status;

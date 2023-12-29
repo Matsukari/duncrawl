@@ -7,7 +7,9 @@
 "name": "No-name-obj",
 "desc": "No-desc-obj",
 "size": {
-  "x": 1,
-  "y": 1
-}
+	"x": 1,
+	"y": 1
+},
+"containedItemType": "com.leisure.duncraw.art.item.items.StaminaPotion",
+"containedItemData": "dat/item/stam_low.dat"
 }

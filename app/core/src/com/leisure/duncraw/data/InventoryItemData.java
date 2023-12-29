@@ -17,8 +17,9 @@ public class InventoryItemData extends Dat {
   @Override
   public void reset() {
     quantity = 0;
-    maxQuantity = 99;
+    maxQuantity = 16;
     datFile = "none";
+    classname = "none";
   }
   @Override
   public boolean equals(Object obj) {
