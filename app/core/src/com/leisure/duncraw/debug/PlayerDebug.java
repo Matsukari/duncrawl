@@ -28,7 +28,7 @@ public class PlayerDebug extends CharaDebug {
     ImGui.beginChild("Scroll panel", size.x, player.inventory.items.size() * 10 + 10);
     for (Item item : player.inventory.items) ImGui.text(String.format("%s", item.dat.name));
     ImGui.endChild();
-    if (player.itemSel != null) ImGui.labelText("Equip", player.itemSel.dat.name);
+    if (player.weapon != null) ImGui.labelText("Weapon", player.weapon.dat.name);
   
   }
 }

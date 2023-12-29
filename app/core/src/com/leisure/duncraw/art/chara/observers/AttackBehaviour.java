@@ -9,7 +9,6 @@ public class AttackBehaviour extends Observer {
   public void invoke(State state) {
     if (state instanceof AttackState) {
       AttackState s = (AttackState)state;
-      // s.target.status.health -= s.chara.status.phyAttack.x;
     }
   }
   @Override

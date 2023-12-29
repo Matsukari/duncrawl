@@ -50,22 +50,19 @@ public class Item extends Obj {
     if (chara instanceof Player && isDrop) {
       Player player = (Player)chara;
       player.inventory.put(this);
-      if (player.itemSel == null) player.equip(this);
     }
   }
   public Item clone() {
-    Item item = new Item();
-    item.datFile = datFile;
-    item.dat = dat;
-    item.anim = anim;
-    item.idle = idle;
-    item.dropAnim = dropAnim;
-    item.storeAnim = storeAnim;
-    item.isDrop = isDrop;
-    item.maxQuantity = maxQuantity;
-    item.quantity = quantity;
-    item.owner = owner;
-    return item;
+    // Runtime subtype
+    try {
+      Item item = getClass().getDeclaredConstructor(String.class).newInstance(datFile);
+      item.isDrop = isDrop;
+      item.maxQuantity = maxQuantity;
+      item.quantity = quantity;
+      item.owner = owner;
+      return item;
+    } catch (Exception e) { e.printStackTrace(); System.exit(-1); }
+    return null;
   }
   public boolean use() {
     quantity--;

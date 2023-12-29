@@ -36,8 +36,14 @@ public class Inventory extends Dat {
     itemData.quantity++;
     item.quantity++;
   }
+  private InventoryItemData getItemData(Item item) {
+    InventoryItemData itemData =new InventoryItemData(item);;
+    for (InventoryItemData i : itemsData) if (i.equals(itemData)) itemData = i; 
+    return itemData;
+  }
   public Item use(Item item) {
     item.use();
+    getItemData(item).quantity = item.quantity;
     if (item.quantity <= 0) {
       items.remove(item);
       itemsData.remove(new InventoryItemData(item));

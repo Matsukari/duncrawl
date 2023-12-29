@@ -11,13 +11,19 @@
 				"classname": "com.leisure.duncraw.art.item.items.StaminaPotion",
 				"quantity": 2,
 				"maxQuantity": 16
+			},
+			{
+				"datFile": "dat/equip/green_steel.dat",
+				"classname": "com.leisure.duncraw.art.item.Weapon",
+				"quantity": 1,
+				"maxQuantity": 16
 			}
 		],
 		"capacity": 10
 	},
 	"status": {
 		"health": 100,
-		"stamina": 14,
+		"stamina": 100,
 		"maxHealth": 100,
 		"maxStamina": 100,
 		"hpRecovery": 2,

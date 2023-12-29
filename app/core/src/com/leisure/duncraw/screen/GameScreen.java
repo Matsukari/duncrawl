@@ -20,6 +20,7 @@ import com.leisure.duncraw.art.chara.observers.TalkBehaviour;
 import com.leisure.duncraw.art.chara.observers.dark.InfuseDarknessBehaviour;
 import com.leisure.duncraw.art.chara.observers.dark.ShadowCloakBehaviour;
 import com.leisure.duncraw.art.chara.states.MoveState;
+import com.leisure.duncraw.art.item.Weapon;
 import com.leisure.duncraw.art.item.items.StaminaPotion;
 import com.leisure.duncraw.art.lighting.LightEnvironment;
 import com.leisure.duncraw.art.lighting.PointLight;
@@ -95,6 +96,7 @@ public class GameScreen extends Screen {
     npc.setState(new MoveState(pos.x + 2, pos.y - 1, false));
     // mob.startAI(new AiWanderer(floorManager.getCurrentFloor(), player));
     floorManager.getCurrentFloor().background.putObject(new StaminaPotion(Graphics.objsSources.lowStaminaPotion), pos.x - 1, pos.y);
+    floorManager.getCurrentFloor().background.putObject(new Weapon(Graphics.objsSources.greenSteel), pos.x, pos.y);
     floorManager.getCurrentFloor().background.putObject(new Chest(Graphics.objsSources.chest), pos.x + 3, pos.y);
     // floorManager.getCurrentFloor().background.putObject(new Lamp("dat/obj/lamp.dat", floorManager.lightEnvironment, effectManager), pos.x - 3, pos.y);
     
