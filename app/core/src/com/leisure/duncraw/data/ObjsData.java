@@ -3,7 +3,7 @@ package com.leisure.duncraw.data;
 import java.util.ArrayList;
 
 public class ObjsData extends Dat {
-  public String chest;
+  public ArrayList<ArrayList<String>> floorChests;
   public String magicDust;
   public String magicOre;
   public String bronzeMonsterCore;
@@ -37,7 +37,9 @@ public class ObjsData extends Dat {
 
   @Override
   public void reset() {
-    chest = "dat/obj/chest.dat";  
+    floorChests = new ArrayList<>();
+    floorChests.add(new ArrayList<>());
+    floorChests.get(0).add("dat/obj/chest.dat");
     magicDust = "dat/item/magic_dust.dat";
     magicOre = "dat/obj/magic_dust.dat";
     lamp = "dat/obj/lamp.dat";

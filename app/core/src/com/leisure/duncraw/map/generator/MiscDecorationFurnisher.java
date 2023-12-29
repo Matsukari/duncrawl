@@ -9,6 +9,7 @@ import com.leisure.duncraw.Graphics;
 import com.leisure.duncraw.art.map.Decoration;
 import com.leisure.duncraw.art.map.Obj;
 import com.leisure.duncraw.art.map.Terrain;
+import com.leisure.duncraw.art.map.objs.Chest;
 import com.leisure.duncraw.art.map.objs.Totem;
 import com.leisure.duncraw.map.TerrainSet;
 
@@ -21,7 +22,8 @@ public class MiscDecorationFurnisher extends TerrainFurnisher {
   private int lastDec;
   private int lastOffset;
   // By room
-  private int totems = 4;
+  public int totems = 4;
+  public ArrayList<String> chests = new ArrayList<>();
   @Override
   public void furnish(TerrainSet terrainSet, RoomsBuilder roomsBuilder, Terrain terrain, int x, int y) {
     if (lastDec >= lastOffset && terrain.type.contains("ground")) {
@@ -37,6 +39,10 @@ public class MiscDecorationFurnisher extends TerrainFurnisher {
     for (int i = 0; i < totems; i++) {
       Pointi ranPos = roomsBuilder.getRandomTileInRoom(roomsBuilder.mainRooms.get(i%(roomsBuilder.mainRooms.size()))); 
       terrainSet.putObject(new Totem(Graphics.objsSources.totems.get(MathUtils.random(Graphics.objsSources.totems.size()-1))), ranPos.x, ranPos.y);
+    }
+    for (int i = 0; i < chests.size(); i++) {
+      Pointi ranPos = roomsBuilder.getRandomTileInRoom(roomsBuilder.mainRooms.get(i%(roomsBuilder.mainRooms.size()))); 
+      terrainSet.putObject(new Chest(chests.get(i)), ranPos.x, ranPos.y);
     }
   }
 }

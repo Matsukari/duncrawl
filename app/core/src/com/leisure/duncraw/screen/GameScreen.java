@@ -97,7 +97,7 @@ public class GameScreen extends Screen {
     // mob.startAI(new AiWanderer(floorManager.getCurrentFloor(), player));
     floorManager.getCurrentFloor().background.putObject(new StaminaPotion(Graphics.objsSources.lowStaminaPotion), pos.x - 1, pos.y);
     floorManager.getCurrentFloor().background.putObject(new Weapon(Graphics.objsSources.greenSteel), pos.x, pos.y);
-    floorManager.getCurrentFloor().background.putObject(new Chest(Graphics.objsSources.chest), pos.x + 3, pos.y);
+    // floorManager.getCurrentFloor().background.putObject(new Chest(Graphics.objsSources.chest), pos.x + 3, pos.y);
     // floorManager.getCurrentFloor().background.putObject(new Lamp("dat/obj/lamp.dat", floorManager.lightEnvironment, effectManager), pos.x - 3, pos.y);
     
     // floorManager.getCurrentFloor().initialSpawn(new EnemySpawner(charaManager, charaManager.sources, ()->new AiWanderer(floorManager.getCurrentFloor(), player));

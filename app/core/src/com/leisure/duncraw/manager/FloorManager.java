@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
+import com.leisure.duncraw.Graphics;
 import com.leisure.duncraw.art.lighting.LightEnvironment;
 import com.leisure.duncraw.data.FloorData;
 import com.leisure.duncraw.data.FloorsData;
@@ -41,7 +42,9 @@ public class FloorManager {
 
     floor.generator.wallFurnishers.add(new LightSourcesFurnisher(lightEnvironment, effectManager));
     floor.generator.groundFurnishers.add(new DeadBodiesFurnisher());
-    floor.generator.groundFurnishers.add(new MiscDecorationFurnisher());
+    MiscDecorationFurnisher miscDecorationFurnisher = new MiscDecorationFurnisher();
+    miscDecorationFurnisher.chests.addAll(Graphics.objsSources.floorChests.get(0));
+    floor.generator.groundFurnishers.add(miscDecorationFurnisher);
     floor.stage();
     // Logger.log("FloorManager", String.format("Current floor (%d) name : %s", level, floor.getName()));
     // Logger.log("FloorManager", String.format("Floor data %s", level, floorData.title));
