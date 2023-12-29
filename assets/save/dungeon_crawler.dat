@@ -5,7 +5,14 @@
 "player": {
 	"rank": "BRONZE",
 	"inventory": {
-		"itemsData": [],
+		"itemsData": [
+			{
+				"datFile": "dat/item/stamina_potion.dat",
+				"classname": "com.leisure.duncraw.art.item.items.StaminaPotion",
+				"quantity": 2,
+				"maxQuantity": 99
+			}
+		],
 		"capacity": 10
 	},
 	"status": {

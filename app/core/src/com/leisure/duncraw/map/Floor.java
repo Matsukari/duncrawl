@@ -1,11 +1,15 @@
 package com.leisure.duncraw.map;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
+import com.leisure.duncraw.art.chara.Chara;
 import com.leisure.duncraw.art.chara.EnemySpawner;
+import com.leisure.duncraw.art.item.Item;
+import com.leisure.duncraw.art.map.Obj;
 import com.leisure.duncraw.art.map.Terrain;
 import com.leisure.duncraw.art.map.TilemapChara;
 import com.leisure.duncraw.map.generator.TerrainSetGenerator;
@@ -37,6 +41,8 @@ public class Floor {
     for (Terrain terrain : layer.terrains) {
       if (terrain != null) terrain.render(batch);
     }
+    for (Map.Entry<Pointi, Obj> obj : layer.objs.entrySet()) 
+      obj.getValue().render(batch); 
   }
   public void putChara(TilemapChara chara) {
     if (chars.contains(chara));
@@ -49,7 +55,17 @@ public class Floor {
     return null;
   }
   public void update() {}
-  public void initialSpawn(EnemySpawner spawner) { this.spawner = spawner; }
+  public void initialSpawn(EnemySpawner spawner) { this.spawner = spawner; } 
+  public boolean canTravel(int x, int y) {
+    Terrain terrain = background.getTerrain(x, y);
+    Obj obj = background.getObj(x, y);
+    TilemapChara chara = getChara(x, y);
+    boolean traversable = true;
+    if (terrain != null && !terrain.traversable()) traversable = false;
+    if (obj != null && !(obj instanceof Item)) traversable = false;
+    if (chara != null) traversable = false;
+    return traversable;
+  }
   public Pointi getTileInRandomRoom() {
     Pointi tile = new Pointi(0, 0);
     if (generator == null) return tile;

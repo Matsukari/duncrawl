@@ -3,6 +3,7 @@ package lib.math;
 public class Pointi {
   public int x;
   public int y;
+  public Pointi() {}
   public Pointi(int x, int y) { 
     this.x = x;
     this.y = y;
@@ -19,6 +20,11 @@ public class Pointi {
   @Override
   public int hashCode() {
     return y * 1000 + x;
+  }
+  public Pointi set(int x, int y) { 
+    this.x = x;
+    this.y = y;
+    return this;
   }
   
 

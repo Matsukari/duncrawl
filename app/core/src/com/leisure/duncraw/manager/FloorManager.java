@@ -57,8 +57,8 @@ public class FloorManager {
       floor.render(batch, floor.foreground);
       batch.end();
     }
-    lightEnvironment.update();
-    lightEnvironment.cast(cam);
+    // lightEnvironment.update();
+    // lightEnvironment.cast(cam);
   }
   public void dispose() {
     batch.dispose();

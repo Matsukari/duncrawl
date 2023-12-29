@@ -24,7 +24,7 @@ public class LightSourcesFurnisher extends TerrainFurnisher {
   @Override
   public void furnish(TerrainSet terrainSet, RoomsBuilder roomsBuilder, Terrain terrain, int x, int y) {
     if (lastLight >= lastOffset && terrain.type.equals("wall")) {
-      terrain.putObj(new Lamp("dat/obj/lamp.dat", lightEnvironment, effectManager)); 
+      terrainSet.putObject(new Lamp("dat/obj/lamp.dat", lightEnvironment, effectManager), x, y); 
       lastLight = 0;
       lastOffset = MathUtils.random(nextOffset.x, nextOffset.y);
     }

@@ -35,9 +35,9 @@ public class TilemapChara {
      return map.background.getTerrain(x+byX, y+byY);
   }
   public Obj getObjBy(int byX, int byY) {
-    Terrain terrain = getTerrainBy(byX, byY);
-    if (terrain != null) return terrain.lastObj();
-    return null;
+    // Terrain terrain = getTerrainBy(byX, byY);
+    // if (terrain != null) return terrain.lastObj();
+    return map.background.getObj(x+byX, y+byY);
   }
   public boolean onBlock(int u, int v) { return x == u && y == v; } 
   public int getWidth() { return map.background.terrainWidth; }

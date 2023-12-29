@@ -20,6 +20,8 @@ public class Obj extends Art {
   public transient String datFile;
   public transient LinearAnimation<TextureRegion> idle;
   public transient LinearAnimation<TextureRegion> anim;
+  // public Pointi tileOccupy = new Pointi(1, 1);
+
   public Obj(String datFile) {
     load(datFile);
   }

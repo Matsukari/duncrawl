@@ -5,14 +5,7 @@
 "player": {
 	"rank": "BRONZE",
 	"inventory": {
-		"items": [
-			{
-				"isDrop": false,
-				"quantity": 2,
-				"maxQuantity": 99,
-				"datFile": "dat/item/stamina_potion.dat"
-			}
-		],
+		"itemsData": [],
 		"capacity": 10
 	},
 	"status": {
