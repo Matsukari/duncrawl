@@ -13,8 +13,7 @@ public class Player extends Chara {
   public Player(CharaData data, SaveData saveData) {
     super(data);
     status = saveData.player.status;
-    inventory = saveData.player.inventory;
-    for (Item item : inventory.items) item.load(item.datFile);
+    inventory = saveData.player.inventory.populate(this);
     movement.stepDuration = 3.5f;
     anims.get("move").setAnimDur(0.08f);
   }

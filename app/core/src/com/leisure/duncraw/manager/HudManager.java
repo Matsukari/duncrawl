@@ -81,6 +81,9 @@ public class HudManager {
     dialogueHud.setVisible(false);
     inventoryHud.setVisible(false);
   }
+  public boolean isModalVisible() {
+    return windowUi.isVisible() || dialogueHud.isVisible() || inventoryHud.isVisible();
+  }
   public void update(float dt) {
     dialogueHud.update();
     statusHud.update();

@@ -17,6 +17,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class Obj extends Art {
   public transient ObjData dat;
+  public transient String datFile;
   public transient LinearAnimation<TextureRegion> idle;
   public transient LinearAnimation<TextureRegion> anim;
   public Obj(String datFile) {
@@ -27,6 +28,7 @@ public class Obj extends Art {
     idle = anim;
   }
   public void load(String datFile) {
+    this.datFile = datFile;
     ObjData data = new ObjData(); 
     data.reset();
     try { data = Deserializer.load(ObjData.class, Gdx.files.local(datFile)); } catch(Exception e) { Serializer.save(data, Gdx.files.local(datFile)); }

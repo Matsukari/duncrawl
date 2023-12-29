@@ -15,10 +15,10 @@ import com.leisure.duncraw.logging.Logger;
 import lib.animation.LinearAnimation;
 
 public class Item extends Obj {
-  public boolean isDrop = true;
+  public transient boolean isDrop = true;
   public int quantity;
   public int maxQuantity;
-  public String datFile;
+  // public String datFile;
   public transient Player owner;
   public transient ItemData itemData;
   public transient LinearAnimation<TextureRegion> dropAnim; 
@@ -46,17 +46,26 @@ public class Item extends Obj {
     if (chara instanceof Player && isDrop) {
       Player player = (Player)chara;
       player.inventory.put(this);
-      owner = player;
       if (player.itemSel == null) player.equip(this);
     }
   }
   public Item clone() {
     Item item = new Item(datFile);
+    item.isDrop = isDrop;
     item.maxQuantity = maxQuantity;
     item.quantity = quantity;
+    item.owner = owner;
     return item;
   }
-  public void use() {}
+  public boolean use() {
+    quantity--;
+    if (quantity >= 0) onUse();
+    else return false;
+    return true;
+  }
+  protected void onUse() {
+    Logger.log("Item", "use base class");    
+  }
   @Override
   public boolean equals(Object obj) {
     return datFile.equals(((Item)obj).datFile);
@@ -68,7 +77,7 @@ public class Item extends Obj {
     // Logger.log("Item", "Rendered at: " + bounds.toString());
   } 
   // Will be called by the UI
-  public void renderStore(SpriteBatch spriteBatch, float x, float y, float w, float h) {
-    spriteBatch.draw(storeAnim.current(), x, y, w, h); 
+  public void renderStore(SpriteBatch batch, float x, float y, float w, float h) { 
+    batch.draw(storeAnim.current(), x, y, w, h); 
   }
 }

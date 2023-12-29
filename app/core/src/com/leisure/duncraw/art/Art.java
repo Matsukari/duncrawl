@@ -1,5 +1,6 @@
 package com.leisure.duncraw.art;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.leisure.duncraw.helper.IdGenerator;
@@ -7,6 +8,7 @@ import com.leisure.duncraw.helper.IdGenerator;
 public abstract class Art {
   public transient final int id;
   public transient Rectangle bounds = new Rectangle(0, 0, 100f, 100f);
+  public transient Color tint = new Color(1f, 1f, 1f, 1f);
   public Art() {
     id = IdGenerator.gen();
   }

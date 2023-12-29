@@ -7,7 +7,7 @@ public class HealthPotion extends Item {
     super(datFile);
   }
   @Override
-  public void use() {
+  public void onUse() {
     owner.status.setHealth(owner.status.health + 10); 
   }
 }

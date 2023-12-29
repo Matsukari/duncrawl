@@ -8,7 +8,7 @@ public class ExpansionBag extends Item {
     super(datFile);
   }
   @Override
-  public void use() {
+  public void onUse() {
     owner.inventory.capacity += 20;
   }
 }

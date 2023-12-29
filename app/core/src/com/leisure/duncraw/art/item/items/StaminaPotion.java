@@ -10,8 +10,9 @@ public class StaminaPotion extends Item {
     super(datFile);
   }
   @Override
-  public void use() {
+  public void onUse() {
     owner.status.setStamina(owner.status.stamina + 19); 
+    Logger.log("StaminaPotion", "Used");
   }
   @Override
   public void render(SpriteBatch batch) {

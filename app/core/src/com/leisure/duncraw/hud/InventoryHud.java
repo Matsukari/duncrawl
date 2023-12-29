@@ -21,6 +21,9 @@ public class InventoryHud extends Hud {
   public Color containerBgColor;
   public Color itemBgColor;
   public BitmapFont quantityLabelFont;
+  public int id;
+  public int currIndex = 0;
+  public Item currItem;
   public InventoryHud(Inventory inventory, SpriteBatch batch) {
     this.inventory = inventory;
     this.batch = batch;
@@ -33,9 +36,23 @@ public class InventoryHud extends Hud {
     itemPadding = 5;
     add(titleLabel).center().top().expand();
     setVisible(false);  
+    selectLeft();
+    selectRight();
     id = IdGenerator.gen();
   }
-  public int id;
+  public void selectLeft() {
+    currItem = inventory.select(--currIndex);
+  }
+  public void selectRight() {
+    currItem = inventory.select(++currIndex);
+  }
+  public void useSelected() {
+    if (currItem != null) {
+      Logger.log("InventoryHud", "Used item");
+      currItem = inventory.use(currItem);
+    }
+    else Logger.log("InventoryHud", "Cannot use item, null");
+  }
   @Override
   public void drawShapes() {
     if (!isVisible()) return;
@@ -56,7 +73,11 @@ public class InventoryHud extends Hud {
       Item item = inventory.items.get(i); 
       float x = getGlobalX()+ ((i%cols) * (itemSize + itemPadding + 5)) * itemPadding;
       float y = getGlobalY() + getHeight() - itemSize - itemPadding - ((i/cols) * itemSize);
+      if (i != currIndex) item.tint = Color.GRAY;
+      else item.tint = Color.WHITE;
+      batch.setColor(item.tint);
       item.renderStore(batch, x, y, itemSize, itemSize);
+      batch.setColor(Color.WHITE);
       quantityLabelFont.draw(batch, String.format("%d/%d", item.quantity, item.maxQuantity), x, y);
     }
     batch.end();

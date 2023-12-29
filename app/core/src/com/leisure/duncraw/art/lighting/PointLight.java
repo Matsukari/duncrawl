@@ -8,7 +8,6 @@ import com.leisure.duncraw.art.Art;
 
 public class PointLight extends Art {
   public final TextureRegion textureRegion;
-  public Color tint = new Color(1f, 1f, 1f, 1f);
   public PointLight(TextureRegion textureRegion) {
     this.textureRegion = textureRegion;
   }

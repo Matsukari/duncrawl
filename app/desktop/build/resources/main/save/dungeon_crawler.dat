@@ -5,19 +5,19 @@
 "player": {
 	"rank": "BRONZE",
 	"inventory": {
-		"items": [
+		"itemsData": [
 			{
-				"isDrop": false,
-				"quantity": 2,
-				"maxQuantity": 99,
-				"datFile": "dat/item/stamina_potion.dat"
+				"datFile": "dat/item/stamina_potion.dat",
+				"classname": "com.leisure.duncraw.art.item.items.StaminaPotion",
+				"quantity": 3,
+				"maxQuantity": 99
 			}
 		],
 		"capacity": 10
 	},
 	"status": {
 		"health": 100,
-		"stamina": 100,
+		"stamina": 64,
 		"maxHealth": 100,
 		"maxStamina": 100,
 		"hpRecovery": 2,

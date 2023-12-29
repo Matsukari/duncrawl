@@ -7,6 +7,8 @@ public class SaveData {
   public PlayerData player;
   public Settings settings;
   public SaveData(Status stats, Inventory inventory) {
+    stats.reset();
+    inventory.reset();
     progression = new Progression();
     progression.reset();
     player = new PlayerData(stats, inventory);
