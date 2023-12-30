@@ -14,7 +14,7 @@
 "maxMob": 15,
 "maxElite": 5,
 "title": "Floor 0 : Tutorial",
-"normalHeight": 2,
+"normalHeight": 3,
 "customHeight": {},
 "prefabRooms": {
   "startRoom": "floors/starting_room.tmx"

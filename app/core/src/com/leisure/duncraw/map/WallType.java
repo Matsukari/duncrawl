@@ -36,4 +36,7 @@ public class WallType {
     return types; 
      
   } 
+  public void setTraversable(boolean v, TerrainVariants i) {
+    for (Terrain wall : i) wall.canTravel = v;
+  }
 }

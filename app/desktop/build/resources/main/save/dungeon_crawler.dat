@@ -9,7 +9,7 @@
 			{
 				"datFile": "dat/item/stam_low.dat",
 				"classname": "com.leisure.duncraw.art.item.items.StaminaPotion",
-				"quantity": 2,
+				"quantity": 7,
 				"maxQuantity": 16
 			},
 			{

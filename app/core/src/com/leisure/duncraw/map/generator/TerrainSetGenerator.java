@@ -1,6 +1,7 @@
 package com.leisure.duncraw.map.generator;
 
 import java.util.ArrayList;
+import java.util.function.Function;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.MathUtils;
@@ -10,6 +11,7 @@ import com.leisure.duncraw.art.map.LayeredTerrain;
 import com.leisure.duncraw.art.map.Obj;
 import com.leisure.duncraw.art.map.Terrain;
 import com.leisure.duncraw.data.FloorData;
+import com.leisure.duncraw.helper.SString;
 import com.leisure.duncraw.logging.Logger;
 import com.leisure.duncraw.map.TerrainSet;
 import com.leisure.duncraw.map.TerrainVariants;
@@ -22,11 +24,6 @@ public class TerrainSetGenerator {
   public FloorData data;
   public final TerrainFurnishers wallFurnishers = new TerrainFurnishers();
   public final TerrainFurnishers groundFurnishers = new TerrainFurnishers();
-  // 0-5 for a grid representation of the body of a wall
-  // 0 1 2 
-  // 3 4 5
-  // Other oddity collections
-  // 6 7 
   public TerrainVariants walls[] = new TerrainVariants[8];
   public TerrainVariants grounds = new TerrainVariants();
   public TerrainSetGenerator(FloorData data) {
@@ -36,8 +33,8 @@ public class TerrainSetGenerator {
   public TerrainSet prepare() {
     roomsBuilder.build(data.roomsNum, new Vector2(data.getMaxWidth(), data.getMaxHeight()), data.widthRange, data.heightRange);
     TerrainSet terrainSet = new TerrainSet(
-        (int)(roomsBuilder.rect.width/data.tileSize)+1, 
-        (int)(roomsBuilder.rect.height/data.tileSize)+1, 
+        (int)(roomsBuilder.rect.width/data.tileSize)+2, 
+        (int)(roomsBuilder.rect.height/data.tileSize)+2, 
         data.tileSize, data.tileSize);
     Logger.log("TerrainSetGenerator", String.format("Size of terrain be generated: %d %d", terrainSet.cols, terrainSet.rows));
     // Logger.log("TerrainSetGenerator", roomsBuilder.rect.toString());
@@ -59,6 +56,7 @@ public class TerrainSetGenerator {
     groundFurnishers.start(terrainSet, roomsBuilder);
     roomsBuilder.forEachTileInRooms(roomsBuilder.rooms, (room, col, row)->{
       Pointi pos = roomsBuilder.getRoomRelTilePos(room);
+      pos.x += 1;
       Terrain terrain = grounds.get(MathUtils.random(0, grounds.size()-1)).clone();
       if (terrainSet.getTerrain(pos.x + col, pos.y + row) == null) putTerrain(terrainSet, terrain, pos.x + col, pos.y + row, furnishers);  
     }); 
@@ -68,61 +66,113 @@ public class TerrainSetGenerator {
     terrainSet.putTerrain(terrain, x, y);
     if (furnishers != null) furnishers.furnish(terrainSet, roomsBuilder, terrain, x, y);
   }
+  public void replaceTerrain(TerrainSet terrainSet, Terrain terrain, int x, int y, TerrainFurnishers furnishers) {
+    terrainSet.replaceTerrain(terrain, x, y);
+    if (furnishers != null) furnishers.furnish(terrainSet, roomsBuilder, terrain, x, y);
+  }
   public void placeWalls(TerrainSet terrainSet, TerrainFurnishers furnishers) throws Exception {
     // Logger.log("Rooms before", )
     wallFurnishers.start(terrainSet, roomsBuilder);
     roomsBuilder.rooms.sort((a, b)-> (a.y > b.y) ? 1 : (b.y > a.y) ? -1 : 0 );
+    ArrayList<Pointi> wallBodies = new ArrayList<>();
     for (Rectangle room : roomsBuilder.rooms) {
       int cols = (int)(room.width / data.tileSize);
       int rows = (int)(room.height / data.tileSize);
       // Go explore topmost and bottommost tile in room horizontally
       Pointi pos = roomsBuilder.getRoomRelTilePos(room);
+      pos.x += 1;
       int top = pos.y;
       int bottom = pos.y + rows;
-      int left = pos.x;
-      int right = pos.x + cols - 1;
       // Go explore horizontally
       for (int col = 0; col < cols; col++) {
         Terrain terrain = walls[WallType.BODY].getVariant();
         // terrain.canTravel = false;
         if (terrainSet.getTerrain(pos.x + col, top - 1) == null) { 
-          for (int i = 0; i < data.normalHeight-1; i++) putTerrain(terrainSet, terrain.clone(), pos.x + col, top - i, furnishers);
-          putTerrain(terrainSet, walls[WallType.DOWN_EDGE].getVariant(), pos.x + col, top-data.normalHeight+1, furnishers);
+          for (int i = 0; i < data.normalHeight-1; i++) {
+            replaceTerrain(terrainSet, terrain.clone(), pos.x + col, top - i, furnishers);
+            wallBodies.add(new Pointi(pos.x+col, top-i));
+          }
+          replaceTerrain(terrainSet, walls[WallType.DOWN_EDGE].getVariant(), pos.x + col, top-data.normalHeight+1, furnishers);
+          wallBodies.add(new Pointi(pos.x+col, top-data.normalHeight+1));
           putTerrain(terrainSet, walls[WallType.TOP_HEAD].getVariant(), pos.x + col, top, furnishers);
         }
         if (terrainSet.getTerrain(pos.x + col, bottom + 1) == null) {
-          for (int i = 0; i < data.normalHeight-1; i++) putTerrain(terrainSet, terrain.clone(), pos.x + col, bottom - i, furnishers);
-          putTerrain(terrainSet, walls[WallType.DOWN_EDGE].getVariant(), pos.x + col, bottom-data.normalHeight+1, furnishers);
+          for (int i = 0; i < data.normalHeight-1; i++) {
+            replaceTerrain(terrainSet, terrain.clone(), pos.x + col, bottom - i, furnishers);
+            wallBodies.add(new Pointi(pos.x+col, bottom-i));
+          }
+          replaceTerrain(terrainSet, walls[WallType.DOWN_EDGE].getVariant(), pos.x + col, bottom-data.normalHeight+1, furnishers);
+          wallBodies.add(new Pointi(pos.x+col, bottom-data.normalHeight+1));
           putTerrain(terrainSet, walls[WallType.TOP_HEAD].getVariant(), pos.x + col, bottom, furnishers);
         }
         
       }
       
     }
-    for (Rectangle room : roomsBuilder.rooms) {
-      int cols = (int)(room.width / data.tileSize);
-      int rows = (int)(room.height / data.tileSize);
-      // Go explore topmost and bottommost tile in room horizontally
-      Pointi pos = roomsBuilder.getRoomRelTilePos(room);
-      pos.y += data.normalHeight - 1;
-      int left = pos.x;
-      int right = pos.x + cols - 1;
-      // Go explore leftmost and rightmost tile vertiacally
-      for (int row = 0; row < rows; row++) {
-        Terrain leftWall = walls[WallType.LEFT_HEAD].getVariant();
-        Terrain rightWall = walls[WallType.RIGHT_HEAD].getVariant();
-        if (terrainSet.getTerrain(left - 1, pos.y + row) == null ||
-            terrainTypeHas("wall", terrainSet.getTerrain(left-1, pos.y+row))
-            )
-          putTerrain(terrainSet, rightWall, left-1, pos.y + row, furnishers);
-        if (terrainSet.getTerrain(right + 1, pos.y + row) == null || 
-            terrainTypeHas("wall", terrainSet.getTerrain(right+1, pos.y+row))
-            )
-          putTerrain(terrainSet, leftWall, right+1, pos.y + row, furnishers);
-      }
-
-    }
     wallFurnishers.finish(terrainSet, roomsBuilder);
+    // Place side heads
+    ArrayList<Pointi> sideHeads = new ArrayList<>();
+    for (Pointi body : wallBodies) {
+      int x = body.x;
+      int y = body.y;
+      // Go explore leftmost and rightmost tile vertiacally
+      Terrain sideWall = null;
+      Terrain left = terrainSet.getTerrain(x-1, y);
+      Terrain right = terrainSet.getTerrain(x+1, y);
+      // Logger.log("TerrainSetGenerator", SString.toString(body.bounds));
+      
+      if (left == null || terrainTypeHas("ground", left)) sideWall = walls[WallType.LEFT_HEAD].getVariant();
+      if (right == null || terrainTypeHas("ground", right)) sideWall = walls[WallType.RIGHT_HEAD].getVariant();
+      if (sideWall != null) {
+        terrainSet.putTerrain(sideWall, x, y);
+        sideHeads.add(new Pointi(x, y));
+        Terrain bottom = null;
+        while (y < terrainSet.rows) {
+          y++;
+          bottom = terrainSet.getTerrain(x, y);
+          left = terrainSet.getTerrain(x-1, y);
+          right = terrainSet.getTerrain(x+1, y);
+          sideWall = null;
+          if (bottom == null) {
+            if (left != null && (terrainTypeHas("left", left) || terrainTypeHas("right", left))) break;
+            if (right != null && (terrainTypeHas("left", right) || terrainTypeHas("right", right))) break;
+            if (left != null && terrainTypeHas("ground", left)) sideWall = walls[WallType.LEFT_HEAD].getVariant();
+            if (right != null && terrainTypeHas("ground", right)) sideWall = walls[WallType.RIGHT_HEAD].getVariant();
+          }
+          else {
+            // Already populated; only take the bottomost unit of a set of wall
+            if (terrainTypeHas("left", bottom) || terrainTypeHas("right", bottom)) break;
+            if (left == null && terrainTypeHas("ground", bottom)) sideWall = walls[WallType.LEFT_HEAD].getVariant();
+            if (right == null && terrainTypeHas("ground", bottom)) sideWall = walls[WallType.RIGHT_HEAD].getVariant();
+          }
+          if (sideWall != null) {
+            terrainSet.putTerrain(sideWall, x, y);
+            sideHeads.add(new Pointi(x, y));
+          }
+        }
+      }
+    }
+    // Clean side walls
+    // for (Pointi sideHead : sideHeads) {
+    //   // Side walls can only go down! Never beside!
+    //   int x = sideHead.x;
+    //   int y = sideHead.y;
+    //   Terrain head = terrainSet.getTerrain(x, y);
+    //   Terrain left = terrainSet.getTerrain(x-1, y);
+    //   Terrain right = terrainSet.getTerrain(x+1, y);
+    //   if (left != null && right != null) {
+    //     if (!terrainTypeHas("ground", head) && (terrainTypeHas("ground", left) || terrainTypeHas("ground", right))) {
+    //       if (terrainTypeHas("right", head)) terrainSet.putTerrain(walls[WallType.LEFT_HEAD].getVariant(), x, y);
+    //       else terrainSet.putTerrain(walls[WallType.RIGHT_HEAD].getVariant(), x, y);
+    //     }
+    //     else if (terrainTypeHas("left", left) || terrainTypeHas("right", left) || terrainTypeHas("left", right) || terrainTypeHas("right", right))
+    //     {
+    //
+    //     }
+    //   }
+    //
+    // }
+
   }
   private boolean terrainTypeHas(String type, Terrain terrain) {
     if (terrain instanceof LayeredTerrain) return ((LayeredTerrain)terrain).containsWType(type);
