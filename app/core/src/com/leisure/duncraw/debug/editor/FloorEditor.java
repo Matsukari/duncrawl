@@ -1,5 +1,7 @@
 package com.leisure.duncraw.debug.editor;
 
+import java.util.ArrayList;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -9,6 +11,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.leisure.duncraw.Graphics;
+import com.leisure.duncraw.art.lighting.PointLight;
 import com.leisure.duncraw.manager.FloorManager;
 import com.leisure.duncraw.map.floors.Floor1;
 import com.leisure.duncraw.map.generator.RoomsBuilder;
@@ -25,6 +28,7 @@ public class FloorEditor extends ToolAgent {
   public TerrainSetGenerator generator;
   public FloorManager manager;
   public BitmapFont font;
+  public ArrayList<PointLight> lights = new ArrayList<>();
   public boolean hideShapes = true;
   public FloorEditor(FloorManager manager) {
     super("FloorEditor");
@@ -33,17 +37,29 @@ public class FloorEditor extends ToolAgent {
     this.roomsBuilder = generator.roomsBuilder;
     generator.roomsBuilder = roomsBuilder;
     font = Graphics.getFont(Graphics.fontSources.def);
+    lights.addAll(manager.lightEnvironment.lightSources);
+    manager.lightEnvironment.lightSources.clear();
   }
   @Override
   public void tool() {
     ImGui.inputInt("Rooms", points);
-    if (ImGui.button("Hide shapes")) {
+    if (ImGui.button("Toogle shapes")) {
       hideShapes = !hideShapes;
     }
     if (ImGui.button("Generate")) {
       // roomsBuilder.build(points.get(), new Vector2(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()), new Vector2(0.2f, 1f), new Vector2(0.2f, 1f));
       generator.data.roomsNum = points.get(); 
       manager.setCurrentFloor(new Floor1(generator, manager.batch));
+    }
+    if (ImGui.button("Toogle lighting")) {
+      manager.showLighting = !manager.showLighting;  
+    }
+    else if (ImGui.button("Toogle lights")) {
+
+      if (manager.lightEnvironment.lightSources.isEmpty()) {
+        manager.lightEnvironment.lightSources.addAll(lights);
+      }
+      else manager.lightEnvironment.lightSources.clear();
     }
   }
   @Override

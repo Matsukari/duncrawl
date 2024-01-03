@@ -1,7 +1,6 @@
 package com.leisure.duncraw.map.generator;
 
 import java.util.ArrayList;
-import java.util.function.Function;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.MathUtils;
@@ -11,7 +10,6 @@ import com.leisure.duncraw.art.map.LayeredTerrain;
 import com.leisure.duncraw.art.map.Obj;
 import com.leisure.duncraw.art.map.Terrain;
 import com.leisure.duncraw.data.FloorData;
-import com.leisure.duncraw.helper.SString;
 import com.leisure.duncraw.logging.Logger;
 import com.leisure.duncraw.map.TerrainSet;
 import com.leisure.duncraw.map.TerrainVariants;

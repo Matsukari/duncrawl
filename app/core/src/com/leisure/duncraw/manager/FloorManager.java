@@ -21,7 +21,8 @@ import com.leisure.duncraw.map.generator.MiscDecorationFurnisher;
 import com.leisure.duncraw.map.generator.TerrainSetGenerator;
 
 public class FloorManager {
-  public final LightEnvironment lightEnvironment; 
+  public final LightEnvironment lightEnvironment;
+  public boolean showLighting = false;
   public final FloorsData sources;
   public final SpriteBatch batch;
   public Tileset tileset;
@@ -64,8 +65,12 @@ public class FloorManager {
       floor.render(batch, floor.foreground);
       batch.end();
     }
-    // lightEnvironment.update();
-    // lightEnvironment.cast(cam);
+    if (showLighting)
+    {
+      lightEnvironment.update();
+      lightEnvironment.cast(cam);
+
+    }
   }
   public void dispose() {
     batch.dispose();
