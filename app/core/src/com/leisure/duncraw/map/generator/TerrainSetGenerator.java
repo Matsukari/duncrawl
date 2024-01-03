@@ -11,6 +11,7 @@ import com.leisure.duncraw.art.map.Obj;
 import com.leisure.duncraw.art.map.Terrain;
 import com.leisure.duncraw.data.FloorData;
 import com.leisure.duncraw.logging.Logger;
+import com.leisure.duncraw.manager.RenderSortManager;
 import com.leisure.duncraw.map.TerrainSet;
 import com.leisure.duncraw.map.TerrainVariants;
 import com.leisure.duncraw.map.WallType;
@@ -22,9 +23,11 @@ public class TerrainSetGenerator {
   public FloorData data;
   public final TerrainFurnishers wallFurnishers = new TerrainFurnishers();
   public final TerrainFurnishers groundFurnishers = new TerrainFurnishers();
+  public final RenderSortManager renderSortManager;
   public TerrainVariants walls[] = new TerrainVariants[8];
   public TerrainVariants grounds = new TerrainVariants();
-  public TerrainSetGenerator(FloorData data) {
+  public TerrainSetGenerator(FloorData data, RenderSortManager renderSortManager) {
+    this.renderSortManager = renderSortManager;
     this.data = data;
     roomsBuilder = new RoomsBuilder(data.tileSize);
   }
@@ -33,7 +36,8 @@ public class TerrainSetGenerator {
     TerrainSet terrainSet = new TerrainSet(
         (int)(roomsBuilder.rect.width/data.tileSize)+2, 
         (int)(roomsBuilder.rect.height/data.tileSize)+2, 
-        data.tileSize, data.tileSize);
+        data.tileSize, data.tileSize,
+        renderSortManager);
     Logger.log("TerrainSetGenerator", String.format("Size of terrain be generated: %d %d", terrainSet.cols, terrainSet.rows));
     // Logger.log("TerrainSetGenerator", roomsBuilder.rect.toString());
     ArrayList<Rectangle> expandedCorridors = roomsBuilder.expandCorridors(4, false);
@@ -63,6 +67,7 @@ public class TerrainSetGenerator {
   public void putTerrain(TerrainSet terrainSet, Terrain terrain, int x, int y, TerrainFurnishers furnishers) {
     terrainSet.putTerrain(terrain, x, y);
     if (furnishers != null) furnishers.furnish(terrainSet, roomsBuilder, terrain, x, y);
+    // Logger.log("TerrainSetGenerator", "Put terrain");
   }
   public void replaceTerrain(TerrainSet terrainSet, Terrain terrain, int x, int y, TerrainFurnishers furnishers) {
     terrainSet.replaceTerrain(terrain, x, y);
@@ -92,7 +97,10 @@ public class TerrainSetGenerator {
           }
           replaceTerrain(terrainSet, walls[WallType.DOWN_EDGE].getVariant(), pos.x + col, top-data.normalHeight+1, furnishers);
           wallBodies.add(new Pointi(pos.x+col, top-data.normalHeight+1));
-          putTerrain(terrainSet, walls[WallType.TOP_HEAD].getVariant(), pos.x + col, top, furnishers);
+          Terrain topHead = walls[WallType.TOP_HEAD].getVariant();
+
+          putTerrain(terrainSet, topHead, pos.x + col, top, furnishers);
+          terrainSet.getTerrain(pos.x + col, top).setTravel(true);
         }
         if (terrainSet.getTerrain(pos.x + col, bottom + 1) == null) {
           for (int i = 0; i < data.normalHeight-1; i++) {
@@ -102,6 +110,7 @@ public class TerrainSetGenerator {
           replaceTerrain(terrainSet, walls[WallType.DOWN_EDGE].getVariant(), pos.x + col, bottom-data.normalHeight+1, furnishers);
           wallBodies.add(new Pointi(pos.x+col, bottom-data.normalHeight+1));
           putTerrain(terrainSet, walls[WallType.TOP_HEAD].getVariant(), pos.x + col, bottom, furnishers);
+          terrainSet.getTerrain(pos.x + col, bottom).setTravel(true);
         }
         
       }
@@ -150,26 +159,6 @@ public class TerrainSetGenerator {
         }
       }
     }
-    // Clean side walls
-    // for (Pointi sideHead : sideHeads) {
-    //   // Side walls can only go down! Never beside!
-    //   int x = sideHead.x;
-    //   int y = sideHead.y;
-    //   Terrain head = terrainSet.getTerrain(x, y);
-    //   Terrain left = terrainSet.getTerrain(x-1, y);
-    //   Terrain right = terrainSet.getTerrain(x+1, y);
-    //   if (left != null && right != null) {
-    //     if (!terrainTypeHas("ground", head) && (terrainTypeHas("ground", left) || terrainTypeHas("ground", right))) {
-    //       if (terrainTypeHas("right", head)) terrainSet.putTerrain(walls[WallType.LEFT_HEAD].getVariant(), x, y);
-    //       else terrainSet.putTerrain(walls[WallType.RIGHT_HEAD].getVariant(), x, y);
-    //     }
-    //     else if (terrainTypeHas("left", left) || terrainTypeHas("right", left) || terrainTypeHas("left", right) || terrainTypeHas("right", right))
-    //     {
-    //
-    //     }
-    //   }
-    //
-    // }
 
   }
   private boolean terrainTypeHas(String type, Terrain terrain) {
@@ -196,9 +185,6 @@ public class TerrainSetGenerator {
       }
     }
     
-  }
-  public static TerrainSet blank() {
-    return new TerrainSet(Gdx.graphics.getWidth()/32, Gdx.graphics.getHeight()/32, 32, 32);
   }
   public static ArrayList<Obj> selectExits(TerrainSet terrainSet) {
     ArrayList<Obj> exits = new ArrayList<>();

@@ -1,5 +1,7 @@
 package com.leisure.duncraw.screen;
 
+import java.util.ArrayList;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -7,6 +9,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.leisure.duncraw.Graphics;
+import com.leisure.duncraw.art.Art;
 import com.leisure.duncraw.art.chara.Chara;
 import com.leisure.duncraw.art.chara.Enemy;
 import com.leisure.duncraw.art.chara.EnemySpawner;
@@ -29,6 +32,7 @@ import com.leisure.duncraw.art.map.objs.Lamp;
 import com.leisure.duncraw.data.AssetSource;
 import com.leisure.duncraw.data.CharaData;
 import com.leisure.duncraw.data.Conversation;
+import com.leisure.duncraw.data.Deserializer;
 import com.leisure.duncraw.data.SaveData;
 import com.leisure.duncraw.data.Serializer;
 import com.leisure.duncraw.debug.SpriteBatchDebug;
@@ -41,6 +45,7 @@ import com.leisure.duncraw.manager.EffectManager;
 import com.leisure.duncraw.manager.FloorManager;
 import com.leisure.duncraw.manager.HudManager;
 import com.leisure.duncraw.manager.MusicManager;
+import com.leisure.duncraw.manager.RenderSortManager;
 import com.leisure.duncraw.manager.StoryManager;
 
 import lib.math.Pointi;
@@ -55,6 +60,7 @@ public class GameScreen extends Screen {
   public final CharaManager charaManager;
   public final FloorManager floorManager;  
   public final EffectManager effectManager;
+  public final RenderSortManager renderSortManager;
   public final OrthographicCamera camera;
   public final ExtendViewport viewport; 
   public Player player;
@@ -65,11 +71,12 @@ public class GameScreen extends Screen {
     camera = new OrthographicCamera();
     viewport = new ExtendViewport(saveData.settings.bounds.width, saveData.settings.bounds.height, camera);
     viewport.apply();
+    renderSortManager = new RenderSortManager();
     effectManager = new EffectManager();
-    floorManager = new FloorManager(saveData, AssetSource.getFloorsData(), saveData.progression.level.floor, effectManager);
-    charaManager = new CharaManager(AssetSource.getCharasData(), floorManager.getCurrentFloor());
+    floorManager = new FloorManager(saveData, AssetSource.getFloorsData(), saveData.progression.level.floor, effectManager, renderSortManager);
+    charaManager = new CharaManager(AssetSource.getCharasData(), floorManager.getCurrentFloor(), renderSortManager);
     charaManager.observers.add(new AnimationBehaviour(effectManager));
-    player = charaManager.add(new Player(CharaData.fromDat(charaManager.sources.player), saveData));
+    player = charaManager.add(new Player(Deserializer.safeLoad(CharaData.class, charaManager.sources.player), saveData));
     player.observers.add(new InfuseDarknessBehaviour(effectManager));
     player.observers.add(new ShadowCloakBehaviour(effectManager));
     player.observers.add(new DashBehaviour(effectManager));
@@ -129,7 +136,8 @@ public class GameScreen extends Screen {
 
     ScreenUtils.clear(backgroundColor);
     floorManager.renderBackground(camera);
-    charaManager.renderAll(camera);
+    // charaManager.renderAll(camera);
+    renderSortManager.renderAll(camera);
     floorManager.renderForeground(camera);
     effectManager.renderAll(camera);
     hudManager.renderAvailable(camera);

@@ -10,16 +10,17 @@ import com.leisure.duncraw.art.item.ItemParser;
 import com.leisure.duncraw.art.map.Obj;
 import com.leisure.duncraw.art.map.ObjParser;
 import com.leisure.duncraw.art.map.Terrain;
+import com.leisure.duncraw.manager.RenderSortManager;
 import com.leisure.duncraw.map.TerrainSet;
 
 import lib.animation.LinearAnimation;
 
 public class TmxLoader {
-  public static TerrainSet[] load(String file, int width, int height) {
+  public static TerrainSet[] load(String file, int width, int height, RenderSortManager renderSortManager) {
     TiledMap tiled = new TmxMapLoader().load(file);
     TiledMapTileLayer defLayer = (TiledMapTileLayer)tiled.getLayers().get(0);
-    TerrainSet terrainSet = new TerrainSet(defLayer.getWidth(), defLayer.getHeight(), width, height);
-    TerrainSet foreground = new TerrainSet(defLayer.getWidth(), defLayer.getHeight(), width, height);
+    TerrainSet terrainSet = new TerrainSet(defLayer.getWidth(), defLayer.getHeight(), width, height, renderSortManager);
+    TerrainSet foreground = new TerrainSet(defLayer.getWidth(), defLayer.getHeight(), width, height, renderSortManager);
     String ar = "";
     for (MapLayer l : tiled.getLayers()) {
       if (l instanceof TiledMapTileLayer) {

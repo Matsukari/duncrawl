@@ -7,6 +7,7 @@ import java.util.Queue;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.leisure.duncraw.art.EntityArrayList;
 import com.leisure.duncraw.art.chara.Chara;
 import com.leisure.duncraw.art.chara.Observer;
 import com.leisure.duncraw.art.chara.observers.AttackBehaviour;
@@ -22,7 +23,7 @@ import com.leisure.duncraw.map.Floor;
 
 public class CharaManager {
   // Contains all charas that are alive
-  public ArrayList<Chara> charas = new ArrayList<>();
+  public EntityArrayList<Chara> charas;
   // Queue for killing (When it needs to animate before completely removing)
   public Queue<Chara> deadCharas = new LinkedList<>(); 
   public SpriteBatch batch = new SpriteBatch();
@@ -30,9 +31,10 @@ public class CharaManager {
   private final Floor floor;
   public final CharasData sources;
   public final ArrayList<Observer> observers = new ArrayList<>();
-  public CharaManager(CharasData sources, Floor floor) { 
+  public CharaManager(CharasData sources, Floor floor, RenderSortManager renderManager) { 
     this.sources = sources;
     this.floor = floor;
+    charas = new EntityArrayList<Chara>(renderManager);
     observers.add(new AttackBehaviour());
     observers.add(new HurtBehaviour());
     observers.add(new SoundBehaviour());
@@ -65,7 +67,7 @@ public class CharaManager {
   }
   public void kill(int id) {}
   public void updateAll(float dt) {
-    for (Chara chara : charas) {
+    for (Chara chara : charas.data) {
       chara.update(dt);
       if (chara.status.health <= 0) {
         deadCharas.add(chara);
@@ -81,11 +83,11 @@ public class CharaManager {
   public void renderAll(Camera cam) {
     batch.setProjectionMatrix(cam.combined);
     batch.begin();
-    for (Chara chara : charas) chara.render(batch);
+    // for (Chara chara : charas) chara.render(batch);
     batch.end();
   }
   public void dispose() {
-    for (Chara chara : charas) {
+    for (Chara chara : charas.data) {
       chara.onDeath();
     }
     batch.dispose();

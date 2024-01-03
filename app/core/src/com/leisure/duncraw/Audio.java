@@ -8,6 +8,7 @@ import com.badlogic.gdx.audio.Sound;
 import com.leisure.duncraw.data.AssetSource;
 import com.leisure.duncraw.data.CharaData;
 import com.leisure.duncraw.data.CharasData;
+import com.leisure.duncraw.data.Deserializer;
 import com.leisure.duncraw.data.MusicData;
 import com.leisure.duncraw.logging.Logger;
 
@@ -24,7 +25,7 @@ public class Audio {
   }
   public static AssetManager getManager() { return assets; }
   private static void loadChara(String chara) {
-    for (Map.Entry<String, String> entry : CharaData.fromDat(chara).sounds.entrySet()) {
+    for (Map.Entry<String, String> entry : Deserializer.safeLoad(CharaData.class, chara).sounds.entrySet()) {
       Logger.log("Audio", "Loading chara's " + entry.getKey() + " : " + entry.getValue());
       assets.load((String)entry.getValue(), Sound.class);
     }

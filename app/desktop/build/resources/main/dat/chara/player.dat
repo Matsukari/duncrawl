@@ -70,5 +70,6 @@
 	"element": "NONE",
 	"weakness": "NONE",
 	"action": "IDLE"
-}
+},
+"offsetY": 12
 }

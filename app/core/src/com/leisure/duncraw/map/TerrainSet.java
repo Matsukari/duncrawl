@@ -4,12 +4,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.leisure.duncraw.art.Art;
+import com.leisure.duncraw.art.EntityHashMap;
 import com.leisure.duncraw.art.item.Item;
 import com.leisure.duncraw.art.map.LayeredTerrain;
 import com.leisure.duncraw.art.map.Obj;
 import com.leisure.duncraw.art.map.Terrain;
 import com.leisure.duncraw.helper.SString;
 import com.leisure.duncraw.logging.Logger;
+import com.leisure.duncraw.manager.RenderSortManager;
 
 import lib.math.Pointi;
 
@@ -18,12 +20,14 @@ public class TerrainSet {
   public int terrainWidth = 32, terrainHeight = 32;
   public Terrain terrains[] = {};
   public Pointi tph = new Pointi(); // TEmporary holder
-  public HashMap<Pointi, Obj> objs = new HashMap<>();
-  public TerrainSet(int cols, int rows, int terrainWidth, int terrainHeight) { 
+  public EntityHashMap<Pointi, Obj> objs;
+
+  public TerrainSet(int cols, int rows, int terrainWidth, int terrainHeight, RenderSortManager renderSortManager) { 
     this.cols = cols;
     this.rows  = rows;
     this.terrainWidth = terrainWidth;
     this.terrainHeight = terrainHeight;
+    this.objs = new EntityHashMap<Pointi, Obj>(renderSortManager);
     terrains = new Terrain[cols * rows];
     for (int i = 0; i < cols * rows; i++) {
       terrains[i] = null;
@@ -38,7 +42,7 @@ public class TerrainSet {
     if (!isWithin(x, y)) return;
     int cell = y * cols + x;
     if (snapSize) terrain.bounds.setSize(terrainWidth, terrainHeight);
-    terrain.setPosition(x * terrainWidth, y * terrainHeight);
+    terrain.bounds.setPosition(x * terrainWidth, y * terrainHeight);
 
     // Overlay then
     if (terrains[cell] == null || replace) terrains[cell] = terrain;
@@ -59,7 +63,7 @@ public class TerrainSet {
       }
       objs.put(tph.set(x, y), obj);
       // getTerrain(x, y).putObj(obj);
-      Logger.log("TerrainSet", "Put object at " + String.format("%d %d ", x, y) + SString.toString(obj.bounds));
+      // Logger.log("TerrainSet", "Put object at " + String.format("%d %d ", x, y) + SString.toString(obj.bounds));
     }
     else 
       Logger.log("TerrainSet", "cannot put obj");

@@ -24,7 +24,9 @@ public class Obj extends Art {
   }
   public Obj(LinearAnimation<TextureRegion> anim) {
     this.anim = anim;
-    idle = anim;
+    this.idle = anim;
+    this.dat = new ObjData();
+    dat.reset();
   }
   public Obj() {}
   public void load(String datFile) { loadType(datFile, ObjData.class); }
@@ -39,7 +41,7 @@ public class Obj extends Art {
   }
   @Override
   public void render(SpriteBatch batch) {
-    batch.draw(anim.current(), bounds.x, bounds.y, bounds.width, bounds.height);
+    batch.draw(anim.current(), bounds.x + dat.offsetX, bounds.y + dat.offsetY, bounds.width, bounds.height);
   }
   public void update(float dt) {}
   public void onCharaOccupy(Chara chara) {}

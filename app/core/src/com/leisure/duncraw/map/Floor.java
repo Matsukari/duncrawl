@@ -6,6 +6,7 @@ import java.util.Map;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
+import com.leisure.duncraw.art.EntityHashMap;
 import com.leisure.duncraw.art.chara.Chara;
 import com.leisure.duncraw.art.chara.EnemySpawner;
 import com.leisure.duncraw.art.item.Item;
@@ -22,7 +23,9 @@ public class Floor {
   public final TerrainSetGenerator generator;
   public final TerrainSet background;
   public final TerrainSet foreground;
-  public EnemySpawner spawner;
+  public EnemySpawner spawner; 
+  public EntityHashMap<Pointi, Obj> objs;
+
   public Floor(TerrainSet background, TerrainSet foreground) {
     this.background = background;
     this.foreground = foreground;
@@ -42,8 +45,8 @@ public class Floor {
     for (Terrain terrain : layer.terrains) {
       if (terrain != null) terrain.render(batch);
     }
-    for (Map.Entry<Pointi, Obj> obj : layer.objs.entrySet()) 
-      obj.getValue().render(batch); 
+    // for (Map.Entry<Pointi, Obj> obj : layer.objs.entrySet()) 
+    //   obj.getValue().render(batch); 
   }
   public void putChara(TilemapChara chara) {
     if (chars.contains(chara));

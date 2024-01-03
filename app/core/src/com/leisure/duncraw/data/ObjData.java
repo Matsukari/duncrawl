@@ -10,6 +10,9 @@ public class ObjData extends Dat {
   public String name;
   public String desc;
   public Pointi size;
+  public float offsetX;
+  public float offsetY;
+
   @Override
   public void reset() {
     super.reset();
@@ -21,5 +24,7 @@ public class ObjData extends Dat {
     size = new Pointi();
     size.x = 1;
     size.y = 1;
+    offsetX = 0;
+    offsetY = 0;
   }
 }

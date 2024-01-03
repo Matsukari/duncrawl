@@ -5,11 +5,6 @@ import java.util.HashMap;
 import lib.math.Pointi;
 
 public class ItemData extends ObjData { 
-  // public HashMap<String, String> anims;
-  // public HashMap<String, String> sounds;
-  // public String name;
-  // public String desc;
-
   @Override
   public void reset() {
     anims = new HashMap<>();
@@ -22,6 +17,8 @@ public class ItemData extends ObjData {
     size = new Pointi();
     size.x = 1;
     size.y = 1;
+    offsetX = 0;
+    offsetY = 0;
   }
 }
 

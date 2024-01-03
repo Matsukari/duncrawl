@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.leisure.duncraw.Graphics;
 import com.leisure.duncraw.art.lighting.LightEnvironment;
+import com.leisure.duncraw.data.Deserializer;
 import com.leisure.duncraw.data.FloorData;
 import com.leisure.duncraw.data.FloorsData;
 import com.leisure.duncraw.data.SaveData;
@@ -28,14 +29,15 @@ public class FloorManager {
   public Tileset tileset;
   public int level;
   private Floor floor; 
-  public FloorManager(SaveData save, FloorsData sources, int levelStart, EffectManager effectManager) {
+  
+  public FloorManager(SaveData save, FloorsData sources, int levelStart, EffectManager effectManager, RenderSortManager renderSortManager) {
     this.sources = sources;
     this.level = levelStart;
 
     Logger.hide("RoomsBuilder");
     batch = new SpriteBatch();
     tileset = new Tileset(sources.tilesets);
-    TerrainSetGenerator terrainGenerator = new TerrainSetGenerator(FloorData.fromDat(sources.floorsDat.get(level)));
+    TerrainSetGenerator terrainGenerator = new TerrainSetGenerator(Deserializer.safeLoad(FloorData.class, sources.floorsDat.get(level)), renderSortManager);
     terrainGenerator.grounds = new TerrainVariants(tileset.terrainTransform(tileset.filter("terrain", "ground"), batch));
     terrainGenerator.walls = WallType.getAllWallTypes(tileset, batch);
     floor = new Floor1(terrainGenerator, batch); 
