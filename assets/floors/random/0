@@ -13,10 +13,15 @@
 },
 "maxMob": 15,
 "maxElite": 5,
-"title": "Floor 0 : Tutorial",
+"title": "Default Floor",
 "normalHeight": 2,
+"classname": "com.leisure.duncraw.map.floors.Floor1",
+"envColor": {
+	"r": 0.033,
+	"g": 0.033,
+	"b": 0.1,
+	"a": 0.2
+},
 "customHeight": {},
-"prefabRooms": {
-  "startRoom": "floors/starting_room.tmx"
-}
+"prefabRooms": {}
 }

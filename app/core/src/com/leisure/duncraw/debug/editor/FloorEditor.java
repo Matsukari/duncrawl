@@ -33,12 +33,12 @@ public class FloorEditor extends ToolAgent {
   public FloorEditor(FloorManager manager) {
     super("FloorEditor");
     this.manager = manager;
-    this.generator = manager.getCurrentFloor().generator;
+    this.generator = manager.getFloor().generator;
     this.roomsBuilder = generator.roomsBuilder;
     generator.roomsBuilder = roomsBuilder;
     font = Graphics.getFont(Graphics.fontSources.def);
-    lights.addAll(manager.lightEnvironment.lightSources);
-    manager.lightEnvironment.lightSources.clear();
+    lights.addAll(manager.lighting.getEnv().lightSources);
+    manager.lighting.getEnv().lightSources.clear();
   }
   @Override
   public void tool() {
@@ -48,18 +48,18 @@ public class FloorEditor extends ToolAgent {
     }
     if (ImGui.button("Generate")) {
       // roomsBuilder.build(points.get(), new Vector2(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()), new Vector2(0.2f, 1f), new Vector2(0.2f, 1f));
-      generator.data.roomsNum = points.get(); 
-      manager.setCurrentFloor(new Floor1(generator, manager.batch));
+      // generator.data.roomsNum = points.get(); 
+      // manager.setCurrentFloor(new Floor1(generator, manager.batch));
     }
     if (ImGui.button("Toogle lighting")) {
       manager.showLighting = !manager.showLighting;  
     }
     else if (ImGui.button("Toogle lights")) {
 
-      if (manager.lightEnvironment.lightSources.isEmpty()) {
-        manager.lightEnvironment.lightSources.addAll(lights);
+      if (manager.lighting.getEnv().lightSources.isEmpty()) {
+        manager.lighting.getEnv().lightSources.addAll(lights);
       }
-      else manager.lightEnvironment.lightSources.clear();
+      else manager.lighting.getEnv().lightSources.clear();
     }
   }
   @Override

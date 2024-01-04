@@ -38,7 +38,7 @@ public class InfuseDarknessBehaviour extends Observer {
       if (effectManager != null && stack == 1) {
         effect = new GfxAnimation(null, true);
         // effect.bounds.setPosition(chara.bounds.x, chara.bounds.y);
-        effect.centerTo(chara.bounds);
+        effect.centerTo(chara);
         effect.bounds.setSize(chara.bounds.width / 2 * stack);
         changeEffectDir();
         effect.setLoop(true);
@@ -63,7 +63,7 @@ public class InfuseDarknessBehaviour extends Observer {
     }
     if (!isActive()) stop(); 
     else {
-      effect.centerTo(chara.bounds);
+      effect.centerTo(chara);
       effect.bounds.setSize(chara.bounds.width + (stack * (chara.bounds.width/maxStack)));
       // effect.bounds.setPosition(chara.bounds.x, chara.bounds.y);
     }

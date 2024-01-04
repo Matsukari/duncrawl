@@ -12,11 +12,11 @@ public abstract class Art {
   public Art() {
     id = IdGenerator.gen();
   }
-  public void centerTo(Rectangle other) {
-    bounds.x = other.x - bounds.width/2;
-    bounds.y = other.y - bounds.height/2;
-    bounds.x += other.width/2;
-    bounds.y += other.height/2;
+  public void centerTo(Art other) {
+    bounds.x = other.getWorldX() - bounds.width/2;
+    bounds.y = other.getWorldY() - bounds.height/2;
+    bounds.x += other.bounds.width/2;
+    bounds.y += other.bounds.height/2;
   }
   public float getWorldX() { return bounds.x; }
   public float getWorldY() { return bounds.y; }

@@ -33,7 +33,6 @@ public class ShadowCloakBehaviour extends Observer {
       if (dirAnimation != null && effectManager != null) {
         dirAnimation.face(chara.movement.lastVelX, chara.movement.lastVelY);
         effect = new GfxAnimation(dirAnimation.currentDir, true);
-        effect.bounds.setPosition(chara.bounds.x, chara.bounds.y);
         effect.bounds.setSize(chara.bounds.width);
         effectManager.start(effect);
       }
@@ -52,7 +51,7 @@ public class ShadowCloakBehaviour extends Observer {
       sustainTimer.peek();
     }
     if (!isActive()) stop(); 
-    else effect.bounds.setPosition(chara.bounds.x, chara.bounds.y);
+    else effect.centerTo(chara);
   }
   @Override
   public Observer copy() {

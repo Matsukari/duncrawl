@@ -25,8 +25,8 @@ public class LightEnvironment {
   public float bufferHeight;
   public Color envColor;
   public Viewport viewport;
-  public LightEnvironment(Color envColor, Rectangle bounds, SpriteBatch batch) {
-    this.batch = batch;
+  public LightEnvironment(Color envColor, Rectangle bounds) {
+    this.batch = new SpriteBatch();
     this.bounds = bounds;
     this.envColor = envColor;
     

@@ -10,10 +10,12 @@ import com.leisure.duncraw.art.EntityHashMap;
 import com.leisure.duncraw.art.chara.Chara;
 import com.leisure.duncraw.art.chara.EnemySpawner;
 import com.leisure.duncraw.art.item.Item;
+import com.leisure.duncraw.art.lighting.LightEnvironment;
 import com.leisure.duncraw.art.map.Decoration;
 import com.leisure.duncraw.art.map.Obj;
 import com.leisure.duncraw.art.map.Terrain;
 import com.leisure.duncraw.art.map.TilemapChara;
+import com.leisure.duncraw.manager.EffectManager;
 import com.leisure.duncraw.map.generator.TerrainSetGenerator;
 
 import lib.math.Pointi;
@@ -23,8 +25,8 @@ public class Floor {
   public final TerrainSetGenerator generator;
   public final TerrainSet background;
   public final TerrainSet foreground;
-  public EnemySpawner spawner; 
-  public EntityHashMap<Pointi, Obj> objs;
+  public LightEnvironment lightEnvironment;
+  public EnemySpawner spawner;
 
   public Floor(TerrainSet background, TerrainSet foreground) {
     this.background = background;
@@ -37,16 +39,15 @@ public class Floor {
     this.generator = generator;
     background = generator.prepare();
     foreground = null;
+    lightEnvironment = new LightEnvironment(generator.data.envColor, new Rectangle(0, 0, background.getWidth(), background.getHeight()));
   }
-  public void stage() {
+  public void stage(Tileset tileset, EffectManager effectManager) {
     generator.populate(background);
   }
   public void render(SpriteBatch batch, TerrainSet layer) {
     for (Terrain terrain : layer.terrains) {
       if (terrain != null) terrain.render(batch);
     }
-    // for (Map.Entry<Pointi, Obj> obj : layer.objs.entrySet()) 
-    //   obj.getValue().render(batch); 
   }
   public void putChara(TilemapChara chara) {
     if (chars.contains(chara));

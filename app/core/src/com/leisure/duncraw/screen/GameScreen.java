@@ -74,13 +74,13 @@ public class GameScreen extends Screen {
     renderSortManager = new RenderSortManager();
     effectManager = new EffectManager();
     floorManager = new FloorManager(saveData, AssetSource.getFloorsData(), saveData.progression.level.floor, effectManager, renderSortManager);
-    charaManager = new CharaManager(AssetSource.getCharasData(), floorManager.getCurrentFloor(), renderSortManager);
+    charaManager = new CharaManager(AssetSource.getCharasData(), floorManager.getFloor(), renderSortManager);
     charaManager.observers.add(new AnimationBehaviour(effectManager));
     player = charaManager.add(new Player(Deserializer.safeLoad(CharaData.class, charaManager.sources.player), saveData));
     player.observers.add(new InfuseDarknessBehaviour(effectManager));
     player.observers.add(new ShadowCloakBehaviour(effectManager));
     player.observers.add(new DashBehaviour(effectManager));
-    player.observers.add(new IlluminateBehaviour(floorManager.lightEnvironment, new PointLight(Graphics.getSafeTextureRegion("images/lights/light_smooth.png"))));
+    player.observers.add(new IlluminateBehaviour(floorManager.lighting, new PointLight(Graphics.getSafeTextureRegion("images/lights/light_smooth.png"))));
     musicManager = new MusicManager(this, AssetSource.getMusicData(), saveData.settings.music);
     hudManager = new HudManager(this, AssetSource.getUiData());
     storyManager = new StoryManager(this, saveData.progression.level.scene);
@@ -90,24 +90,24 @@ public class GameScreen extends Screen {
     debugManager.debugPlayer(player);
     debugManager.editFloorGen(floorManager);
     debugManager.debugTool(new SpriteBatchDebug(floorManager.batch));
-    debugManager.debugTool(new LightEnvEditor(floorManager.lightEnvironment));
+    debugManager.debugTool(new LightEnvEditor(floorManager.lighting));
     
     testPlaceScene();
   }
   private void testPlaceScene() {
     Enemy mob = charaManager.addFrom(charaManager.sources.ghost, Enemy.class);
     Chara npc = charaManager.addFrom(charaManager.sources.ghost, Npc.class); 
-    Pointi pos = floorManager.getCurrentFloor().getTileInRandomRoom();
+    Pointi pos = floorManager.getFloor().getTileInRandomRoom();
     player.setState(new MoveState(pos.x, pos.y, false));
     mob.setState(new MoveState(pos.x + 5, pos.y + 5, false));
     npc.setState(new MoveState(pos.x + 2, pos.y - 1, false));
-    // mob.startAI(new AiWanderer(floorManager.getCurrentFloor(), player));
-    floorManager.getCurrentFloor().background.putObject(new StaminaPotion(Graphics.objsSources.lowStaminaPotion), pos.x - 1, pos.y);
-    floorManager.getCurrentFloor().background.putObject(new Weapon(Graphics.objsSources.greenSteel), pos.x, pos.y);
-    // floorManager.getCurrentFloor().background.putObject(new Chest(Graphics.objsSources.chest), pos.x + 3, pos.y);
-    // floorManager.getCurrentFloor().background.putObject(new Lamp("dat/obj/lamp.dat", floorManager.lightEnvironment, effectManager), pos.x - 3, pos.y);
+    // mob.startAI(new AiWanderer(floorManager.getFloor(), player));
+    floorManager.getFloor().background.putObject(new StaminaPotion(Graphics.objsSources.lowStaminaPotion), pos.x - 1, pos.y);
+    floorManager.getFloor().background.putObject(new Weapon(Graphics.objsSources.greenSteel), pos.x, pos.y);
+    // floorManager.getFloor().background.putObject(new Chest(Graphics.objsSources.chest), pos.x + 3, pos.y);
+    // floorManager.getFloor().background.putObject(new Lamp("dat/obj/lamp.dat", floorManager.lightEnvironment, effectManager), pos.x - 3, pos.y);
     
-    // floorManager.getCurrentFloor().initialSpawn(new EnemySpawner(charaManager, charaManager.sources, ()->new AiWanderer(floorManager.getCurrentFloor(), player));
+    // floorManager.getFloor().initialSpawn(new EnemySpawner(charaManager, charaManager.sources, ()->new AiWanderer(floorManager.getFloor(), player));
     npc.observers.add(new TalkBehaviour(hudManager.dialogueHud, Conversation.fromDat("dat/convs/test.conv")));
     camera.zoom = 30f;
     debugManager.debugChara(mob);

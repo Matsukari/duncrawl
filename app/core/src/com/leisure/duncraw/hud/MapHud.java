@@ -25,8 +25,8 @@ public class MapHud extends Hud {
   @Override
   public void update() {
     // Change in floor
-    if (lastFloor == null || floorManager.getCurrentFloor() != lastFloor) {
-      lastFloor = floorManager.getCurrentFloor();
+    if (lastFloor == null || floorManager.getFloor() != lastFloor) {
+      lastFloor = floorManager.getFloor();
       floorLabel.setText(lastFloor.getName());
     }
   }

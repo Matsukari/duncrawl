@@ -34,6 +34,7 @@ public class TerrainSetGenerator {
     roomsBuilder = new RoomsBuilder(data.tileSize);
   }
   public TerrainSet prepare() {
+    Logger.hide("RoomsBuilder"); 
     roomsBuilder.build(data.roomsNum, new Vector2(data.getMaxWidth(), data.getMaxHeight()), data.widthRange, data.heightRange);
     TerrainSet terrainSet = new TerrainSet(
         (int)(roomsBuilder.rect.width/data.tileSize)+2, 
@@ -188,16 +189,12 @@ public class TerrainSetGenerator {
     return terrain.type.contains(type);
   }
   // Call before styling anything (before placing any terrains based on created rooms)
-  public static void combine(TerrainSet base, TerrainSet add, RoomsBuilder roomsBuilder, Rectangle replacedRoom) {
-    roomsBuilder.rooms.remove(replacedRoom);
-    Pointi replacedRoomPos = roomsBuilder.getRoomRelTilePos(replacedRoom);
-    int rCols = (int)replacedRoom.width / roomsBuilder.tileSize;
-    int rRows = (int)replacedRoom.height / roomsBuilder.tileSize;
+  public static void combine(TerrainSet base, TerrainSet add, RoomsBuilder roomsBuilder, Pointi center) { 
+    // roomsBuilder.rooms.remove(replacedRoom);
+    // Pointi replacedRoomPos = roomsBuilder.getRoomRelTilePos(replacedRoom);
     // Origin on center of the replaced room
-    int rCenterX = replacedRoomPos.x + rCols / 2;
-    int rCenterY = replacedRoomPos.y + rRows / 2;
-    int startX = rCenterX - add.cols / 2;
-    int startY = rCenterY - add.rows / 2;
+    int startX = center.x - add.cols / 2;
+    int startY = center.y - add.rows / 2;
     int endX = startX + add.cols;
     int endY = startY + add.rows;
 

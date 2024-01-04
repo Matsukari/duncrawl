@@ -47,7 +47,7 @@ public class Tileset {
     Logger.log("Tileset", "Filtered terrains: " + Integer.toString(tiles.size()));
     return tiles;
   }
-  public ArrayList<Terrain> terrainTransform(ArrayList<TiledMapTile> tiles, SpriteBatch batch) {
+  public ArrayList<Terrain> terrainTransform(ArrayList<TiledMapTile> tiles) {
     ArrayList<Terrain> terrains = new ArrayList<>();
     for (TiledMapTile tile : tiles) {
       Terrain terrain = new Terrain(new LinearAnimation<TextureRegion>(tile.getTextureRegion()));
@@ -58,8 +58,8 @@ public class Tileset {
     }
     return terrains;
   }
-  public TerrainVariants getTerrainVariants(String val, SpriteBatch batch) {
-    return new TerrainVariants(terrainTransform(filter("terrain", val), batch));
+  public TerrainVariants getTerrainVariants(String val) {
+    return new TerrainVariants(terrainTransform(filter("terrain", val)));
 
   }
   public void dispose() {

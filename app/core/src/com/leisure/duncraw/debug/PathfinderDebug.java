@@ -19,7 +19,7 @@ public class PathfinderDebug extends ToolAgent {
     Pointi end = new Pointi(start);
     end.x += 1;
     end.y += 7;
-    path = new Pathfinder(game.floorManager.getCurrentFloor().background, start, end).getArrayPath();
+    path = new Pathfinder(game.floorManager.getFloor().background, start, end).getArrayPath();
   }
   @Override
   public void render(ShapeRenderer renderer) {

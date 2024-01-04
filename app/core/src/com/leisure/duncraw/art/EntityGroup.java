@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import com.leisure.duncraw.manager.RenderSortManager;
 
 public class EntityGroup <T extends Art> {
-  private RenderSortManager manager; 
+  public final RenderSortManager manager; 
   public EntityGroup(RenderSortManager manager) {
     assert manager != null;
     this.manager = manager;

@@ -16,20 +16,20 @@ public class WallType {
   public static int RIGHT_HEAD = 9;
   public static int TOP_HEAD = 10;
   public static int getTotal() { return 11; }
-  public static TerrainVariants[] getAllWallTypes(Tileset tileset, SpriteBatch batch) {
+  public static TerrainVariants[] getAllWallTypes(Tileset tileset) {
     TerrainVariants types[] = new TerrainVariants[getTotal()];
-    types[WallType.BODY] = tileset.getTerrainVariants("wall", batch);
+    types[WallType.BODY] = tileset.getTerrainVariants("wall");
     types[WallType.BODY].get(0).canTravel = false;
-    types[WallType.LEFT_EDGE] = tileset.getTerrainVariants("wall_left_edge", batch);
-    types[WallType.LEFT_CORNER] = tileset.getTerrainVariants("wall_left_corner", batch);
-    types[WallType.LEFT_HEAD] = tileset.getTerrainVariants("left_wall", batch);
-    types[WallType.RIGHT_EDGE] = tileset.getTerrainVariants("wall_right_edge", batch);
-    types[WallType.RIGHT_CORNER] = tileset.getTerrainVariants("wall_right_corner", batch);
-    types[WallType.RIGHT_HEAD] = tileset.getTerrainVariants("right_wall", batch);
-    types[WallType.SINGLE_BODY] = tileset.getTerrainVariants("wall_single_body", batch);
-    types[WallType.SINGLE_DOWN] = tileset.getTerrainVariants("wall_single_down", batch);
-    types[WallType.DOWN_EDGE] = tileset.getTerrainVariants("wall_down_edge", batch);
-    types[WallType.TOP_HEAD] = tileset.getTerrainVariants("top_wall", batch);
+    types[WallType.LEFT_EDGE] = tileset.getTerrainVariants("wall_left_edge");
+    types[WallType.LEFT_CORNER] = tileset.getTerrainVariants("wall_left_corner");
+    types[WallType.LEFT_HEAD] = tileset.getTerrainVariants("left_wall");
+    types[WallType.RIGHT_EDGE] = tileset.getTerrainVariants("wall_right_edge");
+    types[WallType.RIGHT_CORNER] = tileset.getTerrainVariants("wall_right_corner");
+    types[WallType.RIGHT_HEAD] = tileset.getTerrainVariants("right_wall");
+    types[WallType.SINGLE_BODY] = tileset.getTerrainVariants("wall_single_body");
+    types[WallType.SINGLE_DOWN] = tileset.getTerrainVariants("wall_single_down");
+    types[WallType.DOWN_EDGE] = tileset.getTerrainVariants("wall_down_edge");
+    types[WallType.TOP_HEAD] = tileset.getTerrainVariants("top_wall");
     for (TerrainVariants wallVar : types) {
       for (Terrain wall : wallVar) wall.canTravel = false;
     }

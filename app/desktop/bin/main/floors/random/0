@@ -13,6 +13,7 @@
 },
 "maxMob": 15,
 "maxElite": 5,
+"classname": "com.leisure.duncraw.map.floors.Floor1"
 "title": "Floor 0 : Tutorial",
 "normalHeight": 2,
 "customHeight": {},

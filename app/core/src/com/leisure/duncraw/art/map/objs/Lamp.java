@@ -32,7 +32,7 @@ public class Lamp extends Obj {
   public void render(SpriteBatch batch) {
     fireAnim.bounds.setSize(bounds.width, bounds.height);
     fireAnim.bounds.setPosition(bounds.x, bounds.y + bounds.height / 2);
-    light.centerTo(bounds);
+    light.centerTo(this);
     super.render(batch);
   }
 }
