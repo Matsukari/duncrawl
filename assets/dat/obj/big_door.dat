@@ -1,0 +1,14 @@
+{
+"anims": {
+	"idle": "images/objects/door_big_idle.png",
+	"open": "images/objects/door_big_open.png"
+},
+"sounds": {},
+"name": "No-name-obj",
+"desc": "No-desc-obj",
+"size": {
+	"x": 2,
+	"y": 2
+},
+"offsetY": 3
+}

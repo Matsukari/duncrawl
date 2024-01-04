@@ -200,7 +200,7 @@ public class TerrainSetGenerator {
 
     for (int x = startX; x < endX; x++) {
       for (int y = startY; y < endY; y++) {
-        base.putTerrain(add.getTerrain(x-startX, y-startY).clone(), x, y);
+        base.replaceTerrain(add.getTerrain(x-startX, y-startY).clone(), x, y);
       }
     }
     

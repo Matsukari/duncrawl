@@ -16,4 +16,6 @@ public class EntityGroup <T extends Art> {
   public void remove(Object o) {
     manager.entities.remove(o);
   }
+  public void clear() {
+  }
 }

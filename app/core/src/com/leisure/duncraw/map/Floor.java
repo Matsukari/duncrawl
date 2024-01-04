@@ -23,10 +23,12 @@ import lib.math.Pointi;
 public class Floor {
   public final ArrayList<TilemapChara> chars = new ArrayList<>();
   public final TerrainSetGenerator generator;
-  public final TerrainSet background;
-  public final TerrainSet foreground;
+  public TerrainSet background;
+  public TerrainSet foreground;
   public LightEnvironment lightEnvironment;
+  public EffectManager effectManager;
   public EnemySpawner spawner;
+  public int nextLevel = -1;
 
   public Floor(TerrainSet background, TerrainSet foreground) {
     this.background = background;
@@ -42,6 +44,7 @@ public class Floor {
     lightEnvironment = new LightEnvironment(generator.data.envColor, new Rectangle(0, 0, background.getWidth(), background.getHeight()));
   }
   public void stage(Tileset tileset, EffectManager effectManager) {
+    this.effectManager = effectManager;
     generator.populate(background);
   }
   public void render(SpriteBatch batch, TerrainSet layer) {

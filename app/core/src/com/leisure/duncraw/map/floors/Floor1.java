@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.leisure.duncraw.Graphics;
+import com.leisure.duncraw.art.EntityHashMap;
 import com.leisure.duncraw.art.chara.Enemy;
 import com.leisure.duncraw.art.chara.EnemySpawner;
 import com.leisure.duncraw.art.chara.states.MoveState;
@@ -24,12 +25,9 @@ import com.leisure.duncraw.map.loader.TmxLoader;
 import lib.math.Pointi;
 
 public class Floor1 extends Floor {
-  private FloorData data;
+  private TerrainSet content;
   public Floor1(TerrainSetGenerator generator) {
     super(generator);
-    data = generator.data; 
-    // TerrainSet prefab = TmxLoader.load(data.prefabRooms.get("startRoom"), data.tileSize, data.tileSize, background.objs.manager)[0];
-    // TerrainSetGenerator.combine(background, prefab, generator.roomsBuilder, Pointi.getRandom(generator.roomsBuilder.rect));
   }
   @Override
   public void stage(Tileset tileset, EffectManager effectManager) {
@@ -42,11 +40,18 @@ public class Floor1 extends Floor {
     miscDecorationFurnisher.chests.addAll(Graphics.objsSources.floorChests.get(generator.data.level));
     generator.groundFurnishers.add(miscDecorationFurnisher);
     super.stage(tileset, effectManager);
+    try {
+      TerrainSet prefab = TmxLoader.load(this, generator.data.prefabRooms.get("startRoom"));
+      content = background;
+      background.objs.clear();
+      background = prefab;
+      // TerrainSetGenerator.combine(background, prefab, generator.roomsBuilder, Pointi.getRandom(generator.roomsBuilder.rect));
+    } catch (Exception e) {e.printStackTrace(); System.exit(-1);}
   }
   @Override
   public void initialSpawn(EnemySpawner spawner) {
     super.initialSpawn(spawner);
-    for (int i = 0; i < data.maxMob; i++) {
+    for (int i = 0; i < generator.data.maxMob; i++) {
       Enemy enemy = (Enemy)spawner.spawn(spawner.sources.ghost);
       Pointi pos = getTileInRandomRoom();
       enemy.setState(new MoveState(pos.x, pos.y, false));
