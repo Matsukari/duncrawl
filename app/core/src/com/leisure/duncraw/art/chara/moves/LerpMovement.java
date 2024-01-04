@@ -45,6 +45,7 @@ public class LerpMovement extends Movement {
     float direction = Math.abs(velX) + Math.abs(velY); 
     boolean ahead = stepTaken > direction;
     if (ahead || (time >= stepDuration && ahead)) {
+      // chara.bounds.setPosition(MathUtils.ceil(chara.bounds.x), MathUtils.ceil(chara.bounds.y));
       chara.mapAgent.moveBy(lastVelX, lastVelY);
       reset();
       if (length <= 1) {

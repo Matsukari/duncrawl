@@ -39,6 +39,10 @@ public class Chara extends Art {
     setState(new IdleState());
   }
   @Override
+  public float getWorldX() { return bounds.x + offset.x; }
+  @Override
+  public float getWorldY() { return bounds.y + offset.y; }
+  @Override
   public void render(SpriteBatch batch) {
     batch.draw(anims.current.currentDir.current(), bounds.x + offset.x, bounds.y + offset.y, bounds.width, bounds.height);  
   }

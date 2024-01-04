@@ -66,7 +66,7 @@ public class Floor {
     TilemapChara chara = getChara(x, y);
     boolean traversable = true;
     if (terrain != null && !terrain.traversable()) traversable = false;
-    if (obj != null && !(obj instanceof Item) && !(obj instanceof Decoration)) traversable = false;
+    if (obj != null && !(obj instanceof Item) && !(obj instanceof Decoration) && !(obj instanceof Terrain)) traversable = false;
     if (chara != null) traversable = false;
     return traversable;
   }

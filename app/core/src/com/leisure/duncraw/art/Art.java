@@ -18,6 +18,8 @@ public abstract class Art {
     bounds.x += other.width/2;
     bounds.y += other.height/2;
   }
+  public float getWorldX() { return bounds.x; }
+  public float getWorldY() { return bounds.y; }
   @Override
   public boolean equals(Object obj) {
     return id == ((Art)obj).id;

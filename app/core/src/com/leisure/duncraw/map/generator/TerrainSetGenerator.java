@@ -3,6 +3,7 @@ package com.leisure.duncraw.map.generator;
 import java.util.ArrayList;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
@@ -21,6 +22,7 @@ import lib.math.Pointi;
 public class TerrainSetGenerator {
   public RoomsBuilder roomsBuilder;
   public FloorData data;
+  public TerrainSet terrainSet;
   public final TerrainFurnishers wallFurnishers = new TerrainFurnishers();
   public final TerrainFurnishers groundFurnishers = new TerrainFurnishers();
   public final RenderSortManager renderSortManager;
@@ -45,35 +47,48 @@ public class TerrainSetGenerator {
     
     return terrainSet;
   }
-  public void populate(TerrainSet terrainSet) {
+  public void populate(TerrainSet set) {
+    terrainSet = set;
     try {
-      placeGrounds(terrainSet, groundFurnishers);
-      placeWalls(terrainSet, wallFurnishers);
+      placeGrounds(groundFurnishers);
+      placeWalls(wallFurnishers);
     } catch (Exception e) { 
       e.printStackTrace();
       System.exit(-1);
     }
   }
-  public void placeGrounds(TerrainSet terrainSet, TerrainFurnishers furnishers) throws Exception {
+  public void placeGrounds(TerrainFurnishers furnishers) throws Exception {
     groundFurnishers.start(terrainSet, roomsBuilder);
     roomsBuilder.forEachTileInRooms(roomsBuilder.rooms, (room, col, row)->{
       Pointi pos = roomsBuilder.getRoomRelTilePos(room);
       pos.x += 1;
       Terrain terrain = grounds.get(MathUtils.random(0, grounds.size()-1)).clone();
-      if (terrainSet.getTerrain(pos.x + col, pos.y + row) == null) putTerrain(terrainSet, terrain, pos.x + col, pos.y + row, furnishers);  
+      if (terrainSet.getTerrain(pos.x + col, pos.y + row) == null) putTerrain(terrain, pos.x + col, pos.y + row, furnishers);  
     }); 
     groundFurnishers.finish(terrainSet, roomsBuilder);
   }
-  public void putTerrain(TerrainSet terrainSet, Terrain terrain, int x, int y, TerrainFurnishers furnishers) {
+  public void putTerrain(Terrain terrain, int x, int y, TerrainFurnishers furnishers) {
     terrainSet.putTerrain(terrain, x, y);
     if (furnishers != null) furnishers.furnish(terrainSet, roomsBuilder, terrain, x, y);
     // Logger.log("TerrainSetGenerator", "Put terrain");
   }
-  public void replaceTerrain(TerrainSet terrainSet, Terrain terrain, int x, int y, TerrainFurnishers furnishers) {
+  public void replaceTerrain(Terrain terrain, int x, int y, TerrainFurnishers furnishers) {
     terrainSet.replaceTerrain(terrain, x, y);
     if (furnishers != null) furnishers.furnish(terrainSet, roomsBuilder, terrain, x, y);
   }
-  public void placeWalls(TerrainSet terrainSet, TerrainFurnishers furnishers) throws Exception {
+  public Pointi makeWall(LayeredTerrain group, int type, int x, int y, TerrainFurnishers furnishers, Color color) {
+    Terrain terrain = walls[type].getVariant();
+    replaceTerrain(terrain, x, y, furnishers);
+    // Terrain obj = walls[type].getVariant();
+    // terrain.tint = color;
+    // terrain.bounds.setPosition(x * data.tileSize, y * data.tileSize);
+    // terrain.bounds.setSize(data.tileSize);
+    // group.add(terrain);
+    return (new Pointi(x, y));
+  }
+  public Pointi makeWallA(LayeredTerrain group, int type, int x, int y, TerrainFurnishers furnishers) { return makeWall(group, type, x, y, furnishers,Color.RED); }
+  public Pointi makeWallB(LayeredTerrain group, int type, int x, int y, TerrainFurnishers furnishers) { return makeWall(group, type, x, y, furnishers,Color.BLUE); }
+  public void placeWalls(TerrainFurnishers furnishers) throws Exception {
     // Logger.log("Rooms before", )
     wallFurnishers.start(terrainSet, roomsBuilder);
     roomsBuilder.rooms.sort((a, b)-> (a.y > b.y) ? 1 : (b.y > a.y) ? -1 : 0 );
@@ -88,29 +103,36 @@ public class TerrainSetGenerator {
       int bottom = pos.y + rows;
       // Go explore horizontally
       for (int col = 0; col < cols; col++) {
-        Terrain terrain = walls[WallType.BODY].getVariant();
-        // terrain.canTravel = false;
+        // terrain.canTravel = false // bottom;
         if (terrainSet.getTerrain(pos.x + col, top - 1) == null) { 
+          LayeredTerrain wallGroup = new LayeredTerrain();
           for (int i = 0; i < data.normalHeight-1; i++) {
-            replaceTerrain(terrainSet, terrain.clone(), pos.x + col, top - i, furnishers);
-            wallBodies.add(new Pointi(pos.x+col, top-i));
+            wallBodies.add(makeWallA(wallGroup, WallType.BODY, pos.x + col, top - i, furnishers));
           }
-          replaceTerrain(terrainSet, walls[WallType.DOWN_EDGE].getVariant(), pos.x + col, top-data.normalHeight+1, furnishers);
-          wallBodies.add(new Pointi(pos.x+col, top-data.normalHeight+1));
+          wallBodies.add(makeWallA(wallGroup, WallType.DOWN_EDGE, pos.x + col, top-data.normalHeight+1, furnishers));
+        
           Terrain topHead = walls[WallType.TOP_HEAD].getVariant();
-
-          putTerrain(terrainSet, topHead, pos.x + col, top, furnishers);
-          terrainSet.getTerrain(pos.x + col, top).setTravel(true);
+          putTerrain(topHead, pos.x + col, top, furnishers);
+          wallGroup.add(topHead);
+          // terrainSet.getTerrain(pos.x + col, top).setTravel(true);
+          
+          wallGroup.bounds.setPosition((float)(pos.x+col) * data.tileSize, (float)(top-data.normalHeight+1) * data.tileSize);
+          terrainSet.putObject(wallGroup, pos.x + col, top-data.normalHeight-1, false);
         }
         if (terrainSet.getTerrain(pos.x + col, bottom + 1) == null) {
+          LayeredTerrain wallGroup = new LayeredTerrain();
           for (int i = 0; i < data.normalHeight-1; i++) {
-            replaceTerrain(terrainSet, terrain.clone(), pos.x + col, bottom - i, furnishers);
-            wallBodies.add(new Pointi(pos.x+col, bottom-i));
+            wallBodies.add(makeWallB(wallGroup, WallType.BODY, pos.x + col, bottom - i, furnishers));
           }
-          replaceTerrain(terrainSet, walls[WallType.DOWN_EDGE].getVariant(), pos.x + col, bottom-data.normalHeight+1, furnishers);
-          wallBodies.add(new Pointi(pos.x+col, bottom-data.normalHeight+1));
-          putTerrain(terrainSet, walls[WallType.TOP_HEAD].getVariant(), pos.x + col, bottom, furnishers);
-          terrainSet.getTerrain(pos.x + col, bottom).setTravel(true);
+          wallBodies.add(makeWallB(wallGroup, WallType.DOWN_EDGE, pos.x + col, bottom-data.normalHeight+1, furnishers));
+
+          Terrain topHead = walls[WallType.TOP_HEAD].getVariant();
+          putTerrain(topHead, pos.x + col, bottom, furnishers);
+          wallGroup.add(topHead);
+          // terrainSet.getTerrain(pos.x + col, bottom).setTravel(true);
+          
+          wallGroup.bounds.setPosition((float)(pos.x+col) * data.tileSize, (float)(bottom-data.normalHeight+1) * data.tileSize);
+          terrainSet.putObject(wallGroup, pos.x+col, bottom-data.normalHeight+1, false);
         }
         
       }

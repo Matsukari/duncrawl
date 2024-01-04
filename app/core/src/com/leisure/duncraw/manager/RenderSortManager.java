@@ -16,7 +16,14 @@ public class RenderSortManager {
   public void renderAll(Camera camera) {
     batch.setProjectionMatrix(camera.combined);
     batch.begin();
-    entities.sort((a, b)-> (a.bounds.y > b.bounds.y || (b instanceof Decoration)) ? -1 : (b.bounds.y > a.bounds.y || a instanceof Decoration) ? 1 : 0 );
+    // entities.sort((a, b)-> 
+    //       (a.getWorldY() > b.getWorldY() && !(b instanceof Decoration)) ? -1 
+    //     : (b.getWorldY() > a.getWorldY() || (b instanceof Decoration)) ? 1 
+    //     : 0 );
+    entities.sort((a, b)-> 
+          (a.getWorldY() > b.getWorldY() ) ? -1 
+        : (b.getWorldY() > a.getWorldY() ) ? 1
+        : 0 );
     for (Art entity : entities) {
       entity.render(batch);
     }
