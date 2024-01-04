@@ -1,16 +1,19 @@
 package com.leisure.duncraw.art.map;
 
 import com.leisure.duncraw.art.chara.Chara;
+import com.leisure.duncraw.manager.FloorManager;
 import com.leisure.duncraw.map.Floor;
 
 public class TilemapChara {
-  public final Floor map;
+  private final FloorManager floorManager;
+  public Floor map;
   public final Chara chara;
   public int x = 0;
   public int y = 0;
-  public TilemapChara(Chara chara, Floor map) {
+  public TilemapChara(Chara chara, FloorManager floorManager) {
+    this.floorManager = floorManager;
     this.chara = chara;
-    this.map = map;
+    this.map = floorManager.getFloor();
   }
   @Override
   public boolean equals(Object obj) {
@@ -25,6 +28,9 @@ public class TilemapChara {
     x += byX;
     y += byY;
   }
+  public void update() {
+    map = floorManager.getFloor();
+  }
   public int distance(TilemapChara other) {
     return Math.abs(x - other.x) + Math.abs(y - other.y);
   }
@@ -32,14 +38,14 @@ public class TilemapChara {
     return 0;
   }
   public Terrain getTerrainBy(int byX, int byY) {
-     return map.background.getTerrain(x+byX, y+byY);
+    update();
+    return map.background.getTerrain(x+byX, y+byY);
   }
   public Obj getObjBy(int byX, int byY) {
-    // Terrain terrain = getTerrainBy(byX, byY);
-    // if (terrain != null) return terrain.lastObj();
+    update();
     return map.background.getObj(x+byX, y+byY);
   }
   public boolean onBlock(int u, int v) { return x == u && y == v; } 
-  public int getWidth() { return map.background.terrainWidth; }
-  public int getHeight() { return map.background.terrainHeight; }
+  public int getWidth() { update(); return map.background.terrainWidth; }
+  public int getHeight() { update(); return map.background.terrainHeight; }
 }

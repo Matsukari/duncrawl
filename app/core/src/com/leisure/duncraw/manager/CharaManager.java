@@ -28,12 +28,12 @@ public class CharaManager {
   public Queue<Chara> deadCharas = new LinkedList<>(); 
   public SpriteBatch batch = new SpriteBatch();
   public Chara player;
-  private final Floor floor;
+  private final FloorManager floorManager;
   public final CharasData sources;
   public final ArrayList<Observer> observers = new ArrayList<>();
-  public CharaManager(CharasData sources, Floor floor, RenderSortManager renderManager) { 
+  public CharaManager(CharasData sources, FloorManager floorManager, RenderSortManager renderManager) { 
     this.sources = sources;
-    this.floor = floor;
+    this.floorManager = floorManager;
     charas = new EntityArrayList<Chara>(renderManager);
     observers.add(new AttackBehaviour());
     observers.add(new HurtBehaviour());
@@ -42,28 +42,20 @@ public class CharaManager {
 
   public <T extends Chara> T addFrom(String source, Class<T> clazz) {
     Logger.log("CharaManager", "Creating a character from source: " + source);
-    CharaData data = new CharaData();
-    data.reset();
-    try { data = Deserializer.load(CharaData.class, Gdx.files.local(source)); }
-    catch(Exception e) { Serializer.save(data, Gdx.files.local(source)); }
-    try {
-      T chara = clazz.getDeclaredConstructor(CharaData.class).newInstance(data);
-      chara.bounds.setSize(32, 32);
-      chara.mapAgent = new TilemapChara(chara, floor);
-      floor.putChara(chara.mapAgent); 
-      charas.add(chara);
-      for (Observer observer : observers) chara.observers.add(observer.copy());
-      return chara;  
-    } catch (Exception e) { e.printStackTrace(); }
+    CharaData data = Deserializer.safeLoad(CharaData.class, source);
+    try { 
+      return add(clazz.getDeclaredConstructor(CharaData.class).newInstance(data));
+    } catch (Exception e) { e.printStackTrace(); System.exit(-1); }
     return null;
   }
   public Chara addFrom(String source) { return addFrom(source, Chara.class); }
   public <T extends Chara> T add(T chara) { 
-    charas.add(chara);
     chara.bounds.setSize(32, 32);
-    chara.mapAgent = new TilemapChara(chara, floor);
+    chara.mapAgent = new TilemapChara(chara, floorManager);
+    floorManager.getFloor().putChara(chara.mapAgent); 
+    charas.add(chara);
     for (Observer observer : observers) chara.observers.add(observer.copy());
-    return chara;
+    return chara;  
   }
   public void kill(int id) {}
   public void updateAll(float dt) {

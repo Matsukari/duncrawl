@@ -8,8 +8,8 @@ import behave.models.Node;
 
 public class EnemySpawner extends Spawner {
   private Instantiator<Node> commonAi;
-  public EnemySpawner(CharaManager charaManager, CharasData sources, Instantiator<Node> ai) {
-    super(charaManager, sources);
+  public EnemySpawner(CharaManager charaManager, Instantiator<Node> ai) {
+    super(charaManager);
     this.commonAi = ai;
   }
   @Override

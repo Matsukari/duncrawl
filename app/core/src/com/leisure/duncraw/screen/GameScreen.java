@@ -73,17 +73,22 @@ public class GameScreen extends Screen {
     viewport.apply();
     renderSortManager = new RenderSortManager();
     effectManager = new EffectManager();
-    floorManager = new FloorManager(saveData, AssetSource.getFloorsData(), saveData.progression.level.floor, effectManager, renderSortManager);
-    charaManager = new CharaManager(AssetSource.getCharasData(), floorManager.getFloor(), renderSortManager);
+    floorManager = new FloorManager(saveData, AssetSource.getFloorsData(), effectManager, renderSortManager);
+    charaManager = new CharaManager(AssetSource.getCharasData(), floorManager, renderSortManager);
+
+    floorManager.loadFloor(saveData.progression.level.floor);
     charaManager.observers.add(new AnimationBehaviour(effectManager));
     player = charaManager.add(new Player(Deserializer.safeLoad(CharaData.class, charaManager.sources.player), saveData));
     player.observers.add(new InfuseDarknessBehaviour(effectManager));
     player.observers.add(new ShadowCloakBehaviour(effectManager));
     player.observers.add(new DashBehaviour(effectManager));
     player.observers.add(new IlluminateBehaviour(floorManager.lighting, new PointLight(Graphics.getSafeTextureRegion("images/lights/light_smooth.png"))));
+    floorManager.stageFloor(player, charaManager);
+
     musicManager = new MusicManager(this, AssetSource.getMusicData(), saveData.settings.music);
     hudManager = new HudManager(this, AssetSource.getUiData());
     storyManager = new StoryManager(this, saveData.progression.level.scene);
+
 
     debugManager = new DebugManager();
     debugManager.debugSystem();
@@ -108,7 +113,7 @@ public class GameScreen extends Screen {
     floorManager.getFloor().background.putObject(new Lamp("dat/obj/lamp.dat", floorManager.lighting.getEnv(), effectManager), pos.x - 3, pos.y);
     
     
-    floorManager.getFloor().initialSpawn(new EnemySpawner(charaManager, charaManager.sources, ()->new AiWanderer(floorManager.getFloor(), player)));
+    floorManager.getFloor().initialSpawn(new EnemySpawner(charaManager, ()->new AiWanderer(floorManager.getFloor(), player)));
     npc.observers.add(new TalkBehaviour(hudManager.dialogueHud, Conversation.fromDat("dat/convs/test.conv")));
     camera.zoom = 30f;
     debugManager.debugChara(mob);
@@ -129,6 +134,13 @@ public class GameScreen extends Screen {
       camera.position.y = player.bounds.y;
     }
     camera.update();
+    int nextFloor = floorManager.updateFloor();
+    if (nextFloor != -1) {
+      floorManager.loadFloor(nextFloor);
+      floorManager.stageFloor(player, charaManager);
+      floorManager.getFloor().lightEnvironment.update();
+      floorManager.getFloor().lightEnvironment.cast(camera);
+    }
     charaManager.updateAll(delta);
     effectManager.updateAll(delta);
     storyManager.updateScene();

@@ -6,9 +6,9 @@ import com.leisure.duncraw.manager.CharaManager;
 public abstract class Spawner {
   final public CharasData sources;
   final protected CharaManager charaManager;
-  public Spawner(CharaManager charaManager, CharasData sources) {
+  public Spawner(CharaManager charaManager) {
     this.charaManager = charaManager;
-    this.sources = sources;
+    this.sources = charaManager.sources;
   }
   public abstract Chara spawn(String source);
 }

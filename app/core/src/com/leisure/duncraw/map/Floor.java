@@ -9,12 +9,14 @@ import com.badlogic.gdx.math.Rectangle;
 import com.leisure.duncraw.art.EntityHashMap;
 import com.leisure.duncraw.art.chara.Chara;
 import com.leisure.duncraw.art.chara.EnemySpawner;
+import com.leisure.duncraw.art.chara.Player;
 import com.leisure.duncraw.art.item.Item;
 import com.leisure.duncraw.art.lighting.LightEnvironment;
 import com.leisure.duncraw.art.map.Decoration;
 import com.leisure.duncraw.art.map.Obj;
 import com.leisure.duncraw.art.map.Terrain;
 import com.leisure.duncraw.art.map.TilemapChara;
+import com.leisure.duncraw.helper.IdGenerator;
 import com.leisure.duncraw.manager.EffectManager;
 import com.leisure.duncraw.map.generator.TerrainSetGenerator;
 
@@ -29,7 +31,11 @@ public class Floor {
   public EffectManager effectManager;
   public EnemySpawner spawner;
   public int nextLevel = -1;
-
+  public Player player;
+  public int id;
+  {
+    id = IdGenerator.gen();
+  }
   public Floor(TerrainSet background, TerrainSet foreground) {
     this.background = background;
     this.foreground = foreground;
@@ -43,9 +49,14 @@ public class Floor {
     foreground = null;
     lightEnvironment = new LightEnvironment(generator.data.envColor, new Rectangle(0, 0, background.getWidth(), background.getHeight()));
   }
-  public void stage(Tileset tileset, EffectManager effectManager) {
+  public void stage(Player player, Tileset tileset, EffectManager effectManager) {
+    this.player = player;
     this.effectManager = effectManager;
     generator.populate(background);
+  }
+  public void unstage() {
+    background.objs.clear();
+    nextLevel = -1;
   }
   public void render(SpriteBatch batch, TerrainSet layer) {
     for (Terrain terrain : layer.terrains) {
@@ -87,4 +98,5 @@ public class Floor {
   @Override public boolean equals(Object obj) {
     return getName().contains(((Floor)obj).getName());
   }
+  public boolean isExactSame(Floor floor) { return id == floor.id; } 
 }

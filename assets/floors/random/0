@@ -11,7 +11,7 @@
 	"x": 0.2,
 	"y": 1
 },
-"maxMob": 15,
+"maxMob": 0,
 "maxElite": 5,
 "title": "Default Floor",
 "normalHeight": 2,

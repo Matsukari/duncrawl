@@ -7,6 +7,7 @@ import com.leisure.duncraw.Graphics;
 import com.leisure.duncraw.art.EntityHashMap;
 import com.leisure.duncraw.art.chara.Enemy;
 import com.leisure.duncraw.art.chara.EnemySpawner;
+import com.leisure.duncraw.art.chara.Player;
 import com.leisure.duncraw.art.chara.states.MoveState;
 import com.leisure.duncraw.art.lighting.LightEnvironment;
 import com.leisure.duncraw.data.FloorData;
@@ -30,7 +31,7 @@ public class Floor1 extends Floor {
     super(generator);
   }
   @Override
-  public void stage(Tileset tileset, EffectManager effectManager) {
+  public void stage(Player player, Tileset tileset, EffectManager effectManager) {
     generator.grounds = new TerrainVariants(tileset.terrainTransform(tileset.filter("terrain", "ground")));
     generator.walls = WallType.getAllWallTypes(tileset);
 
@@ -39,7 +40,7 @@ public class Floor1 extends Floor {
     MiscDecorationFurnisher miscDecorationFurnisher = new MiscDecorationFurnisher();
     miscDecorationFurnisher.chests.addAll(Graphics.objsSources.floorChests.get(generator.data.level));
     generator.groundFurnishers.add(miscDecorationFurnisher);
-    super.stage(tileset, effectManager);
+    super.stage(player, tileset, effectManager);
     try {
       TerrainSet prefab = TmxLoader.load(this, generator.data.prefabRooms.get("startRoom"));
       content = background;
@@ -51,6 +52,7 @@ public class Floor1 extends Floor {
   @Override
   public void initialSpawn(EnemySpawner spawner) {
     super.initialSpawn(spawner);
+    player.setState(new MoveState(background.cols/2, background.rows/2, false));
     for (int i = 0; i < generator.data.maxMob; i++) {
       Enemy enemy = (Enemy)spawner.spawn(spawner.sources.ghost);
       Pointi pos = getTileInRandomRoom();

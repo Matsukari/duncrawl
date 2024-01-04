@@ -1,10 +1,12 @@
 package com.leisure.duncraw.art.lighting;
 
+import com.leisure.duncraw.data.FloorData;
 import com.leisure.duncraw.manager.FloorManager;
+import com.leisure.duncraw.map.Floor;
 
 // Whenever LightEnvironment is changed due to floor changes
 public class Lighting {
-  private int lastLevel = 12312;
+  private Floor lastFloor = null;
   private LightEnvironment lightEnvironment;
   private final FloorManager manager;
   public Lighting(FloorManager manager) {
@@ -15,8 +17,8 @@ public class Lighting {
     return lightEnvironment;
   }
   public void updateEnv() {
-    if (lastLevel != manager.getFloor().generator.data.level) {
-      lastLevel = manager.getFloor().generator.data.level;
+    if (lastFloor == null || lastFloor.isExactSame(manager.getFloor())) {
+      lastFloor = manager.getFloor();
       lightEnvironment = manager.getFloor().lightEnvironment;
     }
   }

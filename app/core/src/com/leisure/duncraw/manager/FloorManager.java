@@ -2,11 +2,15 @@ package com.leisure.duncraw.manager;
 
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.leisure.duncraw.art.chara.EnemySpawner;
+import com.leisure.duncraw.art.chara.Player;
+import com.leisure.duncraw.art.chara.ai.AiWanderer;
 import com.leisure.duncraw.art.lighting.Lighting;
 import com.leisure.duncraw.data.Deserializer;
 import com.leisure.duncraw.data.FloorData;
 import com.leisure.duncraw.data.FloorsData;
 import com.leisure.duncraw.data.SaveData;
+import com.leisure.duncraw.logging.Logger;
 import com.leisure.duncraw.map.Floor;
 import com.leisure.duncraw.map.Tileset;
 import com.leisure.duncraw.map.generator.TerrainSetGenerator;
@@ -17,31 +21,41 @@ public class FloorManager {
   public final SpriteBatch batch;
   public Tileset tileset;
   private Floor floor;
+  private Player player;
+  private CharaManager charaManager;
   private RenderSortManager renderSortManager;
   private EffectManager effectManager;
-  public final Lighting lighting;
+  public Lighting lighting;
   
-  public FloorManager(SaveData save, FloorsData sources, int level, EffectManager effectManager, RenderSortManager renderSortManager) {
+  public FloorManager(SaveData save, FloorsData sources, EffectManager effectManager, RenderSortManager renderSortManager) {
     this.sources = sources;
     this.renderSortManager = renderSortManager;
     this.effectManager = effectManager;
 
     batch = new SpriteBatch();
     tileset = new Tileset(sources.tilesets);
-
-    setFloor(level);
-    lighting = new Lighting(this);
   }
-  public void setFloor(int level) {  
+  public void loadFloor(int level) { 
+    Logger.log("FloorManager", String.format("Loading floor level %d", level) );
     FloorData data = Deserializer.safeLoad(FloorData.class, sources.floorsDat.get(level)); 
     TerrainSetGenerator terrainGenerator = new TerrainSetGenerator(data, renderSortManager);
     try {
+      if (floor != null) floor.unstage();
       floor = (Floor)Class.forName(data.classname).getDeclaredConstructor(TerrainSetGenerator.class).newInstance(terrainGenerator);
-      floor.stage(tileset, effectManager);
+      if (lighting == null) lighting = new Lighting(this);
+      lighting.updateEnv();
     } catch (Exception e) { e.printStackTrace(); System.exit(-1); }
+  }
+  public void stageFloor(Player player, CharaManager charaManager) {
+    Logger.log("FloorManager", "Staging floor...");
+    floor.stage(player, tileset, effectManager);
+    floor.initialSpawn(new EnemySpawner(charaManager, ()->new AiWanderer(floor, player)));
   }
   public void rebuild() {  
 
+  }
+  public int updateFloor() {
+    return floor.nextLevel;
   }
   public Floor getFloor() { return floor; }
   public void renderBackground(Camera cam) {
