@@ -37,9 +37,9 @@ public class FloorManager {
     Logger.log("FloorManager", String.format("Loading floor level %d", level) );
     FloorData data = Deserializer.safeLoad(FloorData.class, sources.floorsDat.get(level)); 
     data.level = level;
+    if (floor != null) floor.unstage();
     TerrainSetGenerator terrainGenerator = new TerrainSetGenerator(data, renderSortManager);
     try {
-      if (floor != null) floor.unstage();
       floor = (Floor)Class.forName(data.classname).getDeclaredConstructor(TerrainSetGenerator.class).newInstance(terrainGenerator);
       if (lighting == null) 
         lighting = new Lighting(this);

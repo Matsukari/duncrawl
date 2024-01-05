@@ -12,10 +12,12 @@ import com.leisure.duncraw.art.map.Obj;
 import com.leisure.duncraw.art.map.TilemapChara;
 import com.leisure.duncraw.data.CharaData;
 import com.leisure.duncraw.data.DirAnimData;
+import com.leisure.duncraw.manager.CharaManager;
 
 import lib.math.Pointi;
 
 public class Chara extends Art {
+  private CharaManager manager;
   public Status status;
   public State prevState;
   public State state;
@@ -38,6 +40,8 @@ public class Chara extends Art {
     observers = new Observers(this);
     setState(new IdleState());
   }
+  public void setManager(CharaManager manager) { this.manager = manager; }
+  public void kill() { if (manager != null) manager.kill(this); }
   @Override
   public float getWorldX() { return bounds.x + offset.x; }
   @Override

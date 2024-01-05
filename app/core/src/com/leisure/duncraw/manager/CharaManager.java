@@ -52,12 +52,15 @@ public class CharaManager {
   public <T extends Chara> T add(T chara) { 
     chara.bounds.setSize(32, 32);
     chara.mapAgent = new TilemapChara(chara, floorManager);
+    chara.setManager(this);
     floorManager.getFloor().putChara(chara.mapAgent); 
     charas.add(chara);
     for (Observer observer : observers) chara.observers.add(observer.copy());
     return chara;  
   }
-  public void kill(int id) {}
+  public void kill(Chara chara) {
+    deadCharas.add(chara);
+  }
   public void updateAll(float dt) {
     for (Chara chara : charas.data) {
       chara.update(dt);

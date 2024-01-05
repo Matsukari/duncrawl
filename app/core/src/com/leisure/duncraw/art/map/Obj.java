@@ -5,6 +5,7 @@ import com.leisure.duncraw.art.chara.Chara;
 import com.leisure.duncraw.data.Deserializer;
 import com.leisure.duncraw.data.GeneralAnimation;
 import com.leisure.duncraw.data.ObjData;
+import com.leisure.duncraw.map.Floor;
 
 import lib.animation.LinearAnimation;
 
@@ -44,6 +45,8 @@ public class Obj extends Art {
     batch.draw(anim.current(), bounds.x + dat.offsetX, bounds.y + dat.offsetY, bounds.width, bounds.height);
   }
   public void update(float dt) {}
+  public void onStage(Floor floor) {}
+  public void onUnstage(Floor floor) {}
   public void onCharaOccupy(Chara chara) {}
   public void onCharaInteract(Chara chara) {}
 }

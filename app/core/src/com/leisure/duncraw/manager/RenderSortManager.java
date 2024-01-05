@@ -28,7 +28,6 @@ public class RenderSortManager {
       entity.render(batch);
     }
     batch.end();
-
   }
   
 }

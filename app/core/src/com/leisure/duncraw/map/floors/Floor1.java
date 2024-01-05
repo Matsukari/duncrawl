@@ -7,6 +7,7 @@ import com.leisure.duncraw.art.chara.Enemy;
 import com.leisure.duncraw.art.chara.EnemySpawner;
 import com.leisure.duncraw.art.chara.Player;
 import com.leisure.duncraw.art.chara.states.MoveState;
+import com.leisure.duncraw.art.map.TilemapChara;
 import com.leisure.duncraw.art.map.objs.Stair;
 import com.leisure.duncraw.logging.Logger;
 import com.leisure.duncraw.manager.EffectManager;
@@ -25,7 +26,7 @@ public class Floor1 extends Floor {
     super(generator);
   }
   @Override
-  public void stage(Player player, Tileset tileset, EffectManager effectManager) {
+  protected void onStage() {
     generator.grounds = tileset.getTerrainVariants("ground");
     generator.walls = WallType.getAllWallTypes(tileset);
 
@@ -34,7 +35,14 @@ public class Floor1 extends Floor {
     EssensialsFurnisher essenFurnisher = new EssensialsFurnisher(this, tileset);
     essenFurnisher.chests.addAll(generator.data.chests);
     generator.groundFurnishers.add(essenFurnisher);
-    super.stage(player, tileset, effectManager);
+  } 
+  @Override
+  protected void onUnstage() {
+    Logger.log("Floor1", "Unstaging");
+    Logger.log("Floor1", "Total objects : " + Integer.toString(background.objs.data.size()));
+    // for (TilemapChara chara : chars) { 
+    //   chara.chara.kill();
+    // }
   }
   @Override
   public void initialSpawn(EnemySpawner spawner) {

@@ -11,6 +11,7 @@ import com.leisure.duncraw.art.lighting.PointLight;
 import com.leisure.duncraw.art.map.Obj;
 import com.leisure.duncraw.data.GeneralAnimation;
 import com.leisure.duncraw.manager.EffectManager;
+import com.leisure.duncraw.map.Floor;
 
 public class Lamp extends Obj {
   private GfxAnimation fireAnim;
@@ -27,6 +28,10 @@ public class Lamp extends Obj {
     light.tint = new Color(1f, 0.2f, 0.2f, 0.5f);
     effectManager.start(fireAnim);
     lightEnvironment.addLight(light);
+  }
+  @Override
+  public void onUnstage(Floor floor) {
+    effectManager.stop(fireAnim);
   }
   @Override
   public void render(SpriteBatch batch) {

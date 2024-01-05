@@ -59,10 +59,10 @@ public class TerrainSet {
         obj.bounds.setSize(terrainWidth * obj.dat.size.x, terrainHeight * obj.dat.size.y);
       }
       if (!objs.data.containsKey(tph.set(x, y))) {
+        objs.put(tph.set(x, y), obj);
       } else {
         Logger.log("TerrainSet", "Already has Obj");
       }
-      objs.put(tph.set(x, y), obj);
       // getTerrain(x, y).putObj(obj);
       // Logger.log("TerrainSet", "Put object at " + String.format("%d %d ", x, y) + SString.toString(obj.bounds));
     }

@@ -1,6 +1,7 @@
 package com.leisure.duncraw.map;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
@@ -26,6 +27,7 @@ public class Floor {
   public TerrainSet foreground;
   public LightEnvironment lightEnvironment;
   public EffectManager effectManager;
+  public Tileset tileset;
   public EnemySpawner spawner;
   public int nextLevel = -1;
   public Player player;
@@ -43,11 +45,25 @@ public class Floor {
   public void stage(Player player, Tileset tileset, EffectManager effectManager) {
     this.player = player;
     this.effectManager = effectManager;
+    this.tileset = tileset;
+    onStage();
     generator.populate(background);
+    for (Map.Entry<Pointi, Obj> obj : background.objs.data.entrySet()) {
+      obj.getValue().onStage(this);
+    }
   }
+  protected void onStage() {}
+  protected void onUnstage() {}
   public void unstage() {
+    for (Map.Entry<Pointi, Obj> obj : background.objs.data.entrySet()) {
+      obj.getValue().onUnstage(this);
+    }
+    for (TilemapChara agent : chars) {
+      if (!(agent.chara instanceof Player)) agent.chara.kill();
+    }
     background.objs.clear();
     nextLevel = -1;
+    onUnstage();
   }
   public void render(SpriteBatch batch, TerrainSet layer) {
     for (Terrain terrain : layer.terrains) {

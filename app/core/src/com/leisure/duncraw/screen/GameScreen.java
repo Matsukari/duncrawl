@@ -1,15 +1,11 @@
 package com.leisure.duncraw.screen;
 
-import java.util.ArrayList;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.leisure.duncraw.Graphics;
-import com.leisure.duncraw.art.Art;
 import com.leisure.duncraw.art.chara.Chara;
 import com.leisure.duncraw.art.chara.Enemy;
 import com.leisure.duncraw.art.chara.EnemySpawner;
@@ -25,7 +21,6 @@ import com.leisure.duncraw.art.chara.observers.dark.ShadowCloakBehaviour;
 import com.leisure.duncraw.art.chara.states.MoveState;
 import com.leisure.duncraw.art.item.Weapon;
 import com.leisure.duncraw.art.item.items.StaminaPotion;
-import com.leisure.duncraw.art.lighting.LightEnvironment;
 import com.leisure.duncraw.art.lighting.PointLight;
 import com.leisure.duncraw.art.map.objs.Chest;
 import com.leisure.duncraw.art.map.objs.Lamp;
@@ -36,7 +31,6 @@ import com.leisure.duncraw.data.Deserializer;
 import com.leisure.duncraw.data.SaveData;
 import com.leisure.duncraw.data.Serializer;
 import com.leisure.duncraw.debug.SpriteBatchDebug;
-import com.leisure.duncraw.debug.TerrainSetDebug;
 import com.leisure.duncraw.debug.editor.LightEnvEditor;
 import com.leisure.duncraw.logging.Logger;
 import com.leisure.duncraw.manager.CharaManager;
