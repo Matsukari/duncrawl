@@ -35,6 +35,8 @@ public class TerrainSetGenerator {
   }
   public TerrainSet prepare() {
     Logger.hide("RoomsBuilder"); 
+    Logger.hide("TerrainSet");
+
     roomsBuilder.build(data.roomsNum, new Vector2(data.getMaxWidth(), data.getMaxHeight()), data.widthRange, data.heightRange);
     TerrainSet terrainSet = new TerrainSet(
         (int)(roomsBuilder.rect.width/data.tileSize)+2, 

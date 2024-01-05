@@ -36,6 +36,7 @@ public class FloorManager {
   public void loadFloor(int level) { 
     Logger.log("FloorManager", String.format("Loading floor level %d", level) );
     FloorData data = Deserializer.safeLoad(FloorData.class, sources.floorsDat.get(level)); 
+    data.level = level;
     TerrainSetGenerator terrainGenerator = new TerrainSetGenerator(data, renderSortManager);
     try {
       if (floor != null) floor.unstage();

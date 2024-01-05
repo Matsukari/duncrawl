@@ -11,6 +11,7 @@ import lib.tooling.ToolAgent;
 public class Logger extends ToolAgent {
   private static ArrayList<String> hidden = new ArrayList<>();
   public static final ArrayList<String> logList = new ArrayList<>();
+  private static int streak = 0;
   public Logger() {
     size.y = Gdx.graphics.getHeight() - 100;
   }
@@ -26,9 +27,24 @@ public class Logger extends ToolAgent {
   public static void hide(String tag) {
     hidden.add(tag);
   }
-  public static void log(String tag, String msg) { 
+  public static void log(String tag, String msg) {
     if (hidden.contains(tag)) return;
-    logList.add(String.format("[%s] %s", tag, msg));
-    Gdx.app.log(tag, msg); 
+    if (!logList.isEmpty() && tag.equals(logList.get(logList.size()-1))) streak++;
+    else if (streak >= 3) logList.add(String.format("...and (%d) others", streak));
+    else {
+      streak = 0;
+      logList.add(String.format("[%s] %s", tag, msg));
+      Gdx.app.log(tag, msg); 
+    }
+  }
+  public static void error(String tag, String msg) { 
+    if (hidden.contains(tag)) return;
+    logList.add(String.format("ERROR: [%s] %s", tag, msg));
+    Gdx.app.error(tag, msg); 
+    System.exit(-1);
+  }
+  public static void error(Exception e) { 
+    e.printStackTrace();
+    System.exit(-1);
   }
 }

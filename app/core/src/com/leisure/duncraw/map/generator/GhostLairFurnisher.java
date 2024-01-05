@@ -2,15 +2,13 @@ package com.leisure.duncraw.map.generator;
 
 import com.badlogic.gdx.math.MathUtils;
 import com.leisure.duncraw.Graphics;
-import com.leisure.duncraw.art.item.Item;
 import com.leisure.duncraw.art.map.Decoration;
-import com.leisure.duncraw.art.map.Obj;
 import com.leisure.duncraw.art.map.Terrain;
 import com.leisure.duncraw.map.TerrainSet;
 
 import lib.math.Pointi;
 
-public class DeadBodiesFurnisher extends TerrainFurnisher {
+public class GhostLairFurnisher extends TerrainFurnisher {
   public int minBody;
   public int maxBody;
   private Pointi nextOffset = new Pointi(100, 200);
@@ -26,4 +24,5 @@ public class DeadBodiesFurnisher extends TerrainFurnisher {
     }
     lastBody++;
   }
+  
 }

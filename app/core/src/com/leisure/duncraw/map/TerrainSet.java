@@ -1,5 +1,6 @@
 package com.leisure.duncraw.map;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 import com.leisure.duncraw.art.EntityHashMap;
@@ -71,11 +72,12 @@ public class TerrainSet {
   public Obj getObj(int x, int y) {
     return objs.get(tph.set(x, y));
   }
-  public <T extends Obj> T getObj(Class<T> clazz) {
+  public <T extends Obj> ArrayList<T> getObj(Class<T> clazz) {
+    ArrayList<T> list = new ArrayList<>();
     for (Map.Entry<Pointi, Obj> obj : objs.data.entrySet()) {
-      if (obj.getValue().getClass() == clazz) return clazz.cast(obj.getValue());
+      if (obj.getValue().getClass() == clazz) list.add(clazz.cast(obj.getValue()));
     }
-    return null;
+    return list;
   }
   public Terrain getTerrain(int x, int y) { 
     try { return terrains[y*cols+x]; } 

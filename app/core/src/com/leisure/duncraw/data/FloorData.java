@@ -1,5 +1,6 @@
 package com.leisure.duncraw.data;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.badlogic.gdx.Gdx;
@@ -22,6 +23,7 @@ public class FloorData extends Dat {
   public Color envColor;
   public HashMap<String, Integer> customHeight;
   public HashMap<String, String> prefabRooms;
+  public ArrayList<String> chests;
   @Override
   public void reset() {
     roomsNum = 5;
@@ -37,6 +39,7 @@ public class FloorData extends Dat {
     envColor = new Color(0.033f, 0.033f, 0.100f, 0.2f);
     customHeight = new HashMap<>();
     prefabRooms = new HashMap<>();
+    chests = new ArrayList<>();
     classname = "com.leisure.duncraw.map.floors.Floor1";
     title = "Default Floor";
   }

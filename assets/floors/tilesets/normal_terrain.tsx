@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tileset version="1.10" tiledversion="git" name="semi_surface_2" tilewidth="16" tileheight="16" tilecount="400" columns="20">
  <image source="../../images/terrains/semi_surface.v.2.png" width="320" height="320"/>
+ <tile id="3">
+  <properties>
+   <property name="terrain" value="stair"/>
+  </properties>
+ </tile>
+ <tile id="22">
+  <properties>
+   <property name="terrain" value="stair"/>
+  </properties>
+ </tile>
  <tile id="45">
   <properties>
    <property name="terrain" value="left_wall"/>

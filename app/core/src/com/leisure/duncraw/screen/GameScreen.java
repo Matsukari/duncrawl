@@ -121,6 +121,7 @@ public class GameScreen extends Screen {
   @Override
   public void pause() {
     Logger.log("GameScreen", "Paused");
+    saveData.progression.level.floor = floorManager.getFloor().generator.data.level;
     Serializer.save(saveData, Gdx.files.local(AssetSource.instance.save));
   }
   @Override

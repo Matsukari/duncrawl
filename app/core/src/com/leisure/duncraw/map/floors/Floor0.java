@@ -20,7 +20,7 @@ public class Floor0 extends Floor {
     try {
       setTerrainSet(TmxLoader.load(this, generator.data.prefabRooms.get("startRoom")));
     } catch (Exception e) {e.printStackTrace(); System.exit(-1);}
-    BigDoor door = background.getObj(BigDoor.class);
+    BigDoor door = background.getObj(BigDoor.class).get(0);
     door.connectedFloorLevel = generator.data.level + 1;
 
   }

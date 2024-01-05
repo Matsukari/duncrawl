@@ -11,11 +11,11 @@
 	"x": 0.2,
 	"y": 1
 },
-"maxMob": 0,
+"maxMob": 15,
 "maxElite": 5,
-"title": "(???) Entrance",
+"title": "Default Floor",
 "normalHeight": 2,
-"classname": "com.leisure.duncraw.map.floors.Floor0",
+"classname": "com.leisure.duncraw.map.floors.Floor1",
 "envColor": {
 	"r": 0.033,
 	"g": 0.033,
@@ -23,8 +23,6 @@
 	"a": 0.2
 },
 "customHeight": {},
-"prefabRooms": {
-  "startRoom": "floors/starting_room.tmx"
-},
+"prefabRooms": {},
 "chests": []
 }
