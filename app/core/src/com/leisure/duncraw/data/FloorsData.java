@@ -20,7 +20,7 @@ public class FloorsData {
     startingHall = "floors/starting_room.tmx";
     tilesets = "floors/tilesets.tmx";
     floorsDat = new ArrayList<>();
-    for (int i = 0; i < 10; i++)  {
+    for (int i = 0; i <= 10; i++)  {
       floorsDat.add(String.format("floors/random/%d", i));
     }
   }

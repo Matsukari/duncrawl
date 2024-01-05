@@ -11,7 +11,7 @@ public class IlluminateBehaviour extends Observer {
   public IlluminateBehaviour(Lighting lighting, PointLight light) {
     this.lighting = lighting;
     this.light = light;
-    this.light = lighting.getEnv().addLight(light);
+    this.light = lighting.addPersistLight(light);
   }
   @Override
   public void invoke(State state) {

@@ -4,15 +4,16 @@
  <tile id="0">
   <properties>
    <property name="dat" value="dat/obj/chest.dat"/>
-   <property name="object" value="chest_box"/>
+   <property name="object" value="objs.Chest"/>
   </properties>
   <image width="16" height="16" source="../../images/objects/chest_idle.png"/>
  </tile>
  <tile id="1">
   <properties>
-   <property name="object" value="big_door"/>
+   <property name="dat" value="dat/obj/big_door.dat"/>
+   <property name="object" value="objs.BigDoor"/>
   </properties>
-  <image width="416" height="33" source="../../images/objects/door_big.png"/>
+  <image width="32" height="33" source="../../images/objects/door_big_idle.png"/>
  </tile>
  <tile id="2">
   <image width="16" height="16" source="../../images/objects/lamp.png"/>

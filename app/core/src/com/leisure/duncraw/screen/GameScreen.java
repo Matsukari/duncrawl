@@ -79,11 +79,11 @@ public class GameScreen extends Screen {
     floorManager.loadFloor(saveData.progression.level.floor);
     charaManager.observers.add(new AnimationBehaviour(effectManager));
     player = charaManager.add(new Player(Deserializer.safeLoad(CharaData.class, charaManager.sources.player), saveData));
+    floorManager.stageFloor(player, charaManager);
     player.observers.add(new InfuseDarknessBehaviour(effectManager));
     player.observers.add(new ShadowCloakBehaviour(effectManager));
     player.observers.add(new DashBehaviour(effectManager));
     player.observers.add(new IlluminateBehaviour(floorManager.lighting, new PointLight(Graphics.getSafeTextureRegion("images/lights/light_smooth.png"))));
-    floorManager.stageFloor(player, charaManager);
 
     musicManager = new MusicManager(this, AssetSource.getMusicData(), saveData.settings.music);
     hudManager = new HudManager(this, AssetSource.getUiData());

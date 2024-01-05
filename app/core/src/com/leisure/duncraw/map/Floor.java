@@ -1,13 +1,10 @@
 package com.leisure.duncraw.map;
 
 import java.util.ArrayList;
-import java.util.Map;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
-import com.leisure.duncraw.art.EntityHashMap;
-import com.leisure.duncraw.art.chara.Chara;
 import com.leisure.duncraw.art.chara.EnemySpawner;
 import com.leisure.duncraw.art.chara.Player;
 import com.leisure.duncraw.art.item.Item;
@@ -36,18 +33,12 @@ public class Floor {
   {
     id = IdGenerator.gen();
   }
-  public Floor(TerrainSet background, TerrainSet foreground) {
-    this.background = background;
-    this.foreground = foreground;
-    assert background != null;
-    if (foreground != null) assert background.terrainWidth != foreground.terrainWidth || background.terrainHeight != foreground.terrainHeight;
-    generator = null;
+  protected Floor(TerrainSetGenerator generator, boolean prepare) {
+    this.generator = generator;
   }
   public Floor(TerrainSetGenerator generator) {
     this.generator = generator;
-    background = generator.prepare();
-    foreground = null;
-    lightEnvironment = new LightEnvironment(generator.data.envColor, new Rectangle(0, 0, background.getWidth(), background.getHeight()));
+    setTerrainSet(generator.prepare());
   }
   public void stage(Player player, Tileset tileset, EffectManager effectManager) {
     this.player = player;
@@ -74,6 +65,10 @@ public class Floor {
     return null;
   }
   public void update() {}
+  protected void setTerrainSet(TerrainSet terrainSet) {
+    background = terrainSet;
+    lightEnvironment = new LightEnvironment(generator.data.envColor, new Rectangle(0, 0, background.getWidth(), background.getHeight()));
+  }
   public void initialSpawn(EnemySpawner spawner) { this.spawner = spawner; } 
   public boolean canTravel(int x, int y) {
     Terrain terrain = background.getTerrain(x, y);

@@ -21,8 +21,6 @@ public class FloorManager {
   public final SpriteBatch batch;
   public Tileset tileset;
   private Floor floor;
-  private Player player;
-  private CharaManager charaManager;
   private RenderSortManager renderSortManager;
   private EffectManager effectManager;
   public Lighting lighting;
@@ -42,14 +40,15 @@ public class FloorManager {
     try {
       if (floor != null) floor.unstage();
       floor = (Floor)Class.forName(data.classname).getDeclaredConstructor(TerrainSetGenerator.class).newInstance(terrainGenerator);
-      if (lighting == null) lighting = new Lighting(this);
-      lighting.updateEnv();
+      if (lighting == null) 
+        lighting = new Lighting(this);
     } catch (Exception e) { e.printStackTrace(); System.exit(-1); }
   }
   public void stageFloor(Player player, CharaManager charaManager) {
     Logger.log("FloorManager", "Staging floor...");
     floor.stage(player, tileset, effectManager);
     floor.initialSpawn(new EnemySpawner(charaManager, ()->new AiWanderer(floor, player)));
+    lighting.updateEnv();
   }
   public void rebuild() {  
 

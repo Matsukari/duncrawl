@@ -13,9 +13,9 @@
 },
 "maxMob": 0,
 "maxElite": 5,
-"title": "Default Floor",
+"title": "Entrance",
 "normalHeight": 2,
-"classname": "com.leisure.duncraw.map.floors.Floor1",
+"classname": "com.leisure.duncraw.map.floors.Floor0",
 "envColor": {
 	"r": 0.033,
 	"g": 0.033,

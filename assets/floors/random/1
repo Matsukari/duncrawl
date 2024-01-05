@@ -11,7 +11,7 @@
 	"x": 0.2,
 	"y": 1
 },
-"maxMob": 0,
+"maxMob": 15,
 "maxElite": 5,
 "title": "Default Floor",
 "normalHeight": 2,
@@ -23,7 +23,5 @@
 	"a": 0.2
 },
 "customHeight": {},
-"prefabRooms": {
-  "startRoom": "floors/starting_room.tmx"
-}
+"prefabRooms": {}
 }
