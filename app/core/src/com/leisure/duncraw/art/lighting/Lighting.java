@@ -19,7 +19,7 @@ public class Lighting {
   }
   public void updateEnv() {
     // Changed because player have gone onto the next floor
-    if (lastFloor == null || lastFloor.isExactSame(manager.getFloor())) {
+    if (lastFloor == null || !lastFloor.isExactSame(manager.getFloor())) {
       lastFloor = manager.getFloor();
       lightEnvironment = manager.getFloor().lightEnvironment;
       lightEnvironment.lightSources.addAll(persistentLights);
