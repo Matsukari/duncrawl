@@ -31,11 +31,14 @@ public class Deserializer {
       return instance;
     } 
     catch (InvocationTargetException e) { e.printStackTrace(); System.exit(-1); }
-    catch (Exception e) { 
-      try { 
+    catch (Exception e) {
+      e.printStackTrace();
+      try {
+        Logger.log("Deserializer", String.format("Loading failed (%s)", tClass.getSimpleName()));
         instance = tClass.getDeclaredConstructor().newInstance(); 
         instance.reset();
         Serializer.save(instance, file); 
+        // return instance;
       }
       catch (Exception e2) { e2.printStackTrace(); System.exit(-1); }
     }

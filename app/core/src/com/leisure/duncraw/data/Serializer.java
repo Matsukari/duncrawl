@@ -1,5 +1,6 @@
 package com.leisure.duncraw.data;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonWriter.OutputType;
@@ -10,5 +11,8 @@ public class Serializer {
     Logger.log("Serializer", "Writing to file: " + file.toString());
     Json json = new Json(OutputType.json);
     file.writeString(json.prettyPrint(json.toJson(value)), false); 
+  }
+  public static <T> void save(T value, String file) {
+    save(value, Gdx.files.local(file));
   }
 }

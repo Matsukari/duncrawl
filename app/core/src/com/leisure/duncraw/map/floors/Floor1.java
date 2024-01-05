@@ -47,16 +47,18 @@ public class Floor1 extends Floor {
   @Override
   public void initialSpawn(EnemySpawner spawner) {
     super.initialSpawn(spawner);
+    if (generator.data.firstGen) {
+      for (int i = 0; i < generator.data.maxMob; i++) {
+        Enemy enemy = (Enemy)spawner.spawn(spawner.sources.ghost);
+        Pointi pos = getTileInRandomRoom();
+        enemy.setState(new MoveState(pos.x, pos.y, false));
+      }
+    }
     ArrayList<Stair> stairs = background.getObj(Stair.class);
     Stair homeStair = null;
     if (stairs.get(0).destFloorLevel < generator.data.level) homeStair = stairs.get(0);
     else if (stairs.get(1).destFloorLevel < generator.data.level) homeStair = stairs.get(1); 
     else { Logger.error("Floor1", "No stairs available"); }
     player.setState(new MoveState((int)homeStair.bounds.x/generator.data.tileSize, (int)homeStair.bounds.y/generator.data.tileSize, false));
-    for (int i = 0; i < generator.data.maxMob; i++) {
-      Enemy enemy = (Enemy)spawner.spawn(spawner.sources.ghost);
-      Pointi pos = getTileInRandomRoom();
-      enemy.setState(new MoveState(pos.x, pos.y, false));
-    }
   }
 }

@@ -38,7 +38,7 @@ public class FloorManager {
     FloorData data = Deserializer.safeLoad(FloorData.class, sources.floorsDat.get(level)); 
     data.level = level;
     if (floor != null) floor.unstage();
-    TerrainSetGenerator terrainGenerator = new TerrainSetGenerator(data, renderSortManager);
+    TerrainSetGenerator terrainGenerator = new TerrainSetGenerator(sources.floorsDat.get(level), data, renderSortManager);
     try {
       floor = (Floor)Class.forName(data.classname).getDeclaredConstructor(TerrainSetGenerator.class).newInstance(terrainGenerator);
       if (lighting == null) 

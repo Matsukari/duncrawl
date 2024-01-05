@@ -1,6 +1,7 @@
 package com.leisure.duncraw.map.generator;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
@@ -9,8 +10,10 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.leisure.duncraw.art.map.LayeredTerrain;
 import com.leisure.duncraw.art.map.Obj;
+import com.leisure.duncraw.art.map.ObjParser;
 import com.leisure.duncraw.art.map.Terrain;
 import com.leisure.duncraw.data.FloorData;
+import com.leisure.duncraw.data.Serializer;
 import com.leisure.duncraw.logging.Logger;
 import com.leisure.duncraw.manager.RenderSortManager;
 import com.leisure.duncraw.map.TerrainSet;
@@ -28,16 +31,19 @@ public class TerrainSetGenerator {
   public final RenderSortManager renderSortManager;
   public TerrainVariants walls[] = new TerrainVariants[8];
   public TerrainVariants grounds = new TerrainVariants();
-  public TerrainSetGenerator(FloorData data, RenderSortManager renderSortManager) {
+  public String datFile;
+  public TerrainSetGenerator(String datFile, FloorData data, RenderSortManager renderSortManager) {
     this.renderSortManager = renderSortManager;
+    this.datFile = datFile;
     this.data = data;
     roomsBuilder = new RoomsBuilder(data.tileSize);
   }
   public TerrainSet prepare() {
     Logger.hide("RoomsBuilder"); 
     Logger.hide("TerrainSet");
-
-    roomsBuilder.build(data.roomsNum, new Vector2(data.getMaxWidth(), data.getMaxHeight()), data.widthRange, data.heightRange);
+    
+    roomsBuilder = data.generation.roomsBuilder;
+    if (data.firstGen) roomsBuilder.build(data.roomsNum, new Vector2(data.getMaxWidth(), data.getMaxHeight()), data.widthRange, data.heightRange);
     TerrainSet terrainSet = new TerrainSet(
         (int)(roomsBuilder.rect.width/data.tileSize)+2, 
         (int)(roomsBuilder.rect.height/data.tileSize)+2, 
@@ -45,8 +51,10 @@ public class TerrainSetGenerator {
         renderSortManager);
     Logger.log("TerrainSetGenerator", String.format("Size of terrain be generated: %d %d", terrainSet.cols, terrainSet.rows));
     // Logger.log("TerrainSetGenerator", roomsBuilder.rect.toString());
-    ArrayList<Rectangle> expandedCorridors = roomsBuilder.expandCorridors(4, false);
-    roomsBuilder.rooms.addAll(expandedCorridors);
+    if (data.firstGen) {
+      ArrayList<Rectangle> expandedCorridors = roomsBuilder.expandCorridors(4, false);
+      roomsBuilder.rooms.addAll(expandedCorridors);
+    }
     
     return terrainSet;
   }
@@ -54,30 +62,42 @@ public class TerrainSetGenerator {
     terrainSet = set;
     try {
       placeGrounds(groundFurnishers);
-      placeWalls(wallFurnishers);
+      if (data.firstGen) {
+        placeWalls(wallFurnishers);
+        data.firstGen = false;
+        for (Map.Entry<Pointi, Obj> obj : terrainSet.objs.data.entrySet()) {
+          FloorData.Generation.Entity entity = new FloorData.Generation.Entity();
+          entity.x = obj.getKey().x;
+          entity.y = obj.getKey().y;
+          entity.classname = obj.getValue().getClass().getSimpleName();
+          entity.dat = obj.getValue().datFile;
+          data.generation.entities.add(entity);
+        } 
+        Serializer.save(data, datFile);
+      }
     } catch (Exception e) { 
       e.printStackTrace();
       System.exit(-1);
     }
   }
   public void placeGrounds(TerrainFurnishers furnishers) throws Exception {
-    groundFurnishers.start(terrainSet, roomsBuilder);
+    if (data.firstGen) groundFurnishers.start(terrainSet, roomsBuilder);
     roomsBuilder.forEachTileInRooms(roomsBuilder.rooms, (room, col, row)->{
       Pointi pos = roomsBuilder.getRoomRelTilePos(room);
       pos.x += 1;
       Terrain terrain = grounds.get(MathUtils.random(0, grounds.size()-1)).clone();
       if (terrainSet.getTerrain(pos.x + col, pos.y + row) == null) putTerrain(terrain, pos.x + col, pos.y + row, furnishers);  
     }); 
-    groundFurnishers.finish(terrainSet, roomsBuilder);
+    if (data.firstGen) groundFurnishers.finish(terrainSet, roomsBuilder);
   }
   public void putTerrain(Terrain terrain, int x, int y, TerrainFurnishers furnishers) {
     terrainSet.putTerrain(terrain, x, y);
-    if (furnishers != null) furnishers.furnish(terrainSet, roomsBuilder, terrain, x, y);
+    if (furnishers != null && data.firstGen) furnishers.furnish(terrainSet, roomsBuilder, terrain, x, y);
     // Logger.log("TerrainSetGenerator", "Put terrain");
   }
   public void replaceTerrain(Terrain terrain, int x, int y, TerrainFurnishers furnishers) {
     terrainSet.replaceTerrain(terrain, x, y);
-    if (furnishers != null) furnishers.furnish(terrainSet, roomsBuilder, terrain, x, y);
+    if (furnishers != null && data.firstGen) furnishers.furnish(terrainSet, roomsBuilder, terrain, x, y);
   }
   public Pointi makeWall(LayeredTerrain group, int type, int x, int y, TerrainFurnishers furnishers, Color color) {
     Terrain terrain = walls[type].getVariant();

@@ -13,7 +13,7 @@
 },
 "maxMob": 15,
 "maxElite": 5,
-"title": "Default Floor",
+"title": "Ghost Lair (Outer)",
 "normalHeight": 2,
 "classname": "com.leisure.duncraw.map.floors.Floor1",
 "envColor": {
@@ -22,14 +22,8 @@
 	"b": 0.1,
 	"a": 0.2
 },
+"firstGen": true,
 "customHeight": {},
 "prefabRooms": {},
-"chests": [],
-"firstGen": true,
-"generation": {
-	"entities": [],
-	"roomsBuilder": {
-		"tileSize": 32
-	}
-}
+"chests": []
 }

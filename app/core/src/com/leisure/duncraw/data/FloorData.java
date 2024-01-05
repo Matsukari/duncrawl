@@ -6,6 +6,9 @@ import java.util.HashMap;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
+import com.leisure.duncraw.map.generator.RoomsBuilder;
+
+import lib.math.Pointi;
 
 public class FloorData extends Dat {
   public int roomsNum;
@@ -24,6 +27,18 @@ public class FloorData extends Dat {
   public HashMap<String, Integer> customHeight;
   public HashMap<String, String> prefabRooms;
   public ArrayList<String> chests;
+  public boolean firstGen;
+  public Generation generation;
+  public static class Generation {
+    public static class Entity {
+      public int x;
+      public int y;
+      public String classname;
+      public String dat;
+    }
+    public ArrayList<Entity> entities;
+    public RoomsBuilder roomsBuilder;
+  }
   @Override
   public void reset() {
     roomsNum = 5;
@@ -40,6 +55,11 @@ public class FloorData extends Dat {
     customHeight = new HashMap<>();
     prefabRooms = new HashMap<>();
     chests = new ArrayList<>();
+    firstGen = true;
+    generation = new Generation();
+    generation.entities = new ArrayList<>();
+    generation.roomsBuilder = new RoomsBuilder(tileSize);
+    generation.roomsBuilder.reset();
     classname = "com.leisure.duncraw.map.floors.Floor1";
     title = "Default Floor";
   }

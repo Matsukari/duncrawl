@@ -17,7 +17,12 @@ public class ObjParser {
 
     try {
       return (Obj)Class.forName("com.leisure.duncraw.art.map."+type).getDeclaredConstructor(String.class).newInstance(datFile);
-    } catch (Exception e) { e.printStackTrace(); System.exit(-1); }
+    } catch (Exception e) { 
+      Logger.error(e);
+      try {
+        return (Obj)Class.forName("com.leisure.duncraw.art.map.objs."+type).getDeclaredConstructor(String.class).newInstance(datFile);
+      } catch (Exception e2) {}
+    }
     return null; 
   }
 }

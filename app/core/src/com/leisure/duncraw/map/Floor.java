@@ -12,8 +12,10 @@ import com.leisure.duncraw.art.item.Item;
 import com.leisure.duncraw.art.lighting.LightEnvironment;
 import com.leisure.duncraw.art.map.Decoration;
 import com.leisure.duncraw.art.map.Obj;
+import com.leisure.duncraw.art.map.ObjParser;
 import com.leisure.duncraw.art.map.Terrain;
 import com.leisure.duncraw.art.map.TilemapChara;
+import com.leisure.duncraw.data.FloorData;
 import com.leisure.duncraw.helper.IdGenerator;
 import com.leisure.duncraw.manager.EffectManager;
 import com.leisure.duncraw.map.generator.TerrainSetGenerator;
@@ -40,7 +42,13 @@ public class Floor {
   }
   public Floor(TerrainSetGenerator generator) {
     this.generator = generator;
-    setTerrainSet(generator.prepare());
+    setTerrainSet(generator.prepare()); 
+    ObjParser objParser = new ObjParser(this);
+    if (!generator.data.firstGen) {
+      for (FloorData.Generation.Entity entity : generator.data.generation.entities) {
+        background.putObject(objParser.from(entity.classname, entity.dat), entity.x, entity.y);
+      }
+    }
   }
   public void stage(Player player, Tileset tileset, EffectManager effectManager) {
     this.player = player;

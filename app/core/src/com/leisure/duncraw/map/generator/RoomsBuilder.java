@@ -1,5 +1,6 @@
 package com.leisure.duncraw.map.generator;
 
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -14,6 +15,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.FloatArray;
+import com.leisure.duncraw.data.Dat;
 import com.leisure.duncraw.logging.Logger;
 
 import lib.math.Circle;
@@ -22,7 +24,7 @@ import lib.math.Edge;
 import lib.math.Pointi;
 
 // Gods, you must believe if I tell you how much TIME I spent to caress this already BIG BOY!
-public class RoomsBuilder {
+public class RoomsBuilder extends Dat {
   public ArrayList<Edge> nodes = new ArrayList<>();
   public ArrayList<Edge> corridors = new ArrayList<>();
   public ArrayList<Rectangle> rooms = new ArrayList<>();
@@ -38,6 +40,22 @@ public class RoomsBuilder {
   public int tileSize;
   public RoomsBuilder(int tileSize) {
     this.tileSize = tileSize;
+  }
+  public RoomsBuilder() {
+  }
+  @Override
+  public void reset() {
+    this.tileSize = 32;
+    nodes = new ArrayList<>();
+    corridors = new ArrayList<>();
+    rooms = new ArrayList<>();
+    mainRooms = new ArrayList<>();
+    subRooms = new ArrayList<>();
+    roomConnections = new HashMap<>();
+    roomsCenter = new Vector2(1000, 1000);
+    rect = new Rectangle();
+    min = new Vector2();
+    max = new Vector2();
   }
   public void build(int roomsNum, Vector2 maxSize, Vector2 widthRange, Vector2 heightRange) {
     this.roomsNum = roomsNum;

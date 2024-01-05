@@ -8,6 +8,7 @@ import com.leisure.duncraw.data.Deserializer;
 import com.leisure.duncraw.data.GeneralAnimation;
 import com.leisure.duncraw.data.ItemData;
 import com.leisure.duncraw.data.ObjData;
+import com.leisure.duncraw.data.Serializer;
 import com.leisure.duncraw.logging.Logger;
 
 import lib.animation.LinearAnimation;
@@ -18,14 +19,17 @@ import com.badlogic.gdx.graphics.g2d.Animation.PlayMode;
 public class Chest extends Obj {
   public Item containedItem;
   private LinearAnimation<TextureRegion> open;
+  ChestData chestData;
   public static class ChestData extends ItemData {
     public String containedItemType; // Classname of item
     public String containedItemData; // datFile
+    public boolean empty;
     @Override
     public void reset() {
       super.reset();
       containedItemData = "";
       containedItemType = "";
+      empty = false;
     }
   }
   public Chest(String datFile) {
@@ -33,7 +37,7 @@ public class Chest extends Obj {
   }
   @Override
   public void load(String datFile) {
-    ChestData chestData = loadType(datFile, ChestData.class);
+    chestData = loadType(datFile, ChestData.class);
     dat = chestData;
     try {
       containedItem = (Item)Class.forName(chestData.containedItemType).getDeclaredConstructor(String.class).newInstance(chestData.containedItemData);
@@ -44,6 +48,10 @@ public class Chest extends Obj {
   public void onCharaInteract(Chara chara) {
     anim = open;
     anim.reset();
-    if (containedItem != null) containedItem.onCharaOccupy(chara);
+    if (containedItem != null) {
+      containedItem.onCharaOccupy(chara); 
+      chestData.empty = true;
+      Serializer.save(chestData, datFile);
+    }
   }
 }
