@@ -2,7 +2,7 @@ package com.leisure.duncraw.manager;
 
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.leisure.duncraw.art.chara.EnemySpawner;
+import com.leisure.duncraw.art.chara.Spawner;
 import com.leisure.duncraw.art.chara.Player;
 import com.leisure.duncraw.art.chara.ai.AiWanderer;
 import com.leisure.duncraw.art.lighting.Lighting;
@@ -14,6 +14,7 @@ import com.leisure.duncraw.logging.Logger;
 import com.leisure.duncraw.map.Floor;
 import com.leisure.duncraw.map.Tileset;
 import com.leisure.duncraw.map.generator.TerrainSetGenerator;
+import com.leisure.duncraw.screen.GameScreen.Context;
 
 public class FloorManager {
   public boolean showLighting = false;
@@ -45,11 +46,11 @@ public class FloorManager {
         lighting = new Lighting(this);
     } catch (Exception e) { e.printStackTrace(); System.exit(-1); }
   }
-  public void stageFloor(Player player, CharaManager charaManager) {
+  public void stageFloor(Player player, CharaManager charaManager, Context context) {
     Logger.log("FloorManager", "Staging floor...");
     if (floor.generator.data.firstGen) Logger.log("FloorManager", "...For the first time");
-    floor.stage(player, tileset, effectManager);
-    floor.initialSpawn(new EnemySpawner(charaManager, ()->new AiWanderer(floor, player)));
+    floor.stage(player, tileset, context);
+    floor.initialSpawn(new Spawner(charaManager));
     lighting.updateEnv();
   }
   public void rebuild() {  

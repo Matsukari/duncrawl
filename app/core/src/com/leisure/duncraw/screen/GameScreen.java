@@ -8,7 +8,7 @@ import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.leisure.duncraw.Graphics;
 import com.leisure.duncraw.art.chara.Chara;
 import com.leisure.duncraw.art.chara.Enemy;
-import com.leisure.duncraw.art.chara.EnemySpawner;
+import com.leisure.duncraw.art.chara.Spawner;
 import com.leisure.duncraw.art.chara.Npc;
 import com.leisure.duncraw.art.chara.Player;
 import com.leisure.duncraw.art.chara.ai.AiWanderer;
@@ -58,7 +58,25 @@ public class GameScreen extends Screen {
   public final OrthographicCamera camera;
   public final ExtendViewport viewport; 
   public Player player;
-  public boolean blockCamera = false; 
+  public boolean blockCamera = false;
+  private Context context;
+  public static class Context {
+    public final StoryManager storyManager;
+    public final HudManager hudManager;
+    public final EffectManager effectManager;
+    public final RenderSortManager renderSortManager;
+    public Context(
+        StoryManager storyManager,
+        HudManager hudManager,
+        EffectManager effectManager,
+        RenderSortManager renderSortManager
+    ) {
+      this.storyManager = storyManager;
+      this.hudManager = hudManager;
+      this.effectManager = effectManager;
+      this.renderSortManager = renderSortManager;
+    }
+  }
   public GameScreen(SaveData saveData) {
     Logger.log("GameScreen", "Init");
     this.saveData = saveData;
@@ -73,15 +91,16 @@ public class GameScreen extends Screen {
     floorManager.loadFloor(saveData.progression.level.floor);
     charaManager.observers.add(new AnimationBehaviour(effectManager));
     player = charaManager.add(new Player(Deserializer.safeLoad(CharaData.class, charaManager.sources.player), saveData));
-    floorManager.stageFloor(player, charaManager);
+    hudManager = new HudManager(this, AssetSource.getUiData());
+    storyManager = new StoryManager(this, saveData.progression.level.scene);
+    context = new Context(storyManager, hudManager, effectManager, renderSortManager);
+    floorManager.stageFloor(player, charaManager, context);
     player.observers.add(new InfuseDarknessBehaviour(effectManager));
     player.observers.add(new ShadowCloakBehaviour(effectManager));
     player.observers.add(new DashBehaviour(effectManager));
     player.observers.add(new IlluminateBehaviour(floorManager.lighting, new PointLight(Graphics.getSafeTextureRegion("images/lights/light_smooth.png"))));
 
     musicManager = new MusicManager(this, AssetSource.getMusicData(), saveData.settings.music);
-    hudManager = new HudManager(this, AssetSource.getUiData());
-    storyManager = new StoryManager(this, saveData.progression.level.scene);
 
 
     debugManager = new DebugManager();
@@ -106,8 +125,8 @@ public class GameScreen extends Screen {
     floorManager.getFloor().background.putObject(new Chest(Graphics.objsSources.floorChests.get(0).get(0)), pos.x + 3, pos.y);
     floorManager.getFloor().background.putObject(new Lamp("dat/obj/lamp.dat", floorManager.lighting.getEnv(), effectManager), pos.x - 3, pos.y);
     
-    
-    floorManager.getFloor().initialSpawn(new EnemySpawner(charaManager, ()->new AiWanderer(floorManager.getFloor(), player)));
+   
+    floorManager.getFloor().initialSpawn(new Spawner(charaManager));
     npc.observers.add(new TalkBehaviour(hudManager.dialogueHud, Conversation.fromDat("dat/convs/test.conv")));
     camera.zoom = 30f;
     debugManager.debugChara(mob);
@@ -132,7 +151,7 @@ public class GameScreen extends Screen {
     int nextFloor = floorManager.updateFloor();
     if (nextFloor != -1) {
       floorManager.loadFloor(nextFloor);
-      floorManager.stageFloor(player, charaManager);
+      floorManager.stageFloor(player, charaManager, context);
       floorManager.getFloor().lightEnvironment.update();
       floorManager.getFloor().lightEnvironment.cast(camera);
     }

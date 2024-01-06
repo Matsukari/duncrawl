@@ -1,10 +1,33 @@
 package com.leisure.duncraw.art.chara;
 
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import java.util.ArrayList;
+
+import com.leisure.duncraw.art.chara.observers.TalkBehaviour;
 import com.leisure.duncraw.data.CharaData;
+import com.leisure.duncraw.data.Conversation;
+import com.leisure.duncraw.data.Deserializer;
+import com.leisure.duncraw.hud.DialogueHud;
+import com.leisure.duncraw.logging.Logger;
 
 public class Npc extends Chara {  
-  public Npc(CharaData data) {
-    super(data);
+  public NpcData npcData;
+  public static class NpcData extends CharaData {
+    public ArrayList<String> convs;
+    @Override
+    public void reset() {
+      super.reset();
+      convs = new ArrayList<>();
+    }
+  }
+  public Npc(String datFile, DialogueHud dialogueHud) {
+    npcData = Deserializer.safeLoad(NpcData.class, datFile);
+    init(npcData);
+    ArrayList<Conversation> conversations = new ArrayList<>();
+    for (String conv : npcData.convs) {
+      conversations.add(Deserializer.safeLoad(Conversation.class, conv));
+      Logger.log("Npc", "Got " + conv);
+
+    }
+    observers.add(new TalkBehaviour(dialogueHud, conversations));
   }
 }

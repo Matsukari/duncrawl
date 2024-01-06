@@ -7,8 +7,9 @@ import java.util.Map;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
-import com.leisure.duncraw.art.chara.EnemySpawner;
+import com.leisure.duncraw.art.chara.Spawner;
 import com.leisure.duncraw.art.chara.Player;
+import com.leisure.duncraw.art.chara.states.MoveState;
 import com.leisure.duncraw.art.item.Item;
 import com.leisure.duncraw.art.lighting.LightEnvironment;
 import com.leisure.duncraw.art.map.Decoration;
@@ -16,6 +17,7 @@ import com.leisure.duncraw.art.map.Obj;
 import com.leisure.duncraw.art.map.ObjParser;
 import com.leisure.duncraw.art.map.Terrain;
 import com.leisure.duncraw.art.map.TilemapChara;
+import com.leisure.duncraw.art.map.objs.Stair;
 import com.leisure.duncraw.data.Deserializer;
 import com.leisure.duncraw.data.FloorData;
 import com.leisure.duncraw.helper.IdGenerator;
@@ -23,6 +25,7 @@ import com.leisure.duncraw.helper.SString;
 import com.leisure.duncraw.logging.Logger;
 import com.leisure.duncraw.manager.EffectManager;
 import com.leisure.duncraw.map.generator.TerrainSetGenerator;
+import com.leisure.duncraw.screen.GameScreen.Context;
 
 import lib.math.Pointi;
 
@@ -32,8 +35,8 @@ public class Floor {
   public LightEnvironment lightEnvironment;
   public TerrainSet background;
   public TerrainSet foreground;
-  public EffectManager effectManager;
-  public EnemySpawner spawner;
+  public Context context;;
+  public Spawner spawner;
   public Tileset tileset;
   public Player player;
   public int id;
@@ -48,9 +51,9 @@ public class Floor {
     this.generator = generator;
     setTerrainSet(generator.prepare()); 
   }
-  public void stage(Player player, Tileset tileset, EffectManager effectManager) {
+  public void stage(Player player, Tileset tileset, Context context) {
     this.player = player;
-    this.effectManager = effectManager;
+    this.context = context;
     this.tileset = tileset;
     onStage();
     generator.populate(background);
@@ -61,7 +64,7 @@ public class Floor {
   }
   private void loadGeneration() {
     Logger.hide("Deserializer");
-    ObjParser objParser = new ObjParser(this);
+    ObjParser objParser = new ObjParser(this, context);
     HashMap<String, Integer> eLog = new HashMap<>();
     if (!generator.data.firstGen && generator.data.generation != null) {
       for (FloorData.Generation.Entity entity : generator.data.generation.entities) {
@@ -75,9 +78,6 @@ public class Floor {
     Logger.show("Deserializer");
     Logger.log("Floor", "Loaded generation: " + SString.toString(eLog));
   }
-  protected void onStage() {}
-  protected void onUnstage() {}
-  public void update() {}
   public void unstage() {
     for (Map.Entry<Pointi, Obj> obj : background.objs.data.entrySet()) {
       obj.getValue().onUnstage(this);
@@ -108,7 +108,7 @@ public class Floor {
     background = terrainSet;
     lightEnvironment = new LightEnvironment(generator.data.envColor, new Rectangle(0, 0, background.getWidth(), background.getHeight()));
   }
-  public void initialSpawn(EnemySpawner spawner) { this.spawner = spawner; } 
+  public void initialSpawn(Spawner spawner) { this.spawner = spawner; } 
   public boolean canTravel(int x, int y) {
     Terrain terrain = background.getTerrain(x, y);
     Obj obj = background.getObj(x, y);
@@ -133,4 +133,15 @@ public class Floor {
     return getName().contains(((Floor)obj).getName());
   }
   public boolean isExactSame(Floor floor) { return id == floor.id; } 
+  protected void spawnStair() {
+    ArrayList<Stair> stairs = background.getObj(Stair.class);
+    Stair homeStair = null;
+    if (stairs.get(0).destFloorLevel < generator.data.level) homeStair = stairs.get(0);
+    else if (stairs.get(1).destFloorLevel < generator.data.level) homeStair = stairs.get(1); 
+    else { Logger.error("Floor", "No stairs available: " + Integer.toString(stairs.size())); }
+    player.setState(new MoveState((int)homeStair.bounds.x/generator.data.tileSize, (int)homeStair.bounds.y/generator.data.tileSize, false));
+  }
+  protected void onStage() {}
+  protected void onUnstage() {}
+  public void update() {}
 }

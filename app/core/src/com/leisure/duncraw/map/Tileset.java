@@ -15,6 +15,7 @@ import com.leisure.duncraw.art.map.ObjParser;
 import com.leisure.duncraw.art.map.Terrain;
 import com.leisure.duncraw.art.map.TilemapChara;
 import com.leisure.duncraw.logging.Logger;
+import com.leisure.duncraw.screen.GameScreen.Context;
 
 import lib.animation.LinearAnimation;
 
@@ -50,9 +51,9 @@ public class Tileset {
     Logger.log("Tileset", "Filtered terrains: " + Integer.toString(tiles.size()));
     return tiles;
   }
-  public ArrayList<Obj> objTransform(Floor context, ArrayList<TiledMapTile> tiles) {
+  public ArrayList<Obj> objTransform(Floor floor, Context context, ArrayList<TiledMapTile> tiles) {
     ArrayList<Obj> objs = new ArrayList<>();
-    ObjParser parser = new ObjParser(context); 
+    ObjParser parser = new ObjParser(floor, context); 
     for (TiledMapTile tile : tiles) {
 
       String objType = tile.getProperties().get("object", String.class);

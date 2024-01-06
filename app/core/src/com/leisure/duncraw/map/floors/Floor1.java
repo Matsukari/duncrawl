@@ -4,11 +4,13 @@ import java.util.ArrayList;
 
 import com.leisure.duncraw.Graphics;
 import com.leisure.duncraw.art.chara.Enemy;
-import com.leisure.duncraw.art.chara.EnemySpawner;
+import com.leisure.duncraw.art.chara.Spawner;
 import com.leisure.duncraw.art.chara.Player;
 import com.leisure.duncraw.art.chara.states.MoveState;
 import com.leisure.duncraw.art.map.TilemapChara;
 import com.leisure.duncraw.art.map.objs.Stair;
+import com.leisure.duncraw.data.CharaData;
+import com.leisure.duncraw.data.Deserializer;
 import com.leisure.duncraw.logging.Logger;
 import com.leisure.duncraw.manager.EffectManager;
 import com.leisure.duncraw.map.Floor;
@@ -30,9 +32,9 @@ public class Floor1 extends Floor {
     generator.grounds = tileset.getTerrainVariants("ground");
     generator.walls = WallType.getAllWallTypes(tileset);
 
-    generator.wallFurnishers.add(new LightSourcesFurnisher(lightEnvironment, effectManager));
+    generator.wallFurnishers.add(new LightSourcesFurnisher(lightEnvironment, context.effectManager));
     generator.groundFurnishers.add(new GhostLairFurnisher());
-    EssensialsFurnisher essenFurnisher = new EssensialsFurnisher(this, tileset);
+    EssensialsFurnisher essenFurnisher = new EssensialsFurnisher(this, tileset, context);
     essenFurnisher.chests.addAll(generator.data.chests);
     generator.groundFurnishers.add(essenFurnisher);
   } 
@@ -45,20 +47,16 @@ public class Floor1 extends Floor {
     // }
   }
   @Override
-  public void initialSpawn(EnemySpawner spawner) {
+  public void initialSpawn(Spawner spawner) {
     super.initialSpawn(spawner);
     if (generator.data.firstGen) {
       for (int i = 0; i < generator.data.maxMob; i++) {
-        Enemy enemy = (Enemy)spawner.spawn(spawner.sources.ghost);
+        Enemy enemy = new Enemy(Deserializer.safeLoad(CharaData.class, spawner.sources.ghost));
+        spawner.spawn(enemy);
         Pointi pos = getTileInRandomRoom();
         enemy.setState(new MoveState(pos.x, pos.y, false));
       }
     }
-    ArrayList<Stair> stairs = background.getObj(Stair.class);
-    Stair homeStair = null;
-    if (stairs.get(0).destFloorLevel < generator.data.level) homeStair = stairs.get(0);
-    else if (stairs.get(1).destFloorLevel < generator.data.level) homeStair = stairs.get(1); 
-    else { Logger.error("Floor1", "No stairs available"); }
-    player.setState(new MoveState((int)homeStair.bounds.x/generator.data.tileSize, (int)homeStair.bounds.y/generator.data.tileSize, false));
+    spawnStair();
   }
 }

@@ -13,9 +13,9 @@
 },
 "maxMob": 15,
 "maxElite": 5,
-"title": "Default Floor",
+"title": "Safe Zone 1",
 "normalHeight": 2,
-"classname": "com.leisure.duncraw.map.floors.Floor1",
+"classname": "com.leisure.duncraw.map.floors.Floor2",
 "envColor": {
 	"r": 0.033,
 	"g": 0.033,
@@ -23,6 +23,8 @@
 	"a": 0.2
 },
 "customHeight": {},
-"prefabRooms": {},
+"prefabRooms": {
+  "safezone": "floors/safezone_1.tmx"
+},
 "chests": []
 }

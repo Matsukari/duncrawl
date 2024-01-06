@@ -1,0 +1,35 @@
+{
+"anims": {
+	"idle": {
+		"side": "images/characters/bard.png",
+		"back": "images/characters/bard.png",
+		"front": "images/characters/bard.png"
+	}
+},
+"sounds": {},
+"status": {
+	"health": 100,
+	"stamina": 100,
+	"maxHealth": 100,
+	"maxStamina": 100,
+	"hpRecovery": 2,
+	"stRecovery": 3,
+	"phyAttack": {
+		"x": 1,
+		"y": 1
+	},
+	"phyDefense": {
+		"x": 1,
+		"y": 1
+	},
+	"elementPower": 1,
+	"element": "NONE",
+	"weakness": "NONE",
+	"action": "IDLE"
+},
+"offsetY": 12,
+"convs": [
+  "dat/convs/bard1.conv",
+  "dat/convs/bard2.conv"
+]
+}

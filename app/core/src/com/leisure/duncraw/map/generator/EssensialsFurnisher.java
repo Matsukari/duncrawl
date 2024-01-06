@@ -14,6 +14,7 @@ import com.leisure.duncraw.map.Floor;
 import com.leisure.duncraw.map.TerrainSet;
 import com.leisure.duncraw.map.TerrainVariants;
 import com.leisure.duncraw.map.Tileset;
+import com.leisure.duncraw.screen.GameScreen.Context;
 
 import lib.math.Pointi;
 
@@ -23,9 +24,9 @@ public class EssensialsFurnisher extends TerrainFurnisher {
   public ArrayList<String> chests = new ArrayList<>();
   public ArrayList<Obj> stairs;
   private Floor floor;
-  public EssensialsFurnisher(Floor floor, Tileset tileset) {
+  public EssensialsFurnisher(Floor floor, Tileset tileset, Context context) {
     this.floor = floor;
-    stairs = tileset.objTransform(floor, tileset.filter("terrain", "stair"));
+    stairs = tileset.objTransform(floor, context, tileset.filter("terrain", "stair"));
   }
   @Override
   public void furnish(TerrainSet terrainSet, RoomsBuilder roomsBuilder, Terrain terrain, int x, int y) {

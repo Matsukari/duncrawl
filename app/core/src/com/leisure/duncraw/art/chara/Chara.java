@@ -26,9 +26,14 @@ public class Chara extends Art {
   public Observers observers;
   public TilemapChara mapAgent;
   public Vector2 offset = new Vector2();
-  public final HashMap<String, String> sounds;     
-  public final DirAnimationMap anims = new DirAnimationMap();
+  public HashMap<String, String> sounds;     
+  public DirAnimationMap anims = new DirAnimationMap();
   public Chara(CharaData data) {
+    init(data);
+  }
+  protected Chara() {
+  }
+  protected void init(CharaData data) {
     status = data.status;
     sounds = data.sounds;
     offset.x = data.offsetX;
@@ -40,12 +45,6 @@ public class Chara extends Art {
     observers = new Observers(this);
     setState(new IdleState());
   }
-  public void setManager(CharaManager manager) { this.manager = manager; }
-  public void kill() { if (manager != null) manager.kill(this); }
-  @Override
-  public float getWorldX() { return bounds.x + offset.x; }
-  @Override
-  public float getWorldY() { return bounds.y + offset.y; }
   @Override
   public void render(SpriteBatch batch) {
     batch.draw(anims.current.currentDir.current(), bounds.x + offset.x, bounds.y + offset.y, bounds.width, bounds.height);  
@@ -68,6 +67,10 @@ public class Chara extends Art {
     state.init(this);  
     observers.notifyAll(state);
   }
+  @Override public float getWorldX() { return bounds.x + offset.x; }
+  @Override public float getWorldY() { return bounds.y + offset.y; }
+  public void setManager(CharaManager manager) { this.manager = manager; }
   public void setState(State s) { setState(s, false); }
+  public void kill() { if (manager != null) manager.kill(this); }
   public void onDeath() {}
 }

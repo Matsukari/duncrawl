@@ -37,7 +37,7 @@ public class Logger extends ToolAgent {
     if (hidden.contains(tag)) return;
     if (!logList.isEmpty() && format(tag, msg).equals(logList.get(logList.size()-1))) streak++;
     else if (streak >= 3) {
-      String str = String.format("...and (%d) others", streak);
+      String str = String.format("...................and (%d) others", streak);
       logList.add(str);
       Gdx.app.log(tag, str);
       streak = 0;

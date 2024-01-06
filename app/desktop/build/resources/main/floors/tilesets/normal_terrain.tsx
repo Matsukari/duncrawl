@@ -10,7 +10,7 @@
  </tile>
  <tile id="22">
   <properties>
-   <property name="dat" value="dat/obj/stair_down.dat"/>
+   <property name="dat" value="dat/obj/stair_up.dat"/>
    <property name="object" value="objs.Stair"/>
    <property name="terrain" value="stair"/>
   </properties>

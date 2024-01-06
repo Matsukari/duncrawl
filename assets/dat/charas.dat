@@ -1,4 +1,6 @@
 {
 "player": "dat/chara/player.dat",
-"ghost": "dat/chara/ghost.dat"
+"ghost": "dat/chara/ghost.dat",
+"bard": "dat/chara/bard.dat"
+
 }

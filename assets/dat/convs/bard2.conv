@@ -1,0 +1,19 @@
+{
+"messages": [
+	{
+		"message": "I am Loren. A bard trapped in this... forsaken place.",
+		"sender": "Unknown",
+		"specialState": "normal"
+	},
+	{
+		"message": "Most of the people here are adventurers.",
+		"sender": "Unknown",
+		"specialState": "normal"
+	},
+	{
+		"message": "And because of... My throat are parched. Please inquire the Elder for more information.",
+		"sender": "Unknown",
+		"specialState": "normal"
+	}
+]
+}

@@ -13,12 +13,14 @@ public class Observers {
   public void updateAll() {
     for (int i = 0; i < observers.size(); i++) observers.get(i).update(); 
   }
-  public <T extends Observer> T get(Class<T> clazz) {
+  public <T extends Observer> ArrayList<T> getAll(Class<T> clazz) {
+    ArrayList<T> array = new ArrayList<>();
     for (Observer observer : observers) {
-      if (observer.getClass() == clazz) return clazz.cast(observer);
+      if (observer.getClass() == clazz) array.add(clazz.cast(observer));
     }
-    return null;
+    return array;
   }
+  public <T extends Observer> T get(Class<T> clazz) { return getAll(clazz).get(0); }
   public void notify(int index, State state) {
     // Logger.log("Observers", "Notified" + state.getClass().getName());
     observers.get(index).invoke(state);
