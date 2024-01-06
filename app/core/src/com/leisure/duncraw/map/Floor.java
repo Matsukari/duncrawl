@@ -16,6 +16,7 @@ import com.leisure.duncraw.art.map.Obj;
 import com.leisure.duncraw.art.map.ObjParser;
 import com.leisure.duncraw.art.map.Terrain;
 import com.leisure.duncraw.art.map.TilemapChara;
+import com.leisure.duncraw.data.Deserializer;
 import com.leisure.duncraw.data.FloorData;
 import com.leisure.duncraw.helper.IdGenerator;
 import com.leisure.duncraw.helper.SString;
@@ -28,15 +29,15 @@ import lib.math.Pointi;
 public class Floor {
   public final ArrayList<TilemapChara> chars = new ArrayList<>();
   public final TerrainSetGenerator generator;
+  public LightEnvironment lightEnvironment;
   public TerrainSet background;
   public TerrainSet foreground;
-  public LightEnvironment lightEnvironment;
   public EffectManager effectManager;
-  public Tileset tileset;
   public EnemySpawner spawner;
-  public int nextLevel = -1;
+  public Tileset tileset;
   public Player player;
   public int id;
+  public int nextLevel = -1;
   {
     id = IdGenerator.gen();
   }
@@ -53,6 +54,13 @@ public class Floor {
     this.tileset = tileset;
     onStage();
     generator.populate(background);
+    loadGeneration();
+    for (Map.Entry<Pointi, Obj> obj : background.objs.data.entrySet()) {
+      obj.getValue().onStage(this);
+    }
+  }
+  private void loadGeneration() {
+    Logger.hide("Deserializer");
     ObjParser objParser = new ObjParser(this);
     HashMap<String, Integer> eLog = new HashMap<>();
     if (!generator.data.firstGen && generator.data.generation != null) {
@@ -64,13 +72,12 @@ public class Floor {
         eLog.put(key, Integer.valueOf(eLog.get(key).intValue() + 1));
       }
     }
+    Logger.show("Deserializer");
     Logger.log("Floor", "Loaded generation: " + SString.toString(eLog));
-    for (Map.Entry<Pointi, Obj> obj : background.objs.data.entrySet()) {
-      obj.getValue().onStage(this);
-    }
   }
   protected void onStage() {}
   protected void onUnstage() {}
+  public void update() {}
   public void unstage() {
     for (Map.Entry<Pointi, Obj> obj : background.objs.data.entrySet()) {
       obj.getValue().onUnstage(this);
@@ -97,7 +104,6 @@ public class Floor {
     }
     return null;
   }
-  public void update() {}
   protected void setTerrainSet(TerrainSet terrainSet) {
     background = terrainSet;
     lightEnvironment = new LightEnvironment(generator.data.envColor, new Rectangle(0, 0, background.getWidth(), background.getHeight()));

@@ -24,7 +24,7 @@
 		"capacity": 10
 	},
 	"status": {
-		"health": 66,
+		"health": 100,
 		"stamina": 100,
 		"maxHealth": 100,
 		"maxStamina": 100,

@@ -27,13 +27,23 @@ public class Logger extends ToolAgent {
   public static void hide(String tag) {
     hidden.add(tag);
   }
+  public static void show(String tag) {
+    hidden.remove(tag);
+  }
+  private static String format(String tag, String msg) {
+    return String.format("[%s] %s", tag, msg);
+  }
   public static void log(String tag, String msg) {
     if (hidden.contains(tag)) return;
-    if (!logList.isEmpty() && tag.equals(logList.get(logList.size()-1))) streak++;
-    else if (streak >= 3) logList.add(String.format("...and (%d) others", streak));
-    else {
+    if (!logList.isEmpty() && format(tag, msg).equals(logList.get(logList.size()-1))) streak++;
+    else if (streak >= 3) {
+      String str = String.format("...and (%d) others", streak);
+      logList.add(str);
+      Gdx.app.log(tag, str);
       streak = 0;
-      logList.add(String.format("[%s] %s", tag, msg));
+    }
+    else {
+      logList.add(format(tag, msg));
       Gdx.app.log(tag, msg); 
     }
   }
