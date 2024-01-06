@@ -1,9 +1,9 @@
 {
 "anims": {
 	"idle": {
-		"side": "images/characters/woman.png",
-		"back": "images/characters/woman.png",
-		"front": "images/characters/woman.png"
+		"side": "images/characters/elder.png",
+		"back": "images/characters/elder.png",
+		"front": "images/characters/elder.png"
 	}
 },
 "sounds": {},
