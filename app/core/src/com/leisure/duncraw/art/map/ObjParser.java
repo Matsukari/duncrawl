@@ -2,6 +2,7 @@ package com.leisure.duncraw.art.map;
 
 import com.leisure.duncraw.art.map.objs.BigDoor;
 import com.leisure.duncraw.art.map.objs.Lamp;
+import com.leisure.duncraw.art.map.objs.Stair;
 import com.leisure.duncraw.logging.Logger;
 import com.leisure.duncraw.map.Floor;
 
@@ -13,15 +14,14 @@ public class ObjParser {
   public Obj from(String type, String datFile) {
     Logger.log("ObjParser", "from " + type);
     if (type.contains("Lamp")) return new Lamp(datFile, floor.lightEnvironment, floor.effectManager);
-    if (type.contains("BigDoor")) return new BigDoor(datFile, floor);
-
+    else if (type.contains("BigDoor")) return new BigDoor(datFile, floor);
+    else if (type.contains("Stair")) return new Stair(datFile, floor);
     try {
       return (Obj)Class.forName("com.leisure.duncraw.art.map."+type).getDeclaredConstructor(String.class).newInstance(datFile);
     } catch (Exception e) { 
-      Logger.error(e);
       try {
         return (Obj)Class.forName("com.leisure.duncraw.art.map.objs."+type).getDeclaredConstructor(String.class).newInstance(datFile);
-      } catch (Exception e2) {}
+      } catch (Exception e2) { Logger.error(e); }
     }
     return null; 
   }

@@ -76,7 +76,9 @@ public class TerrainSet {
     ArrayList<T> list = new ArrayList<>();
     for (Map.Entry<Pointi, Obj> obj : objs.data.entrySet()) {
       if (obj.getValue().getClass() == clazz) list.add(clazz.cast(obj.getValue()));
+      // Logger.log("getObj", "Checking " + obj.getValue().getClass().getName());
     }
+    Logger.log("TerrainSet gotObj", String.format("%s: got %d", clazz.getSimpleName(), list.size()));
     return list;
   }
   public Terrain getTerrain(int x, int y) { 

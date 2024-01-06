@@ -1,6 +1,7 @@
 package com.leisure.duncraw.map;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -17,6 +18,8 @@ import com.leisure.duncraw.art.map.Terrain;
 import com.leisure.duncraw.art.map.TilemapChara;
 import com.leisure.duncraw.data.FloorData;
 import com.leisure.duncraw.helper.IdGenerator;
+import com.leisure.duncraw.helper.SString;
+import com.leisure.duncraw.logging.Logger;
 import com.leisure.duncraw.manager.EffectManager;
 import com.leisure.duncraw.map.generator.TerrainSetGenerator;
 
@@ -43,12 +46,6 @@ public class Floor {
   public Floor(TerrainSetGenerator generator) {
     this.generator = generator;
     setTerrainSet(generator.prepare()); 
-    ObjParser objParser = new ObjParser(this);
-    if (!generator.data.firstGen) {
-      for (FloorData.Generation.Entity entity : generator.data.generation.entities) {
-        background.putObject(objParser.from(entity.classname, entity.dat), entity.x, entity.y);
-      }
-    }
   }
   public void stage(Player player, Tileset tileset, EffectManager effectManager) {
     this.player = player;
@@ -56,6 +53,18 @@ public class Floor {
     this.tileset = tileset;
     onStage();
     generator.populate(background);
+    ObjParser objParser = new ObjParser(this);
+    HashMap<String, Integer> eLog = new HashMap<>();
+    if (!generator.data.firstGen && generator.data.generation != null) {
+      for (FloorData.Generation.Entity entity : generator.data.generation.entities) {
+        Obj obj = objParser.from(entity.classname, entity.dat);
+        String key = obj.getClass().getSimpleName();
+        if (!eLog.containsKey(key)) eLog.put(key, Integer.valueOf(0));
+        background.putObject(obj, entity.x, entity.y);
+        eLog.put(key, Integer.valueOf(eLog.get(key).intValue() + 1));
+      }
+    }
+    Logger.log("Floor", "Loaded generation: " + SString.toString(eLog));
     for (Map.Entry<Pointi, Obj> obj : background.objs.data.entrySet()) {
       obj.getValue().onStage(this);
     }

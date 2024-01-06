@@ -10,7 +10,10 @@ import com.badlogic.gdx.maps.tiled.TiledMapTile;
 import com.badlogic.gdx.maps.tiled.TiledMapTileSet;
 import com.badlogic.gdx.maps.tiled.TiledMapTileSets;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.leisure.duncraw.art.map.Obj;
+import com.leisure.duncraw.art.map.ObjParser;
 import com.leisure.duncraw.art.map.Terrain;
+import com.leisure.duncraw.art.map.TilemapChara;
 import com.leisure.duncraw.logging.Logger;
 
 import lib.animation.LinearAnimation;
@@ -47,9 +50,23 @@ public class Tileset {
     Logger.log("Tileset", "Filtered terrains: " + Integer.toString(tiles.size()));
     return tiles;
   }
+  public ArrayList<Obj> objTransform(Floor context, ArrayList<TiledMapTile> tiles) {
+    ArrayList<Obj> objs = new ArrayList<>();
+    ObjParser parser = new ObjParser(context); 
+    for (TiledMapTile tile : tiles) {
+
+      String objType = tile.getProperties().get("object", String.class);
+      String objDat = tile.getProperties().get("dat", String.class);
+      Obj obj = parser.from(objType, objDat);
+      obj.bounds.setSize(tile.getTextureRegion().getRegionWidth(), tile.getTextureRegion().getRegionHeight());
+      objs.add(obj);
+    }
+    return objs;
+  } 
   public ArrayList<Terrain> terrainTransform(ArrayList<TiledMapTile> tiles) {
     ArrayList<Terrain> terrains = new ArrayList<>();
     for (TiledMapTile tile : tiles) {
+
       Terrain terrain = new Terrain(new LinearAnimation<TextureRegion>(tile.getTextureRegion()));
       terrain.type = tile.getProperties().get("terrain", String.class);
       Logger.log("Tileset", "Got terrain type : " + terrain.type);
@@ -60,7 +77,6 @@ public class Tileset {
   }
   public TerrainVariants getTerrainVariants(String val) {
     return new TerrainVariants(terrainTransform(filter("terrain", val)));
-
   }
   public void dispose() {
     tilesetsOwner.dispose();

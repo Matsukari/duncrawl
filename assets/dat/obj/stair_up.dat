@@ -1,6 +1,6 @@
 {
 "anims": {
-	"idle": "images/objects/rock_2.png"
+	"idle": "images/objects/stair_down.png"
 },
 "sounds": {},
 "name": "No-name-obj",
@@ -8,5 +8,6 @@
 "size": {
   "x": 1,
   "y": 1
-}
+},
+"up": true
 }

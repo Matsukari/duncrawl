@@ -27,6 +27,7 @@ public class FloorData extends Dat {
   public HashMap<String, Integer> customHeight;
   public HashMap<String, String> prefabRooms;
   public ArrayList<String> chests;
+  public ArrayList<String> stairs;
   public boolean firstGen;
   public Generation generation;
   public static class Generation {
@@ -55,6 +56,7 @@ public class FloorData extends Dat {
     customHeight = new HashMap<>();
     prefabRooms = new HashMap<>();
     chests = new ArrayList<>();
+    stairs = new ArrayList<>();
     firstGen = true;
     generation = new Generation();
     generation.entities = new ArrayList<>();

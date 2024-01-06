@@ -46,6 +46,7 @@ public class Chest extends Obj {
   }
   @Override
   public void onCharaInteract(Chara chara) {
+    if (chestData.empty) return;
     anim = open;
     anim.reset();
     if (containedItem != null) {

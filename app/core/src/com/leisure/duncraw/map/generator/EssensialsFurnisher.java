@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.badlogic.gdx.math.MathUtils;
 import com.leisure.duncraw.Graphics;
 import com.leisure.duncraw.art.map.Decoration;
+import com.leisure.duncraw.art.map.Obj;
 import com.leisure.duncraw.art.map.Terrain;
 import com.leisure.duncraw.art.map.objs.Chest;
 import com.leisure.duncraw.art.map.objs.Stair;
@@ -20,11 +21,11 @@ public class EssensialsFurnisher extends TerrainFurnisher {
   // By room
   public int totems = 4;
   public ArrayList<String> chests = new ArrayList<>();
-  public TerrainVariants stairs;
+  public ArrayList<Obj> stairs;
   private Floor floor;
   public EssensialsFurnisher(Floor floor, Tileset tileset) {
     this.floor = floor;
-    stairs = tileset.getTerrainVariants("stair");
+    stairs = tileset.objTransform(floor, tileset.filter("terrain", "stair"));
   }
   @Override
   public void furnish(TerrainSet terrainSet, RoomsBuilder roomsBuilder, Terrain terrain, int x, int y) {
@@ -46,7 +47,7 @@ public class EssensialsFurnisher extends TerrainFurnisher {
     
     Pointi upFloor = roomsBuilder.getRandomTileInMainRooms(); 
     Pointi downFloor = roomsBuilder.getRandomTileInMainRooms(); 
-    terrainSet.putObject(new Stair(stairs.getVariant(), floor, false), downFloor.x, downFloor.y);
-    terrainSet.putObject(new Stair(stairs.getVariant(), floor, true), upFloor.x, upFloor.y);
+    terrainSet.putObject(stairs.get(0), downFloor.x, downFloor.y);
+    terrainSet.putObject(stairs.get(1), upFloor.x, upFloor.y);
   }
 }

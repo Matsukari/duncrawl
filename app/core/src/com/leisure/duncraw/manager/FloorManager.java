@@ -47,6 +47,7 @@ public class FloorManager {
   }
   public void stageFloor(Player player, CharaManager charaManager) {
     Logger.log("FloorManager", "Staging floor...");
+    if (floor.generator.data.firstGen) Logger.log("FloorManager", "...For the first time");
     floor.stage(player, tileset, effectManager);
     floor.initialSpawn(new EnemySpawner(charaManager, ()->new AiWanderer(floor, player)));
     lighting.updateEnv();

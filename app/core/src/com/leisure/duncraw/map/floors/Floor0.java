@@ -20,7 +20,7 @@ public class Floor0 extends Floor {
     BigDoor door = background.getObj(BigDoor.class).get(0);
     door.connectedFloorLevel = generator.data.level + 1;
     Logger.log("Floor0", "Objects : " + Integer.toString(background.objs.data.size()));
-    generator.data.firstGen = true; 
+    // generator.data.firstGen = true; 
 
   }
   @Override

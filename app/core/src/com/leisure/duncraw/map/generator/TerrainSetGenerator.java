@@ -55,6 +55,7 @@ public class TerrainSetGenerator {
       ArrayList<Rectangle> expandedCorridors = roomsBuilder.expandCorridors(4, false);
       roomsBuilder.rooms.addAll(expandedCorridors);
     }
+    // Logger.log("TerrainSetGenerator", "First generation? " + Boolean.toString(data.firstGen));
     
     return terrainSet;
   }
@@ -62,22 +63,24 @@ public class TerrainSetGenerator {
     terrainSet = set;
     try {
       placeGrounds(groundFurnishers);
-      if (data.firstGen) {
-        placeWalls(wallFurnishers);
-        data.firstGen = false;
-        for (Map.Entry<Pointi, Obj> obj : terrainSet.objs.data.entrySet()) {
-          FloorData.Generation.Entity entity = new FloorData.Generation.Entity();
-          entity.x = obj.getKey().x;
-          entity.y = obj.getKey().y;
-          entity.classname = obj.getValue().getClass().getSimpleName();
-          entity.dat = obj.getValue().datFile;
-          data.generation.entities.add(entity);
-        } 
-        Serializer.save(data, datFile);
-      }
+      placeWalls(wallFurnishers);
     } catch (Exception e) { 
       e.printStackTrace();
       System.exit(-1);
+    }
+    if (data.firstGen) {
+      Logger.log("TerrainSetGenerator", "Saving genereted objects...");
+      data.firstGen = false;
+      for (Map.Entry<Pointi, Obj> obj : terrainSet.objs.data.entrySet()) {
+        FloorData.Generation.Entity entity = new FloorData.Generation.Entity();
+        if (obj.getValue() instanceof Terrain) continue;
+        entity.x = (int)obj.getValue().bounds.x / data.tileSize;
+        entity.y = (int)obj.getValue().bounds.y / data.tileSize;
+        entity.classname = obj.getValue().getClass().getSimpleName();
+        entity.dat = obj.getValue().datFile;
+        data.generation.entities.add(entity);
+      } 
+      Serializer.save(data, datFile);
     }
   }
   public void placeGrounds(TerrainFurnishers furnishers) throws Exception {
@@ -113,8 +116,8 @@ public class TerrainSetGenerator {
   public Pointi makeWallB(LayeredTerrain group, int type, int x, int y, TerrainFurnishers furnishers) { return makeWall(group, type, x, y, furnishers,Color.BLUE); }
   public void placeWalls(TerrainFurnishers furnishers) throws Exception {
     // Logger.log("Rooms before", )
-    wallFurnishers.start(terrainSet, roomsBuilder);
-    roomsBuilder.rooms.sort((a, b)-> (a.y > b.y) ? 1 : (b.y > a.y) ? -1 : 0 );
+    if (data.firstGen) wallFurnishers.start(terrainSet, roomsBuilder);
+    // roomsBuilder.rooms.sort((a, b)-> (a.y > b.y) ? 1 : (b.y > a.y) ? -1 : 0 );
     ArrayList<Pointi> wallBodies = new ArrayList<>();
     for (Rectangle room : roomsBuilder.rooms) {
       int cols = (int)(room.width / data.tileSize);
@@ -161,7 +164,7 @@ public class TerrainSetGenerator {
       }
       
     }
-    wallFurnishers.finish(terrainSet, roomsBuilder);
+    if (data.firstGen) wallFurnishers.finish(terrainSet, roomsBuilder);
     // Place side heads
     ArrayList<Pointi> sideHeads = new ArrayList<>();
     for (Pointi body : wallBodies) {
