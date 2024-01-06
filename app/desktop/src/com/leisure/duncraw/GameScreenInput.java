@@ -19,6 +19,7 @@ public class GameScreenInput extends GameScreen implements InputProcessor {
   private int pressedKey = -1;
   private Vector3 cameraStartDrag = Vector3.Zero;
   private Vector2 startDrag = Vector2.Zero;
+  private boolean steerMode = false;
   private final DesktopControls desktopControls;
   public GameScreenInput(SaveData save) {
     super(save);
@@ -32,10 +33,10 @@ public class GameScreenInput extends GameScreen implements InputProcessor {
   }
   private void update() {
     if (player.movement.isMoving()) return;
-    if (Gdx.input.isKeyPressed(desktopControls.down)) { player.setState(new MoveState(0, -1)); }
-    else if (Gdx.input.isKeyPressed(desktopControls.up)) { player.setState(new MoveState(0, 1)); }
-    else if (Gdx.input.isKeyPressed(desktopControls.left)) { player.setState(new MoveState(-1, 0)); }
-    else if (Gdx.input.isKeyPressed(desktopControls.right)) { player.setState(new MoveState(1, 0)); }
+    if (Gdx.input.isKeyPressed(desktopControls.down)) { player.setState(new MoveState(0, -1, true, steerMode)); }
+    else if (Gdx.input.isKeyPressed(desktopControls.up)) { player.setState(new MoveState(0, 1, true, steerMode)); }
+    else if (Gdx.input.isKeyPressed(desktopControls.left)) { player.setState(new MoveState(-1, 0, true, steerMode)); }
+    else if (Gdx.input.isKeyPressed(desktopControls.right)) { player.setState(new MoveState(1, 0, true, steerMode)); }
   }
   @Override public boolean keyDown(int keycode) {
     // Logger.log("GameScreenInput", "Keydown");
@@ -48,6 +49,7 @@ public class GameScreenInput extends GameScreen implements InputProcessor {
     if (pressedKey == desktopControls.cancel) hudManager.closeModal();
     else if (pressedKey == desktopControls.menuWindow) hudManager.toogleModal(hudManager.windowUi);
     else if (pressedKey == desktopControls.inventory) hudManager.toogleModal(hudManager.inventoryHud);
+    else if (pressedKey == desktopControls.steerMode) steerMode = !steerMode; 
     else if (pressedKey == desktopControls.action) player.setState(new InteractState(), true);
     else if (pressedKey == desktopControls.skill1) player.setState(new InfuseDarknessSkill());
     else if (pressedKey == desktopControls.skill2) player.setState(new ShadowCloakSkill());

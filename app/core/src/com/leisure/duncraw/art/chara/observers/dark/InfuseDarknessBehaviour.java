@@ -4,6 +4,7 @@ import com.leisure.duncraw.art.chara.DirAnimation;
 import com.leisure.duncraw.art.chara.Observer;
 import com.leisure.duncraw.art.chara.State;
 import com.leisure.duncraw.art.chara.states.AttackState;
+import com.leisure.duncraw.art.chara.states.IdleState;
 import com.leisure.duncraw.art.chara.states.MoveState;
 import com.leisure.duncraw.art.chara.states.dark.InfuseDarknessSkill;
 import com.leisure.duncraw.art.gfx.Gfx;
@@ -46,8 +47,8 @@ public class InfuseDarknessBehaviour extends Observer {
       }
     }
     else if (invoked && isActive()) {
-      if (state instanceof MoveState) changeEffectDir();
-      else if (state instanceof AttackState) { 
+      changeEffectDir();
+      if (state instanceof AttackState) { 
         AttackState attackState = (AttackState)state;
         attackState.chara.status.bonusAttack = getDamage();
       }  
