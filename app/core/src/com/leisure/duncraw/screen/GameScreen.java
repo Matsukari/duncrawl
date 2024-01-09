@@ -59,7 +59,7 @@ public class GameScreen extends Screen {
   public final ExtendViewport viewport; 
   public Player player;
   public boolean blockCamera = false;
-  private Context context;
+  public Context context;
   public static class Context {
     public final StoryManager storyManager;
     public final HudManager hudManager;
@@ -101,6 +101,9 @@ public class GameScreen extends Screen {
     player.observers.add(new IlluminateBehaviour(floorManager.lighting, new PointLight(Graphics.getSafeTextureRegion("images/lights/light_smooth.png"))));
 
     musicManager = new MusicManager(this, AssetSource.getMusicData(), saveData.settings.music);
+
+
+    storyManager.play();
 
 
     debugManager = new DebugManager();

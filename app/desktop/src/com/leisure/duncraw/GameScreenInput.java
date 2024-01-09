@@ -57,24 +57,24 @@ public class GameScreenInput extends GameScreen implements InputProcessor {
     return true;
   }
   @Override public boolean scrolled(float amountX, float amountY) {
-    camera.zoom += amountY;
+    // camera.zoom += amountY;
     return true;
   }
   @Override public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-    blockCamera = false;
+    // blockCamera = false;
     return false;
   }
   @Override public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-    blockCamera = true;
-    cameraStartDrag.x = camera.position.x;
-    cameraStartDrag.y = camera.position.y;
-    startDrag.x = screenX;
-    startDrag.y = screenY;
+    // blockCamera = true;
+    // cameraStartDrag.x = camera.position.x;
+    // cameraStartDrag.y = camera.position.y;
+    // startDrag.x = screenX;
+    // startDrag.y = screenY;
     return false;
   }
   @Override public boolean touchDragged(int screenX, int screenY, int pointer) {
-    camera.position.x = cameraStartDrag.x + (startDrag.x - screenX) * (camera.zoom * 0.5f);
-    camera.position.y = cameraStartDrag.y + (screenY - startDrag.y) * (camera.zoom * 0.5f);
+    // camera.position.x = cameraStartDrag.x + (startDrag.x - screenX) * (camera.zoom * 0.5f);
+    // camera.position.y = cameraStartDrag.y + (screenY - startDrag.y) * (camera.zoom * 0.5f);
     return false;
   }
   @Override public boolean touchCancelled(int screenX, int screenY, int pointer, int button) {

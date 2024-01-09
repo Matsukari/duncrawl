@@ -9,7 +9,7 @@ import com.leisure.duncraw.screen.GameScreen;
 public class SceneQueue {
   public Queue<SceneNode> scenes = new LinkedList<>();
   public SceneNode current;
-  public int index = 0;
+  // public int index = 0;
   public boolean started = false;
   public boolean play(GameScreen game) {
     started = true;
@@ -20,9 +20,9 @@ public class SceneQueue {
     current = scenes.poll();
     if (current != null) {
       current.invoke(game);
-      index++;
+      // index++;
     } 
-    else if (index > 0) {
+    else {
       return true;
     }
     return false; 

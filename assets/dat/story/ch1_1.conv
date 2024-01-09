@@ -1,0 +1,54 @@
+{
+"messages": [
+	{
+		"message": "...",
+		"sender": "Unknown",
+		"specialState": "normal"
+	},
+	{
+		"message": "...Guk...",
+		"sender": "Unknown",
+		"specialState": "normal"
+	},
+	{
+		"message": "...",
+		"sender": "Unknown",
+		"specialState": "normal"
+	},
+	{
+		"message": "...This is...?",
+		"sender": "Unknown",
+		"specialState": "normal"
+	},
+	{
+		"message": "...I shouldn't be here..!",
+		"sender": "Unknown",
+		"specialState": "normal"
+	},
+	{
+		"message": "...Boltes Five!",
+		"sender": "Unknown",
+		"specialState": "normal"
+	},
+	{
+		"message": "Gah!",
+		"sender": "Unknown",
+		"specialState": "normal"
+	},
+	{
+		"message": "...My stomach!",
+		"sender": "Unknown",
+		"specialState": "normal"
+	},
+	{
+		"message": "So it's not a dream...",
+		"sender": "Unknown",
+		"specialState": "normal"
+	},
+	{
+		"message": "...",
+		"sender": "Unknown",
+		"specialState": "normal"
+	},
+]
+}

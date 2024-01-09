@@ -1,8 +1,6 @@
 {
 "progression": {
-	"level": {
-		"floor": 2
-	}
+	"level": {}
 },
 "player": {
 	"rank": "BRONZE",
@@ -19,7 +17,7 @@
 	},
 	"status": {
 		"health": 100,
-		"stamina": 75,
+		"stamina": 100,
 		"maxHealth": 100,
 		"maxStamina": 100,
 		"hpRecovery": 2,

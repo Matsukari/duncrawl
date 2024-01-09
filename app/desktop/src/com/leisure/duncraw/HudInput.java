@@ -23,9 +23,10 @@ public class HudInput extends InputAdapter {
       else if (keycode == controls.action) hudManager.inventoryHud.useSelected();
       return true;
     }
-    // else if (hudManager.dialogueHud.isVisible()) {
-    //   if (keycode == controls.action) hudManager.dialogueHud.next();
-    // }
+    else if (hudManager.dialogueHud.isVisible()) {
+      if (keycode == controls.action) hudManager.dialogueHud.next();
+      return true;
+    }
     return false;
   }
   

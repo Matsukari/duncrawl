@@ -12,6 +12,7 @@ public class Logger extends ToolAgent {
   private static ArrayList<String> hidden = new ArrayList<>();
   public static final ArrayList<String> logList = new ArrayList<>();
   private static int streak = 0;
+  private static boolean group = true;
   public Logger() {
     size.y = Gdx.graphics.getHeight() - 100;
   }
@@ -24,6 +25,7 @@ public class Logger extends ToolAgent {
       ImGui.endChild();
     }
   }
+  public static void toogleGroup() { group = !group; }
   public static void hide(String tag) {
     hidden.add(tag);
   }
@@ -35,8 +37,8 @@ public class Logger extends ToolAgent {
   }
   public static void log(String tag, String msg) {
     if (hidden.contains(tag)) return;
-    if (!logList.isEmpty() && format(tag, msg).equals(logList.get(logList.size()-1))) streak++;
-    else if (streak >= 3) {
+    if (group && !logList.isEmpty() && format(tag, msg).equals(logList.get(logList.size()-1))) streak++;
+    else if (group && streak >= 3) {
       String str = String.format("...................and (%d) others", streak);
       logList.add(str);
       Gdx.app.log(tag, str);
