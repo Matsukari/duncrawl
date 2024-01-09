@@ -28,6 +28,7 @@ public abstract class Art {
   public float getWorldY() { return bounds.y; }
   @Override
   public boolean equals(Object obj) {
+    if (!(obj instanceof Art)) return false;
     return id == ((Art)obj).id;
   }
   public void render(SpriteBatch batch) {}

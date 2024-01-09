@@ -28,7 +28,7 @@ public class GfxInterpolation extends Gfx {
   }
   @Override
   public void update(float dt) {
-    Logger.log("GfxInterpolation", "ALpha : " + Float.toString(art.tint.a));
+    // Logger.log("GfxInterpolation", "ALpha : " + Float.toString(art.tint.a));
     art.tint.a = 1 - interpolation.apply(timer.normalize());
   }
   @Override

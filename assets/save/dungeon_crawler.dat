@@ -19,13 +19,13 @@
 	},
 	"status": {
 		"health": 100,
-		"stamina": 69,
+		"stamina": 84,
 		"maxHealth": 100,
 		"maxStamina": 100,
 		"hpRecovery": 2,
 		"stRecovery": 3,
 		"phyAttack": {
-			"x": 20,
+			"x": 2,
 			"y": 1
 		},
 		"phyDefense": {
