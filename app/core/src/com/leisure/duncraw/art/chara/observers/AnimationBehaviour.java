@@ -47,7 +47,10 @@ public class AnimationBehaviour extends Observer {
       attackEffect = new GfxAnimation(attackEffAnim.currentDir, false);
       attackEffect.rotation = MathUtils.random(0, 90);
       attackEffect.bounds.setSize(chara.bounds.width);
-      attackEffect.centerTo(attackState.target);
+      attackEffect.centerTo(
+          chara.getWorldX() + chara.movement.lastVelX * chara.bounds.width, 
+          chara.getWorldY() + chara.movement.lastVelY * chara.bounds.height, 
+          chara.bounds.width, chara.bounds.height);
       effectManager.start(attackEffect);
     }
   } 

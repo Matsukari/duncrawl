@@ -10,8 +10,13 @@ import com.leisure.duncraw.data.DirAnimData;
 import com.leisure.duncraw.logging.Logger;
 import com.leisure.duncraw.manager.EffectManager;
 
+import lib.time.Timer;
+
 public class DashBehaviour extends Observer {
   private final EffectManager effectManager;
+  private final Timer next = new Timer(200);
+  private final Timer delay = new Timer(0);
+
   public DashBehaviour(EffectManager effectManager) {
     this.effectManager = effectManager;
   }
@@ -23,10 +28,25 @@ public class DashBehaviour extends Observer {
       if (chara.movement.isMoving()) step = 3;
       Logger.log("DashBehaviour", String.format("Dash: %d %d", chara.movement.lastVelX, chara.movement.lastVelY));
       chara.setState(new MoveState(chara.mapAgent.x + chara.movement.lastVelX * step, chara.mapAgent.y + chara.movement.lastVelY * step, false)); 
+      // chara.setState(new MoveState(chara.movement.lastVelX * step, chara.movement.lastVelY * step));
+      // chara.movement.stepDuration = 20f;
       chara.anims.set("idle", chara.movement.lastVelX, chara.movement.lastVelY);
       chara.movement.stop();
       chara.movement.reset();
       animate("teleport_to");
+      delay.start();
+      chara.lockState = true;
+    }
+  }
+  @Override
+  public void update() {
+    if (delay.isFinished()) {
+      delay.stop();
+      next.start();
+    }
+    else if (next.isFinished()) {
+      next.stop();
+      chara.lockState = false;
     }
   }
   public void animate(String anim) {

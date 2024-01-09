@@ -10,7 +10,8 @@ public class AttackState extends State {
   @Override
   public void init(Chara s) {
     super.init(s);
-    target.setState(new HurtState(chara));
+    if (target != null)
+      target.setState(new HurtState(chara));
   }
   @Override
   public void update(float dt) {

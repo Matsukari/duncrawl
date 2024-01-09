@@ -3,11 +3,15 @@
  <image source="../../images/terrains/semi_surface.v.2.png" width="320" height="320"/>
  <tile id="3">
   <properties>
+   <property name="dat" value="dat/obj/stair_down.dat"/>
+   <property name="object" value="objs.Stair"/>
    <property name="terrain" value="stair"/>
   </properties>
  </tile>
  <tile id="22">
   <properties>
+   <property name="dat" value="dat/obj/stair_up.dat"/>
+   <property name="object" value="objs.Stair"/>
    <property name="terrain" value="stair"/>
   </properties>
  </tile>

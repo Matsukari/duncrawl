@@ -39,6 +39,7 @@ public class InteractState extends State {
       }
       return true;
     }
+    else chara.setState(new AttackState(null));
     return false;
   }
   @Override

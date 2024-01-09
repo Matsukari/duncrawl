@@ -22,7 +22,6 @@
 	"b": 0.1,
 	"a": 0.2
 },
-"firstGen": true,
 "customHeight": {},
 "prefabRooms": {
   "startRoom": "floors/starting_room.tmx"

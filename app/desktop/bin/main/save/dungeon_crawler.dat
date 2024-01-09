@@ -1,19 +1,13 @@
 {
 "progression": {
 	"level": {
-		"floor": 1
+		"floor": 2
 	}
 },
 "player": {
 	"rank": "BRONZE",
 	"inventory": {
 		"itemsData": [
-			{
-				"datFile": "dat/item/stam_low.dat",
-				"classname": "com.leisure.duncraw.art.item.items.StaminaPotion",
-				"quantity": 9,
-				"maxQuantity": 16
-			},
 			{
 				"datFile": "dat/equip/green_steel.dat",
 				"classname": "com.leisure.duncraw.art.item.Weapon",
@@ -24,8 +18,8 @@
 		"capacity": 10
 	},
 	"status": {
-		"health": 66,
-		"stamina": 100,
+		"health": 100,
+		"stamina": 5,
 		"maxHealth": 100,
 		"maxStamina": 100,
 		"hpRecovery": 2,

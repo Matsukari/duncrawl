@@ -18,6 +18,12 @@ public abstract class Art {
     bounds.x += other.bounds.width/2;
     bounds.y += other.bounds.height/2;
   }
+  public void centerTo(float x, float y, float w, float h) {
+    bounds.x = x - bounds.width/2;
+    bounds.y = y - bounds.height/2;
+    bounds.x += w/2;
+    bounds.y += h/2;
+  }
   public float getWorldX() { return bounds.x; }
   public float getWorldY() { return bounds.y; }
   @Override
