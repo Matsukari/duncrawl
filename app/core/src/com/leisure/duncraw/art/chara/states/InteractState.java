@@ -31,7 +31,7 @@ public class InteractState extends State {
     }
     else if (other instanceof TilemapChara) {
       TilemapChara otherAgent = ((TilemapChara)other);
-      if (otherAgent.chara instanceof Enemy) chara.setState(new AttackState(((TilemapChara)other).chara));
+      if (otherAgent.chara instanceof Enemy) attack(other);
       else if (otherAgent.chara instanceof Npc) {
         chara.lockState = true;
         chara.setState(new TalkState(otherAgent.chara), true);
@@ -39,8 +39,18 @@ public class InteractState extends State {
       }
       return true;
     }
-    else chara.setState(new AttackState(null));
+    else attack(other);
     return false;
+  }
+  private <T> void attack(T other) {
+    Chara target = null;
+    if ((other instanceof TilemapChara)) {
+      TilemapChara otherAgent = ((TilemapChara)other);
+      if (otherAgent.chara instanceof Enemy) target = ((TilemapChara)other).chara;
+    }
+
+     if (chara.prevState instanceof DashState) chara.setState(new DashAttackState(target), true);
+     else chara.setState(new AttackState(target));
   }
   @Override
   public void update(float dt) {

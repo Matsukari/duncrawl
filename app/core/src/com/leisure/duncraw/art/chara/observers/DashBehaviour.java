@@ -4,6 +4,7 @@ import com.leisure.duncraw.art.chara.DirAnimation;
 import com.leisure.duncraw.art.chara.Observer;
 import com.leisure.duncraw.art.chara.State;
 import com.leisure.duncraw.art.chara.states.DashState;
+import com.leisure.duncraw.art.chara.states.IdleState;
 import com.leisure.duncraw.art.chara.states.MoveState;
 import com.leisure.duncraw.art.gfx.GfxAnimation;
 import com.leisure.duncraw.data.DirAnimData;
@@ -31,6 +32,7 @@ public class DashBehaviour extends Observer {
       // chara.setState(new MoveState(chara.movement.lastVelX * step, chara.movement.lastVelY * step));
       // chara.movement.stepDuration = 20f;
       chara.anims.set("idle", chara.movement.lastVelX, chara.movement.lastVelY);
+      chara.state = state;
       chara.movement.stop();
       chara.movement.reset();
       animate("teleport_to");
@@ -47,6 +49,7 @@ public class DashBehaviour extends Observer {
     else if (next.isFinished()) {
       next.stop();
       chara.lockState = false;
+      chara.setState(new IdleState());
     }
   }
   public void animate(String anim) {

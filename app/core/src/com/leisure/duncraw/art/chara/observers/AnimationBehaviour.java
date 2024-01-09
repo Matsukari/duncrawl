@@ -8,6 +8,7 @@ import com.leisure.duncraw.art.chara.Observer;
 import com.leisure.duncraw.art.chara.State;
 import com.leisure.duncraw.art.chara.observers.dark.InfuseDarknessBehaviour;
 import com.leisure.duncraw.art.chara.states.AttackState;
+import com.leisure.duncraw.art.chara.states.DashAttackState;
 import com.leisure.duncraw.art.chara.states.DashState;
 import com.leisure.duncraw.art.chara.states.IdleState;
 import com.leisure.duncraw.art.chara.states.MoveState;
@@ -31,7 +32,7 @@ public class AnimationBehaviour extends Observer {
     if (state instanceof MoveState && ((MoveState)state).relative) chara.anims.set("move", chara.movement.velX, chara.movement.velY);
     // else if (state instanceof DashState) chara.anims.set("move", chara.movement.velX, chara.movement.velY);
     else if (state instanceof IdleState) chara.anims.set("idle", chara.movement.lastVelX, chara.movement.lastVelY);
-    else if (state instanceof AttackState) {
+    else if (state instanceof AttackState || state instanceof DashAttackState) {
       DirAnimation attackAnim = chara.anims.get("attack");
       if (attackAnim != null) {
         attackAnim.setPlayMode(PlayMode.NORMAL);
@@ -41,12 +42,14 @@ public class AnimationBehaviour extends Observer {
       InfuseDarknessBehaviour infuseDarknessBehaviour = chara.observers.get(InfuseDarknessBehaviour.class);
       if (infuseDarknessBehaviour != null && infuseDarknessBehaviour.isRunning()) attackEffAnim = chara.anims.get("skill1_strike");
       else attackEffAnim = chara.anims.get("attack_effect");
-
-      AttackState attackState = (AttackState)state;
+      
+      float width = chara.bounds.width;
+      if (state instanceof DashAttackState) width *= 2;
+      // AttackState attackState = (AttackState)state;
       attackEffAnim.face(chara.movement.lastVelX, chara.movement.lastVelY);
       attackEffect = new GfxAnimation(attackEffAnim.currentDir, false);
       attackEffect.rotation = MathUtils.random(0, 90);
-      attackEffect.bounds.setSize(chara.bounds.width);
+      attackEffect.bounds.setSize(width);
       attackEffect.centerTo(
           chara.getWorldX() + chara.movement.lastVelX * chara.bounds.width, 
           chara.getWorldY() + chara.movement.lastVelY * chara.bounds.height, 
