@@ -9,6 +9,7 @@ import com.leisure.duncraw.map.Floor;
 
 import lib.animation.LinearAnimation;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.Animation.PlayMode;
@@ -42,7 +43,9 @@ public class Obj extends Art {
   }
   @Override
   public void render(SpriteBatch batch) {
+    batch.setColor(tint);
     batch.draw(anim.current(), bounds.x + dat.offsetX, bounds.y + dat.offsetY, bounds.width, bounds.height);
+    batch.setColor(Color.WHITE);
   }
   public void update(float dt) {}
   public void onStage(Floor floor) {}

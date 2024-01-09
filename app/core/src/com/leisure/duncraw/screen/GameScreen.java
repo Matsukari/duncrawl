@@ -109,26 +109,27 @@ public class GameScreen extends Screen {
     debugManager.editFloorGen(floorManager);
     debugManager.debugTool(new SpriteBatchDebug(floorManager.batch));
     debugManager.debugTool(new LightEnvEditor(floorManager.lighting));
-    
-    // testPlaceScene();
+   
+    testPlaceScene();
   }
   private void testPlaceScene() {
     Enemy mob = charaManager.addFrom(charaManager.sources.ghost, Enemy.class);
-    Chara npc = charaManager.addFrom(charaManager.sources.ghost, Npc.class); 
-    Pointi pos = floorManager.getFloor().getTileInRandomRoom();
-    player.setState(new MoveState(pos.x, pos.y, false));
+    // Chara npc = charaManager.addFrom(charaManager.sources.ghost, Npc.class); 
+    Pointi pos = new Pointi();
+    pos.x = player.mapAgent.x;
+    pos.y = player.mapAgent.y;
+    // player.setState(new MoveState(pos.x, pos.y, false));
     mob.setState(new MoveState(pos.x + 5, pos.y + 5, false));
-    npc.setState(new MoveState(pos.x + 2, pos.y - 1, false));
-    mob.startAI(new AiWanderer(floorManager.getFloor(), player));
-    floorManager.getFloor().background.putObject(new StaminaPotion(Graphics.objsSources.lowStaminaPotion), pos.x - 1, pos.y);
-    floorManager.getFloor().background.putObject(new Weapon(Graphics.objsSources.greenSteel), pos.x, pos.y);
-    floorManager.getFloor().background.putObject(new Chest(Graphics.objsSources.floorChests.get(0).get(0)), pos.x + 3, pos.y);
-    floorManager.getFloor().background.putObject(new Lamp("dat/obj/lamp.dat", floorManager.lighting.getEnv(), effectManager), pos.x - 3, pos.y);
+    // npc.setState(new MoveState(pos.x + 2, pos.y - 1, false));
+    // mob.startAI(new AiWanderer(floorManager.getFloor(), player));
+    // floorManager.getFloor().background.putObject(new StaminaPotion(Graphics.objsSources.lowStaminaPotion), pos.x - 1, pos.y);
+    // floorManager.getFloor().background.putObject(new Weapon(Graphics.objsSources.greenSteel), pos.x, pos.y);
+    // floorManager.getFloor().background.putObject(new Chest(Graphics.objsSources.floorChests.get(0).get(0)), pos.x + 3, pos.y);
+    // floorManager.getFloor().background.putObject(new Lamp("dat/obj/lamp.dat", floorManager.lighting.getEnv(), effectManager), pos.x - 3, pos.y);
     
    
-    floorManager.getFloor().initialSpawn(new Spawner(charaManager));
-    npc.observers.add(new TalkBehaviour(hudManager.dialogueHud, Conversation.fromDat("dat/convs/test.conv")));
-    camera.zoom = 30f;
+    // floorManager.getFloor().initialSpawn(new Spawner(charaManager));
+    // camera.zoom = 30f;
     debugManager.debugChara(mob);
   }
   @Override

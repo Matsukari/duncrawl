@@ -29,6 +29,7 @@ public class Tooling extends InputAdapter {
   @Override public boolean touchDragged(int screenX, int screenY, int pointer) { return isFocused; }
   @Override public boolean touchDown(int screenX, int screenY, int pointer, int button) { return isFocused; } 
   @Override public boolean touchUp(int screenX, int screenY, int pointer, int button) { return isFocused; }
+  @Override public boolean scrolled(float amountX, float amountY) { return isFocused; }
 
   public static void addAgent(ToolAgent tool) {
     assert tooling != null;

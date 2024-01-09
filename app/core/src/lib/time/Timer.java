@@ -18,6 +18,10 @@ public class Timer {
   public void reset() {
     peeker.peek();
   }
+  public float normalize() {
+    if (!hasStarted) return 0;
+    return peeker.sinceLastPeek() / ms;
+  }
   public boolean isTicking() {
     return hasStarted;
   }

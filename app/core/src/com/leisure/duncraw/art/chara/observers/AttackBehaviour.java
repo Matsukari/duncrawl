@@ -3,6 +3,7 @@ package com.leisure.duncraw.art.chara.observers;
 import com.leisure.duncraw.art.chara.Observer;
 import com.leisure.duncraw.art.chara.State;
 import com.leisure.duncraw.art.chara.states.AttackState;
+import com.leisure.duncraw.art.chara.states.DashAttackState;
 
 import lib.time.Timer;
 

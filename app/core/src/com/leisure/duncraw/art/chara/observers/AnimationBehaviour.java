@@ -1,7 +1,9 @@
 package com.leisure.duncraw.art.chara.observers;
 
 import com.badlogic.gdx.graphics.g2d.Animation.PlayMode;
+import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.math.MathUtils;
+import com.leisure.duncraw.art.TransparencyLerpEffect;
 import com.leisure.duncraw.art.chara.Chara;
 import com.leisure.duncraw.art.chara.DirAnimation;
 import com.leisure.duncraw.art.chara.Observer;
@@ -10,10 +12,12 @@ import com.leisure.duncraw.art.chara.observers.dark.InfuseDarknessBehaviour;
 import com.leisure.duncraw.art.chara.states.AttackState;
 import com.leisure.duncraw.art.chara.states.DashAttackState;
 import com.leisure.duncraw.art.chara.states.DashState;
+import com.leisure.duncraw.art.chara.states.DeathState;
 import com.leisure.duncraw.art.chara.states.IdleState;
 import com.leisure.duncraw.art.chara.states.MoveState;
 import com.leisure.duncraw.art.gfx.Gfx;
 import com.leisure.duncraw.art.gfx.GfxAnimation;
+import com.leisure.duncraw.art.gfx.GfxInterpolation;
 import com.leisure.duncraw.logging.Logger;
 import com.leisure.duncraw.manager.EffectManager;
 
@@ -32,6 +36,9 @@ public class AnimationBehaviour extends Observer {
     if (state instanceof MoveState && ((MoveState)state).relative) chara.anims.set("move", chara.movement.velX, chara.movement.velY);
     // else if (state instanceof DashState) chara.anims.set("move", chara.movement.velX, chara.movement.velY);
     else if (state instanceof IdleState) chara.anims.set("idle", chara.movement.lastVelX, chara.movement.lastVelY);
+    else if (state instanceof DeathState) {
+      effectManager.start(new GfxInterpolation(chara, Interpolation.fade, 2));
+    }
     else if (state instanceof AttackState || state instanceof DashAttackState) {
       DirAnimation attackAnim = chara.anims.get("attack");
       if (attackAnim != null) {

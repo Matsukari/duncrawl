@@ -50,7 +50,7 @@ public class InfuseDarknessBehaviour extends Observer {
       changeEffectDir();
       if (state instanceof AttackState) { 
         AttackState attackState = (AttackState)state;
-        attackState.chara.status.bonusAttack = getDamage();
+        attackState.chara.status.nextBonusAttack += getDamage();
       }  
     }
   }
@@ -75,7 +75,6 @@ public class InfuseDarknessBehaviour extends Observer {
   }
   public void stop() {
     if (effectManager != null) effectManager.stop(effect);
-    chara.status.bonusAttack = 0;
     invoked = false;
     stack = 1;
   }

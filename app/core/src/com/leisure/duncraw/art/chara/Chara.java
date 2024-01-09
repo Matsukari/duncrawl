@@ -3,15 +3,18 @@ package com.leisure.duncraw.art.chara;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.leisure.duncraw.art.Art;
 import com.leisure.duncraw.art.chara.moves.LerpMovement;
+import com.leisure.duncraw.art.chara.states.DeathState;
 import com.leisure.duncraw.art.chara.states.IdleState;
 import com.leisure.duncraw.art.map.Obj;
 import com.leisure.duncraw.art.map.TilemapChara;
 import com.leisure.duncraw.data.CharaData;
 import com.leisure.duncraw.data.DirAnimData;
+import com.leisure.duncraw.logging.Logger;
 import com.leisure.duncraw.manager.CharaManager;
 
 import lib.math.Pointi;
@@ -28,6 +31,7 @@ public class Chara extends Art {
   public Vector2 offset = new Vector2();
   public HashMap<String, String> sounds;     
   public DirAnimationMap anims = new DirAnimationMap();
+  public Obj dropObj;
   public Chara(CharaData data) {
     init(data);
   }
@@ -47,10 +51,13 @@ public class Chara extends Art {
   }
   @Override
   public void render(SpriteBatch batch) {
+    batch.setColor(tint);
     batch.draw(anims.current.currentDir.current(), bounds.x + offset.x, bounds.y + offset.y, bounds.width, bounds.height);  
+    batch.setColor(Color.WHITE);
   }
   // This must be called after all operations are done to this chara
   public void update(float dt) {
+    // if (status.dead) return; 
     status.update(dt);
     state.update(dt);
     observers.updateAll();
@@ -61,7 +68,7 @@ public class Chara extends Art {
   }
   // Move the chara, attack, interact, whatever state in parallel with an observer can receive the state
   public void setState(State s, boolean force) { 
-    if (lockState && !force) return;
+    if (status.dead || (lockState && !force)) return;
     prevState = state;
     state = s; 
     state.init(this);  
@@ -71,6 +78,20 @@ public class Chara extends Art {
   @Override public float getWorldY() { return bounds.y + offset.y; }
   public void setManager(CharaManager manager) { this.manager = manager; }
   public void setState(State s) { setState(s, false); }
-  public void kill() { if (manager != null) manager.kill(this); }
-  public void onDeath() {}
+  public void kill() { 
+    // if (manager != null) {
+    //   manager.kill(this); 
+    // }
+    onDeath();
+    status.dead = true;
+  }
+  public void onDeath() {
+    Logger.log("Chara", "onDeath");
+    status.dead = false;
+    setState(new DeathState(), true);
+    status.dead = true;
+    if (dropObj != null) {
+      mapAgent.map.background.putObject(dropObj, mapAgent.x, mapAgent.y);
+    }
+  }
 }

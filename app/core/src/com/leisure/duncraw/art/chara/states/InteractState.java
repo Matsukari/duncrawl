@@ -21,15 +21,20 @@ public class InteractState extends State {
     if (tryInteract(chara.mapAgent.getObjBy(0, 0), true)) { }
     else if (tryInteract(chara.mapAgent.getObjBy(chara.movement.lastVelX, chara.movement.lastVelY), false)) {}
     else if (tryInteract(chara.mapAgent.map.getChara(frontX, frontY), false)) {}
+    else {
+      attack(null);
+    }
   } 
   private <T> boolean tryInteract(T other, boolean below) {
     if (other instanceof Obj) {
+      // Logger.log("InteractState", "At obj");
       chara.setState(new InteractObjState((Obj)other));
       if (below) ((Obj)other).onCharaOccupy(chara);
       else ((Obj)other).onCharaInteract(chara);
       return true;
     }
     else if (other instanceof TilemapChara) {
+      // Logger.log("InteractState", "At chara");
       TilemapChara otherAgent = ((TilemapChara)other);
       if (otherAgent.chara instanceof Enemy) attack(other);
       else if (otherAgent.chara instanceof Npc) {
@@ -39,18 +44,18 @@ public class InteractState extends State {
       }
       return true;
     }
-    else attack(other);
     return false;
   }
   private <T> void attack(T other) {
     Chara target = null;
-    if ((other instanceof TilemapChara)) {
+    if (other != null && (other instanceof TilemapChara)) {
       TilemapChara otherAgent = ((TilemapChara)other);
       if (otherAgent.chara instanceof Enemy) target = ((TilemapChara)other).chara;
+      // if (target != null) Logger.log("InteractState", "OK");
+      // else Logger.log("InteractState", "null");
     }
-
-     if (chara.prevState instanceof DashState) chara.setState(new DashAttackState(target), true);
-     else chara.setState(new AttackState(target));
+    if (chara.prevState instanceof DashState) chara.setState(new DashAttackState(target), true);
+    else chara.setState(new AttackState(target));
   }
   @Override
   public void update(float dt) {

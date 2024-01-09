@@ -2,6 +2,7 @@ package com.leisure.duncraw.art.chara.states;
 
 import com.leisure.duncraw.art.chara.Chara;
 import com.leisure.duncraw.art.chara.State;
+import com.leisure.duncraw.logging.Logger;
 
 public class HurtState extends State {
   public Chara attacker;

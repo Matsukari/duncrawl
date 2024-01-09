@@ -64,7 +64,7 @@ public class CharaManager {
   public void updateAll(float dt) {
     for (Chara chara : charas.data) {
       chara.update(dt);
-      if (chara.status.health <= 0) {
+      if (chara.status.health <= 0 || chara.status.dead) {
         deadCharas.add(chara);
         chara.status.dead = true;
       }

@@ -1,6 +1,7 @@
 package com.leisure.duncraw.art.chara;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Interpolation;
 import com.leisure.duncraw.data.CharaData;
 
 import behave.execution.ExecutionContext;
@@ -23,6 +24,7 @@ public class Enemy extends Chara {
   }
   @Override
   public void onDeath() {
+    super.onDeath();
     if (exec != null) exec.stop();
   }
 }

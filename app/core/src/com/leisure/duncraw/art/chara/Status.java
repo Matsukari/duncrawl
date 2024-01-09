@@ -19,8 +19,13 @@ public class Status {
   // Properties
   transient public boolean dead;
   // Bonus
-  transient public float bonusAttack;
-  transient public float bonusDefense;
+  transient public float bonusAttack = 0;
+  transient public float bonusDefense = 0;
+
+  // Only for the next samage taking or inflict
+  transient public float nextBonusAttack = 0;
+  transient public float nextBonusDefense = 0;
+
   // Normalized scale, added to physical attributes
   public float elementPower;
   public Element element;
@@ -28,13 +33,24 @@ public class Status {
   public ActionState action;
   public enum Element { HOLY, DARK, NONE };
 
+  public float hurt(Chara attacker) {
+    float extraDmg = 0;
+    if (attacker instanceof Player && ((Player)attacker).weapon != null) extraDmg = ((Player)attacker).weapon.damage;
+
+    float sustain = getDefense() - (attacker.status.getAttack() + extraDmg);
+    if (sustain < 0) setHealth(health + (int)sustain);
+    attacker.status.nextBonusAttack = 0;
+    nextBonusDefense = 0;
+    return sustain;
+  }
+
   transient private TimePeeker healthTimer = new TimePeeker();
   transient private TimePeeker staminaTimer= new TimePeeker();
   public boolean canDo(int cost) { return stamina - cost >= 0; }
   public void setHealth(int value) { health = MathUtils.clamp(value, 0, maxHealth); }
   public void setStamina(int value) { stamina = MathUtils.clamp(value, 0, maxStamina); }
-  public float getAttack() { return phyAttack.x + bonusAttack; }
-  public float getDefense() { return phyDefense.x + bonusDefense; }
+  public float getAttack() { return phyAttack.x + bonusAttack + nextBonusAttack; }
+  public float getDefense() { return phyDefense.x + bonusDefense + nextBonusDefense; }
   public void update(float dt) {
     if (healthTimer.sinceLastPeek() >= 10000) {
       setHealth(health + hpRecovery);
