@@ -8,26 +8,33 @@ import com.leisure.duncraw.story.SceneQueue;
 
 import test.story.scenes.TestScene1;
 import test.story.scenes.TestScene2;
+import test.story.scenes.TestScene3;
 
 public class StoryManager {
   private final GameScreen game;
-  public Queue<SceneQueue> stories;
+  public Queue<SceneQueue> scenes;
   public SceneQueue current;
+  public int sceneIndex = 0;
   public StoryManager(GameScreen game, int sceneIndex) {
     this.game = game;
-    stories = new LinkedList<SceneQueue>();
-    SceneQueue storyNodes[] = { new TestScene1(), new TestScene2() };
-    for (int i = sceneIndex; i < storyNodes.length; i++) {
-      stories.add(storyNodes[i]);
+    this.sceneIndex = sceneIndex;
+    scenes = new LinkedList<SceneQueue>();
+    assert sceneIndex >= 0 && sceneIndex < scenes.size();
+    SceneQueue nodes[] = { new TestScene1(), new TestScene2(), new TestScene3() };
+    for (int i = sceneIndex; i < nodes.length; i++) {
+      scenes.add(nodes[i]);
     }
   }
   public void play() {
-    current = stories.poll();
+    current = scenes.poll();
     if (current != null) current.play(game);
   }
   public void updateScene() {
     // Finished, then wait for the next scene
     if (current == null) return;
-    if (current.update(game) && current.hasEnded()) play();
+    if (current.update(game) && current.hasEnded()) {
+      play();
+      sceneIndex++;
+    }
   }
 }

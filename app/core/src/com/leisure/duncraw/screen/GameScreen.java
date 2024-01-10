@@ -139,6 +139,7 @@ public class GameScreen extends Screen {
   public void pause() {
     Logger.log("GameScreen", "Paused");
     saveData.progression.level.floor = floorManager.getFloor().generator.data.level;
+    saveData.progression.level.scene = storyManager.sceneIndex;
     Serializer.save(saveData, Gdx.files.local(AssetSource.instance.save));
   }
   @Override

@@ -19,6 +19,6 @@ public class TestScene1 extends SceneQueue {
     scenes.add(new FloorSceneNodes.ChangeFloor(0));
     scenes.add(new DialogueSceneNode(Deserializer.safeLoad(Conversation.class, "dat/story/ch1_1.conv")));
     scenes.add(new MoveCameraSceneNode(new Vector2(game.player.bounds.x, game.player.bounds.y + 209), 3f));
-    return super.play(game);
+    return start(game);
   }
 }

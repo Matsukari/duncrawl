@@ -12,6 +12,9 @@ public class SceneQueue {
   // public int index = 0;
   public boolean started = false;
   public boolean play(GameScreen game) {
+    return false;
+  }
+  protected boolean start(GameScreen game) {
     started = true;
     return next(game);
   }

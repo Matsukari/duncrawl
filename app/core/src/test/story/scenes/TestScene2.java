@@ -16,7 +16,7 @@ public class TestScene2 extends SceneQueue {
     scenes.add(new BlockCameraSceneNode(false));
     scenes.add(new DialogueSceneNode(Deserializer.safeLoad(Conversation.class, "dat/story/ch1_2.conv")));
     // scenes.add(new DialogueSceneNode(Conversation.fromDat("dat/convs/test.conv")));
-    return super.play(game);
+    return start(game);
   }
   
 }
