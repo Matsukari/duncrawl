@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.leisure.duncraw.art.EntityArrayList;
 import com.leisure.duncraw.art.chara.Chara;
+import com.leisure.duncraw.art.chara.Npc;
 import com.leisure.duncraw.art.chara.Observer;
 import com.leisure.duncraw.art.chara.observers.AttackBehaviour;
 import com.leisure.duncraw.art.chara.observers.HurtBehaviour;
@@ -58,6 +59,12 @@ public class CharaManager {
     charas.add(chara);
     for (Observer observer : observers) chara.observers.add(observer.copy());
     return chara;  
+  }
+  public Npc getNpc(String datFile) {
+    for (Chara c : charas.data) {
+      if (c instanceof Npc && datFile.equals(((Npc)c).datFile)) return (Npc)c;
+    }
+    return null;
   }
   public void kill(Chara chara) {
     deadCharas.add(chara);

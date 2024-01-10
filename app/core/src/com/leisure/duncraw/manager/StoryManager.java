@@ -21,7 +21,10 @@ public class StoryManager {
       new Chapter1.Scene1(), 
       new Chapter1.Scene2(), 
       new Chapter1.Scene3(), 
-      new Chapter1.Scene4() 
+      new Chapter1.Scene4(),
+      new Chapter1.Scene5(), 
+      new Chapter1.Scene6() 
+
     };
     for (int i = sceneIndex; i < nodes.length; i++) {
       scenes.add(nodes[i]);

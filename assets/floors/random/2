@@ -16,18 +16,19 @@
 "title": "Safe Zone 1",
 "normalHeight": 2,
 "classname": "com.leisure.duncraw.map.floors.Floor2",
+"level": 2,
 "envColor": {
 	"r": 0.033,
 	"g": 0.033,
 	"b": 0.1,
 	"a": 0.2
 },
-"statistic": {
-  "visitedRooms": []
-},
 "customHeight": {},
 "prefabRooms": {
-  "safezone": "floors/safezone_1.tmx"
+	"safezone": "floors/safezone_1.tmx"
 },
-"chests": []
+"chests": [],
+"statistic": {
+	"visitedRooms": []
+}
 }

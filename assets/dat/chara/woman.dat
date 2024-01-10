@@ -6,6 +6,10 @@
 		"front": "images/characters/woman.png"
 	}
 },
+"size": {
+	"x": 1,
+	"y": 1
+},
 "sounds": {},
 "status": {
 	"health": 100,

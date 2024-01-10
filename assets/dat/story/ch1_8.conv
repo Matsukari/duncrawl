@@ -1,0 +1,14 @@
+{
+"messages": [
+	{
+		"message": "...What-... Where is this?",
+		"sender": "Unknown",
+		"specialState": "normal"
+	},
+	{
+		"message": "...",
+		"sender": "Unknown",
+		"specialState": "normal"
+	}
+]
+}

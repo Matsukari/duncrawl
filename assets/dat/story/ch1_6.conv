@@ -1,0 +1,14 @@
+{
+"messages": [
+	{
+		"message": "...Puff..huff..",
+		"sender": "Unknown",
+		"specialState": "normal"
+	},
+	{
+		"message": "...!",
+		"sender": "Unknown",
+		"specialState": "normal"
+	}
+]
+}

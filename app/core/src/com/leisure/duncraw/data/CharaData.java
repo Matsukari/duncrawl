@@ -33,4 +33,8 @@ public class CharaData extends Dat {
     status = new Status();
     status.reset();
   }
+  @Override
+  public boolean equals(Object obj) {
+    return anims.equals(obj);
+  }
 }

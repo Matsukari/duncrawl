@@ -41,7 +41,7 @@ public class AnimationBehaviour extends Observer {
     else if (state instanceof DeathState) {
       effectManager.start(new GfxInterpolation(chara, Interpolation.fade, 1));
     }
-    else if (state instanceof HurtState && MathUtils.randomBoolean(0.35f)) {
+    else if (state instanceof HurtState && ((HurtState)state).knockback) {
       HurtState s = (HurtState)state;
       Chara attacker = s.attacker;
       effectManager.start(new KnockbackEffect(

@@ -12,4 +12,9 @@ public class DirAnimData extends Dat {
     back = "";
     front = "";
   }
+  @Override
+  public boolean equals(Object obj) {
+    DirAnimData other = (DirAnimData)obj;
+    return side.equals(other.side) && back.equals(other.back) && front.equals(other.front);
+  }
 }

@@ -11,6 +11,7 @@ import com.leisure.duncraw.logging.Logger;
 
 public class Npc extends Chara {  
   public NpcData npcData;
+  public String datFile;
   public static class NpcData extends CharaData {
     public ArrayList<String> convs;
     @Override
@@ -20,6 +21,7 @@ public class Npc extends Chara {
     }
   }
   public Npc(String datFile, DialogueHud dialogueHud) {
+    this.datFile = datFile;
     npcData = Deserializer.safeLoad(NpcData.class, datFile);
     init(npcData);
     ArrayList<Conversation> conversations = new ArrayList<>();

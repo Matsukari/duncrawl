@@ -146,7 +146,7 @@ public class Floor {
       if (stairs.size() < 2) Logger.error(new Exception());
       homeStair = stairs.getIf((e)->e.destFloorLevel < generator.data.level);
     }
-    player.setState(new MoveState((int)homeStair.bounds.x/generator.data.tileSize, (int)homeStair.bounds.y/generator.data.tileSize, false));
+    player.setState(new MoveState((int)homeStair.bounds.x/generator.data.tileSize-1, (int)homeStair.bounds.y/generator.data.tileSize, false));
   }
   protected void onStage() {}
   protected void onUnstage() {}
