@@ -20,6 +20,7 @@ import com.leisure.duncraw.art.map.TilemapChara;
 import com.leisure.duncraw.art.map.objs.Stair;
 import com.leisure.duncraw.data.Deserializer;
 import com.leisure.duncraw.data.FloorData;
+import com.leisure.duncraw.helper.AArray;
 import com.leisure.duncraw.helper.IdGenerator;
 import com.leisure.duncraw.helper.SString;
 import com.leisure.duncraw.logging.Logger;
@@ -41,6 +42,7 @@ public class Floor {
   public Player player;
   public int id;
   public int nextLevel = -1;
+  public int prevFloor = -1;
   {
     id = IdGenerator.gen();
   }
@@ -134,11 +136,13 @@ public class Floor {
   }
   public boolean isExactSame(Floor floor) { return id == floor.id; } 
   protected void spawnStair() {
-    ArrayList<Stair> stairs = background.getObj(Stair.class);
-    Stair homeStair = null;
-    if (stairs.get(0).destFloorLevel < generator.data.level) homeStair = stairs.get(0);
-    else if (stairs.get(1).destFloorLevel < generator.data.level) homeStair = stairs.get(1); 
-    else { Logger.error("Floor", "No stairs available: " + Integer.toString(stairs.size())); }
+    AArray<Stair> stairs = background.getObj(Stair.class);
+    Stair homeStair = stairs.getIf((e)->e.destFloorLevel == prevFloor);
+    if (homeStair == null) {
+      Logger.log("Floor", String.format("No stairs available at: %d, floor (%d) prev (%d)", stairs.size(), generator.data.level, prevFloor));
+      if (stairs.size() < 2) Logger.error(new Exception());
+      homeStair = stairs.getIf((e)->e.destFloorLevel < generator.data.level);
+    }
     player.setState(new MoveState((int)homeStair.bounds.x/generator.data.tileSize, (int)homeStair.bounds.y/generator.data.tileSize, false));
   }
   protected void onStage() {}

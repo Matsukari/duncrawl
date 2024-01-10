@@ -349,7 +349,7 @@
 			"x": 83,
 			"y": 31,
 			"classname": "Stair",
-			"dat": "dat/obj/stair_down.dat"
+			"dat": "dat/obj/stair_up.dat"
 		},
 		{
 			"x": 68,

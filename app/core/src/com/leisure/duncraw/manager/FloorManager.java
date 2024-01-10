@@ -38,10 +38,15 @@ public class FloorManager {
     Logger.log("FloorManager", String.format("Loading floor level %d", level) );
     FloorData data = Deserializer.safeLoad(FloorData.class, sources.floorsDat.get(level)); 
     data.level = level;
-    if (floor != null) floor.unstage();
+    int prevFloor = -1;
+    if (floor != null) {
+      prevFloor = floor.generator.data.level;
+      floor.unstage();
+    }
     TerrainSetGenerator terrainGenerator = new TerrainSetGenerator(sources.floorsDat.get(level), data, renderSortManager);
     try {
       floor = (Floor)Class.forName(data.classname).getDeclaredConstructor(TerrainSetGenerator.class).newInstance(terrainGenerator);
+      floor.prevFloor = prevFloor;
       if (lighting == null) 
         lighting = new Lighting(this);
     } catch (Exception e) { e.printStackTrace(); System.exit(-1); }

@@ -57,6 +57,9 @@ public class Floor1 extends Floor {
         enemy.setState(new MoveState(pos.x, pos.y, false));
       }
     }
-    spawnStair();
+    try { spawnStair(); }
+    catch (Exception exception) {
+
+    } 
   }
 }

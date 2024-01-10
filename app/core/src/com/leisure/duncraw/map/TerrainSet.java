@@ -1,5 +1,6 @@
 package com.leisure.duncraw.map;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -7,6 +8,7 @@ import com.leisure.duncraw.art.EntityHashMap;
 import com.leisure.duncraw.art.map.LayeredTerrain;
 import com.leisure.duncraw.art.map.Obj;
 import com.leisure.duncraw.art.map.Terrain;
+import com.leisure.duncraw.helper.AArray;
 import com.leisure.duncraw.logging.Logger;
 import com.leisure.duncraw.manager.RenderSortManager;
 
@@ -72,8 +74,8 @@ public class TerrainSet {
   public Obj getObj(int x, int y) {
     return objs.get(tph.set(x, y));
   }
-  public <T extends Obj> ArrayList<T> getObj(Class<T> clazz) {
-    ArrayList<T> list = new ArrayList<>();
+  public <T extends Obj> AArray<T> getObj(Class<T> clazz) {
+    AArray<T> list = new AArray<>();
     for (Map.Entry<Pointi, Obj> obj : objs.data.entrySet()) {
       if (obj.getValue().getClass() == clazz) list.add(clazz.cast(obj.getValue()));
       // Logger.log("getObj", "Checking " + obj.getValue().getClass().getName());
