@@ -12,11 +12,11 @@ public class DirAnimation {
   public LinearAnimation<TextureRegion> currentDir;
   public static int FRONT=0, SIDE=1, BACK=2;
   public boolean rightHanded = true;
-  public DirAnimation(DirAnimData dat) { 
+  public DirAnimation(DirAnimData dat, int size) { 
     rightHanded = dat.rightHanded;
-    anims[FRONT] = GeneralAnimation.line(dat.front);
-    anims[SIDE] = GeneralAnimation.line(dat.side);
-    anims[BACK] = GeneralAnimation.line(dat.back);
+    anims[FRONT] = GeneralAnimation.line(dat.front, PlayMode.LOOP, size);
+    anims[SIDE] = GeneralAnimation.line(dat.side, PlayMode.LOOP, size);
+    anims[BACK] = GeneralAnimation.line(dat.back, PlayMode.LOOP, size);
     currentDir = anims[DirAnimation.FRONT];
   }
   public void flipSide(boolean v) {

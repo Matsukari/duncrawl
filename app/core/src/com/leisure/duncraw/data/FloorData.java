@@ -30,6 +30,7 @@ public class FloorData extends Dat {
   public ArrayList<String> stairs;
   public boolean firstGen;
   public Generation generation;
+  public FloorStatistic statistic;
   public static class Generation {
     public static class Entity {
       public int x;
@@ -58,6 +59,8 @@ public class FloorData extends Dat {
     chests = new ArrayList<>();
     stairs = new ArrayList<>();
     firstGen = true;
+    statistic = new FloorStatistic();
+    statistic.reset();
     generation = new Generation();
     generation.entities = new ArrayList<>();
     generation.roomsBuilder = new RoomsBuilder(tileSize);

@@ -1,0 +1,40 @@
+{
+"anims": {
+	"move": {
+		"side": "images/characters/ghost_king/ghost_king_idle.png",
+		"back": "images/characters/ghost_king/ghost_king_idle.png",
+		"front": "images/characters/ghost_king/ghost_king_idle.png"
+	},
+	"idle": {
+		"side": "images/characters/ghost_king/ghost_king_idle.png",
+		"back": "images/characters/ghost_king/ghost_king_idle.png",
+		"front": "images/characters/ghost_king/ghost_king_idle.png"
+	}
+},
+"size": {
+	"x": 4,
+	"y": 4
+},
+"sounds": {},
+"status": {
+	"health": 100,
+	"stamina": 100,
+	"maxHealth": 100,
+	"maxStamina": 100,
+	"hpRecovery": 2,
+	"stRecovery": 3,
+	"phyAttack": {
+		"x": 1,
+		"y": 1
+	},
+	"phyDefense": {
+		"x": 1,
+		"y": 1
+	},
+	"elementPower": 1,
+	"element": "NONE",
+	"weakness": "NONE",
+	"action": "IDLE"
+},
+"offsetY": 12
+}

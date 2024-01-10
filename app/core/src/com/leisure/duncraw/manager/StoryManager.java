@@ -5,10 +5,7 @@ import java.util.Queue;
 
 import com.leisure.duncraw.screen.GameScreen;
 import com.leisure.duncraw.story.SceneQueue;
-
-import test.story.scenes.TestScene1;
-import test.story.scenes.TestScene2;
-import test.story.scenes.TestScene3;
+import com.leisure.duncraw.story.chapters.Chapter1;
 
 public class StoryManager {
   private final GameScreen game;
@@ -20,7 +17,12 @@ public class StoryManager {
     this.sceneIndex = sceneIndex;
     scenes = new LinkedList<SceneQueue>();
     assert sceneIndex >= 0 && sceneIndex < scenes.size();
-    SceneQueue nodes[] = { new TestScene1(), new TestScene2(), new TestScene3() };
+    SceneQueue nodes[] = { 
+      new Chapter1.Scene1(), 
+      new Chapter1.Scene2(), 
+      new Chapter1.Scene3(), 
+      new Chapter1.Scene4() 
+    };
     for (int i = sceneIndex; i < nodes.length; i++) {
       scenes.add(nodes[i]);
     }

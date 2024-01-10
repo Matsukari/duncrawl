@@ -20,6 +20,7 @@ import com.leisure.duncraw.art.map.TilemapChara;
 import com.leisure.duncraw.art.map.objs.Stair;
 import com.leisure.duncraw.data.Deserializer;
 import com.leisure.duncraw.data.FloorData;
+import com.leisure.duncraw.data.Serializer;
 import com.leisure.duncraw.helper.AArray;
 import com.leisure.duncraw.helper.IdGenerator;
 import com.leisure.duncraw.helper.SString;
@@ -81,6 +82,7 @@ public class Floor {
     Logger.log("Floor", "Loaded generation: " + SString.toString(eLog));
   }
   public void unstage() {
+    Serializer.save(generator.data, generator.datFile);
     for (Map.Entry<Pointi, Obj> obj : background.objs.data.entrySet()) {
       obj.getValue().onUnstage(this);
     }
@@ -90,6 +92,7 @@ public class Floor {
     background.objs.clear();
     nextLevel = -1;
     onUnstage();
+    lightEnvironment.dispose();
   }
   public void render(SpriteBatch batch, TerrainSet layer) {
     for (Terrain terrain : layer.terrains) {
@@ -147,5 +150,10 @@ public class Floor {
   }
   protected void onStage() {}
   protected void onUnstage() {}
-  public void update() {}
+  public void update() {
+    Rectangle room = generator.roomsBuilder.getRoomPointSrc(player.getWorldX(), player.getWorldY());
+    if (room != null && !generator.data.statistic.visitedRooms.contains(room)) {
+      generator.data.statistic.visitedRooms.add(room);
+    }
+  }
 }

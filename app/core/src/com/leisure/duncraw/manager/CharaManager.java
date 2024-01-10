@@ -50,7 +50,8 @@ public class CharaManager {
   }
   public Chara addFrom(String source) { return addFrom(source, Chara.class); }
   public <T extends Chara> T add(T chara) { 
-    chara.bounds.setSize(32, 32);
+    int tilesize = floorManager.getFloor().generator.data.tileSize;
+    chara.bounds.setSize(tilesize * chara.dat.size.x, tilesize * chara.dat.size.y);
     chara.mapAgent = new TilemapChara(chara, floorManager);
     chara.setManager(this);
     floorManager.getFloor().putChara(chara.mapAgent); 

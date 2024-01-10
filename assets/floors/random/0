@@ -11,7 +11,6 @@
 	"x": 0.2,
 	"y": 1
 },
-"maxMob": 0,
 "maxElite": 5,
 "title": "(???) Entrance",
 "normalHeight": 2,
@@ -24,7 +23,10 @@
 },
 "customHeight": {},
 "prefabRooms": {
-  "startRoom": "floors/starting_room.tmx"
+	"startRoom": "floors/starting_room.tmx"
 },
-"chests": []
+"chests": [],
+"statistic": {
+	"visitedRooms": []
+}
 }

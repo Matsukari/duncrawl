@@ -1064,20 +1064,20 @@
 			}
 		],
 		"roomConnections": {
-			"[1280.0,1312.0,416.0,832.0]": [
+			"[704.0,384.0,896.0,672.0]": [
+				{
+					"class": "com.badlogic.gdx.math.Rectangle",
+					"x": -160,
+					"y": 896,
+					"width": 672,
+					"height": 416
+				},
 				{
 					"class": "com.badlogic.gdx.math.Rectangle",
 					"x": 1184,
 					"y": 1056,
 					"width": 640,
 					"height": 192
-				},
-				{
-					"class": "com.badlogic.gdx.math.Rectangle",
-					"x": 1856,
-					"y": 1248,
-					"width": 992,
-					"height": 736
 				}
 			],
 			"[1856.0,1248.0,992.0,736.0]": [
@@ -1096,36 +1096,20 @@
 					"height": 672
 				}
 			],
-			"[-160.0,896.0,672.0,416.0]": [
-				{
-					"class": "com.badlogic.gdx.math.Rectangle",
-					"x": 1280,
-					"y": 1312,
-					"width": 416,
-					"height": 832
-				},
+			"[1280.0,1312.0,416.0,832.0]": [
 				{
 					"class": "com.badlogic.gdx.math.Rectangle",
 					"x": 1184,
 					"y": 1056,
 					"width": 640,
 					"height": 192
-				}
-			],
-			"[704.0,384.0,896.0,672.0]": [
-				{
-					"class": "com.badlogic.gdx.math.Rectangle",
-					"x": -160,
-					"y": 896,
-					"width": 672,
-					"height": 416
 				},
 				{
 					"class": "com.badlogic.gdx.math.Rectangle",
-					"x": 1184,
-					"y": 1056,
-					"width": 640,
-					"height": 192
+					"x": 1856,
+					"y": 1248,
+					"width": 992,
+					"height": 736
 				}
 			],
 			"[1184.0,1056.0,640.0,192.0]": [
@@ -1157,6 +1141,22 @@
 					"width": 992,
 					"height": 736
 				}
+			],
+			"[-160.0,896.0,672.0,416.0]": [
+				{
+					"class": "com.badlogic.gdx.math.Rectangle",
+					"x": 1280,
+					"y": 1312,
+					"width": 416,
+					"height": 832
+				},
+				{
+					"class": "com.badlogic.gdx.math.Rectangle",
+					"x": 1184,
+					"y": 1056,
+					"width": 640,
+					"height": 192
+				}
 			]
 		},
 		"rect": {
@@ -1176,5 +1176,27 @@
 		"roomsNum": 5,
 		"tileSize": 32
 	}
+},
+"statistic": {
+	"visitedRooms": [
+		{
+			"x": 1856,
+			"y": 1248,
+			"width": 992,
+			"height": 736
+		},
+		{
+			"x": 1344,
+			"y": 1184,
+			"width": 416,
+			"height": 480
+		},
+		{
+			"x": 1280,
+			"y": 1312,
+			"width": 416,
+			"height": 832
+		}
+	]
 }
 }

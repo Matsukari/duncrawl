@@ -1,0 +1,20 @@
+{
+"messages": [
+	{
+		"message": "!",
+		"sender": "Unknown",
+		"specialState": "normal"
+	},
+	{
+		"message": "...Huk!",
+		"sender": "Unknown",
+		"specialState": "normal"
+	},
+	{
+		"message": "...!",
+		"sender": "Unknown",
+		"specialState": "normal"
+	}
+
+]
+}

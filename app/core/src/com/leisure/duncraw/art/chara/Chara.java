@@ -31,6 +31,7 @@ public class Chara extends Art {
   public Vector2 offset = new Vector2();
   public HashMap<String, String> sounds;     
   public DirAnimationMap anims = new DirAnimationMap();
+  public CharaData dat;
   public Obj dropObj;
   public Chara(CharaData data) {
     init(data);
@@ -38,12 +39,13 @@ public class Chara extends Art {
   protected Chara() {
   }
   protected void init(CharaData data) {
+    dat = data;
     status = data.status;
     sounds = data.sounds;
     offset.x = data.offsetX;
     offset.y = data.offsetY;
     for (Map.Entry<String, DirAnimData> anim : data.anims.entrySet()) 
-      anims.data.put(anim.getKey(), new DirAnimation(anim.getValue())); 
+      anims.data.put(anim.getKey(), new DirAnimation(anim.getValue(), Math.max(data.size.x, data.size.y) * 16)); 
     anims.set("idle");
     movement = new LerpMovement(this, 2f);
     observers = new Observers(this);

@@ -71,5 +71,9 @@
 	"weakness": "NONE",
 	"action": "IDLE"
 },
+"size": {
+	"x": 1,
+	"y": 1
+},
 "offsetY": 12
 }

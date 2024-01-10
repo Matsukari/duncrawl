@@ -22,6 +22,9 @@
 	"b": 0.1,
 	"a": 0.2
 },
+"statistic": {
+  "visitedRooms": []
+},
 "customHeight": {},
 "prefabRooms": {
   "safezone": "floors/safezone_1.tmx"

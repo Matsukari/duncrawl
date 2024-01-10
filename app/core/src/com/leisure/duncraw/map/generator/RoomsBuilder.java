@@ -300,8 +300,11 @@ public class RoomsBuilder extends Dat {
   }
   // on the basis that each rectangles does not overlap with any other
   public Rectangle getRoomPointSrc(Vector2 point) {
+    return getRoomPointSrc(point.x, point.y);
+  }
+  public Rectangle getRoomPointSrc(float x, float y) {
     for (Rectangle rect : rooms) {
-      if (rect.contains(point.x, point.y)) return rect;
+      if (rect.contains(x, y)) return rect;
     }
     return null;
   }

@@ -85,7 +85,7 @@ public class GameScreen extends Screen {
     viewport.apply();
     renderSortManager = new RenderSortManager();
     effectManager = new EffectManager();
-    floorManager = new FloorManager(saveData, AssetSource.getFloorsData(), effectManager, renderSortManager);
+    floorManager = new FloorManager(saveData, AssetSource.getFloorsData(), renderSortManager);
     charaManager = new CharaManager(AssetSource.getCharasData(), floorManager, renderSortManager);
 
     floorManager.loadFloor(saveData.progression.level.floor);
@@ -179,6 +179,7 @@ public class GameScreen extends Screen {
   public void dispose() {
     hudManager.dispose();
     charaManager.dispose();
+    floorManager.dispose();
     debugManager.dispose();
     Logger.log("GameScreen", "Dispose");
   } 

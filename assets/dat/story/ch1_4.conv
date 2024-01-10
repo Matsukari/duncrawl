@@ -1,0 +1,25 @@
+{
+"messages": [
+	{
+		"message": "...Why does it feel like the room has gotten darker?",
+		"sender": "Unknown",
+		"specialState": "normal"
+	},
+	{
+		"message": "...",
+		"sender": "Unknown",
+		"specialState": "normal"
+	},
+	{
+		"message": "...Shit.",
+		"sender": "Unknown",
+		"specialState": "normal"
+	},
+	{
+		"message": "...",
+		"sender": "Unknown",
+		"specialState": "normal"
+	}
+
+]
+}

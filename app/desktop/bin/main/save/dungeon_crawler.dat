@@ -1,6 +1,9 @@
 {
 "progression": {
-	"level": {}
+	"level": {
+		"floor": 1,
+		"scene": 3
+	}
 },
 "player": {
 	"rank": "BRONZE",

@@ -42,6 +42,7 @@ public class FloorEditor extends ToolAgent {
   }
   @Override
   public void tool() {
+    ImGui.labelText("Visited rooms", Integer.toString(manager.getFloor().generator.data.statistic.visitedRooms.size()));
     ImGui.inputInt("Rooms", points);
     if (ImGui.button("Toogle shapes")) {
       hideShapes = !hideShapes;

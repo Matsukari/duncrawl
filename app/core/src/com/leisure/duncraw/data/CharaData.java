@@ -4,11 +4,14 @@ import java.util.HashMap;
 
 import com.leisure.duncraw.art.chara.Status;
 
+import lib.math.Pointi;
+
 
 public class CharaData extends Dat {
   public HashMap<String, DirAnimData> anims;
   public HashMap<String, String> sounds;
   public Status status;
+  public Pointi size;
   public float offsetX;
   public float offsetY;
 
@@ -22,6 +25,9 @@ public class CharaData extends Dat {
     anims.put("attack", template);
     anims.put("hurt", template);
     sounds = new HashMap<>();
+    size = new Pointi();
+    size.x = 1;
+    size.y = 1;
     offsetX = 0;
     offsetY = 0;
     status = new Status();

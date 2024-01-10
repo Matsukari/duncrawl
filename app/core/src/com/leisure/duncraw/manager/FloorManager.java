@@ -23,13 +23,11 @@ public class FloorManager {
   public Tileset tileset;
   private Floor floor;
   private RenderSortManager renderSortManager;
-  private EffectManager effectManager;
   public Lighting lighting;
   
-  public FloorManager(SaveData save, FloorsData sources, EffectManager effectManager, RenderSortManager renderSortManager) {
+  public FloorManager(SaveData save, FloorsData sources, RenderSortManager renderSortManager) {
     this.sources = sources;
     this.renderSortManager = renderSortManager;
-    this.effectManager = effectManager;
 
     batch = new SpriteBatch();
     tileset = new Tileset(sources.tilesets);
@@ -87,6 +85,7 @@ public class FloorManager {
     }
   }
   public void dispose() {
+    if (floor != null) floor.unstage();
     batch.dispose();
   }
 }

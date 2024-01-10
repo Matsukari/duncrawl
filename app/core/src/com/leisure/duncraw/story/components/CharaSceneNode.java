@@ -1,3 +1,4 @@
+
 package com.leisure.duncraw.story.components;
 
 import com.leisure.duncraw.story.SceneNode;
@@ -7,22 +8,25 @@ import com.leisure.duncraw.art.chara.states.MoveState;
 import com.leisure.duncraw.screen.GameScreen;
 
 // Linear!
-public class MoveCharaSceneNode extends SceneNode {
+public class CharaSceneNode extends SceneNode {
+  @FunctionalInterface
+  public static interface CharaFunction {
+    public void perform(Chara chara);
+
+  }
+  public CharaFunction function;
   public Chara chara;
-  public MoveState state;
-  public boolean started = false;
   public TimePeeker time = new TimePeeker();
-  public MoveCharaSceneNode(Chara chara, MoveState state) {
+  public CharaSceneNode(Chara chara, CharaFunction function) {
     this.chara = chara;
-    this.state = state;
+    this.function = function;
   }
   @Override
   public void invoke(GameScreen game) {
-    chara.setState(state);
-    started = true;
+    function.perform(chara);
   }  
   @Override
   public boolean update(GameScreen game) {
-    return (started && !chara.movement.isMoving());
+    return true;
   }
 }
