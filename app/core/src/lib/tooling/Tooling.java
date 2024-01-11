@@ -9,8 +9,11 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import imgui.ImGui;
 import imgui.ImGuiIO;
 import imgui.flag.ImGuiTreeNodeFlags;
+import imgui.flag.ImGuiWindowFlags;
 import imgui.gl3.ImGuiImplGl3;
 import imgui.glfw.ImGuiImplGlfw;
+import imgui.type.ImBoolean;
+
 import com.badlogic.gdx.utils.Array;
 import com.leisure.duncraw.logging.Logger;
 
@@ -43,6 +46,7 @@ public class Tooling extends InputAdapter {
     tooling = v;
     assert tooling != null;
   }
+  private ImBoolean bool = new ImBoolean(false);
   public Tooling() {
     tools = new Array<ToolAgent>();
     glfw = new ImGuiImplGlfw();
@@ -63,7 +67,8 @@ public class Tooling extends InputAdapter {
     glfw.newFrame();
     ImGui.newFrame();
    
-    ImGui.begin("Tools");
+    ImGui.begin("Tools", bool);
+
     for (int i = 0; i < tools.size; i++) { 
       ImGui.separator();
       if (ImGui.collapsingHeader(tools.get(i).id, ImGuiTreeNodeFlags.DefaultOpen)) {

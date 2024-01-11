@@ -1,7 +1,11 @@
 package com.leisure.duncraw.hud;
 
 import java.util.ArrayList;
+import java.util.concurrent.ConcurrentNavigableMap;
 
+import org.lwjgl.opengl.GL20;
+
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -16,19 +20,16 @@ public class WindowUi extends Hud {
   public StatusWindow statusWindow;
   public ProgressionWindow progressionWindow;
   public SettingsWindow settingsWindow;
-  public Color containerBgColor;
-  public Color containerOutlineBgColor;
-  public Color panelBgColor;
+  public Color containerBgColor = Color.valueOf("#101010");
+  public Color panelBgColor = Color.valueOf("#151515");
+  public Color containerOutlineBgColor = Color.valueOf("#bababa");
   protected Stack tabPanel;
   public Tab currentTab;
-  public WindowUi(StatusHud statusHud, InventoryHud inventoryHud, MapFull mapHud, QuestFull quest) {
+  public WindowUi(StatusFull statusHud, InventoryHud inventoryHud, MapFull mapHud, QuestFull quest) {
     tabs = new ArrayList<>();
     statusWindow = new StatusWindow(statusHud, inventoryHud);
     progressionWindow = new ProgressionWindow(mapHud, quest);
     settingsWindow = new SettingsWindow();
-    containerBgColor = new Color(0.06f, 0.06f, 0.06f, 1f);
-    panelBgColor = new Color(0.1f, 0.1f, 0.1f, 1f);
-    containerOutlineBgColor = new Color(0.3f, 0.3f, 0.3f, 1f);
   }
   @Override
   protected void onInit() {
@@ -53,13 +54,18 @@ public class WindowUi extends Hud {
     add(tabRow).top().expandX().fillX().height(60).padLeft(10);
     row(); add(tabPanel).fill().expand().center();
     center();
-    switchTab(1);
+    switchTab(0);
     setVisible(false);  
   }
   @Override
   public void drawShapes() {
     if (!isVisible()) return;
+    // Gdx.gl.glEnable(GL20.GL_BLEND);
+    // Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
     shapeRenderer.begin(ShapeType.Filled);
+    panelBgColor.a = getAlpha();
+    containerBgColor.a = getAlpha();
+    containerOutlineBgColor.a = getAlpha();
     shapeRenderer.setColor(containerBgColor);
     shapeRenderer.rect(getGlobalX(), getGlobalY(), getWidth(), getHeight());
     shapeRenderer.setColor(panelBgColor);

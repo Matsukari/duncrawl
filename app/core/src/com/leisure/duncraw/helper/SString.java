@@ -20,4 +20,11 @@ public class SString {
     }
     return str;
   }
+  public static String sepLines(String str, int wordLimit) {
+    String lines = "";
+    for (int line = 0; line < str.length(); line+=wordLimit) {
+      lines = lines + '\n' + str.substring(line, Math.min(line + wordLimit, str.length()));
+    }
+    return lines.substring(1); 
+  }
 }

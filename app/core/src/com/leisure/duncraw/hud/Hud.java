@@ -25,7 +25,7 @@ public class Hud extends Table {
     return this;
   }
   public static Label createLabel(String text, String source, Color color) { return new Label(text, new Label.LabelStyle(Graphics.getFont(source), color)); }
-  public static Label createLabel(String text) { return new Label(text, new Label.LabelStyle(Graphics.getFont(Graphics.fontSources.def), Color.WHITE)); }
+  public static Label createLabel(String text) { return new Label(text, new Label.LabelStyle(Graphics.getFont(Graphics.fontSources.def), Color.valueOf("#c4c4c4"))); }
   protected void onInit() {}
   public void drawShapes() {}
   public void update() {}
@@ -43,5 +43,12 @@ public class Hud extends Table {
       globalY += parent.getY();
     }
     return globalY;
+  }
+  public float getAlpha() {
+    float global = getColor().a;
+    for (Group parent = getParent(); parent != null; parent = parent.getParent()) {
+      global += parent.getColor().a - 1;
+    }
+    return global;
   }
 }

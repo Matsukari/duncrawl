@@ -1,9 +1,15 @@
 package com.leisure.duncraw.manager;
 
+import org.lwjgl.opengl.GL20;
+
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Interpolation;
+import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Stack;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.leisure.duncraw.data.UiData;
@@ -13,6 +19,7 @@ import com.leisure.duncraw.hud.InventoryHud;
 import com.leisure.duncraw.hud.MapFull;
 import com.leisure.duncraw.hud.MapHud;
 import com.leisure.duncraw.hud.QuestFull;
+import com.leisure.duncraw.hud.StatusFull;
 import com.leisure.duncraw.hud.StatusHud;
 import com.leisure.duncraw.hud.WindowUi;
 import com.leisure.duncraw.screen.GameScreen;
@@ -36,7 +43,7 @@ public class HudManager {
     statusHud = new StatusHud(game.player);
     mapHud = new MapHud(game.player, game.floorManager);
     windowUi = new WindowUi(
-        new StatusHud(game.player), 
+        new StatusFull(game.player), 
         new InventoryHud(game.player.inventory, batch), 
         new MapFull(game.player, game.floorManager),
         new QuestFull(game.storyManager));
@@ -63,7 +70,7 @@ public class HudManager {
     root.add(dialogueHud).bottom().expandX().height(100);
     
     stage.addActor(root);
-    // root.debugAll();
+    root.debugAll();
   }
   // Permission to pop modals
   public void toogleModal(Hud modal) { 
@@ -72,6 +79,11 @@ public class HudManager {
     dialogueHud.setVisible(false);
     inventoryHud.setVisible(false);
     modal.setVisible(!visible);
+    float x = modal.getWidth();
+    float y = modal.getHeight();
+    // modal.setSize(0, 0);
+    modal.addAction(Actions.alpha(0.2f));
+    modal.addAction(Actions.alpha(1f, 0.5f, Interpolation.fade)); 
   }
   public void closeModal() {
     windowUi.setVisible(false);
@@ -90,6 +102,8 @@ public class HudManager {
     stage.act(dt);
   }
   public void renderAvailable(Camera camera) {
+    Gdx.gl.glEnable(GL20.GL_BLEND);
+    Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
     statusHud.drawShapes();
     mapHud.drawShapes();
     dialogueHud.drawShapes();

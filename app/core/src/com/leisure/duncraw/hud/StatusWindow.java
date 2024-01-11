@@ -3,17 +3,18 @@ package com.leisure.duncraw.hud;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Value;
 import com.leisure.duncraw.data.UiData;
 import com.leisure.duncraw.logging.Logger;
 
 public class StatusWindow extends Hud { 
-  public StatusHud statusHud;
+  public StatusFull statusHud;
   public InventoryHud inventoryHud;
-  public StatusWindow(StatusHud statusHud, InventoryHud inventoryHud) {
+  public StatusWindow(StatusFull statusHud, InventoryHud inventoryHud) {
     this.statusHud = statusHud;
     this.inventoryHud = inventoryHud;
-    add(statusHud).center().top().expand();
-    add(inventoryHud).center().top().expand();
+    add(statusHud).center().left().top().padLeft(20).padTop(10).fill().width(200);
+    add(inventoryHud).center().left().top().expand().padRight(20).fill();
     inventoryHud.setVisible(true);
   }
   @Override
