@@ -3,14 +3,9 @@ package com.leisure.duncraw.manager;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Stack;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.Value;
-import com.badlogic.gdx.scenes.scene2d.ui.VerticalGroup;
-import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.leisure.duncraw.data.UiData;
 import com.leisure.duncraw.hud.DialogueHud;
 import com.leisure.duncraw.hud.Hud;
@@ -20,7 +15,6 @@ import com.leisure.duncraw.hud.MapHud;
 import com.leisure.duncraw.hud.QuestFull;
 import com.leisure.duncraw.hud.StatusHud;
 import com.leisure.duncraw.hud.WindowUi;
-import com.leisure.duncraw.logging.Logger;
 import com.leisure.duncraw.screen.GameScreen;
 
 public class HudManager {

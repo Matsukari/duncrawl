@@ -1,17 +1,27 @@
 package com.leisure.duncraw;
 
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+
+import javax.swing.plaf.multi.MultiTreeUI;
+
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.leisure.duncraw.data.AssetSource;
 import com.leisure.duncraw.hud.Hud;
+import com.leisure.duncraw.logging.Logger;
 import com.leisure.duncraw.screen.MenuScreen;
 import com.leisure.duncraw.screen.Screen;
+
+import lib.time.Timer;
 
 public class MenuScreenInput extends MenuScreen implements InputProcessor {
   public Stage stage;
@@ -25,6 +35,7 @@ public class MenuScreenInput extends MenuScreen implements InputProcessor {
     options[0].addListener(new ClickListener() {
       @Override
       public void clicked(InputEvent event, float x, float y) {
+        Logger.log("MenuScreenInput", "Key");
         change();
       }
     });
@@ -36,6 +47,7 @@ public class MenuScreenInput extends MenuScreen implements InputProcessor {
     }
     
     stage.addActor(root);
+    Gdx.input.setInputProcessor(new InputMultiplexer(stage, this));
   }
   @Override
   public void render(float delta) {
@@ -49,6 +61,7 @@ public class MenuScreenInput extends MenuScreen implements InputProcessor {
   }
   @Override
   public boolean keyDown(int keycode) {
+    Logger.log("MenuScreenInput", "edown");
     return true;
   }
   @Override

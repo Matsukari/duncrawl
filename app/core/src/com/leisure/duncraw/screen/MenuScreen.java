@@ -12,8 +12,6 @@ import com.leisure.duncraw.logging.Logger;
 public class MenuScreen extends Screen {
   protected SaveData save;
   public MenuScreen() {
-    Logger.log("MenuScreen", "Init");
-    change();
   }
   @Override
   public Screen next() {

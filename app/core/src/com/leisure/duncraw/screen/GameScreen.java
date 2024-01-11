@@ -165,8 +165,9 @@ public class GameScreen extends Screen {
     storyManager.updateScene();
     hudManager.update(delta);
     musicManager.update();
-
+    
     ScreenUtils.clear(backgroundColor);
+    if (!floorManager.ready) return;
     floorManager.renderBackground(camera);
     // charaManager.renderAll(camera);
     renderSortManager.renderAll(camera);

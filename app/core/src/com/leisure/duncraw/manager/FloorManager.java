@@ -2,9 +2,12 @@ package com.leisure.duncraw.manager;
 
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Interpolation;
 import com.leisure.duncraw.art.chara.Spawner;
+import com.leisure.duncraw.Graphics;
 import com.leisure.duncraw.art.chara.Player;
 import com.leisure.duncraw.art.chara.ai.AiWanderer;
+import com.leisure.duncraw.art.gfx.GfxFloorTransition;
 import com.leisure.duncraw.art.lighting.Lighting;
 import com.leisure.duncraw.data.Deserializer;
 import com.leisure.duncraw.data.FloorData;
@@ -16,6 +19,8 @@ import com.leisure.duncraw.map.Tileset;
 import com.leisure.duncraw.map.generator.TerrainSetGenerator;
 import com.leisure.duncraw.screen.GameScreen.Context;
 
+import lib.time.Timer;
+
 public class FloorManager {
   public boolean showLighting = false;
   public final FloorsData sources;
@@ -24,6 +29,8 @@ public class FloorManager {
   private Floor floor;
   private RenderSortManager renderSortManager;
   public Lighting lighting;
+  private GfxFloorTransition transition;
+  public boolean ready = false;
   
   public FloorManager(SaveData save, FloorsData sources, RenderSortManager renderSortManager) {
     this.sources = sources;
@@ -55,6 +62,12 @@ public class FloorManager {
     floor.stage(player, tileset, context);
     floor.initialSpawn(new Spawner(charaManager));
     lighting.updateEnv();
+    ready = false;
+    transition = new GfxFloorTransition(Graphics.getSafeTextureRegion("images/ui/diamond.png"), Interpolation.swingOut, 1f, player.bounds.x, player.bounds.y);
+    transition.onCovered = ()-> {
+      ready = true;
+    };
+    context.effectManager.start(transition);
   }
   public void rebuild() {  
 
@@ -64,6 +77,7 @@ public class FloorManager {
   }
   public Floor getFloor() { return floor; }
   public void renderBackground(Camera cam) {
+    if (!ready) return;
     batch.setProjectionMatrix(cam.combined);
     batch.begin();
     floor.update();
@@ -72,6 +86,7 @@ public class FloorManager {
     lighting.updateEnv();
   }
   public void renderForeground(Camera cam) {
+    if (!ready) return;
     if (floor.foreground != null) {
       batch.setProjectionMatrix(cam.combined);
       batch.begin();
