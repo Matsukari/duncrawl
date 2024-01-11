@@ -48,8 +48,8 @@ public class GameScreen extends Screen {
   protected Color backgroundColor = new Color(4/255f, 4/255f, 4/255f, 1f);
   protected final SaveData saveData;
   protected final DebugManager debugManager;
-  protected final StoryManager storyManager;
   protected final MusicManager musicManager;
+  public final StoryManager storyManager;
   public final HudManager hudManager;
   public final CharaManager charaManager;
   public final FloorManager floorManager;  
@@ -91,8 +91,8 @@ public class GameScreen extends Screen {
     floorManager.loadFloor(saveData.progression.level.floor);
     charaManager.observers.add(new AnimationBehaviour(effectManager));
     player = charaManager.add(new Player(Deserializer.safeLoad(CharaData.class, charaManager.sources.player), saveData));
-    hudManager = new HudManager(this, AssetSource.getUiData());
     storyManager = new StoryManager(this, saveData.progression.level.scene);
+    hudManager = new HudManager(this, AssetSource.getUiData());
     context = new Context(storyManager, hudManager, effectManager, renderSortManager);
     floorManager.stageFloor(player, charaManager, context);
     player.observers.add(new InfuseDarknessBehaviour(effectManager));

@@ -21,10 +21,10 @@ public class WindowUi extends Hud {
   public Color panelBgColor;
   protected Stack tabPanel;
   public Tab currentTab;
-  public WindowUi(StatusHud statusHud, InventoryHud inventoryHud, MapHud mapHud) {
+  public WindowUi(StatusHud statusHud, InventoryHud inventoryHud, MapFull mapHud, QuestFull quest) {
     tabs = new ArrayList<>();
     statusWindow = new StatusWindow(statusHud, inventoryHud);
-    progressionWindow = new ProgressionWindow(mapHud);
+    progressionWindow = new ProgressionWindow(mapHud, quest);
     settingsWindow = new SettingsWindow();
     containerBgColor = new Color(0.06f, 0.06f, 0.06f, 1f);
     panelBgColor = new Color(0.1f, 0.1f, 0.1f, 1f);
@@ -39,7 +39,7 @@ public class WindowUi extends Hud {
     tabPanel = new Stack();
     Table tabRow = new Table();
     for (Tab tab : tabs) {
-      tab.content.init(stage, data, shapeRenderer);
+      tab.content.init(stage, data, shapeRenderer, batch);
       tabRow.add(tab.title).center().top().expand().fill();
       tabPanel.addActor(tab.content);
       tab.title.addListener(new ClickListener() {

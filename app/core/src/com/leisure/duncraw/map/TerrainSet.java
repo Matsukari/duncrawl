@@ -4,6 +4,7 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Map;
 
+import com.badlogic.gdx.math.Rectangle;
 import com.leisure.duncraw.art.EntityHashMap;
 import com.leisure.duncraw.art.map.LayeredTerrain;
 import com.leisure.duncraw.art.map.Obj;

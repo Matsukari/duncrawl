@@ -1,8 +1,8 @@
 {
 "progression": {
 	"level": {
-		"floor": 2,
-		"scene": 4
+		"floor": 1,
+		"scene": 6
 	}
 },
 "player": {

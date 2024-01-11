@@ -2,6 +2,7 @@ package com.leisure.duncraw.hud;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -13,11 +14,13 @@ import com.leisure.duncraw.data.UiData;
 public class Hud extends Table {
   protected Stage stage;
   protected UiData data;
+  protected SpriteBatch batch;
   protected ShapeRenderer shapeRenderer;
-  public Hud init(Stage stage, UiData data, ShapeRenderer renderer) {
+  public Hud init(Stage stage, UiData data, ShapeRenderer renderer, SpriteBatch batch) {
     this.stage = stage;
     this.data = data;
     this.shapeRenderer = renderer;
+    this.batch = batch;
     onInit();
     return this;
   }

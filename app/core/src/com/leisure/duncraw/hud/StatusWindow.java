@@ -1,5 +1,6 @@
 package com.leisure.duncraw.hud;
 
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.leisure.duncraw.data.UiData;
@@ -16,10 +17,10 @@ public class StatusWindow extends Hud {
     inventoryHud.setVisible(true);
   }
   @Override
-  public Hud init(Stage stage, UiData data, ShapeRenderer renderer) {
-    statusHud.init(stage, data, renderer);
-    inventoryHud.init(stage, data, renderer);
-    return super.init(stage, data, renderer);
+  public Hud init(Stage stage, UiData data, ShapeRenderer renderer, SpriteBatch batch) {
+    statusHud.init(stage, data, renderer, batch);
+    inventoryHud.init(stage, data, renderer, batch);
+    return super.init(stage, data, renderer, batch);
   }
   @Override
   public void drawShapes() {

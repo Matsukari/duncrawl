@@ -14,7 +14,6 @@ import com.leisure.duncraw.logging.Logger;
 public class InventoryHud extends Hud {
   protected Label titleLabel;
   protected Inventory inventory;
-  protected SpriteBatch batch;
   public float itemSize;
   public int cols;
   public int itemPadding;

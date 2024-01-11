@@ -2,6 +2,7 @@ package com.leisure.duncraw.data;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.scenes.scene2d.actions.IntAction;
 import com.leisure.duncraw.art.chara.Status;
 import com.leisure.duncraw.helper.Instantiator;
 import com.leisure.duncraw.logging.Logger;
@@ -14,6 +15,7 @@ public class AssetSource {
   public String objects;
   public String fonts;
   public String music;
+  public String story; 
   public String ui;
   public static AssetSource instance;
   public AssetSource(FileHandle ini) {
@@ -67,6 +69,7 @@ public class AssetSource {
       instance.fonts = "dat/fonts.dat";
       instance.music = "dat/music.dat";
       instance.ui = "dat/ui.dat";
+      instance.story = "dat/story.dat";
       AssetSource.save();
     }
   }

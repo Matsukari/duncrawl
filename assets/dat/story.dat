@@ -1,0 +1,29 @@
+{
+  "scenes": [
+    {
+      "classname": "Chapter1$Scene1",
+      "title": "Where am I"
+    },
+    {
+      "classname": "Chapter1$Scene2",
+      "title": "Leave the room"
+    },
+    {
+      "classname": "Chapter1$Scene3",
+      "title": "Search the floor"
+    },
+    {
+      "classname": "Chapter1$Scene4",
+      "title": "Danger"
+    },
+    {
+      "classname": "Chapter1$Scene5",
+      "title": "The group of people"
+    },
+    {
+      "classname": "Chapter1$Scene6",
+      "title": "..."
+    }
+
+  ]
+}

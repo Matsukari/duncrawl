@@ -15,7 +15,9 @@ import com.leisure.duncraw.data.UiData;
 import com.leisure.duncraw.hud.DialogueHud;
 import com.leisure.duncraw.hud.Hud;
 import com.leisure.duncraw.hud.InventoryHud;
+import com.leisure.duncraw.hud.MapFull;
 import com.leisure.duncraw.hud.MapHud;
+import com.leisure.duncraw.hud.QuestFull;
 import com.leisure.duncraw.hud.StatusHud;
 import com.leisure.duncraw.hud.WindowUi;
 import com.leisure.duncraw.logging.Logger;
@@ -42,12 +44,13 @@ public class HudManager {
     windowUi = new WindowUi(
         new StatusHud(game.player), 
         new InventoryHud(game.player.inventory, batch), 
-        new MapHud(game.player, game.floorManager));
-    inventoryHud.init(stage, data, shapeRenderer);
-    dialogueHud.init(stage, data, shapeRenderer);
-    statusHud.init(stage, data, shapeRenderer);
-    mapHud.init(stage, data, shapeRenderer);
-    windowUi.init(stage, data, shapeRenderer);
+        new MapFull(game.player, game.floorManager),
+        new QuestFull(game.storyManager));
+    inventoryHud.init(stage, data, shapeRenderer, batch);
+    dialogueHud.init(stage, data, shapeRenderer, batch);
+    statusHud.init(stage, data, shapeRenderer, batch);
+    mapHud.init(stage, data, shapeRenderer, batch);
+    windowUi.init(stage, data, shapeRenderer, batch);
     root = new Table();
     Table row = new Table();
     root.setFillParent(true);
