@@ -1,0 +1,686 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Story</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="16757aaa-507e-4065-9f68-aeac138dc26e" class="page sans"><header><h1 class="page-title">Story</h1><p class="page-description"></p></header><div class="page-body"><ul id="3ab2b935-6218-49fd-85bb-3376af756684" class="bulleted-list"><li style="list-style-type:disc">Tossed in an unknown dungeon, [ MC ] fell into despair, only to be reminded of what [ Villain ] did to his loved one. Fueled by rage and madness to take back at [ Villain ]; [ MC ] prepares his revenge, but only after he clears the dungeon ahead of him…</li></ul><h2 id="7f3b62e3-9641-4a2f-93c4-2785e5292e5f" class="">Goal:</h2><ul id="e1bb7a44-a8e4-4b74-a04e-2a22efa2d964" class="bulleted-list"><li style="list-style-type:disc">To escape the dungeon as soon as possible.</li></ul><ul id="b4cbff56-2031-4ed6-bcc3-a5f5459b0103" class="bulleted-list"><li style="list-style-type:disc">…</li></ul><p id="9aa6e0ec-8330-493a-b587-aba47a1576e2" class="">
+</p><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3;margin:0">Chapter 1</summary><div class="indented"><ul id="1a158ae7-aaa8-4a68-bacd-2f83f101ba20" class="bulleted-list"><li style="list-style-type:disc">Mc was tossed in a dungeon, was mad, angered, and felt he was powerless.</li></ul><ul id="ad9e7529-796f-4616-8b6f-2b2868df6aa8" class="bulleted-list"><li style="list-style-type:disc">[ Despair scene ] (silent cries, illustration, black transition)</li></ul><ul id="6c794bfc-ccae-431a-8195-bc3cc15f05ad" class="bulleted-list"><li style="list-style-type:disc">[ Standup scene ] </li></ul><ul id="8d105367-b007-4192-b7dd-f7f38509aa70" class="bulleted-list"><li style="list-style-type:disc">Explores floor 1 to find out what the dungeon is</li></ul><ul id="efe5679f-99b6-410e-8750-62ff84e2d0fa" class="bulleted-list"><li style="list-style-type:disc">[ Ghost King appearance scene ]</li></ul><ul id="84b5da26-ce72-4b9d-8608-dc3c20c2c673" class="bulleted-list"><li style="list-style-type:disc">Until a strong Ghost King popped out and nearly killed you</li></ul><ul id="96c2e2d0-5b6d-45fd-8d54-6a3cdae93499" class="bulleted-list"><li style="list-style-type:disc">Crawl to the second floor until the safe area</li></ul><ul id="18a746fd-a88a-4dbf-a251-b7bf92649589" class="bulleted-list"><li style="list-style-type:disc">[ Elder appearance, NPC’s alert ] </li></ul><p id="66ed2363-44ce-4c49-a417-81ab9defea6f" class="">
+</p></div></details><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3;margin:0">Chapter 2</summary><div class="indented"><ul id="f76bc3af-652c-49ce-b16f-6b41977478e3" class="bulleted-list"><li style="list-style-type:disc">[ Where am I scene ]</li></ul><ul id="9b6dd733-6de5-4d5e-af31-795663e63d9f" class="bulleted-list"><li style="list-style-type:disc">[ Can’t be helped NPC’s ]</li></ul><ul id="02e646f5-0b93-42f5-a3c8-51831aa92795" class="bulleted-list"><li style="list-style-type:disc">Explore again until the big boss door</li></ul><ul id="76f68f51-8c94-4c4a-b77c-abb4e8a500ca" class="bulleted-list"><li style="list-style-type:disc">[ Ghost &amp; Ghoul King ] boss fight</li></ul><ul id="2eab9b1d-79ad-4b29-8aab-3aed0a02515a" class="bulleted-list"><li style="list-style-type:disc">[ Freed Ghost King scene ]</li></ul><ul id="9f1e18be-cb1c-41e5-992d-40af8f1a4fb8" class="bulleted-list"><li style="list-style-type:disc">Proceeds next door</li></ul><p id="7474c092-aac7-48a8-b179-e88a8756d659" class="">
+</p></div></details><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3;margin:0">Chapter 3</summary><div class="indented"><ul id="8ae19d4c-521a-46a2-a5cd-477997afc5a6" class="bulleted-list"><li style="list-style-type:disc">Ease of battle until 5th floor</li></ul><ul id="42e497ec-af58-4451-8409-7f3ee4de8499" class="bulleted-list"><li style="list-style-type:disc">[ Orc &amp; trolls army battle scene ] (optional to battle them)</li></ul><ul id="edbc3afe-df57-44cb-920f-c1a98b88ad51" class="bulleted-list"><li style="list-style-type:disc">Gone back to prepare and wait for them to empty each other</li></ul><ul id="93df31a0-2e7b-4fbf-86e1-f01a3ac93a9c" class="bulleted-list"><li style="list-style-type:disc">Proceed to next floor</li></ul><ul id="ab810be8-0991-4ff5-99fb-993dc5c6120b" class="bulleted-list"><li style="list-style-type:disc">Explores nest of trolls</li></ul><ul id="09daf16e-6689-4935-bffa-e8142cc08811" class="bulleted-list"><li style="list-style-type:disc">Until the [ Green Skinned apperance ]</li></ul><ul id="e9f8f980-0542-4c3e-85cb-8ee9d8337158" class="bulleted-list"><li style="list-style-type:disc">[ Girl screams ] at the end of fight</li></ul><p id="0e20874a-3fa0-4ded-9df4-cfe567647b06" class="">
+</p></div></details><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3;margin:0">Chapter 4</summary><div class="indented"><ul id="1a592883-f86c-4d8b-b47d-17e9c22defbc" class="bulleted-list"><li style="list-style-type:disc">Enter 6th floor, [ Trials of Higher Stage ]</li></ul><ul id="4d956fc8-a591-4117-a057-ae1a1227984a" class="bulleted-list"><li style="list-style-type:disc">[ Crazy woman scene ] on safe zone</li></ul><ul id="9ba5fc39-16df-4976-b670-a8b98c909af2" class="bulleted-list"><li style="list-style-type:disc">Proceed to higher stage, [ Death ]</li></ul><ul id="58d7df5f-331d-4ca8-8340-67032360ecfa" class="bulleted-list"><li style="list-style-type:disc">Seeks assistance to learn holy energy</li></ul><ul id="d7aa73da-9b04-4c87-99e0-e50ba0593c94" class="bulleted-list"><li style="list-style-type:disc">Explores until 8th floor boss. [ Vampire Progenitor ]</li></ul><ul id="f7f89245-3178-4ea4-9a6a-c262347a55d4" class="bulleted-list"><li style="list-style-type:disc">Retreives Elder’s daughter at the coffin [ Dead or alive depends on progression ]</li></ul><p id="1f036489-4c05-4c73-bd01-59e8f8ade014" class="">
+</p></div></details><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3;margin:0">Chapter 5</summary><div class="indented"><ul id="e2aff153-45bc-477d-94ea-84b6a8265baa" class="bulleted-list"><li style="list-style-type:disc">[ Desolate 9th floor scene ]</li></ul><ul id="b14a6456-038d-4037-9660-1d2eead11aa6" class="bulleted-list"><li style="list-style-type:disc">[ Ominous 10th flooor ]</li></ul><ul id="4e8ff394-d8b0-440f-bfbc-137733adc882" class="bulleted-list"><li style="list-style-type:disc">Last stage fight with [ Darkness Beholder ]</li></ul><ul id="cae8fa54-0301-4ad1-a418-ba8d2df9500c" class="bulleted-list"><li style="list-style-type:disc">[ Breaking dungeon orb scene ]</li></ul><ul id="a365149d-77bd-4f90-8023-31842141fc7c" class="bulleted-list"><li style="list-style-type:disc">Goes back to the safe area of people</li></ul><ul id="483ecd3a-e978-4fde-9650-fc91988732f3" class="bulleted-list"><li style="list-style-type:disc">[ Crying scene ] or [ Massacre scene by Crazy woman ] depends on progression</li></ul><ul id="40913319-2387-4464-9718-0fec5d08266f" class="bulleted-list"><li style="list-style-type:disc">[ Light at the end of tunner scene ]</li></ul><ul id="2ce59563-73d9-49f7-89d5-a2baede72a99" class="bulleted-list"><li style="list-style-type:disc">[ Sun rising scene ]</li></ul><ul id="8be9d39f-0e22-43ed-a8a8-82911727ac81" class="bulleted-list"><li style="list-style-type:disc">[ Determined MC scene ]</li></ul><ul id="ff79b71a-5873-4cbd-a6e9-adce824731c4" class="bulleted-list"><li style="list-style-type:disc">[ End ]</li></ul><p id="1ea182b5-b77d-44e2-aac5-06b7fdc29bfe" class="">
+</p><p id="cdbef7bb-ce9d-4f4b-97b7-8711a601db69" class="">
+</p></div></details><p id="31a95ea6-c2c1-4e4b-a3be-ca886bae0680" class="">
+</p><h3 id="b2e44cef-103b-48aa-aaf9-823ce4b7561a" class="">System architecture:</h3><ul id="040ece98-8817-4a1a-9809-d34965e2e1b2" class="bulleted-list"><li style="list-style-type:disc">Needs:<ul id="0a0962b7-6a6d-4de5-837f-9998fc6e4e5f" class="bulleted-list"><li style="list-style-type:circle">Scene: where the ‘STORY’ can control the environment, entities, and camera; is pre-programmed. Atleast can control:<ul id="1d5ede7c-f631-45ee-9721-b0f5e42416b4" class="bulleted-list"><li style="list-style-type:square">Move, every interaction, attack, etc. remote control entity </li></ul><ul id="9546498b-a9c4-4b87-b6e1-b8aac2f6ece9" class="bulleted-list"><li style="list-style-type:square">Change current stage and it’s camera</li></ul><ul id="b0df3c06-ce04-4c4a-8c87-e00b2951aa69" class="bulleted-list"><li style="list-style-type:square">Spawn monsters</li></ul><ul id="9a98b50f-4790-4a76-a10f-5a1699d2117b" class="bulleted-list"><li style="list-style-type:square">Pop another or remove existing HUD</li></ul><ul id="8db72389-1762-4fb9-8a3c-b076f1a45303" class="bulleted-list"><li style="list-style-type:square">Complete, remove, control quests</li></ul></li></ul></li></ul><p id="54c8fe27-32fc-4602-83e0-edc0e8c71ba8" class="">
+</p><div id="5dd108bf-5f2c-4ebf-8d8e-cfbe07301cf3" class="collection-content"><h4 class="collection-title">Quests</h4><table class="collection-content"><thead><tr><th><span class="icon property-icon"><svg role="graphics-symbol" viewBox="0 0 16 16" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0" class="typesTitle"><path d="M0.637695 13.1914C1.0957 13.1914 1.32812 13 1.47852 12.5215L2.24414 10.3887H6.14746L6.90625 12.5215C7.05664 13 7.2959 13.1914 7.74707 13.1914C8.22559 13.1914 8.5332 12.9043 8.5332 12.4531C8.5332 12.2891 8.50586 12.1523 8.44434 11.9678L5.41602 3.79199C5.2041 3.21777 4.82129 2.9375 4.19922 2.9375C3.60449 2.9375 3.21484 3.21777 3.0166 3.78516L-0.0322266 12.002C-0.09375 12.1797 -0.121094 12.3232 -0.121094 12.4668C-0.121094 12.918 0.166016 13.1914 0.637695 13.1914ZM2.63379 9.12402L4.17871 4.68066H4.21973L5.76465 9.12402H2.63379ZM12.2793 13.2324C13.3115 13.2324 14.2891 12.6787 14.7129 11.8037H14.7402V12.5762C14.7471 12.9863 15.0273 13.2393 15.4238 13.2393C15.834 13.2393 16.1143 12.9795 16.1143 12.5215V8.00977C16.1143 6.49902 14.9658 5.52148 13.1543 5.52148C11.7666 5.52148 10.6592 6.08887 10.2695 6.99121C10.1943 7.15527 10.1533 7.3125 10.1533 7.46289C10.1533 7.81152 10.4062 8.04395 10.7686 8.04395C11.0215 8.04395 11.2129 7.94824 11.3496 7.73633C11.7529 6.99121 12.2861 6.65625 13.1064 6.65625C14.0977 6.65625 14.6992 7.20996 14.6992 8.1123V8.67285L12.5664 8.7959C10.7686 8.8916 9.77734 9.69824 9.77734 11.0107C9.77734 12.3369 10.8096 13.2324 12.2793 13.2324ZM12.6621 12.1387C11.8008 12.1387 11.2129 11.667 11.2129 10.9561C11.2129 10.2725 11.7598 9.82129 12.7578 9.75977L14.6992 9.62988V10.3203C14.6992 11.3457 13.7969 12.1387 12.6621 12.1387Z"></path></svg></span>Name</th><th><span class="icon property-icon"><svg role="graphics-symbol" viewBox="0 0 16 16" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0" class="typesSelect"><path d="M8 15.126C11.8623 15.126 15.0615 11.9336 15.0615 8.06445C15.0615 4.20215 11.8623 1.00293 7.99316 1.00293C4.13086 1.00293 0.938477 4.20215 0.938477 8.06445C0.938477 11.9336 4.1377 15.126 8 15.126ZM8 13.7383C4.85547 13.7383 2.33301 11.209 2.33301 8.06445C2.33301 4.91992 4.84863 2.39746 7.99316 2.39746C11.1377 2.39746 13.6738 4.91992 13.6738 8.06445C13.6738 11.209 11.1445 13.7383 8 13.7383ZM7.62402 10.6348C7.79492 10.915 8.20508 10.9287 8.37598 10.6348L10.666 6.73145C10.8574 6.41016 10.7002 6.04102 10.3652 6.04102H5.62793C5.29297 6.04102 5.14941 6.43066 5.32031 6.73145L7.62402 10.6348Z"></path></svg></span>Type</th></tr></thead><tbody><tr id="8696ad78-e27a-4cc1-a20e-29948ea91942"><td class="cell-title"><a href="Story%2016757aaa507e40659f68aeac138dc26e/Quests%205dd108bf5f2c4ebf8d8ecfbe07301cf3/Steal%20a%20dagger%208696ad78e27a4cc1a20e29948ea91942.html">Steal a dagger</a></td><td class="cell-Bvs{"><span class="selected-value select-value-color-red">Main</span></td></tr><tr id="a9a8a521-d2c7-49c0-8bc9-bd77e8a41643"><td class="cell-title"><a href="Story%2016757aaa507e40659f68aeac138dc26e/Quests%205dd108bf5f2c4ebf8d8ecfbe07301cf3/Discover%20the%20nature%20of%20dungeon%20a9a8a521d2c749c08bc9bd77e8a41643.html">Discover the nature of dungeon</a></td><td class="cell-Bvs{"><span class="selected-value select-value-color-red">Main</span></td></tr><tr id="67995d1b-dc2f-400d-8add-4be82d6f70b4"><td class="cell-title"><a href="Story%2016757aaa507e40659f68aeac138dc26e/Quests%205dd108bf5f2c4ebf8d8ecfbe07301cf3/Traces%20of%20life%2067995d1bdc2f400d8add4be82d6f70b4.html">Traces of life</a></td><td class="cell-Bvs{"><span class="selected-value select-value-color-red">Main</span></td></tr><tr id="96741d38-1c39-4a85-b73e-43cd9bf95a3f"><td class="cell-title"><a href="Story%2016757aaa507e40659f68aeac138dc26e/Quests%205dd108bf5f2c4ebf8d8ecfbe07301cf3/Battle%20against%20time%2096741d381c394a85b73e43cd9bf95a3f.html">Battle against time</a></td><td class="cell-Bvs{"><span class="selected-value select-value-color-red">Main</span></td></tr><tr id="e4d3665f-f6b7-4a7b-90cf-cf63f58dccbf"><td class="cell-title"><a href="Story%2016757aaa507e40659f68aeac138dc26e/Quests%205dd108bf5f2c4ebf8d8ecfbe07301cf3/Better%20equipment%20e4d3665ff6b74a7b90cfcf63f58dccbf.html">Better equipment</a></td><td class="cell-Bvs{"><span class="selected-value select-value-color-red">Main</span></td></tr><tr id="26fb04e9-513c-4f6c-a6cd-fc26024014c5"><td class="cell-title"><a href="Story%2016757aaa507e40659f68aeac138dc26e/Quests%205dd108bf5f2c4ebf8d8ecfbe07301cf3/Defeat%20Ghost%20Ghoul%20King%2026fb04e9513c4f6ca6cdfc26024014c5.html">Defeat Ghost / Ghoul King</a></td><td class="cell-Bvs{"><span class="selected-value select-value-color-red">Main</span></td></tr><tr id="92f90653-84e9-4307-ae58-323c3944b45d"><td class="cell-title"><a href="Story%2016757aaa507e40659f68aeac138dc26e/Quests%205dd108bf5f2c4ebf8d8ecfbe07301cf3/Continue%20progression%2092f9065384e94307ae58323c3944b45d.html">Continue progression</a></td><td class="cell-Bvs{"><span class="selected-value select-value-color-red">Main</span></td></tr><tr id="ede982d6-0018-4623-9521-b174ba6f94b5"><td class="cell-title"><a href="Story%2016757aaa507e40659f68aeac138dc26e/Quests%205dd108bf5f2c4ebf8d8ecfbe07301cf3/Go%20back%20prepare%20ede982d6001846239521b174ba6f94b5.html">Go back prepare</a></td><td class="cell-Bvs{"><span class="selected-value select-value-color-red">Main</span></td></tr><tr id="b0badddb-fe1e-4307-928c-63537b614956"><td class="cell-title"><a href="Story%2016757aaa507e40659f68aeac138dc26e/Quests%205dd108bf5f2c4ebf8d8ecfbe07301cf3/Explore%20nest%20of%20trolls%20b0badddbfe1e4307928c63537b614956.html">Explore nest of trolls</a></td><td class="cell-Bvs{"><span class="selected-value select-value-color-red">Main</span></td></tr><tr id="6b69a36e-8f57-4f4e-843d-4babca8f1a7c"><td class="cell-title"><a href="Story%2016757aaa507e40659f68aeac138dc26e/Quests%205dd108bf5f2c4ebf8d8ecfbe07301cf3/Defeat%20Green%20Skinned%206b69a36e8f574f4e843d4babca8f1a7c.html">Defeat Green Skinned</a></td><td class="cell-Bvs{"><span class="selected-value select-value-color-red">Main</span></td></tr><tr id="a08b3063-c744-455e-af3d-c611623efdb2"><td class="cell-title"><a href="Story%2016757aaa507e40659f68aeac138dc26e/Quests%205dd108bf5f2c4ebf8d8ecfbe07301cf3/Higher%20stage%20a08b3063c744455eaf3dc611623efdb2.html">Higher stage</a></td><td class="cell-Bvs{"><span class="selected-value select-value-color-red">Main</span></td></tr><tr id="d1fa23dc-91c8-47e4-985d-f73d1b0b41fc"><td class="cell-title"><a href="Story%2016757aaa507e40659f68aeac138dc26e/Quests%205dd108bf5f2c4ebf8d8ecfbe07301cf3/Learn%20holy%20magic%20d1fa23dc91c847e4985df73d1b0b41fc.html">Learn holy magic</a></td><td class="cell-Bvs{"><span class="selected-value select-value-color-red">Main</span></td></tr><tr id="6e33c0d3-341a-4638-bdd5-54f26ddcead9"><td class="cell-title"><a href="Story%2016757aaa507e40659f68aeac138dc26e/Quests%205dd108bf5f2c4ebf8d8ecfbe07301cf3/Defeat%20Vampire%20Progenitor%206e33c0d3341a4638bdd554f26ddcead9.html">Defeat Vampire Progenitor</a></td><td class="cell-Bvs{"><span class="selected-value select-value-color-red">Main</span></td></tr><tr id="8ed6f1df-1da5-409e-9f96-48b005714c1b"><td class="cell-title"><a href="Story%2016757aaa507e40659f68aeac138dc26e/Quests%205dd108bf5f2c4ebf8d8ecfbe07301cf3/Defeat%20the%20Dungeon%20Lord%208ed6f1df1da5409e9f9648b005714c1b.html">Defeat the Dungeon Lord</a></td><td class="cell-Bvs{"><span class="selected-value select-value-color-red">Main</span></td></tr><tr id="26601bff-1474-4a53-971c-cf8b3c025df1"><td class="cell-title"><a href="Story%2016757aaa507e40659f68aeac138dc26e/Quests%205dd108bf5f2c4ebf8d8ecfbe07301cf3/Twilight%20end%2026601bff14744a53971ccf8b3c025df1.html">Twilight end</a></td><td class="cell-Bvs{"><span class="selected-value select-value-color-red">Main</span></td></tr><tr id="69f53582-6773-4bed-ad52-72cd87a3456c"><td class="cell-title"><a href="Story%2016757aaa507e40659f68aeac138dc26e/Quests%205dd108bf5f2c4ebf8d8ecfbe07301cf3/I%20want%20to%20eat%20meat%2069f5358267734bedad5272cd87a3456c.html">I want to eat meat</a></td><td class="cell-Bvs{"><span class="selected-value select-value-color-blue">Sub</span></td></tr><tr id="ad575e85-d40b-4669-93f5-1db6e0b40aaa"><td class="cell-title"><a href="Story%2016757aaa507e40659f68aeac138dc26e/Quests%205dd108bf5f2c4ebf8d8ecfbe07301cf3/Maze%20of%20no%20escape%20ad575e85d40b466993f51db6e0b40aaa.html">Maze of no escape</a></td><td class="cell-Bvs{"><span class="selected-value select-value-color-blue">Sub</span></td></tr><tr id="eef253bd-7428-4d4b-806f-e4927268f475"><td class="cell-title"><a href="Story%2016757aaa507e40659f68aeac138dc26e/Quests%205dd108bf5f2c4ebf8d8ecfbe07301cf3/Legendary%20sword%20eef253bd74284d4b806fe4927268f475.html">Legendary sword</a></td><td class="cell-Bvs{"><span class="selected-value select-value-color-blue">Sub</span></td></tr><tr id="fb6eb712-85bd-4fde-a4c0-d0564c375afc"><td class="cell-title"><a href="Story%2016757aaa507e40659f68aeac138dc26e/Quests%205dd108bf5f2c4ebf8d8ecfbe07301cf3/Kill%20the%20boy%20fb6eb71285bd4fdea4c0d0564c375afc.html">Kill the boy</a></td><td class="cell-Bvs{"><span class="selected-value select-value-color-blue">Sub</span></td></tr><tr id="d708443d-1521-4b62-8a46-ebf43000f7b0"><td class="cell-title"><a href="Story%2016757aaa507e40659f68aeac138dc26e/Quests%205dd108bf5f2c4ebf8d8ecfbe07301cf3/Kill%20the%20bard%20d708443d15214b628a46ebf43000f7b0.html">Kill the bard</a></td><td class="cell-Bvs{"><span class="selected-value select-value-color-blue">Sub</span></td></tr><tr id="35064157-49da-4df5-8e90-8d84689df04c"><td class="cell-title"><a href="Story%2016757aaa507e40659f68aeac138dc26e/Quests%205dd108bf5f2c4ebf8d8ecfbe07301cf3/Put%20me%20to%20rest%203506415749da4df58e908d84689df04c.html">Put me to rest</a></td><td class="cell-Bvs{"><span class="selected-value select-value-color-blue">Sub</span></td></tr><tr id="cb78310f-7d8c-4030-8a62-8dd963b4a294"><td class="cell-title"><a href="Story%2016757aaa507e40659f68aeac138dc26e/Quests%205dd108bf5f2c4ebf8d8ecfbe07301cf3/Build%20a%20tomb%20for%20dead%20people%20cb78310f7d8c40308a628dd963b4a294.html">Build a tomb for dead people </a></td><td class="cell-Bvs{"><span class="selected-value select-value-color-blue">Sub</span></td></tr><tr id="c89cee21-20e2-489a-8018-6e4d0ef83c92"><td class="cell-title"><a href="Story%2016757aaa507e40659f68aeac138dc26e/Quests%205dd108bf5f2c4ebf8d8ecfbe07301cf3/Teach%20me%20to%20fight%20c89cee2120e2489a80186e4d0ef83c92.html">Teach me to fight</a></td><td class="cell-Bvs{"><span class="selected-value select-value-color-blue">Sub</span></td></tr><tr id="fca63f48-338d-4952-a893-c7068b0456ac"><td class="cell-title"><a href="Story%2016757aaa507e40659f68aeac138dc26e/Quests%205dd108bf5f2c4ebf8d8ecfbe07301cf3/Help%20find%20this%20treasure%20fca63f48338d4952a893c7068b0456ac.html">Help find this treasure</a></td><td class="cell-Bvs{"><span class="selected-value select-value-color-blue">Sub</span></td></tr><tr id="70d1fe03-1080-4f80-9cee-6068b82c32f3"><td class="cell-title"><a href="Story%2016757aaa507e40659f68aeac138dc26e/Quests%205dd108bf5f2c4ebf8d8ecfbe07301cf3/Discover%20the%20truth%2070d1fe0310804f809cee6068b82c32f3.html">Discover the truth</a></td><td class="cell-Bvs{"><span class="selected-value select-value-color-blue">Sub</span></td></tr></tbody></table><br/><br/></div><p id="ffa91bb1-3989-489b-b884-42110e950bae" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

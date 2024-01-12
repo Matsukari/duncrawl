@@ -1,0 +1,679 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Design Document</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="4b803af7-234f-4d62-b40a-e935aee89f78" class="page sans"><header><img class="page-cover-image" src="https://www.notion.so/images/page-cover/webb4.jpg" style="object-position:center 50%"/><h1 class="page-title">Design Document</h1><p class="page-description"></p></header><div class="page-body"><h2 id="2f7f0fd6-79b8-4fc4-90bf-66baa2214cfe" class="">Story and instant summary:</h2><ul id="5392acbf-08a1-4937-9cff-67c057720067" class="bulleted-list"><li style="list-style-type:disc">Somehow ended up in an unknown dungeon, [ MC ] fell into despair, only to be reminded of what [ Villain ] did to his loved one. Fueled by rage and madness to take back at [ Villain ]; [ MC ] prepares his revenge, but only after he clears the very much peculiar dungeon ahead of him…</li></ul><ul id="6733d07c-28cc-4d13-aaac-b458b278bce8" class="bulleted-list"><li style="list-style-type:disc">Dungeon - No one survived to tell the tale, but there [ MC ] witnessed countless people like him.</li></ul><figure id="16757aaa-507e-4065-9f68-aeac138dc26e" class="link-to-page"><a href="Design%20Document%204b803af7234f4d62b40ae935aee89f78/Story%2016757aaa507e40659f68aeac138dc26e.html">Story</a></figure><h3 id="efcdd4e8-0d9b-49f6-ac05-cd68cf2367fb" class="">Title:</h3><ul id="a3ef521d-df51-4cb2-a4a2-0428e2b9c11c" class="bulleted-list"><li style="list-style-type:disc">Dungeon Crawler</li></ul><h3 id="ac2752a7-84ed-4c59-a1eb-0d1bd9c436a3" class="">Target platform:</h3><ul id="fe857eea-d5fe-40b0-90a6-9baeca2503cc" class="bulleted-list"><li style="list-style-type:disc">Android, windows and linux</li></ul><ul id="4966acb0-2c75-4435-bfe3-8ffd5f0a82cd" class="bulleted-list"><li style="list-style-type:disc">Naturally, running at breakneck 60 FPS even within potato systems</li></ul><ul id="1a1c8e67-0e8d-4459-9005-b7770a5a68b7" class="bulleted-list"><li style="list-style-type:disc">Atleast 5+ hours of gameplay</li></ul><h3 id="6d177e2a-de96-437c-9905-ee14650b1c09" class="">Development:</h3><ul id="9266c3a2-e890-4942-88c6-294fadd3e817" class="bulleted-list"><li style="list-style-type:disc">Java SE 8, built with LibGDX 2.0</li></ul><ul id="8ebb7e00-25ea-4272-8dbe-146418136f04" class="bulleted-list"><li style="list-style-type:disc">Expected completion and delivery at february, 2024</li></ul><ul id="5a12bc79-d7a0-4f1c-842b-f369d5bbb5fa" class="bulleted-list"><li style="list-style-type:disc">Started at late November, 2023</li></ul><ul id="7353060b-cb39-4dae-92c3-f24d3de507fc" class="bulleted-list"><li style="list-style-type:disc"><a href="https://github.com/Matsukari/duncrawl">https://github.com/Matsukari/duncrawl</a></li></ul><h3 id="75ad40f4-9b44-42b0-ac45-7d689e197065" class="">Graphics:</h3><ul id="5ebb626c-8789-48ea-b75e-76c3eab4a5f2" class="bulleted-list"><li style="list-style-type:disc">2D pure pixel art (mainly 16x16) except menu and windows</li></ul><ul id="941dff71-4328-4479-bc09-c853bb9e9128" class="bulleted-list"><li style="list-style-type:disc">Limited to 4 main mild colors: black, red, blue, white </li></ul><ul id="cebaeded-875f-4689-90d7-772cab52e37f" class="bulleted-list"><li style="list-style-type:disc">Simple terrain, splattered in small particle rocks, and decorations </li></ul><h3 id="80e298e3-f2f1-44cc-b519-b93e56a2a00e" class="">Genre:</h3><ul id="314e7004-9bf9-4d7f-a7d9-2a1c1436ed12" class="bulleted-list"><li style="list-style-type:disc">2D dungeon crawler</li></ul><h3 id="2015cb5f-e884-4b5c-b10e-6ba5df97ba70" class="">Core:</h3><ul id="a834e84b-5c1a-42a9-aaba-0521d1c95373" class="bulleted-list"><li style="list-style-type:disc">It’s about story</li></ul><ul id="803333f8-13db-4f91-a2a5-de40df69cfc5" class="bulleted-list"><li style="list-style-type:disc">Find the hidden easters of the dungeon</li></ul><ul id="f0a50566-e0b6-4509-a9be-16de74260724" class="bulleted-list"><li style="list-style-type:disc">Mysteries of NPCs’ quack stories</li></ul><h3 id="08706f44-dfee-4381-a253-f6d9e043756e" class="">Theme:</h3><ul id="96ba77cb-1228-4599-a67c-2da2cff21060" class="bulleted-list"><li style="list-style-type:disc">Dark, full of shadows and unexplored areas (rooms). </li></ul><ul id="51d5da0b-1e8f-4b01-822b-ba8d5570b58b" class="bulleted-list"><li style="list-style-type:disc">Full of trinkets, scriptures, tablets, rocks, and organized lamps</li></ul><ul id="b471609d-8d76-4b9d-a8a6-61d8118a6b0f" class="bulleted-list"><li style="list-style-type:disc">Full of lights, from ores, and glowing items</li></ul><ul id="1298a830-9b0f-4bae-a361-266e266b610f" class="bulleted-list"><li style="list-style-type:disc">Heavy tile-based maps</li></ul><h3 id="e064401a-54b4-4514-83d9-9da1bd50f2b0" class="">Features:</h3><ul id="eeb0ca8a-fcaa-40c5-a33d-61ab02b20630" class="bulleted-list"><li style="list-style-type:disc">Procedural generated rooms</li></ul><ul id="6e92c51c-e9b0-4288-a257-140632a9abff" class="bulleted-list"><li style="list-style-type:disc">Dynamic lighting</li></ul><ul id="1d8e5322-1c40-4434-967c-0739da66fac0" class="bulleted-list"><li style="list-style-type:disc">Real-time battle system</li></ul><ul id="72fc80a5-899c-495e-aef9-0d4bdc5cd89b" class="bulleted-list"><li style="list-style-type:disc">Scene-based story</li></ul><ul id="11c3c3ee-4c5d-41c2-8870-06573214b836" class="bulleted-list"><li style="list-style-type:disc">Main and sub quests</li></ul><ul id="ec7530f3-c902-4f4c-8eba-1e125c776619" class="bulleted-list"><li style="list-style-type:disc">Skills and multiple equipments</li></ul><ul id="f1ff73c3-d7a0-4e5f-bb41-edce3e3d7636" class="bulleted-list"><li style="list-style-type:disc">Collect and use items</li></ul><ul id="c7586a9d-a0d9-402e-b577-f52d2d1ddf8c" class="bulleted-list"><li style="list-style-type:disc">Puzzles and traps</li></ul><ul id="82ede37a-4d4b-4aa5-b7b2-c55bda70d893" class="bulleted-list"><li style="list-style-type:disc">Backup, save and load</li></ul><h3 id="669b6c51-5d49-47c5-b557-97ea4595055e" class="">References:</h3><ul id="a0946605-6115-4bca-9f62-34e6a3d85728" class="bulleted-list"><li style="list-style-type:disc">Zenonia 1</li></ul><ul id="b575903e-ed52-4fb8-9180-db013037a407" class="bulleted-list"><li style="list-style-type:disc">Zelda SNES</li></ul><p id="27824d15-15db-44b2-8758-3cb406c438d4" class="">
+</p><hr id="860b595e-3cd7-4360-a570-9be8e0d6fc04"/><h2 id="0349b78b-148c-4ee0-bd3a-65e889c7c127" class="">More:</h2><h3 id="d9c02f93-0fcb-4363-80b0-180cd76730dd" class="">Save / load system:</h3><ul id="4d9df088-68cd-4250-92b2-aae9b9c3e844" class="bulleted-list"><li style="list-style-type:disc">Only available when in a Safe Area</li></ul><ul id="76d5f12c-2f0d-4b48-a3c0-ec90fb96c52b" class="bulleted-list"><li style="list-style-type:disc">Press [ BUTTON ] to show</li></ul><h3 id="747c264e-ce88-4b34-be72-7a493e216029" class="">Battle system:</h3><ul id="7d77a081-0418-42f9-954a-6bc7d1c16ca3" class="bulleted-list"><li style="list-style-type:disc">Combine magic and basic movements to create strong attack, stack them, or to fullfill requirements of some items to get stronger buffs</li></ul><ul id="c3a39833-af5a-4b76-b763-4c719aaac1c3" class="bulleted-list"><li style="list-style-type:disc">Buffs are visualized as floating balls, limited at most 3. Can be gained through totems or items. </li></ul><ul id="31af63f1-79c0-443e-985e-c3503cf0e574" class="bulleted-list"><li style="list-style-type:disc">If you aren’t seen by target enemy, you can gurantee a critical attack plus back attack</li></ul><ul id="6dbc2e81-0adc-4c73-9be8-0b9faeb87b15" class="bulleted-list"><li style="list-style-type:disc">Only one target at a time, 6 at max (adjacent cells) above by cannot overtake first attackers</li></ul><ul id="90d790b7-690c-49e2-8fdd-701bd91fab40" class="bulleted-list"><li style="list-style-type:disc">Tactic formula would be: hide, go to the back of your enemy, teleport, attack, stall for time, repeat or escape entirely (not all battles are meant to be won, ELITE mob with absurd stats would be present among mobs).</li></ul><h3 id="da962f9a-561e-442a-a86f-8c418d2009aa" class="">Terrain:</h3><ul id="72fd7f51-3ff6-44af-bb10-c656c91aa0d6" class="bulleted-list"><li style="list-style-type:disc">Flat floors, separated by rooms, some rooms having a save area</li></ul><ul id="685b5498-9f5d-40b0-8850-f707b2fbb9ad" class="bulleted-list"><li style="list-style-type:disc">Two ladders to go to upper or lower floors</li></ul><ul id="6082ee88-ffab-48ec-80b9-80e34415b5de" class="bulleted-list"><li style="list-style-type:disc">Unconnected platforms - create a shadow and use Shadow Teleport</li></ul><ul id="32637f73-c090-4535-aefc-aedf0702f1d1" class="bulleted-list"><li style="list-style-type:disc">Undogable traps - use Dark Cloak</li></ul><ul id="c3013b40-e47a-403a-b5b2-2aa901331f46" class="bulleted-list"><li style="list-style-type:disc">Inescapable monster swarm - use Dark Cloak</li></ul><h3 id="82366ac7-57bf-4fdf-bdf1-a717ff716a25" class="">Player actions:</h3><ul id="bb5eaee3-d105-4001-9c8f-48bbdd5397ef" class="bulleted-list"><li style="list-style-type:disc">Move</li></ul><ul id="2301df0b-fe70-4fad-9df7-9b18d1d82a5e" class="bulleted-list"><li style="list-style-type:disc">Use skill</li></ul><ul id="ded75685-8a6c-416c-aa9b-60d7903069f6" class="bulleted-list"><li style="list-style-type:disc">Basic attack</li></ul><ul id="49668229-abbd-46a0-9151-1242a55d0062" class="bulleted-list"><li style="list-style-type:disc">Interact<ul id="796edb17-0d17-41a0-a0fa-ac90893ef53d" class="bulleted-list"><li style="list-style-type:circle">Mine</li></ul><ul id="37322397-916b-418e-b048-b4c5735cf1d9" class="bulleted-list"><li style="list-style-type:circle">Collect item</li></ul><ul id="3419d4be-b5bb-49c9-be9c-df4a397d5511" class="bulleted-list"><li style="list-style-type:circle">De/activate traps </li></ul><ul id="c5077e28-2705-470c-9206-2960c5ad7feb" class="bulleted-list"><li style="list-style-type:circle">Talk to NPCs</li></ul><ul id="2164489d-4bf5-4fa3-a143-1c4039117575" class="bulleted-list"><li style="list-style-type:circle">Custom interactee’s interaction</li></ul></li></ul><h3 id="2ddd1fe8-3c73-42c3-8d2f-6e4ad4da4917" class="">Interface:</h3><ul id="7e3d16be-e169-44a2-9897-2177b054d1c6" class="bulleted-list"><li style="list-style-type:disc">Status - skills, inventory</li></ul><ul id="81ac17e3-5150-4cee-87b7-25df86be1694" class="bulleted-list"><li style="list-style-type:disc">Progression - quests, map</li></ul><ul id="a3c09c72-dbd5-4d5f-bc72-9b590ce756e9" class="bulleted-list"><li style="list-style-type:disc">Settings - load, options</li></ul><p id="26b300b0-b268-497a-8e6d-92cf674f32a1" class="">
+</p><p id="52dcf57d-36eb-4211-b109-7a7486798685" class="">
+</p><hr id="3e1fc512-9b90-426e-baad-aa297e0bbe30"/><h2 id="d81c7d06-1f37-433f-8074-1516f0a7af75" class="">Resources:</h2><figure id="92296f91-71e9-4a7c-a6e1-bdf70e0866b7" class="link-to-page"><a href="Design%20Document%204b803af7234f4d62b40ae935aee89f78/Monsters%2092296f9171e94a7ca6e1bdf70e0866b7.html">Monsters</a></figure><figure id="2969c5bd-fa93-4db6-8794-b0ad5bad407a" class="link-to-page"><a href="Design%20Document%204b803af7234f4d62b40ae935aee89f78/NPCs%202969c5bdfa934db68794b0ad5bad407a.html">NPCs</a></figure><figure id="028fae82-0175-4965-bce9-42978e060183" class="link-to-page"><a href="Design%20Document%204b803af7234f4d62b40ae935aee89f78/Items%20028fae8201754965bce942978e060183.html">Items</a></figure><figure id="fd3c548c-5e10-412e-a7af-299873832fa4" class="link-to-page"><a href="Design%20Document%204b803af7234f4d62b40ae935aee89f78/Magic%20fd3c548c5e10412ea7af299873832fa4.html">Magic</a></figure><figure id="f2f944bb-8651-4b10-85c7-212e89e6d542" class="link-to-page"><a href="Design%20Document%204b803af7234f4d62b40ae935aee89f78/World%20Building%20f2f944bb86514b1085c7212e89e6d542.html">World Building</a></figure><figure id="7aa673c1-05e8-45d4-8706-3e13441cbe9e" class="link-to-page"><a href="Design%20Document%204b803af7234f4d62b40ae935aee89f78/Map%20and%20interactables%207aa673c105e845d487063e13441cbe9e.html">Map and interactables</a></figure><figure id="6e247d0f-bbbc-4073-98e5-2408f57d839c" class="link-to-page"><a href="Design%20Document%204b803af7234f4d62b40ae935aee89f78/Architecture%206e247d0fbbbc407398e52408f57d839c.html">Architecture</a></figure></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

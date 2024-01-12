@@ -1,0 +1,678 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>World Building</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="f2f944bb-8651-4b10-85c7-212e89e6d542" class="page sans"><header><h1 class="page-title">World Building</h1><p class="page-description"></p></header><div class="page-body"><p id="24cff543-a3cb-487c-b56e-2e147e49bf1b" class="">Dungeon Contains 10 Floors. Safe area exists in 2nd and 7th floor. 10th floor reserved for final boss. Exit is closed until the dungeon boss’s death.</p><h2 id="24e44350-475f-4fa7-9d8c-70e1f0ac8930" class="">General Rank / Levels:</h2><ul id="2878da67-dc94-4b60-9e8a-86f765b1063b" class="bulleted-list"><li style="list-style-type:disc">Bronze</li></ul><ul id="e70aa7ff-58e6-4b1b-8171-c23f1a2d9a33" class="bulleted-list"><li style="list-style-type:disc">Silver</li></ul><ul id="19bb0409-8eb7-4ff3-bd1e-a6c5f5cbd3b1" class="bulleted-list"><li style="list-style-type:disc">Gold</li></ul><ul id="b58986a4-8e8d-45b2-bee5-af483f495493" class="bulleted-list"><li style="list-style-type:disc">Platinum</li></ul><ul id="c52474ee-1025-4c37-b23b-e2e6e40d8430" class="bulleted-list"><li style="list-style-type:disc">Orihalcum</li></ul><h2 id="e670d37b-32e0-4dd4-a131-adc20791e2ad" class="">Magic:</h2><ul id="09fc5584-aa66-455d-8779-970a7c544ee2" class="bulleted-list"><li style="list-style-type:disc">Holy</li></ul><ul id="c029ff96-7ff4-4e57-be52-91f68d845295" class="bulleted-list"><li style="list-style-type:disc">Dark</li></ul><p id="f089a673-469d-43dc-9be2-9344f34091de" class="">
+</p><h3 id="351f4c48-802b-4938-85cc-6f95498a8e33" class="">Dungeon lore:</h3><ul id="0ef38381-d738-46e9-9765-e925d9c24b11" class="bulleted-list"><li style="list-style-type:disc">Tomb of ancient king of a lost kingdom that once ruled the entire continent (which was the first boss). No one remembers this kingdom anymore.</li></ul><ul id="de1ae20b-9e59-44df-a95d-2b5749575f33" class="bulleted-list"><li style="list-style-type:disc">Tons of ancient scriptures made therefor, which is just about the king’s glorious past, how the people hail him, the kingdom’s glorious army, and how a certain creature brought an end to that kingdom. Yeah, it’s the last boss. Sealed in the deepest floor.</li></ul><ul id="6151ca75-278a-405f-9bc7-897cc4a0622d" class="bulleted-list"><li style="list-style-type:disc">Became an underground base of vampires after so long, then served the last boss. Similar story for the green orcs, and trolls; kind of like chased out of their beastdom.</li></ul><ul id="8d7af3b0-1307-4e41-8a96-21d8f5ae1591" class="bulleted-list"><li style="list-style-type:disc">Humans came next. Cannot leave; forced to make habitat inside the dungeon and sustain themselved using resources of dungeon.</li></ul><p id="ddcec4cc-bcd8-4fc2-9aea-ba7daa9969c3" class="">
+</p><h3 id="54ea2182-73f0-4e0d-a5ad-78bd03e76e98" class="">Dungeon contents:</h3><ul id="e7ce4d9b-a476-4780-9f1a-5a65045278f5" class="bulleted-list"><li style="list-style-type:disc">1-3: Ghost Lair:<ul id="741553a0-b446-44f2-8b00-cf4a48a9e697" class="bulleted-list"><li style="list-style-type:circle">1: tutorial, little monsters<ul id="10c74fae-6946-42bb-a84e-52766130ab32" class="bulleted-list"><li style="list-style-type:square">scripture of how the dungeon is cursed</li></ul><ul id="ef79bf9a-0e03-4c6e-883a-c9c6aaaef10f" class="bulleted-list"><li style="list-style-type:square">scripture of who the Ghost King is</li></ul><ul id="b1d7d7ff-f7b5-4b74-964d-89fcb30742b4" class="bulleted-list"><li style="list-style-type:square">legendary sword in hidden room  </li></ul><ul id="f83f844f-0d9d-4f95-8259-0e38c77a69db" class="bulleted-list"><li style="list-style-type:square">elder lich here if unhindered<ul id="f90a1e89-da31-49d8-b803-d7274e521284" class="bulleted-list"><li style="list-style-type:disc">offers nightmare mode if you give him dungeon core: turns all boss, mobs intro zombies and locks the dungeon (if time permits) or reanimate all undead. Turns all negative energy to his power (you must destroy all equipments and items in your inventory and all cached loots in all floors).</li></ul><ul id="a28cb439-29e9-40aa-883f-3512af9c3e24" class="bulleted-list"><li style="list-style-type:disc">offers you choices upon failure to defeat the elder lich: kill all NPCs then join the elder lich, or perma death (turns all NPCs into undead at the end and closes the game).</li></ul></li></ul></li></ul><ul id="e1750d0a-cd47-464c-a0f1-41baa944a2c8" class="bulleted-list"><li style="list-style-type:circle">2: safe place for npc<ul id="4e0e5ec6-7935-4b85-b7c1-3e8eed666ce7" class="bulleted-list"><li style="list-style-type:square">scripture of how there was a certain ancient kingdom,</li></ul><ul id="6e618b99-9873-4b61-8b57-b0a3f7559210" class="bulleted-list"><li style="list-style-type:square">scripture telling that guardian of the kindom lost his sword in the final battle  </li></ul><ul id="73c43fe9-905f-4143-842f-8bc272b81ef7" class="bulleted-list"><li style="list-style-type:square">someone saw a legendary sword</li></ul><ul id="58dbad50-03e1-4ed2-a072-f613f45ac800" class="bulleted-list"><li style="list-style-type:square">there is a hidden room here that connects to floor 5</li></ul><ul id="ec83d330-ff6c-44f9-84cc-1f4e2f228778" class="bulleted-list"><li style="list-style-type:square">some bard entrust you “Assasin’s Pride” if you take revenge on crazy woman </li></ul></li></ul><ul id="37838040-66e2-456b-9b31-c71b65ba015f" class="bulleted-list"><li style="list-style-type:circle">3: boss area<ul id="f5ff5577-f97d-4cf4-8ead-46f5c80402c8" class="bulleted-list"><li style="list-style-type:square">vampire lord is roaming here after killing Green Skinned, relocates to floor to floor every wasted time (actually looking for a running lich on the verge of becoming elder lich)</li></ul><ul id="029897ba-436e-47b4-82c7-cfbe617e5d80" class="bulleted-list"><li style="list-style-type:square">king tells you about the last boss</li></ul><ul id="03200ad9-7722-44e4-bc1e-17bd1f29e025" class="bulleted-list"><li style="list-style-type:square">king let’s you choose 1 from:<ul id="33f036c8-0731-4f9a-8aff-1648b0e9ed38" class="bulleted-list"><li style="list-style-type:disc">his most treasured weapon: cursed divine dagger</li></ul><ul id="47d426fb-7986-4e10-81c7-6e9087989082" class="bulleted-list"><li style="list-style-type:disc">abundant wealth: bag containing millions of gold coins</li></ul><ul id="56574a2c-afcd-4257-b5a3-701abc504572" class="bulleted-list"><li style="list-style-type:disc">knowledge: tells you the whole story about the kingdom and the dungeon</li></ul><ul id="347d1526-268a-47ad-99bc-8de6fae78509" class="bulleted-list"><li style="list-style-type:disc">I ask for none, this guy will relocate and offer the same thing, if you refuse, he will relocate every time and tells you bits of everything of story</li></ul></li></ul><ul id="2fde40e8-95d6-444a-9a8a-3fc5c5a5b8bc" class="bulleted-list"><li style="list-style-type:square">king offered to upgrade dark magic to necromancy </li></ul></li></ul></li></ul><ul id="981c5754-91e4-453b-87c5-dd15fc3e4506" class="bulleted-list"><li style="list-style-type:disc">4-6: Green Lair:<ul id="e6044dd2-a144-4aa6-b75e-95b2c8397cd1" class="bulleted-list"><li style="list-style-type:circle">4: long and large floor basement<ul id="17639385-de5f-411d-8ebd-1f8137dfac61" class="bulleted-list"><li style="list-style-type:square">there are 5 hidden chain seals here that you can release to empower the last boss</li></ul><ul id="6515bb78-1751-4029-93cd-450cf8a542a4" class="bulleted-list"><li style="list-style-type:square">scripture recounting the glory of the kingdom</li></ul><ul id="eb768ce7-1948-4be3-9b4b-5c1192ff5b8d" class="bulleted-list"><li style="list-style-type:square">scripture of what a vampire is</li></ul><ul id="833aa6d0-3ba9-47bd-92be-475c9ffe44e0" class="bulleted-list"><li style="list-style-type:square">scripture of undead family</li></ul></li></ul><ul id="735bd8e4-22ac-4e9a-a5c2-d3622eb75105" class="bulleted-list"><li style="list-style-type:circle">5: safe area for npc<ul id="89b3a14b-818b-4fec-9959-679460c44536" class="bulleted-list"><li style="list-style-type:square">crazy woman is rampaging here giving ominous quests</li></ul><ul id="17eccec8-7382-4b63-af9f-48bb5fe7eea1" class="bulleted-list"><li style="list-style-type:square">boy tells about a lost certain strong adventurer who ain’t back after re-challenging 6th floor</li></ul><ul id="58d66f95-3008-44d2-8007-421e0d1a5a64" class="bulleted-list"><li style="list-style-type:square">priest that teaches you holy magic if you rescue the adventurer</li></ul></li></ul><ul id="dbda26ff-5076-4734-9e9f-5e4c857b9cb3" class="bulleted-list"><li style="list-style-type:circle">6: boss area<ul id="8155e25e-cdf9-4947-a35b-d50d1dd5a48c" class="bulleted-list"><li style="list-style-type:square">scipture of a certain shaman orc about his tribe’s woe</li></ul><ul id="48544e55-9575-4c2f-95f2-2e19fc3a1991" class="bulleted-list"><li style="list-style-type:square">certain strong adventurer is stuck in a trap in here in hidden area after the boss area</li></ul></li></ul></li></ul><ul id="f153c016-8ecb-4ac9-9727-b280e251ada8" class="bulleted-list"><li style="list-style-type:disc">7-9: Vampire’s Den:<ul id="955ae84a-db7f-45a5-bd13-f98e71fea58b" class="bulleted-list"><li style="list-style-type:circle">7: strong vampires<ul id="bc2f106a-9ecf-412d-8af0-cc76dc6bb85a" class="bulleted-list"><li style="list-style-type:square">key to unlock legendary sword in floor 1</li></ul></li></ul><ul id="fa78653e-4dc0-4fc4-b279-0584fbe7bee4" class="bulleted-list"><li style="list-style-type:circle">8: deep peak<ul id="8e129dfe-3b74-4842-aa99-6ba6a452f845" class="bulleted-list"><li style="list-style-type:square">3 active vampire lord here</li></ul></li></ul><ul id="2bfcce36-d552-4982-ae84-e7f3f7f575c7" class="bulleted-list"><li style="list-style-type:circle">9: next to last boss and no-one-reached-here-safe area<ul id="cdac6594-3cc4-4ec8-b605-91a45194453f" class="bulleted-list"><li style="list-style-type:square">scripture of what a lich is</li></ul><ul id="cba644a1-805c-4eeb-8346-d963e19f8c88" class="bulleted-list"><li style="list-style-type:square">sleeping vampire lord in here</li></ul><ul id="15421307-ca12-46cf-9518-3fd1c959e69f" class="bulleted-list"><li style="list-style-type:square">max-stat ruse dark weapon in here (Vampire Fang, which is absorbed by last boss)</li></ul><ul id="14af93ac-8d6d-45d5-9866-2fe3ed6c068c" class="bulleted-list"><li style="list-style-type:square">death knight here after last boss: if you fail to prevent the awakening of lich </li></ul></li></ul><ul id="2ae5352a-f779-4b51-8267-f2603e9f7bec" class="bulleted-list"><li style="list-style-type:circle">10: last boss and dungeon core <ul id="1cc4dc74-945d-4361-b363-b094cbbc6d59" class="bulleted-list"><li style="list-style-type:square">desolate until the boss room</li></ul><ul id="ba907254-4f44-47d0-980d-7c9f986210c9" class="bulleted-list"><li style="list-style-type:square">scripture about the kingdom’s demise</li></ul><ul id="4cd51db3-c13d-4162-83ff-d206b6a08171" class="bulleted-list"><li style="list-style-type:square">scripture about the existence that caused the kingdom’s end</li></ul><ul id="9b02301b-916a-4d99-a1d7-9f3659130868" class="bulleted-list"><li style="list-style-type:square">scripture about how the last boss was sealed</li></ul></li></ul></li></ul><h2 id="e683bcd5-a7c4-471b-8537-04f0dbcc22d0" class="">Mechanics:</h2><ul id="8261463f-76e8-45e4-8878-6bda3dacb1c2" class="bulleted-list"><li style="list-style-type:disc">Attack<ul id="5eba035e-96da-489c-af83-ab033f0fcbe1" class="bulleted-list"><li style="list-style-type:circle">Play sword slash, monster agony, impact, (crit if any), (magic if any)</li></ul><ul id="f438010e-34db-4c85-9290-cf391d9bd44b" class="bulleted-list"><li style="list-style-type:circle">Animate monster agony</li></ul><ul id="7fdc2134-6a9b-49e3-bfda-863863b64521" class="bulleted-list"><li style="list-style-type:circle">Animate player slash</li></ul></li></ul></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

@@ -1,0 +1,10 @@
+﻿Name,Status
+"Bones, dead bodies",Decoration
+Door and stairs,Interactable
+Chestbox,Interactable
+"Light sources: torch, lamps",Decoration
+"Paintings, scriptures",Decoration
+Totems,Interactable
+Statues,Decoration
+Rocks,Decoration
+"Plants, flower",Decoration
