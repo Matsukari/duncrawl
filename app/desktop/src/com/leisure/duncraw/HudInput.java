@@ -16,11 +16,11 @@ public class HudInput extends InputAdapter {
   }
   @Override
   public boolean keyDown(int keycode) {
-    if (hudManager.inventoryHud.isVisible()) {
+    if (hudManager.windowUi.isVisible() && hudManager.windowUi.currentIndex == 0) {
       if (keycode == controls.cancel || keycode == controls.inventory) return false;
-      else if (keycode == controls.menuLeft) hudManager.inventoryHud.selectLeft();
-      else if (keycode == controls.menuRight) hudManager.inventoryHud.selectRight();
-      else if (keycode == controls.action) hudManager.inventoryHud.useSelected();
+      else if (keycode == controls.menuLeft) hudManager.windowUi.statusWindow.inventoryHud.selectLeft();
+      else if (keycode == controls.menuRight) hudManager.windowUi.statusWindow.inventoryHud.selectRight();
+      else if (keycode == controls.action) hudManager.windowUi.statusWindow.inventoryHud.useSelected();
       return true;
     }
     else if (hudManager.dialogueHud.isVisible()) {

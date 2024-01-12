@@ -1,5 +1,6 @@
 package com.leisure.duncraw.art.chara;
 
+import com.leisure.duncraw.art.item.Armor;
 import com.leisure.duncraw.art.item.Weapon;
 import com.leisure.duncraw.data.CharaData;
 import com.leisure.duncraw.data.Inventory;
@@ -8,6 +9,8 @@ import com.leisure.duncraw.data.SaveData;
 public class Player extends Chara {
   public Inventory inventory = new Inventory();
   public Weapon weapon = null;
+  public Armor armor = null;
+   
   public Player(CharaData data, SaveData saveData) {
     super(data);
     status = saveData.player.status;

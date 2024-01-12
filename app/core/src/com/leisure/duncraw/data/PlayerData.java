@@ -6,6 +6,7 @@ public class PlayerData extends Dat {
   public GeneralRank rank;
   public Inventory inventory;
   public Status status;
+  
   public PlayerData(Status status, Inventory inventory) {
     this.status = status;
     this.inventory = inventory;

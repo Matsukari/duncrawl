@@ -25,6 +25,7 @@ public class WindowUi extends Hud {
   public Color containerOutlineBgColor = Color.valueOf("#bababa");
   protected Stack tabPanel;
   public Tab currentTab;
+  public int currentIndex;
   public WindowUi(StatusFull statusHud, InventoryHud inventoryHud, MapFull mapHud, QuestFull quest) {
     tabs = new ArrayList<>();
     statusWindow = new StatusWindow(statusHud, inventoryHud);
@@ -85,11 +86,15 @@ public class WindowUi extends Hud {
     for (Tab tab : tabs) tab.content.setVisible(false);
     currentTab = tabs.get(index);
     currentTab.content.setVisible(true);
+    currentIndex = index;
   }
   public void switchTab(StringBuilder title) {
-    for (Tab tab : tabs) {
-      tab.content.setVisible(false);
-      if (tab.title.getText().equalsIgnoreCase(title)) currentTab = tab;
+    for (int i = 0; i < tabs.size(); i++) {
+      tabs.get(i).content.setVisible(false);
+      if (tabs.get(i).title.getText().equalsIgnoreCase(title)) {
+        currentTab = tabs.get(i);
+        currentIndex = i;
+      }
     }
     currentTab.content.setVisible(true);
   }

@@ -48,7 +48,7 @@ public class GameScreenInput extends GameScreen implements InputProcessor {
     // Logger.log("GameScreenInput", "Keyup");
     if (pressedKey == desktopControls.cancel) hudManager.closeModal();
     else if (pressedKey == desktopControls.menuWindow) hudManager.toogleModal(hudManager.windowUi);
-    else if (pressedKey == desktopControls.inventory) hudManager.toogleModal(hudManager.inventoryHud);
+    // else if (pressedKey == desktopControls.inventory) hudManager.toogleModal(hudManager.inventoryHud);
     else if (pressedKey == desktopControls.steerMode) steerMode = !steerMode; 
     else if (pressedKey == desktopControls.action) player.setState(new InteractState(), true);
     else if (pressedKey == desktopControls.skill1) player.setState(new InfuseDarknessSkill());

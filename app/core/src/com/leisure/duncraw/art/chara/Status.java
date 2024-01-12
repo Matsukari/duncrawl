@@ -33,14 +33,16 @@ public class Status {
   public ActionState action;
   public enum Element { HOLY, DARK, NONE };
 
-  public float hurt(Chara attacker) {
+  public static float hurt(Chara attacker, Chara defender) {
     float extraDmg = 0;
-    if (attacker instanceof Player && ((Player)attacker).weapon != null) extraDmg = ((Player)attacker).weapon.damage;
+    float extraDef = 0;
+    if (defender instanceof Player && ((Player)defender).armor != null) extraDef = ((Player)defender).armor.defense;
+    else if (attacker instanceof Player && ((Player)attacker).weapon != null) extraDmg = ((Player)attacker).weapon.damage;
 
-    float sustain = getDefense() - (attacker.status.getAttack() + extraDmg);
-    if (sustain < 0) setHealth(health + (int)sustain);
+    float sustain = (defender.status.getDefense() + extraDef) - (attacker.status.getAttack() + extraDmg);
+    if (sustain < 0) defender.status.setHealth(defender.status.health + (int)sustain);
     attacker.status.nextBonusAttack = 0;
-    nextBonusDefense = 0;
+    defender.status.nextBonusDefense = 0;
     return sustain;
   }
 

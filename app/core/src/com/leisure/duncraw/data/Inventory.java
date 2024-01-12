@@ -1,9 +1,13 @@
 package com.leisure.duncraw.data;
 
+import java.nio.InvalidMarkException;
 import java.util.ArrayList;
 
+import com.badlogic.gdx.math.Interpolation.Exp;
 import com.leisure.duncraw.art.chara.Player;
+import com.leisure.duncraw.art.item.Armor;
 import com.leisure.duncraw.art.item.Item;
+import com.leisure.duncraw.art.item.Weapon;
 import com.leisure.duncraw.logging.Logger;
 
 public class Inventory extends Dat {
@@ -11,6 +15,8 @@ public class Inventory extends Dat {
   public transient Player owner;
   public ArrayList<InventoryItemData> itemsData;
   public int capacity;
+  public InventoryItemData armor; // include this i serialization
+  public InventoryItemData weapon;
 
   public Inventory() {}
 
@@ -42,6 +48,14 @@ public class Inventory extends Dat {
     return itemData;
   }
   public Item use(Item item) {
+    if (item instanceof Armor) {
+      armor = new InventoryItemData(item);
+      owner.armor = (Armor)item;
+    }
+    else if (item instanceof Weapon) {
+      weapon = new InventoryItemData(item);
+      owner.weapon = (Weapon)item;
+    }
     item.use();
     getItemData(item).quantity = item.quantity;
     if (item.quantity <= 0) {
@@ -70,6 +84,10 @@ public class Inventory extends Dat {
         items.add(item);
       } catch (Exception e) { e.printStackTrace(); System.exit(-1); }
     }
+    try {
+      owner.weapon = (Weapon)Class.forName(weapon.classname).getDeclaredConstructor(String.class).newInstance(weapon.datFile);
+      owner.armor = (Armor)Class.forName(armor.classname).getDeclaredConstructor(String.class).newInstance(armor.datFile);
+    } catch (Exception e) { e.printStackTrace(); }
     return this;
   }
   @Override

@@ -29,6 +29,8 @@ public class InventoryHud extends Hud {
   public Color containerBgColor = Color.valueOf("#1a1a1a");
   public Color itemBgColor = Color.valueOf("#101010");
   public BitmapFont quantityLabelFont;
+  public Color quantityLabelColor = Color.valueOf("#b4b4b4");
+  public float quantityLabelScale = 0.9f;
   public int id;
   public int currIndex = 0;
   public Item currItem;
@@ -42,7 +44,7 @@ public class InventoryHud extends Hud {
     this.batch = batch;
     titleLabel = createLabel("Inventory");
     quantityLabelFont = Graphics.getFont(Graphics.fontSources.def);
-    cols = 5;
+    cols = 10;
     itemSize = 32;
     itemPadding = 5;
     itemMargin = new Pointi(15, 25);
@@ -53,10 +55,11 @@ public class InventoryHud extends Hud {
     
     itemLabel = createLabel("");
     itemDescLabel = createLabel("");
+    itemDescLabel.setColor(quantityLabelColor);
     row();
-    add(itemLabel).center().top().padTop(20);
+    add(itemLabel).center().top().spaceTop(50);
     row();
-    add(itemDescLabel).center().top().padTop(30);
+    add(itemDescLabel).center().top().padTop(30).expand();
     id = IdGenerator.gen();
   }
   public void selectLeft() {
@@ -83,24 +86,33 @@ public class InventoryHud extends Hud {
     shapeRenderer.setColor(containerBgColor);
     // shapeRenderer.rect(getGlobalX(), getGlobalY() + getHeight() - (getHeight()*0.45f), getWidth()*0.5f, getHeight()*0.5f);
     // shapeRenderer.rect(getGlobalX()+getWidth()*0.55f, getGlobalY() + getHeight() - (getHeight()*0.45f), getWidth()*0.45f, getHeight()*0.5f);
-    shapeRenderer.rect(getGlobalX(), getGlobalY() + getHeight() - (getHeight()*0.45f), getWidth(), getHeight()*0.5f);
-    shapeRenderer.rect(getGlobalX()+getWidth()*0.55f, getGlobalY() + 20, getWidth(), getHeight()*0.45f);
+    shapeRenderer.rect(
+        getGlobalX(), 
+        getGlobalY() + getHeight() - (getHeight()*0.45f), getWidth(), 
+        ((inventory.capacity/cols-1) * (itemSize + itemMargin.y + itemPadding)));
+    shapeRenderer.rect(
+        getGlobalX(), 
+        getGlobalY() + 20, 
+        getWidth(), 
+        getHeight()*0.45f);
+    // Slots 
     shapeRenderer.setColor(itemBgColor);
     for (int i = 0; i < inventory.capacity; i++) {
-      float x = getGlobalX()+ ((i%cols) * (itemSize + itemPadding + itemMargin.x)) + itemPadding;
-      float y = getGlobalY() + getHeight() - itemSize - itemPadding - ((i/cols) * (itemSize + itemMargin.y)); 
-      y -= 30;
+      float x = getGlobalX() + ((i%cols) * (itemSize + itemPadding + itemMargin.x));
+      float y = getGlobalY() + getHeight() - itemSize - itemPadding - ((i/cols) * (itemSize + itemMargin.y + itemPadding)); 
+      y -= 40;
       x += 13;
       shapeRenderer.circle(x+(itemSize/2), y+(itemSize/2), itemSize/2+itemPadding);
       
     }
     shapeRenderer.end();
+    // Items in slots
     batch.begin();
     for (int i = 0; i < inventory.items.size(); i++) {
       Item item = inventory.items.get(i); 
-      float x = getGlobalX()+ ((i%cols) * (itemSize + itemPadding + itemMargin.x)) * itemPadding;
-      float y = getGlobalY() + getHeight() - itemSize - itemPadding - ((i/cols) * (itemSize + itemMargin.y));
-      y -= 30;
+      float x = getGlobalX() + ((i%cols) * (itemSize + itemPadding + itemMargin.x));
+      float y = getGlobalY() + getHeight() - itemSize - itemPadding - ((i/cols) * (itemSize + itemMargin.y + itemPadding));
+      y -= 40;
       x += 13;
       if (i != currIndex) item.tint = Color.GRAY;
       else item.tint = Color.WHITE;
@@ -108,7 +120,10 @@ public class InventoryHud extends Hud {
       item.renderStore(batch, x, y, itemSize, itemSize);
       batch.setColor(Color.WHITE);
       batch.setColor(1f, 1f, 1f, alpha);
+      quantityLabelFont.getData().setScale(quantityLabelScale);
+      quantityLabelFont.setColor(quantityLabelColor);
       quantityLabelFont.draw(batch, String.format("%d/%d", item.quantity, item.maxQuantity), x, y);
+      quantityLabelFont.getData().setScale(1f);
       batch.setColor(Color.WHITE);
     }
 
@@ -116,7 +131,7 @@ public class InventoryHud extends Hud {
       String desc = currItem.dat.desc;
 
       itemLabel.setText(currItem.dat.name);
-      itemDescLabel.setText(SString.sepLines(currItem.dat.desc, 30));
+      itemDescLabel.setText(SString.sepLines(currItem.dat.desc, 70));
 
     }
     else {
