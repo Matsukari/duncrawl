@@ -36,7 +36,7 @@ public class StatusHud extends Hud {
     shapeRenderer.setColor(healthColor);
     shapeRenderer.rect(getGlobalX(), getGlobalY()+30, player.status.health * attrScale.x, attrScale.y);
     shapeRenderer.setColor(staminaColor);
-    shapeRenderer.rect(getGlobalX(), getGlobalY()+23, player.status.stamina * attrScale.y, attrScale.y);
+    shapeRenderer.rect(getGlobalX(), getGlobalY()+23, player.status.stamina * attrScale.x, attrScale.y);
     shapeRenderer.end();
   }
 

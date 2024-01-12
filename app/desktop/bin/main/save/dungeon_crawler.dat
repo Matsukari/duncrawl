@@ -1,6 +1,7 @@
 {
 "progression": {
 	"level": {
+		"floor": 1,
 		"scene": 6
 	}
 },
@@ -13,9 +14,21 @@
 				"classname": "com.leisure.duncraw.art.item.Weapon",
 				"quantity": 1,
 				"maxQuantity": 16
+			},
+			{
+				"datFile": "dat/item/stam_low.dat",
+				"classname": "com.leisure.duncraw.art.item.items.StaminaPotion",
+				"quantity": 5,
+				"maxQuantity": 16
 			}
 		],
-		"capacity": 10
+		"capacity": 10,
+		"weapon": {
+			"datFile": "dat/equip/green_steel.dat",
+			"classname": "com.leisure.duncraw.art.item.Weapon",
+			"quantity": 1,
+			"maxQuantity": 16
+		}
 	},
 	"status": {
 		"health": 100,
@@ -56,8 +69,8 @@
 		"down": 47,
 		"confirm": 38,
 		"cancel": 111,
-		"menuLeft": 21,
-		"menuRight": 22,
+		"menuLeft": 29,
+		"menuRight": 32,
 		"steerMode": 40,
 		"menuWindow": 62,
 		"inventory": 37,

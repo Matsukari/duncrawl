@@ -3,16 +3,21 @@ package com.leisure.duncraw.hud;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Value;
 import com.leisure.duncraw.data.UiData;
+
+import lib.math.Pointi;
 
 public class ProgressionWindow extends Hud {
   public MapFull map;
   public QuestFull quest;
+
+
   public ProgressionWindow(MapFull mapHud, QuestFull quest) {
     this.map = mapHud;
     this.quest = quest;
-    add(map).center().expand();
-    add(quest).center().top().expand();
+    add(map).center().left().fill().padLeft(20).width(400);
+    add(quest).center().left().top().expand().padRight(20).padTop(20).spaceLeft(50);
     
   }
   @Override

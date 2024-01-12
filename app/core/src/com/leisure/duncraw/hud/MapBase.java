@@ -13,15 +13,25 @@ public class MapBase extends Hud {
   protected final Player player;
   protected final FloorManager floorManager;
   protected final Label floorLabel;
+  public Color floorLabelColor = Color.valueOf("#cccccc");
+  public float floorLabelScale = 1f;
+  public boolean drawPlayer = true;
   public float minimapScale = 0.016f;
+  public Color roomColor = Color.valueOf("#000000");
+  public Color playerColor = Color.valueOf("#204020");
   public MapBase(Player player, FloorManager floorManager) {
     this.floorManager = floorManager;
     this.player = player;
   }
   {
-    lastFloor = null;
     floorLabel = createLabel("Unknown floor");
+  }
+  protected void init() {
+    lastFloor = null;
+    floorLabel.setColor(floorLabelColor);
+    floorLabel.setScale(floorLabelScale);
     setVisible(true);  
+
   }
   @Override
   public void update() {
@@ -34,10 +44,12 @@ public class MapBase extends Hud {
   @Override
   public void drawShapes() {
     shapeRenderer.begin(ShapeType.Filled);
-    shapeRenderer.setColor(Color.GRAY);
+    shapeRenderer.setColor(roomColor);
     drawMap();
-    shapeRenderer.setColor(Color.GREEN);
-    shapeRenderer.circle(getGlobalX() + player.bounds.x*minimapScale, getGlobalY() + player.bounds.y*minimapScale, 2);
+    if (drawPlayer) {
+      shapeRenderer.setColor(playerColor);
+      shapeRenderer.circle(getGlobalX() + player.bounds.x*minimapScale, getGlobalY() + player.bounds.y*minimapScale, 2);
+    }
     shapeRenderer.end();
   }
   protected void drawMap() {
@@ -46,5 +58,14 @@ public class MapBase extends Hud {
         shapeRenderer.rect(getGlobalX() + room.x*minimapScale, getGlobalY() + room.y*minimapScale, room.width*minimapScale, room.height*minimapScale);
       }
     }
+  }
+  
+  @Override
+  public float getGlobalY() {
+    return super.getGlobalY() + getHeight()/3;
+  }
+  @Override
+  public float getGlobalX() {
+    return super.getGlobalX() + getWidth()/5.5f;
   }
 }

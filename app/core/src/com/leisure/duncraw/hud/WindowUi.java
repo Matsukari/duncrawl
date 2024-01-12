@@ -22,7 +22,7 @@ public class WindowUi extends Hud {
   public SettingsWindow settingsWindow;
   public Color containerBgColor = Color.valueOf("#101010");
   public Color panelBgColor = Color.valueOf("#151515");
-  public Color containerOutlineBgColor = Color.valueOf("#bababa");
+  public Color containerOutlineBgColor = Color.valueOf("#555555");
   protected Stack tabPanel;
   public Tab currentTab;
   public int currentIndex;

@@ -71,7 +71,7 @@ public class HudManager {
     root.add(dialogueHud).bottom().expandX().height(100);
     
     stage.addActor(root);
-    root.debugAll();
+    // root.debugAll();
   }
   // Permission to pop modals
   public void toogleModal(Hud modal) { 

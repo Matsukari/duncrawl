@@ -13,7 +13,7 @@ public class StatusWindow extends Hud {
   public StatusWindow(StatusFull statusHud, InventoryHud inventoryHud) {
     this.statusHud = statusHud;
     this.inventoryHud = inventoryHud;
-    add(statusHud).center().left().top().padLeft(20).padTop(10).fill().width(200);
+    add(statusHud).center().left().top().padLeft(20).padTop(40).fill().width(200);
     add(inventoryHud).center().left().top().expand().padRight(20).fill();
     inventoryHud.setVisible(true);
   }
