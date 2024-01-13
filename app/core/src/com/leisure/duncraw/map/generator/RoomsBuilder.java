@@ -60,9 +60,10 @@ public class RoomsBuilder extends Dat {
   public void build(int roomsNum, Vector2 maxSize, Vector2 widthRange, Vector2 heightRange) {
     this.roomsNum = roomsNum;
     mainRooms = genRandomRooms(roomsNum, maxSize, widthRange, heightRange);
-    subRooms = genRandomRooms(roomsNum * 10, maxSize.sub(maxSize.x/3, maxSize.y/3), widthRange, heightRange);
+    subRooms = genRandomRooms(roomsNum * 3, maxSize.sub(maxSize.x/3, maxSize.y/3), widthRange, heightRange);
     rooms.clear();
     rooms.addAll(mainRooms);
+    rooms.addAll(subRooms);
     separateRooms(mainRooms, roomsCenter, maxSize.x);
     separateRooms(subRooms, roomsCenter, maxSize.x);
     nodes = connectRooms(mainRooms);

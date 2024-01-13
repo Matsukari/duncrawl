@@ -14,6 +14,7 @@ import com.leisure.duncraw.art.map.ObjParser;
 import com.leisure.duncraw.art.map.Terrain;
 import com.leisure.duncraw.data.FloorData;
 import com.leisure.duncraw.data.Serializer;
+import com.leisure.duncraw.helper.Pair;
 import com.leisure.duncraw.logging.Logger;
 import com.leisure.duncraw.manager.RenderSortManager;
 import com.leisure.duncraw.map.TerrainSet;
@@ -41,12 +42,14 @@ public class TerrainSetGenerator {
   public TerrainSet prepare() {
     Logger.hide("RoomsBuilder"); 
     Logger.hide("TerrainSet");
+
+    // data.firstGen = true;
     
     roomsBuilder = data.generation.roomsBuilder;
     if (data.firstGen) roomsBuilder.build(data.roomsNum, new Vector2(data.getMaxWidth(), data.getMaxHeight()), data.widthRange, data.heightRange);
     TerrainSet terrainSet = new TerrainSet(
         (int)(roomsBuilder.rect.width/data.tileSize)+2, 
-        (int)(roomsBuilder.rect.height/data.tileSize)+2, 
+        (int)(roomsBuilder.rect.height/data.tileSize)+2+data.normalHeight, 
         data.tileSize, data.tileSize,
         renderSortManager);
     Logger.log("TerrainSetGenerator", String.format("Size of terrain be generated: %d %d", terrainSet.cols, terrainSet.rows));
@@ -93,27 +96,20 @@ public class TerrainSetGenerator {
     }); 
     if (data.firstGen) groundFurnishers.finish(terrainSet, roomsBuilder);
   }
-  public void putTerrain(Terrain terrain, int x, int y, TerrainFurnishers furnishers) {
-    terrainSet.putTerrain(terrain, x, y);
-    if (furnishers != null && data.firstGen) furnishers.furnish(terrainSet, roomsBuilder, terrain, x, y);
-    // Logger.log("TerrainSetGenerator", "Put terrain");
+  private void vertiWallGroup(ArrayList<Pointi> wallBodies, int x, int start, TerrainFurnishers furnishers) {
+    int height = data.normalHeight-1;
+    LayeredTerrain wallGroup = new LayeredTerrain();
+    for (int i = 0; i <= height; i++) wallBodies.add(makeWallA(wallGroup, WallType.BODY, x, start + i, furnishers));
+    wallBodies.add(makeWallA(wallGroup, WallType.DOWN_EDGE, x, start, furnishers));
+
+    // terrainSet.getTerrain(pos.x + col, top).setTravel(true);
+    Terrain topHead = getWall(WallType.TOP_HEAD);
+    putTerrain(topHead, x, start+height, furnishers);
+    wallGroup.add(topHead);
+
+    wallGroup.bounds.setPosition((float)(x) * data.tileSize, (float)(start) * data.tileSize);
+    terrainSet.putObject(wallGroup, x, start, false);
   }
-  public void replaceTerrain(Terrain terrain, int x, int y, TerrainFurnishers furnishers) {
-    terrainSet.replaceTerrain(terrain, x, y);
-    if (furnishers != null && data.firstGen) furnishers.furnish(terrainSet, roomsBuilder, terrain, x, y);
-  }
-  public Pointi makeWall(LayeredTerrain group, int type, int x, int y, TerrainFurnishers furnishers, Color color) {
-    Terrain terrain = walls[type].getVariant();
-    replaceTerrain(terrain, x, y, furnishers);
-    // Terrain obj = walls[type].getVariant();
-    // terrain.tint = color;
-    // terrain.bounds.setPosition(x * data.tileSize, y * data.tileSize);
-    // terrain.bounds.setSize(data.tileSize);
-    // group.add(terrain);
-    return (new Pointi(x, y));
-  }
-  public Pointi makeWallA(LayeredTerrain group, int type, int x, int y, TerrainFurnishers furnishers) { return makeWall(group, type, x, y, furnishers,Color.RED); }
-  public Pointi makeWallB(LayeredTerrain group, int type, int x, int y, TerrainFurnishers furnishers) { return makeWall(group, type, x, y, furnishers,Color.BLUE); }
   public void placeWalls(TerrainFurnishers furnishers) throws Exception {
     // Logger.log("Rooms before", )
     if (data.firstGen) wallFurnishers.start(terrainSet, roomsBuilder);
@@ -125,42 +121,14 @@ public class TerrainSetGenerator {
       // Go explore topmost and bottommost tile in room horizontally
       Pointi pos = roomsBuilder.getRoomRelTilePos(room);
       pos.x += 1;
-      int top = pos.y;
-      int bottom = pos.y + rows;
-      // Go explore horizontally
+      pos.y += 0;
+      int bottom = pos.y;
+      int top = pos.y + rows;
+      // Go explore horizontally, 
       for (int col = 0; col < cols; col++) {
-        // terrain.canTravel = false // bottom;
-        if (terrainSet.getTerrain(pos.x + col, top - 1) == null) { 
-          LayeredTerrain wallGroup = new LayeredTerrain();
-          for (int i = 0; i < data.normalHeight-1; i++) {
-            wallBodies.add(makeWallA(wallGroup, WallType.BODY, pos.x + col, top - i, furnishers));
-          }
-          wallBodies.add(makeWallA(wallGroup, WallType.DOWN_EDGE, pos.x + col, top-data.normalHeight+1, furnishers));
-        
-          Terrain topHead = walls[WallType.TOP_HEAD].getVariant();
-          putTerrain(topHead, pos.x + col, top, furnishers);
-          wallGroup.add(topHead);
-          // terrainSet.getTerrain(pos.x + col, top).setTravel(true);
-          
-          wallGroup.bounds.setPosition((float)(pos.x+col) * data.tileSize, (float)(top-data.normalHeight+1) * data.tileSize);
-          terrainSet.putObject(wallGroup, pos.x + col, top-data.normalHeight-1, false);
-        }
-        if (terrainSet.getTerrain(pos.x + col, bottom + 1) == null) {
-          LayeredTerrain wallGroup = new LayeredTerrain();
-          for (int i = 0; i < data.normalHeight-1; i++) {
-            wallBodies.add(makeWallB(wallGroup, WallType.BODY, pos.x + col, bottom - i, furnishers));
-          }
-          wallBodies.add(makeWallB(wallGroup, WallType.DOWN_EDGE, pos.x + col, bottom-data.normalHeight+1, furnishers));
-
-          Terrain topHead = walls[WallType.TOP_HEAD].getVariant();
-          putTerrain(topHead, pos.x + col, bottom, furnishers);
-          wallGroup.add(topHead);
-          // terrainSet.getTerrain(pos.x + col, bottom).setTravel(true);
-          
-          wallGroup.bounds.setPosition((float)(pos.x+col) * data.tileSize, (float)(bottom-data.normalHeight+1) * data.tileSize);
-          terrainSet.putObject(wallGroup, pos.x+col, bottom-data.normalHeight+1, false);
-        }
-        
+        int x = pos.x + col;
+        if (terrainSet.getTerrain(x, bottom - 1) == null) vertiWallGroup(wallBodies, x, bottom, furnishers);
+        if (terrainSet.getTerrain(x, top + 1) == null) vertiWallGroup(wallBodies, x, top, furnishers); 
       }
       
     }
@@ -176,40 +144,94 @@ public class TerrainSetGenerator {
       Terrain right = terrainSet.getTerrain(x+1, y);
       // Logger.log("TerrainSetGenerator", SString.toString(body.bounds));
       
-      if (left == null || terrainTypeHas("ground", left)) sideWall = walls[WallType.LEFT_HEAD].getVariant();
-      if (right == null || terrainTypeHas("ground", right)) sideWall = walls[WallType.RIGHT_HEAD].getVariant();
+      if (left == null || terrainTypeHas("ground", left)) sideWall = getWall(WallType.LEFT_HEAD);
+      if (right == null || terrainTypeHas("ground", right)) sideWall = getWall(WallType.RIGHT_HEAD);
       if (sideWall != null) {
-        terrainSet.putTerrain(sideWall, x, y);
-        sideHeads.add(new Pointi(x, y));
-        Terrain bottom = null;
-        while (y < terrainSet.rows) {
-          y++;
-          bottom = terrainSet.getTerrain(x, y);
-          left = terrainSet.getTerrain(x-1, y);
-          right = terrainSet.getTerrain(x+1, y);
-          sideWall = null;
-          if (bottom == null) {
-            if (left != null && (terrainTypeHas("left", left) || terrainTypeHas("right", left))) break;
-            if (right != null && (terrainTypeHas("left", right) || terrainTypeHas("right", right))) break;
-            if (left != null && terrainTypeHas("ground", left)) sideWall = walls[WallType.LEFT_HEAD].getVariant();
-            if (right != null && terrainTypeHas("ground", right)) sideWall = walls[WallType.RIGHT_HEAD].getVariant();
+        Pair<Integer, Integer> dig = digDownHasWall(x, y);
+        // if (dig.a) terrainSet.putTerrain(sideWall, x, y);
+        // if (dig.a || !dig.a) {
+          // y -= data.normalHeight;
+          for (int i = 0; i < dig.b; i++) {
+            int offset = 0;
+            if (dig.a == 0) {
+              if (terrainTypeHas("left", sideWall)) sideWall = getWall(WallType.LEFT_HEAD);
+              else sideWall = getWall(WallType.RIGHT_HEAD);
+              // offset = 0;
+            }
+            else if (dig.a == 1) {
+              sideWall = getWall(WallType.LEFT_HEAD); 
+              // offset = 1;
+            }
+            else if (dig.a == -1) { 
+              sideWall = getWall(WallType.LEFT_HEAD); 
+            }
+            else if (dig.a == 2) {
+              sideWall = getWall(WallType.RIGHT_HEAD);
+              // offset = -1;
+            }
+            else if (dig.a == -2) {
+              sideWall = getWall(WallType.RIGHT_HEAD);
+            }
+            // Terrain d = getWall(WallType.LEFT_HEAD);
+            // d.tint = Color.RED;
+            terrainSet.putTerrain(sideWall, x+offset, y-i);
           }
-          else {
-            // Already populated; only take the bottomost unit of a set of wall
-            if (terrainTypeHas("left", bottom) || terrainTypeHas("right", bottom)) break;
-            if (left == null && terrainTypeHas("ground", bottom)) sideWall = walls[WallType.LEFT_HEAD].getVariant();
-            if (right == null && terrainTypeHas("ground", bottom)) sideWall = walls[WallType.RIGHT_HEAD].getVariant();
-          }
-          if (sideWall != null) {
-            terrainSet.putTerrain(sideWall, x, y);
-            sideHeads.add(new Pointi(x, y));
-          }
-        }
+
+        // }
       }
     }
 
   }
+  public void putTerrain(Terrain terrain, int x, int y, TerrainFurnishers furnishers) {
+    terrainSet.putTerrain(terrain, x, y);
+    if (furnishers != null && data.firstGen) furnishers.furnish(terrainSet, roomsBuilder, terrain, x, y);
+    // Logger.log("TerrainSetGenerator", "Put terrain");
+  }
+  public void replaceTerrain(Terrain terrain, int x, int y, TerrainFurnishers furnishers) {
+    terrainSet.replaceTerrain(terrain, x, y);
+    if (furnishers != null && data.firstGen) furnishers.furnish(terrainSet, roomsBuilder, terrain, x, y);
+  }
+  public Pointi makeWall(LayeredTerrain group, int type, int x, int y, TerrainFurnishers furnishers, Color color) {
+    Terrain terrain = walls[type].getVariant();
+    replaceTerrain(terrain, x, y, furnishers);
+    return (new Pointi(x, y));
+  }
+  public Pointi makeWallA(LayeredTerrain group, int type, int x, int y, TerrainFurnishers furnishers) { 
+    return makeWall(group, type, x, y, furnishers,Color.RED); 
+  }
+  public Pointi makeWallB(LayeredTerrain group, int type, int x, int y, TerrainFurnishers furnishers) { 
+    return makeWall(group, type, x, y, furnishers,Color.BLUE); 
+  }
+  private Terrain getWall(int type) {
+    return walls[type].getVariant();
+  }
+  // It SHOULD be guaranteed that digging down below the afore wall will yield a subsequent wall since 2 wallblock exists within, 
+  // and only within a box room (top & bottom). 
+  // -1=left, 0=front, 1=right
+  private Pair<Integer, Integer> digDownHasWall(int x, int y) {
+    Terrain start = terrainSet.getTerrain(x, y);
+    int touchedNull = 1;
+    if (terrainTypeHas("left_wall", start) || terrainTypeHas("right_wall", start)) return new Pair<>(0, 0);
+    for (int i = 0; y >= 0; i++) {
+      Terrain left = terrainSet.getTerrain(x-1, y);
+      Terrain right = terrainSet.getTerrain(x+1, y);
+      Terrain current = terrainSet.getTerrain(x, y);
+      y--;
+      if (current == null && left == null && right == null) return new Pair<>(0, 0);
+      else if (terrainTypeHas("top_wall", current)) return new Pair<>(0, i+1);
+      else if (terrainTypeHas("top_wall", left) && (!terrainTypeHas("ground", right) || terrainTypeHas("ground", current))) return new Pair<>(1*touchedNull, i+1);
+      else if (terrainTypeHas("top_wall", right) && (!terrainTypeHas("ground", left) || terrainTypeHas("ground", current))) return new Pair<>(2*touchedNull, i+1);
+      else if (current == null) {
+        touchedNull = -1;
+        continue;
+      }
+      else if ((current != null && left != null && right != null) && !terrainTypeHas("wall", current)) return new Pair<>(0, 0);
+    }
+    return new Pair<>(0, 0);
+
+  }
   private boolean terrainTypeHas(String type, Terrain terrain) {
+    if (terrain == null) return false;
     if (terrain instanceof LayeredTerrain) return ((LayeredTerrain)terrain).containsWType(type);
     return terrain.type.contains(type);
   }
