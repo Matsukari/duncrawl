@@ -103,7 +103,7 @@ public class GameScreen extends Screen {
     debugManager.debugPlayer(player);
     debugManager.editFloorGen(floorManager);
     debugManager.debugTool(new SpriteBatchDebug(floorManager.batch));
-    debugManager.debugTool(new LightEnvEditor(floorManager.lighting));
+    // debugManager.debugTool(new LightEnvEditor(floorManager.lighting));
    
     testPlaceScene();
   }

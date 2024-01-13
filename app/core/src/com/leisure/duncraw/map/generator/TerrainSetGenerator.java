@@ -205,9 +205,7 @@ public class TerrainSetGenerator {
   private Terrain getWall(int type) {
     return walls[type].getVariant();
   }
-  // It SHOULD be guaranteed that digging down below the afore wall will yield a subsequent wall since 2 wallblock exists within, 
-  // and only within a box room (top & bottom). 
-  // -1=left, 0=front, 1=right
+  // It SHOULD be guaranteed that digging down below the afore wall will yield a subsequent wall since 2 wallblock exists within a box room (top & bottom). 
   private Pair<Integer, Integer> digDownHasWall(int x, int y) {
     Terrain start = terrainSet.getTerrain(x, y);
     int touchedNull = 1;

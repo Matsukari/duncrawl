@@ -67,7 +67,7 @@ public class TmxLoader {
           else {
             String terrainType = cell.getTile().getProperties().get("terrain", String.class);
             Terrain terrain = new Terrain(new LinearAnimation<TextureRegion>(cell.getTile().getTextureRegion()));
-            if (terrainType != null && terrainType.contains("wall") && l.getName().contains("nopass")) terrain.canTravel = false;
+            if (terrainType != null && terrainType.contains("wall")) terrain.canTravel = false;
             terrainLayer.putTerrain(terrain, x, y); 
             terrains ++;
           }
