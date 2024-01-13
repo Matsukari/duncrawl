@@ -1,6 +1,7 @@
 package com.leisure.duncraw.manager;
 
 import java.util.ArrayList;
+import java.util.zip.DeflaterOutputStream;
 
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -16,10 +17,14 @@ public class RenderSortManager {
   public void renderAll(Camera camera) {
     batch.setProjectionMatrix(camera.combined);
     batch.begin();
-    entities.sort((a, b)-> 
-          (a.getWorldY() > b.getWorldY() && !(b instanceof Decoration)) ? -1 
-        : (a.getWorldY() < b.getWorldY() || (b instanceof Decoration)) ? 1 
-        : 0 );
+    entities.sort((a, b)-> {
+      if (a instanceof Decoration) return -1;
+      else if (b instanceof Decoration) return 1;
+      if (a.getWorldY() > b.getWorldY()) return -1;
+      else if (a.getWorldY() < b.getWorldY()) return 1;
+      return 0;
+    
+    }); 
     // entities.sort((a, b)-> 
     //       (a.getWorldY() > b.getWorldY() ) ? -1 
     //     : (b.getWorldY() > a.getWorldY() ) ? 1

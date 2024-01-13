@@ -12,6 +12,7 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.leisure.duncraw.art.AnimatedArt;
 import com.leisure.duncraw.art.gfx.GfxAnimation;
 import com.leisure.duncraw.art.gfx.GfxInterpolation;
+import com.leisure.duncraw.data.AssetSource;
 import com.leisure.duncraw.data.GeneralAnimation;
 import com.leisure.duncraw.screen.Screen;
 import com.leisure.duncraw.screen.SplashScreen;
@@ -41,7 +42,8 @@ public class SplashScreenInput extends SplashScreen implements InputProcessor {
   }
   @Override
   public Screen next() {
-    return new MenuScreenInput();
+    // return new MenuScreenInput();
+    return new GameScreenInput(AssetSource.getSaveData());
   }
   @Override
   public boolean keyDown(int keycode) {

@@ -24,11 +24,14 @@ public class DashBehaviour extends Observer {
   @Override
   public void invoke(State state) {
     if (state instanceof DashState) {
+      Logger.log("DashBehaviour", String.format("Dash: %d %d", chara.movement.lastVelX, chara.movement.lastVelY));
       animate("teleport_from");
       int step = 2;
       if (chara.movement.isMoving()) step = 3;
-      Logger.log("DashBehaviour", String.format("Dash: %d %d", chara.movement.lastVelX, chara.movement.lastVelY));
-      chara.setState(new MoveState(chara.mapAgent.x + chara.movement.lastVelX * step, chara.mapAgent.y + chara.movement.lastVelY * step, false)); 
+      step = tryTakeStep(step);
+      int dstX = chara.mapAgent.x + chara.movement.lastVelX * step;
+      int dstY = chara.mapAgent.y + chara.movement.lastVelY * step; 
+      chara.setState(new MoveState(dstX, dstY, false)); 
       // chara.setState(new MoveState(chara.movement.lastVelX * step, chara.movement.lastVelY * step));
       // chara.movement.stepDuration = 20f;
       chara.anims.set("idle", chara.movement.lastVelX, chara.movement.lastVelY);
@@ -39,6 +42,14 @@ public class DashBehaviour extends Observer {
       delay.start();
       chara.lockState = true;
     }
+  }
+  private int tryTakeStep(int steps) {
+    int step = 0;
+    for (int i = 1; i <= steps; i++) {
+      if (chara.mapAgent.map.canTravel(chara.mapAgent.x + chara.movement.lastVelX * i, chara.mapAgent.y + chara.movement.lastVelY * i)) step = steps;
+      else return i-1;
+    }
+    return step;
   }
   @Override
   public void update() {

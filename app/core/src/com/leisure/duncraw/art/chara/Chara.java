@@ -17,8 +17,6 @@ import com.leisure.duncraw.data.DirAnimData;
 import com.leisure.duncraw.logging.Logger;
 import com.leisure.duncraw.manager.CharaManager;
 
-import lib.math.Pointi;
-
 public class Chara extends Art {
   private CharaManager manager;
   public Status status;
