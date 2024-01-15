@@ -56,6 +56,7 @@ public class GameScreen extends Screen {
     public final HudManager hudManager;
     public final EffectManager effectManager;
     public final RenderSortManager renderSortManager;
+    // public boolean gameUpdate
     public Context(
         StoryManager storyManager,
         HudManager hudManager,

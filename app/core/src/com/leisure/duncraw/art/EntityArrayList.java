@@ -10,12 +10,16 @@ public class EntityArrayList <T extends Art> extends EntityGroup<T> {
   public EntityArrayList(RenderSortManager manager) { super(manager); }
   @Override
   public void add(T e) {
-    data.add(e);
+    synchronized (data) {
+      data.add(e);
+    }
     super.add(e);
   }
   @Override
   public void remove(Object o) {
-    data.remove(o);
+    synchronized (data) {
+      data.remove(o);
+    }
     super.remove(o);
   }  
   @Override

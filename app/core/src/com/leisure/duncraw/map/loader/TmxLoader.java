@@ -4,11 +4,13 @@ import java.util.ArrayList;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapLayer;
+import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTile;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer.Cell;
+import com.badlogic.gdx.utils.Array;
 import com.leisure.duncraw.art.chara.Chara;
 import com.leisure.duncraw.art.chara.CharaParser;
 import com.leisure.duncraw.art.item.ItemParser;
@@ -42,7 +44,15 @@ public class TmxLoader {
     // TerrainSet foreground = new TerrainSet(defLayer.getWidth(), defLayer.getHeight(), width, height, renderSortManager);
     int terrains = 0;
     int objs = 0;
+    int rooms = 0;
     for (MapLayer l : tiled.getLayers()) {
+      Array<RectangleMapObject> rects = l.getObjects().getByType(RectangleMapObject.class);
+      if (rects.size > 0) {
+        for (RectangleMapObject r : rects) {
+          floor.generator.roomsBuilder.rooms.add(r.getRectangle());
+          rooms ++;
+        }
+      }
       if (!(l instanceof TiledMapTileLayer)) continue; 
       TiledMapTileLayer layer = (TiledMapTileLayer)l;
       for (int y = 0; y < layer.getHeight(); y++) {
@@ -78,6 +88,7 @@ public class TmxLoader {
     Logger.log("TmxLoader", "Loaded " + Integer.toString(terrains) + " terrains");
     Logger.log("TmxLoader", "Loaded " + Integer.toString(charas.size()) + " charas");
     Logger.log("TmxLoader", "Loaded " + Integer.toString(objs) + " objs");
+    Logger.log("TmxLoader", "Loaded " + Integer.toString(rooms) + " rooms");
     // Logger.log("TmxLoader", ar);
     return terrainSet;
   }

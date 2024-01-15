@@ -55,7 +55,7 @@ public class CharaManager {
     chara.bounds.setSize(tilesize * chara.dat.size.x, tilesize * chara.dat.size.y);
     chara.mapAgent = new TilemapChara(chara, floorManager);
     chara.setManager(this);
-    floorManager.getFloor().putChara(chara.mapAgent); 
+    floorManager.getFloor().putChara(chara.mapAgent);
     charas.add(chara);
     for (Observer observer : observers) chara.observers.add(observer.copy());
     return chara;  

@@ -13,16 +13,16 @@ import lib.animation.LinearAnimation;
 
 public class GeneralAnimation {
   public static LinearAnimation<TextureRegion> line(String source, PlayMode mode, int size) {
-    Texture texture = Graphics.assets.get(source, Texture.class, false);
-    if (texture == null) {
-      Logger.log("GeneralAnimation", "Loading animation for: " + source);
-      Graphics.assets.load(source, Texture.class);
-      Graphics.assets.finishLoadingAsset(source);
-    }
+    Texture texture = Graphics.getSafeTextureRegion(source).getTexture();
     Array<TextureRegion> frames = new Array<TextureRegion>(TextureRegion.split(Graphics.assets.get(source), size, size)[0]);
     // Logger.log("GeneralAnimation", "Got " + Integer.toString(frames.size));
     return new LinearAnimation<TextureRegion>(0.1f, frames, mode);
   } 
-  public static LinearAnimation<TextureRegion> line(String source, PlayMode mode) { return line(source, mode, 16); }
+  public static LinearAnimation<TextureRegion> line(String source, PlayMode mode) { 
+    Texture texture = Graphics.getSafeTextureRegion(source).getTexture();
+    Array<TextureRegion> frames = new Array<TextureRegion>(TextureRegion.split(Graphics.assets.get(source), texture.getHeight(), texture.getHeight())[0]);
+    // Logger.log("GeneralAnimation", "Got " + Integer.toString(frames.size));
+    return new LinearAnimation<TextureRegion>(0.1f, frames, mode);
+  }
   public static LinearAnimation<TextureRegion> line(String source) { return line(source, PlayMode.LOOP); }
 }

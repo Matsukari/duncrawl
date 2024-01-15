@@ -3,6 +3,7 @@ package com.leisure.duncraw.art.chara.observers;
 import com.badlogic.gdx.graphics.g2d.Animation.PlayMode;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable;
 import com.leisure.duncraw.art.InterpolationEffect;
 import com.leisure.duncraw.art.chara.Chara;
 import com.leisure.duncraw.art.chara.DirAnimation;
@@ -27,6 +28,8 @@ public class AnimationBehaviour extends Observer {
   private final EffectManager effectManager;
   private GfxAnimation attackEffect;
   private DirAnimation attackEffAnim;
+  private boolean inIdle = false;
+  private int inIdleSkip = 0;
   public AnimationBehaviour(EffectManager effectManager) { this.effectManager = effectManager; }
   @Override
   public void init(Chara c) {
@@ -37,7 +40,10 @@ public class AnimationBehaviour extends Observer {
     // Logger.log("AnimationBehaviour", "Invoke");
     if (state instanceof MoveState && ((MoveState)state).relative) chara.anims.set("move", chara.movement.velX, chara.movement.velY);
     // else if (state instanceof DashState) chara.anims.set("move", chara.movement.velX, chara.movement.velY);
-    else if (state instanceof IdleState) chara.anims.set("idle", chara.movement.lastVelX, chara.movement.lastVelY);
+    else if (state instanceof IdleState) {
+      inIdle = true;
+      chara.anims.set("idle", chara.movement.lastVelX, chara.movement.lastVelY);
+    }
     else if (state instanceof DeathState) {
       effectManager.start(new GfxInterpolation(chara, Interpolation.fade, 1));
     }
@@ -72,7 +78,18 @@ public class AnimationBehaviour extends Observer {
           chara.bounds.width, chara.bounds.height);
       effectManager.start(attackEffect);
     }
-  } 
+  }
+  @Override
+  public void update() {
+    if (inIdle) {
+      if (inIdleSkip >= 1) {
+        inIdle = false;
+        inIdleSkip = 0;
+      }
+      inIdleSkip++;
+      
+    }
+  }
   @Override
   public Observer copy() {
     return new AnimationBehaviour(effectManager);

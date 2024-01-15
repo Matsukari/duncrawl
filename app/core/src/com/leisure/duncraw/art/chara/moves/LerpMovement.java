@@ -49,6 +49,7 @@ public class LerpMovement extends Movement {
       chara.mapAgent.moveBy(lastVelX, lastVelY);
       reset();
       if (length <= 1) {
+        // Logger.log("LerpMovement", "Stopped moving");
         stop();
         return true;
       } else {

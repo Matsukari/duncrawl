@@ -10,7 +10,9 @@ public class LinearAnimation<T> {
   public float stateTime = 0f;
   
   public LinearAnimation<T> clone() {
-    return new LinearAnimation<T>(this);
+    LinearAnimation<T> t = new LinearAnimation<T>(this);
+    t.stateTime = stateTime;
+    return this;
   }
   public LinearAnimation(float frameDur, Array<? extends T> vals, PlayMode mode) {
     data = new Animation<T>(frameDur, vals, mode);

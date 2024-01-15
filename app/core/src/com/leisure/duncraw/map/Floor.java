@@ -105,7 +105,12 @@ public class Floor {
   }
   public TilemapChara getChara(int x, int y) {
     for (TilemapChara chara : chars) {
-      if (chara.onBlock(x, y) && !chara.chara.status.dead) return chara;
+      for (int col = 0; col < chara.chara.dat.size.x; col++) {
+        for (int row = 0; row < chara.chara.dat.size.y; row++) {
+          if (chara.onBlock(x-col, y-row) && !chara.chara.status.dead) return chara;
+
+        }
+      }
     }
     return null;
   }
@@ -127,7 +132,7 @@ public class Floor {
   public Pointi getTileInRandomRoom() {
     Pointi tile = new Pointi(0, 0);
     if (generator == null) return tile;
-    Rectangle room = generator.roomsBuilder.rooms.get(MathUtils.random(generator.roomsBuilder.mainRooms.size()-1));
+    Rectangle room = generator.roomsBuilder.rooms.get(MathUtils.random(generator.roomsBuilder.rooms.size()-1));
     tile.x = (int)(MathUtils.random(room.x, room.x + room.width) - generator.roomsBuilder.min.x) / background.terrainWidth;
     tile.y = (int)(MathUtils.random(room.y, room.y + room.height) - generator.roomsBuilder.min.y) / background.terrainHeight;
     if (!background.isWithin((int)tile.x, (int)tile.y)) getTileInRandomRoom();

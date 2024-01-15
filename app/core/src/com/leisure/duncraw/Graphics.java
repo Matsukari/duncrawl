@@ -11,6 +11,7 @@ import com.leisure.duncraw.data.AssetSource;
 import com.leisure.duncraw.data.FontsData;
 import com.leisure.duncraw.data.ObjsData;
 import com.leisure.duncraw.data.UiData;
+import com.leisure.duncraw.logging.Logger;
 
 import lib.animation.LinearAnimation;
 
@@ -20,9 +21,10 @@ public class Graphics {
   public static ObjsData objsSources;
   public static BitmapFont defFont;
   public static HashMap<String, LinearAnimation<TextureRegion>> anims = new HashMap<>();
-  private static <T> String getSafe(String file, Class<T> clazz) {
+  public static <T> String getSafe(String file, Class<T> clazz) {
     T res = Graphics.assets.get(file, clazz, false);
     if (res == null) {
+      Logger.log("Graphics", String.format("Loading <%s> asset: %s", clazz.getSimpleName(), file));
       Graphics.assets.load(file, clazz);
       Graphics.assets.finishLoadingAsset(file);
     }

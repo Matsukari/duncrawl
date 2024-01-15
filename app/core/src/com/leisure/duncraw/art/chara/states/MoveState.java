@@ -4,6 +4,8 @@ import com.leisure.duncraw.art.chara.Chara;
 import com.leisure.duncraw.art.chara.State;
 import com.leisure.duncraw.logging.Logger;
 
+import lib.math.Pointi;
+
 public class MoveState extends State {
   public int x;
   public int y;
@@ -13,6 +15,10 @@ public class MoveState extends State {
     this.x = x;
     this.y = y;
     this.relative = relative;
+  }
+  public MoveState(Pointi dst) {
+    this.x = dst.x;
+    this.y = dst.y;
   }
   public MoveState(int x, int y) {
     this.x = x;
@@ -28,7 +34,8 @@ public class MoveState extends State {
   @Override
   public void init(Chara s) {
     super.init(s);
-    chara.movement.stepDuration = 4f;
+    // Logger.log("MoveState", "Move");
+    // chara.movement.stepDuration = 5f;
     if (relative) {
       if (steerMode || !chara.movement.moveBy(x, y)) {
         chara.movement.lastVelX = x;
@@ -45,6 +52,9 @@ public class MoveState extends State {
   }
 
   @Override
-  public void update(float dt) {}
+  public void update(float dt) {
+    // chara.anims.current.setAnimDur(0.04f);
+
+  }
   
 }

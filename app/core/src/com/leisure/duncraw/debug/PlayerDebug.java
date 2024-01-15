@@ -21,7 +21,7 @@ public class PlayerDebug extends CharaDebug {
   public void tool() {
     super.tool();
     ImGui.labelText("state", player.state.getClass().getSimpleName());
-    ImGui.labelText("prev state", player.prevState.getClass().getSimpleName());
+    if (player.prevState != null) ImGui.labelText("prev state", player.prevState.getClass().getSimpleName());
     ImGui.sliderFloat4("Light color", modulate, 0, 1);
     ImGui.sliderFloat("Light Size", lightSize, 100f, 800f);
     player.observers.get(IlluminateBehaviour.class).light.tint.set(modulate[0], modulate[1], modulate[2], modulate[3]);

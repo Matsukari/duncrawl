@@ -9,7 +9,28 @@
 		"side": "images/characters/ghost_king/ghost_king_idle.png",
 		"back": "images/characters/ghost_king/ghost_king_idle.png",
 		"front": "images/characters/ghost_king/ghost_king_idle.png"
+	},
+	"sentience": {
+		"side": "images/characters/ghost_king/ghost_king_sentience.png",
+		"back": "images/characters/ghost_king/ghost_king_sentience.png",
+		"front": "images/characters/ghost_king/ghost_king_sentience.png"
+	},
+	"hurl": {
+		"side": "images/characters/ghost_king/ghost_king_hurl.png",
+		"back": "images/characters/ghost_king/ghost_king_hurl.png",
+		"front": "images/characters/ghost_king/ghost_king_hurl.png"
+	},
+	"ghost_ball": {
+		"side": "images/effects/ghost_ball_idle.png",
+		"back": "images/effects/ghost_ball_idle.png",
+		"front": "images/effects/ghost_ball_idle.png"
+	},
+	"ghost_ball_explode": {
+		"side": "images/effects/ghost_ball_explode.png",
+		"back": "images/effects/ghost_ball_explode.png",
+		"front": "images/effects/ghost_ball_explode.png"
 	}
+
 },
 "size": {
 	"x": 4,

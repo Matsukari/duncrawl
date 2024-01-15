@@ -15,7 +15,7 @@ public class Player extends Chara {
     super(data);
     status = saveData.player.status;
     inventory = saveData.player.inventory.populate(this);
-    movement.stepDuration = 3.5f;
+    movement.stepDuration = 4.5f;
     anims.get("move").setAnimDur(0.08f);
   }
   @Override

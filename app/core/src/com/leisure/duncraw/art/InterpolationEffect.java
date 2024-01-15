@@ -6,7 +6,7 @@ import com.leisure.duncraw.helper.IdGenerator;
 
 import lib.time.Timer;
 
-public abstract class InterpolationEffect implements Effect {
+public class InterpolationEffect implements Effect {
   public Interpolation interpolation;
   public float dur = 0;
   protected Timer timer;
@@ -33,6 +33,7 @@ public abstract class InterpolationEffect implements Effect {
   }
   @Override
   public void update(float dt) {
+    art.tint.a = 1 - interpolation.apply(timer.normalize());
   }
   @Override
   public boolean isFinished() {

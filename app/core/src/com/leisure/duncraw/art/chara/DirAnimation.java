@@ -19,6 +19,13 @@ public class DirAnimation {
     anims[BACK] = GeneralAnimation.line(dat.back, PlayMode.LOOP, size);
     currentDir = anims[DirAnimation.FRONT];
   }
+  public DirAnimation(DirAnimData dat) { 
+    rightHanded = dat.rightHanded;
+    anims[FRONT] = GeneralAnimation.line(dat.front);
+    anims[SIDE] = GeneralAnimation.line(dat.side);
+    anims[BACK] = GeneralAnimation.line(dat.back);
+    currentDir = anims[DirAnimation.FRONT];
+  }
   public void flipSide(boolean v) {
     for (TextureRegion frames : anims[SIDE].data.getKeyFrames()) frames.flip(v, false);
   }

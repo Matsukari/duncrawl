@@ -55,7 +55,7 @@ public class Floor1 extends Floor {
       spawner.spawn(enemy);
       Pointi pos = getTileInRandomRoom();
       enemy.setState(new MoveState(pos.x, pos.y, false));
-      enemy.startAI(new AiWanderer(), player, context);
+      enemy.startAI(new AiWanderer(),this, player, context);
     }
     try { spawnStair(); }
     catch (Exception exception) {

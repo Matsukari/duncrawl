@@ -11,10 +11,14 @@ public class EntityGroup <T extends Art> {
     this.manager = manager;
   }
   public void add(T e) {
-    manager.entities.add(e);
+    synchronized (manager.entities) {
+      manager.entities.add(e);
+    }
   }
   public void remove(Object o) {
-    manager.entities.remove(o);
+    synchronized (manager.entities) {
+      manager.entities.remove(o);
+    }
   }
   public void clear() {
   }

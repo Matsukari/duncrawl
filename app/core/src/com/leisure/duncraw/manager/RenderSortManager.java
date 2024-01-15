@@ -29,8 +29,10 @@ public class RenderSortManager {
           (a.getWorldY() > b.getWorldY() ) ? -1 
         : (b.getWorldY() > a.getWorldY() ) ? 1
         : 0 );
-    for (Art entity : entities) {
-      entity.render(batch);
+    synchronized (entities) {
+      for (Art entity : entities) {
+        entity.render(batch);
+      }
     }
     batch.end();
   }

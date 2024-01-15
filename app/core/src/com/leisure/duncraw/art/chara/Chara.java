@@ -43,7 +43,7 @@ public class Chara extends Art {
     offset.x = data.offsetX;
     offset.y = data.offsetY;
     for (Map.Entry<String, DirAnimData> anim : data.anims.entrySet()) 
-      anims.data.put(anim.getKey(), new DirAnimation(anim.getValue(), Math.max(data.size.x, data.size.y) * 16)); 
+      anims.data.put(anim.getKey(), new DirAnimation(anim.getValue())); 
     anims.set("idle");
     movement = new LerpMovement(this, 2f);
     observers = new Observers(this);
@@ -64,6 +64,7 @@ public class Chara extends Art {
     if (state.next != null) setState(state.next); 
     if (movement.update(dt)) {
       setState(new IdleState());
+      // Logger.log("Chara", "Set to idle");
     }
   }
   // Move the chara, attack, interact, whatever state in parallel with an observer can receive the state
