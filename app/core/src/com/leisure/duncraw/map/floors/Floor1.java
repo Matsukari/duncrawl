@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.leisure.duncraw.Graphics;
 import com.leisure.duncraw.art.chara.Enemy;
 import com.leisure.duncraw.art.chara.Spawner;
+import com.leisure.duncraw.art.chara.ai.AiWanderer;
 import com.leisure.duncraw.art.chara.Player;
 import com.leisure.duncraw.art.chara.states.MoveState;
 import com.leisure.duncraw.art.map.TilemapChara;
@@ -49,13 +50,12 @@ public class Floor1 extends Floor {
   @Override
   public void initialSpawn(Spawner spawner) {
     super.initialSpawn(spawner);
-    if (generator.data.firstGen) {
-      for (int i = 0; i < generator.data.maxMob; i++) {
-        Enemy enemy = new Enemy(Deserializer.safeLoad(CharaData.class, spawner.sources.ghost));
-        spawner.spawn(enemy);
-        Pointi pos = getTileInRandomRoom();
-        enemy.setState(new MoveState(pos.x, pos.y, false));
-      }
+    for (int i = 0; i < generator.data.maxMob; i++) {
+      Enemy enemy = new Enemy(Deserializer.safeLoad(CharaData.class, spawner.sources.ghost));
+      spawner.spawn(enemy);
+      Pointi pos = getTileInRandomRoom();
+      enemy.setState(new MoveState(pos.x, pos.y, false));
+      enemy.startAI(new AiWanderer(), player, context);
     }
     try { spawnStair(); }
     catch (Exception exception) {

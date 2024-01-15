@@ -44,8 +44,9 @@ public class AnimationBehaviour extends Observer {
     else if (state instanceof HurtState && ((HurtState)state).knockback) {
       HurtState s = (HurtState)state;
       Chara attacker = s.attacker;
+      Chara defender = s.chara;
       effectManager.start(new KnockbackEffect(
-            chara, attacker.movement.lastVelX * (chara.bounds.width/2), attacker.movement.lastVelY * (chara.bounds.height/2), Interpolation.fade, 0.16f));
+            defender, attacker.movement.lastVelX * (defender.bounds.width/2), attacker.movement.lastVelY * (defender.bounds.height/2), Interpolation.fade, 0.16f));
     }
     else if (state instanceof AttackState || state instanceof DashAttackState) {
       DirAnimation attackAnim = chara.anims.get("attack");
@@ -66,8 +67,8 @@ public class AnimationBehaviour extends Observer {
       attackEffect.rotation = MathUtils.random(0, 90);
       attackEffect.bounds.setSize(width);
       attackEffect.centerTo(
-          chara.getWorldX() + chara.movement.lastVelX * chara.bounds.width, 
-          chara.getWorldY() + chara.movement.lastVelY * chara.bounds.height, 
+          chara.getWorldX() + chara.movement.lastVelX * (chara.bounds.width*0.7f), 
+          chara.getWorldY() + chara.movement.lastVelY * (chara.bounds.height*0.7f), 
           chara.bounds.width, chara.bounds.height);
       effectManager.start(attackEffect);
     }

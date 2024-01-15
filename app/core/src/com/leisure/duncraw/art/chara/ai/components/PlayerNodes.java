@@ -2,6 +2,7 @@ package com.leisure.duncraw.art.chara.ai.components;
 
 import com.badlogic.gdx.utils.Queue;
 import com.leisure.duncraw.art.chara.ai.Pathfinder;
+import com.leisure.duncraw.art.chara.states.HurtState;
 import com.leisure.duncraw.art.chara.states.MoveState;
 import com.leisure.duncraw.logging.Logger;
 
@@ -40,7 +41,8 @@ public class PlayerNodes {
     @Override
     public Status tick(ExecutionContext context) {
       if (timer.sinceLastPeek() >= 500) {
-        player.status.setHealth(player.status.health - 20);
+        player.setState(new HurtState(chara));
+        // player.status.setHealth(player.status.health - 20);
         return Status.Success;
       }
       return Status.Running;
