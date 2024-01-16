@@ -16,6 +16,7 @@ public class InteractState extends State {
     interactAhead();
   }
   public void interactAhead() { 
+    // if (chara.prevState instanceof MoveState) return;
     int frontX = chara.mapAgent.x + chara.movement.lastVelX, frontY = chara.mapAgent.y + chara.movement.lastVelY;
     Logger.log("Chara", String.format("Attempting to interact at %d %d", frontX, frontY));
     if (tryInteract(chara.mapAgent.getObjBy(0, 0), true)) { }

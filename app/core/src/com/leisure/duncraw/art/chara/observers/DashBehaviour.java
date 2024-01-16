@@ -34,7 +34,7 @@ public class DashBehaviour extends Observer {
       chara.setState(new MoveState(dstX, dstY, false)); 
       // chara.setState(new MoveState(chara.movement.lastVelX * step, chara.movement.lastVelY * step));
       // chara.movement.stepDuration = 20f;
-      chara.anims.set("idle", chara.movement.lastVelX, chara.movement.lastVelY);
+      chara.anims.set("dash", chara.movement.lastVelX, chara.movement.lastVelY);
       chara.state = state;
       chara.movement.stop();
       chara.movement.reset();

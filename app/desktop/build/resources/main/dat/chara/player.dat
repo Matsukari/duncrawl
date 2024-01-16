@@ -15,6 +15,11 @@
 		"back": "images/characters/player/player_attack_back.png",
 		"front": "images/characters/player/player_attack_front.png"
   },
+  "dash": { 
+		"side": "images/characters/player/player_dash_side.png",
+		"back": "images/characters/player/player_dash_back.png",
+		"front": "images/characters/player/player_dash_front.png"
+  },
   "teleport_from": {
 		"side": "images/effects/teleport_from.png",
 		"back": "images/effects/teleport_from.png",

@@ -4,6 +4,8 @@ import com.leisure.duncraw.art.chara.Observer;
 import com.leisure.duncraw.art.chara.State;
 import com.leisure.duncraw.art.chara.states.AttackState;
 import com.leisure.duncraw.art.chara.states.DashAttackState;
+import com.leisure.duncraw.art.chara.states.IdleState;
+import com.leisure.duncraw.art.chara.states.MoveState;
 
 import lib.time.Timer;
 
@@ -12,9 +14,17 @@ public class AttackBehaviour extends Observer {
   @Override
   public void invoke(State state) {
     if (state instanceof AttackState) {
-      AttackState s = (AttackState)state;
       chara.lockState = true;
       delay.start();
+      if (chara.movement.isMoving()) {
+        chara.movement.paused = true;   
+      }
+    }
+    else if (chara.prevState instanceof DashAttackState) {
+      chara.lockState = true;
+      delay.start();
+    }
+    else if (chara.prevState instanceof AttackState) {
     }
   }
   @Override
@@ -22,6 +32,8 @@ public class AttackBehaviour extends Observer {
     if (delay.isFinished()) {
       delay.stop();
       chara.lockState = false;
+      chara.movement.paused = false;
+      chara.setState(new IdleState());
 
 
     }

@@ -11,6 +11,7 @@ public class LerpMovement extends Movement {
   private final Chara chara;
   private float time = 0f;
   private float stepTaken = 0;
+  public boolean paused= false;
   public float stepDuration = 0;
   public int length = 1;
   public LerpMovement(Chara chara, float stepDuration) {
@@ -40,8 +41,12 @@ public class LerpMovement extends Movement {
     stepTaken = 0;
     time = 0;
   }
+  public void pause() {
+    paused = true;
+  }
   @Override
   public boolean update(float dt) {
+    if (paused) return false;
     float direction = Math.abs(velX) + Math.abs(velY); 
     boolean ahead = stepTaken > direction;
     if (ahead || (time >= stepDuration && ahead)) {
