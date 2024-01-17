@@ -31,7 +31,7 @@
 		}
 	},
 	"status": {
-		"health": 100,
+		"health": 80,
 		"stamina": 100,
 		"maxHealth": 100,
 		"maxStamina": 100,

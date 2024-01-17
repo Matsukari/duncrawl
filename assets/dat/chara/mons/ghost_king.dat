@@ -45,7 +45,7 @@
 	"hpRecovery": 2,
 	"stRecovery": 3,
 	"phyAttack": {
-		"x": 1,
+		"x": 5,
 		"y": 1
 	},
 	"phyDefense": {

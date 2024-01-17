@@ -18,14 +18,12 @@ import com.leisure.duncraw.art.map.ObjParser;
 import com.leisure.duncraw.art.map.Terrain;
 import com.leisure.duncraw.art.map.TilemapChara;
 import com.leisure.duncraw.art.map.objs.Stair;
-import com.leisure.duncraw.data.Deserializer;
 import com.leisure.duncraw.data.FloorData;
 import com.leisure.duncraw.data.Serializer;
 import com.leisure.duncraw.helper.AArray;
 import com.leisure.duncraw.helper.IdGenerator;
 import com.leisure.duncraw.helper.SString;
 import com.leisure.duncraw.logging.Logger;
-import com.leisure.duncraw.manager.EffectManager;
 import com.leisure.duncraw.map.generator.TerrainSetGenerator;
 import com.leisure.duncraw.screen.GameScreen.Context;
 

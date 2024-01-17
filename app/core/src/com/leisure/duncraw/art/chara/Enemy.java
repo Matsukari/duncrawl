@@ -26,7 +26,7 @@ public class Enemy extends Chara {
     if (exec != null) exec.stop();
     exec = new Executor();
     exec.initialize(ai, context);
-    exec.start(300, 0);
+    exec.start(10, 0);
   }
   @Override
   public void onDeath() {

@@ -9,6 +9,7 @@ import lib.animation.LinearAnimation;
 public class GfxAnimation extends Gfx {
   public LinearAnimation<TextureRegion> anim;
   public float rotation = 0;
+  public boolean forceEnd = false;
   public GfxAnimation(LinearAnimation<TextureRegion> anim, boolean loop) {
     this.anim = anim;
     setLoop(loop);
@@ -25,6 +26,7 @@ public class GfxAnimation extends Gfx {
   }
   @Override
   public boolean isFinished() {
+    if (forceEnd) return true;
     if (loop) return false;
     return anim.isFinished();
   }

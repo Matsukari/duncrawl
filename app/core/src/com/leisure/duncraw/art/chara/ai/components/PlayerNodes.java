@@ -57,6 +57,7 @@ public class PlayerNodes {
       // path = new Pathfinder(getFloor(context).terrainSet, new Pointi(chara.mapAgent.x, chara.mapAgent.y), 
       //     new Pointi(player.mapAgent.x, player.mapAgent.y)).getQueuedPath();
       // Pointi next = path.removeFirst();
+      if (chara.movement.isMoving()) return;
       Pointi step = Pathfinder.getImmediateDiagonal(new Pointi(chara.mapAgent.x, chara.mapAgent.y), new Pointi(player.mapAgent.x, player.mapAgent.y));
       chara.setState(new MoveState(-step.x, -step.y));
     }

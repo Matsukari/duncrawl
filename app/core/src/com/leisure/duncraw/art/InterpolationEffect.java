@@ -3,6 +3,7 @@ package com.leisure.duncraw.art;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Interpolation;
 import com.leisure.duncraw.helper.IdGenerator;
+import com.leisure.duncraw.manager.EffectManager;
 
 import lib.time.Timer;
 
@@ -38,5 +39,5 @@ public class InterpolationEffect implements Effect {
   @Override
   public boolean isFinished() {
     return timer.isFinished();
-  } 
+  }
 }
