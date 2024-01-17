@@ -38,7 +38,7 @@ public class Deserializer {
         instance = tClass.getDeclaredConstructor().newInstance(); 
         instance.reset();
         Serializer.save(instance, file); 
-        // return instance;
+        return instance;
       }
       catch (Exception e2) { e2.printStackTrace(); System.exit(-1); }
     }
