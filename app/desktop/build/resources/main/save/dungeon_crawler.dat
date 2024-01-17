@@ -1,7 +1,7 @@
 {
 "progression": {
 	"level": {
-		"floor": 4,
+		"floor": 2,
 		"scene": 6
 	}
 },
@@ -31,7 +31,7 @@
 		}
 	},
 	"status": {
-		"health": 80,
+		"health": 92,
 		"stamina": 100,
 		"maxHealth": 100,
 		"maxStamina": 100,

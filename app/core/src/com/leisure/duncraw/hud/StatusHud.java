@@ -12,7 +12,7 @@ import lib.math.Pointi;
 
 public class StatusHud extends Hud {
   protected final Label rankLabel;
-  protected Player player;
+  public Player player;
   public Pointi attrMargin = new Pointi(10, 20);
   public Vector2 attrScale = new Vector2(1.3f, 5f);
   public float attrSpaceY = 2;

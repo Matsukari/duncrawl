@@ -1,0 +1,1408 @@
+{
+"roomsNum": 5,
+"tileMaxRows": 32,
+"tileMaxCols": 32,
+"tileSize": 32,
+"widthRange": {
+	"x": 0.2,
+	"y": 1
+},
+"heightRange": {
+	"x": 0.2,
+	"y": 1
+},
+"maxMob": 15,
+"maxElite": 5,
+"title": "Default Floor",
+"normalHeight": 2,
+"classname": "com.leisure.duncraw.map.floors.Floor1",
+"level": 3,
+"envColor": {
+	"r": 0.033,
+	"g": 0.033,
+	"b": 0.1,
+	"a": 0.2
+},
+"customHeight": {},
+"prefabRooms": {},
+"chests": [],
+"stairs": [],
+"generation": {
+	"entities": [
+		{
+			"x": 21,
+			"y": 43,
+			"classname": "Decoration",
+			"dat": "dat/obj/rock_1.dat"
+		},
+		{
+			"x": 61,
+			"y": 44,
+			"classname": "Decoration",
+			"dat": "dat/obj/corpse_1.dat"
+		},
+		{
+			"x": 24,
+			"y": 42,
+			"classname": "Decoration",
+			"dat": "dat/obj/rock_1.dat"
+		},
+		{
+			"x": 26,
+			"y": 42,
+			"classname": "Decoration",
+			"dat": "dat/obj/corpse_1.dat"
+		},
+		{
+			"x": 37,
+			"y": 41,
+			"classname": "Totem",
+			"dat": "dat/obj/totem_1.dat"
+		},
+		{
+			"x": 49,
+			"y": 42,
+			"classname": "Decoration",
+			"dat": "dat/obj/corpse_1.dat"
+		},
+		{
+			"x": 15,
+			"y": 40,
+			"classname": "Decoration",
+			"dat": "dat/obj/rock_1.dat"
+		},
+		{
+			"x": 19,
+			"y": 40,
+			"classname": "Decoration",
+			"dat": "dat/obj/corpse_1.dat"
+		},
+		{
+			"x": 92,
+			"y": 43,
+			"classname": "Decoration",
+			"dat": "dat/obj/rock_1.dat"
+		},
+		{
+			"x": 26,
+			"y": 40,
+			"classname": "Lamp",
+			"dat": "dat/obj/lamp.dat"
+		},
+		{
+			"x": 66,
+			"y": 41,
+			"classname": "Decoration",
+			"dat": "dat/obj/rock_1.dat"
+		},
+		{
+			"x": 82,
+			"y": 41,
+			"classname": "Decoration",
+			"dat": "dat/obj/rock_1.dat"
+		},
+		{
+			"x": 27,
+			"y": 38,
+			"classname": "Decoration",
+			"dat": "dat/obj/corpse_1.dat"
+		},
+		{
+			"x": 16,
+			"y": 37,
+			"classname": "Lamp",
+			"dat": "dat/obj/lamp.dat"
+		},
+		{
+			"x": 67,
+			"y": 39,
+			"classname": "Decoration",
+			"dat": "dat/obj/rock_1.dat"
+		},
+		{
+			"x": 85,
+			"y": 39,
+			"classname": "Lamp",
+			"dat": "dat/obj/lamp.dat"
+		},
+		{
+			"x": 46,
+			"y": 80,
+			"classname": "Decoration",
+			"dat": "dat/obj/rock_1.dat"
+		},
+		{
+			"x": 89,
+			"y": 39,
+			"classname": "Decoration",
+			"dat": "dat/obj/corpse_1.dat"
+		},
+		{
+			"x": 42,
+			"y": 37,
+			"classname": "Decoration",
+			"dat": "dat/obj/rock_1.dat"
+		},
+		{
+			"x": 30,
+			"y": 79,
+			"classname": "Lamp",
+			"dat": "dat/obj/lamp.dat"
+		},
+		{
+			"x": 49,
+			"y": 37,
+			"classname": "Lamp",
+			"dat": "dat/obj/lamp.dat"
+		},
+		{
+			"x": 59,
+			"y": 37,
+			"classname": "Decoration",
+			"dat": "dat/obj/rock_1.dat"
+		},
+		{
+			"x": 84,
+			"y": 38,
+			"classname": "Decoration",
+			"dat": "dat/obj/rock_1.dat"
+		},
+		{
+			"x": 48,
+			"y": 36,
+			"classname": "Decoration",
+			"dat": "dat/obj/rock_1.dat"
+		},
+		{
+			"x": 44,
+			"y": 35,
+			"classname": "Decoration",
+			"dat": "dat/obj/corpse_1.dat"
+		},
+		{
+			"x": 33,
+			"y": 77,
+			"classname": "Decoration",
+			"dat": "dat/obj/corpse_1.dat"
+		},
+		{
+			"x": 63,
+			"y": 34,
+			"classname": "Totem",
+			"dat": "dat/obj/totem_1.dat"
+		},
+		{
+			"x": 37,
+			"y": 76,
+			"classname": "Decoration",
+			"dat": "dat/obj/rock_1.dat"
+		},
+		{
+			"x": 64,
+			"y": 34,
+			"classname": "Decoration",
+			"dat": "dat/obj/rock_1.dat"
+		},
+		{
+			"x": 28,
+			"y": 32,
+			"classname": "Decoration",
+			"dat": "dat/obj/rock_1.dat"
+		},
+		{
+			"x": 15,
+			"y": 31,
+			"classname": "Decoration",
+			"dat": "dat/obj/rock_1.dat"
+		},
+		{
+			"x": 46,
+			"y": 75,
+			"classname": "Decoration",
+			"dat": "dat/obj/corpse_1.dat"
+		},
+		{
+			"x": 54,
+			"y": 32,
+			"classname": "Stair",
+			"dat": "dat/obj/stair_up.dat"
+		},
+		{
+			"x": 42,
+			"y": 74,
+			"classname": "Decoration",
+			"dat": "dat/obj/rock_1.dat"
+		},
+		{
+			"x": 25,
+			"y": 29,
+			"classname": "Decoration",
+			"dat": "dat/obj/rock_1.dat"
+		},
+		{
+			"x": 51,
+			"y": 30,
+			"classname": "Decoration",
+			"dat": "dat/obj/corpse_1.dat"
+		},
+		{
+			"x": 56,
+			"y": 29,
+			"classname": "Decoration",
+			"dat": "dat/obj/rock_1.dat"
+		},
+		{
+			"x": 33,
+			"y": 28,
+			"classname": "Decoration",
+			"dat": "dat/obj/rock_1.dat"
+		},
+		{
+			"x": 44,
+			"y": 27,
+			"classname": "Decoration",
+			"dat": "dat/obj/corpse_1.dat"
+		},
+		{
+			"x": 31,
+			"y": 68,
+			"classname": "Decoration",
+			"dat": "dat/obj/rock_1.dat"
+		},
+		{
+			"x": 47,
+			"y": 26,
+			"classname": "Decoration",
+			"dat": "dat/obj/rock_1.dat"
+		},
+		{
+			"x": 35,
+			"y": 68,
+			"classname": "Decoration",
+			"dat": "dat/obj/rock_1.dat"
+		},
+		{
+			"x": 90,
+			"y": 27,
+			"classname": "Lamp",
+			"dat": "dat/obj/lamp.dat"
+		},
+		{
+			"x": 28,
+			"y": 67,
+			"classname": "Decoration",
+			"dat": "dat/obj/rock_1.dat"
+		},
+		{
+			"x": 30,
+			"y": 24,
+			"classname": "Decoration",
+			"dat": "dat/obj/corpse_1.dat"
+		},
+		{
+			"x": 34,
+			"y": 24,
+			"classname": "Decoration",
+			"dat": "dat/obj/corpse_1.dat"
+		},
+		{
+			"x": 20,
+			"y": 23,
+			"classname": "Decoration",
+			"dat": "dat/obj/rock_1.dat"
+		},
+		{
+			"x": 12,
+			"y": 21,
+			"classname": "Totem",
+			"dat": "dat/obj/totem_1.dat"
+		},
+		{
+			"x": 74,
+			"y": 24,
+			"classname": "Decoration",
+			"dat": "dat/obj/corpse_1.dat"
+		},
+		{
+			"x": 90,
+			"y": 24,
+			"classname": "Decoration",
+			"dat": "dat/obj/corpse_1.dat"
+		},
+		{
+			"x": 4,
+			"y": 20,
+			"classname": "Decoration",
+			"dat": "dat/obj/rock_1.dat"
+		},
+		{
+			"x": 89,
+			"y": 22,
+			"classname": "Decoration",
+			"dat": "dat/obj/rock_1.dat"
+		},
+		{
+			"x": 29,
+			"y": 62,
+			"classname": "Decoration",
+			"dat": "dat/obj/corpse_1.dat"
+		},
+		{
+			"x": 69,
+			"y": 63,
+			"classname": "Decoration",
+			"dat": "dat/obj/corpse_1.dat"
+		},
+		{
+			"x": 22,
+			"y": 18,
+			"classname": "Decoration",
+			"dat": "dat/obj/corpse_1.dat"
+		},
+		{
+			"x": 57,
+			"y": 19,
+			"classname": "Decoration",
+			"dat": "dat/obj/rock_1.dat"
+		},
+		{
+			"x": 46,
+			"y": 61,
+			"classname": "Decoration",
+			"dat": "dat/obj/rock_1.dat"
+		},
+		{
+			"x": 11,
+			"y": 16,
+			"classname": "Decoration",
+			"dat": "dat/obj/corpse_1.dat"
+		},
+		{
+			"x": 61,
+			"y": 18,
+			"classname": "Lamp",
+			"dat": "dat/obj/lamp.dat"
+		},
+		{
+			"x": 55,
+			"y": 17,
+			"classname": "Lamp",
+			"dat": "dat/obj/lamp.dat"
+		},
+		{
+			"x": 64,
+			"y": 60,
+			"classname": "Decoration",
+			"dat": "dat/obj/rock_1.dat"
+		},
+		{
+			"x": 77,
+			"y": 17,
+			"classname": "Decoration",
+			"dat": "dat/obj/rock_1.dat"
+		},
+		{
+			"x": 84,
+			"y": 17,
+			"classname": "Decoration",
+			"dat": "dat/obj/rock_1.dat"
+		},
+		{
+			"x": 44,
+			"y": 58,
+			"classname": "Lamp",
+			"dat": "dat/obj/lamp.dat"
+		},
+		{
+			"x": 81,
+			"y": 16,
+			"classname": "Lamp",
+			"dat": "dat/obj/lamp.dat"
+		},
+		{
+			"x": 75,
+			"y": 15,
+			"classname": "Lamp",
+			"dat": "dat/obj/lamp.dat"
+		},
+		{
+			"x": 69,
+			"y": 57,
+			"classname": "Decoration",
+			"dat": "dat/obj/rock_1.dat"
+		},
+		{
+			"x": 76,
+			"y": 57,
+			"classname": "Decoration",
+			"dat": "dat/obj/rock_1.dat"
+		},
+		{
+			"x": 37,
+			"y": 12,
+			"classname": "Decoration",
+			"dat": "dat/obj/rock_1.dat"
+		},
+		{
+			"x": 42,
+			"y": 11,
+			"classname": "Decoration",
+			"dat": "dat/obj/rock_1.dat"
+		},
+		{
+			"x": 36,
+			"y": 96,
+			"classname": "Decoration",
+			"dat": "dat/obj/corpse_1.dat"
+		},
+		{
+			"x": 43,
+			"y": 52,
+			"classname": "Decoration",
+			"dat": "dat/obj/rock_1.dat"
+		},
+		{
+			"x": 34,
+			"y": 94,
+			"classname": "Decoration",
+			"dat": "dat/obj/rock_1.dat"
+		},
+		{
+			"x": 31,
+			"y": 8,
+			"classname": "Decoration",
+			"dat": "dat/obj/corpse_1.dat"
+		},
+		{
+			"x": 30,
+			"y": 93,
+			"classname": "Decoration",
+			"dat": "dat/obj/rock_1.dat"
+		},
+		{
+			"x": 49,
+			"y": 51,
+			"classname": "Lamp",
+			"dat": "dat/obj/lamp.dat"
+		},
+		{
+			"x": 39,
+			"y": 93,
+			"classname": "Decoration",
+			"dat": "dat/obj/rock_1.dat"
+		},
+		{
+			"x": 38,
+			"y": 50,
+			"classname": "Decoration",
+			"dat": "dat/obj/rock_1.dat"
+		},
+		{
+			"x": 43,
+			"y": 6,
+			"classname": "Decoration",
+			"dat": "dat/obj/corpse_1.dat"
+		},
+		{
+			"x": 39,
+			"y": 5,
+			"classname": "Decoration",
+			"dat": "dat/obj/rock_1.dat"
+		},
+		{
+			"x": 47,
+			"y": 48,
+			"classname": "Decoration",
+			"dat": "dat/obj/rock_1.dat"
+		},
+		{
+			"x": 72,
+			"y": 49,
+			"classname": "Decoration",
+			"dat": "dat/obj/rock_1.dat"
+		},
+		{
+			"x": 45,
+			"y": 4,
+			"classname": "Decoration",
+			"dat": "dat/obj/rock_1.dat"
+		},
+		{
+			"x": 60,
+			"y": 47,
+			"classname": "Lamp",
+			"dat": "dat/obj/lamp.dat"
+		},
+		{
+			"x": 86,
+			"y": 48,
+			"classname": "Decoration",
+			"dat": "dat/obj/rock_1.dat"
+		},
+		{
+			"x": 38,
+			"y": 46,
+			"classname": "Stair",
+			"dat": "dat/obj/stair_down.dat"
+		},
+		{
+			"x": 34,
+			"y": 88,
+			"classname": "Lamp",
+			"dat": "dat/obj/lamp.dat"
+		},
+		{
+			"x": 76,
+			"y": 47,
+			"classname": "Decoration",
+			"dat": "dat/obj/corpse_1.dat"
+		},
+		{
+			"x": 68,
+			"y": 45,
+			"classname": "Totem",
+			"dat": "dat/obj/totem_1.dat"
+		},
+		{
+			"x": 78,
+			"y": 46,
+			"classname": "Decoration",
+			"dat": "dat/obj/rock_1.dat"
+		}
+	],
+	"roomsBuilder": {
+		"nodes": [
+			{
+				"p1": {
+					"x": 1632,
+					"y": 944
+				},
+				"p2": {
+					"x": 448,
+					"y": 688
+				}
+			},
+			{
+				"p1": {
+					"x": 448,
+					"y": 688
+				},
+				"p2": {
+					"x": 784,
+					"y": 2048
+				}
+			},
+			{
+				"p1": {
+					"x": 1072,
+					"y": 1184
+				},
+				"p2": {
+					"x": 2368,
+					"y": 1376
+				}
+			},
+			{
+				"p1": {
+					"x": 448,
+					"y": 688
+				},
+				"p2": {
+					"x": 1072,
+					"y": 1184
+				}
+			}
+		],
+		"corridors": [
+			{
+				"p1": {
+					"x": 448,
+					"y": 688
+				},
+				"p2": {
+					"x": 448,
+					"y": 1184
+				}
+			},
+			{
+				"p1": {
+					"x": 448,
+					"y": 1184
+				},
+				"p2": {
+					"x": 1072,
+					"y": 1184
+				}
+			},
+			{
+				"p1": {
+					"x": 448,
+					"y": 688
+				},
+				"p2": {
+					"x": 784,
+					"y": 688
+				}
+			},
+			{
+				"p1": {
+					"x": 784,
+					"y": 688
+				},
+				"p2": {
+					"x": 784,
+					"y": 2048
+				}
+			},
+			{
+				"p1": {
+					"x": 1072,
+					"y": 1184
+				},
+				"p2": {
+					"x": 1072,
+					"y": 944
+				}
+			},
+			{
+				"p1": {
+					"x": 1072,
+					"y": 944
+				},
+				"p2": {
+					"x": 1632,
+					"y": 944
+				}
+			},
+			{
+				"p1": {
+					"x": 1072,
+					"y": 1184
+				},
+				"p2": {
+					"x": 1072,
+					"y": 1376
+				}
+			},
+			{
+				"p1": {
+					"x": 1072,
+					"y": 1376
+				},
+				"p2": {
+					"x": 2368,
+					"y": 1376
+				}
+			},
+			{
+				"p1": {
+					"x": 1072,
+					"y": 1184
+				},
+				"p2": {
+					"x": 784,
+					"y": 1184
+				}
+			},
+			{
+				"p1": {
+					"x": 784,
+					"y": 1184
+				},
+				"p2": {
+					"x": 784,
+					"y": 2048
+				}
+			},
+			{
+				"p1": {
+					"x": 1072,
+					"y": 1184
+				},
+				"p2": {
+					"x": 1072,
+					"y": 688
+				}
+			},
+			{
+				"p1": {
+					"x": 1072,
+					"y": 688
+				},
+				"p2": {
+					"x": 448,
+					"y": 688
+				}
+			},
+			{
+				"p1": {
+					"x": 784,
+					"y": 2048
+				},
+				"p2": {
+					"x": 784,
+					"y": 1376
+				}
+			},
+			{
+				"p1": {
+					"x": 784,
+					"y": 1376
+				},
+				"p2": {
+					"x": 2368,
+					"y": 1376
+				}
+			},
+			{
+				"p1": {
+					"x": 784,
+					"y": 2048
+				},
+				"p2": {
+					"x": 1072,
+					"y": 2048
+				}
+			},
+			{
+				"p1": {
+					"x": 1072,
+					"y": 2048
+				},
+				"p2": {
+					"x": 1072,
+					"y": 1184
+				}
+			},
+			{
+				"p1": {
+					"x": 1632,
+					"y": 944
+				},
+				"p2": {
+					"x": 1632,
+					"y": 688
+				}
+			},
+			{
+				"p1": {
+					"x": 1632,
+					"y": 688
+				},
+				"p2": {
+					"x": 448,
+					"y": 688
+				}
+			},
+			{
+				"p1": {
+					"x": 1632,
+					"y": 944
+				},
+				"p2": {
+					"x": 1632,
+					"y": 1184
+				}
+			},
+			{
+				"p1": {
+					"x": 1632,
+					"y": 1184
+				},
+				"p2": {
+					"x": 1072,
+					"y": 1184
+				}
+			},
+			{
+				"p1": {
+					"x": 2368,
+					"y": 1376
+				},
+				"p2": {
+					"x": 2368,
+					"y": 944
+				}
+			},
+			{
+				"p1": {
+					"x": 2368,
+					"y": 944
+				},
+				"p2": {
+					"x": 1632,
+					"y": 944
+				}
+			},
+			{
+				"p1": {
+					"x": 2368,
+					"y": 1376
+				},
+				"p2": {
+					"x": 2368,
+					"y": 1184
+				}
+			},
+			{
+				"p1": {
+					"x": 2368,
+					"y": 1184
+				},
+				"p2": {
+					"x": 1072,
+					"y": 1184
+				}
+			}
+		],
+		"rooms": [
+			{
+				"x": 128,
+				"y": 416,
+				"width": 640,
+				"height": 544
+			},
+			{
+				"x": 928,
+				"y": 832,
+				"width": 288,
+				"height": 704
+			},
+			{
+				"x": 1920,
+				"y": 1152,
+				"width": 896,
+				"height": 448
+			},
+			{
+				"x": 1248,
+				"y": 800,
+				"width": 768,
+				"height": 288
+			},
+			{
+				"x": 672,
+				"y": 1664,
+				"width": 224,
+				"height": 768
+			},
+			{
+				"x": 704,
+				"y": 2720,
+				"width": 448,
+				"height": 416
+			},
+			{
+				"x": 1824,
+				"y": 1568,
+				"width": 512,
+				"height": 448
+			},
+			{
+				"x": 2144,
+				"y": 384,
+				"width": 576,
+				"height": 352
+			},
+			{
+				"x": 896,
+				"y": 2176,
+				"width": 448,
+				"height": 512
+			},
+			{
+				"x": -192,
+				"y": 448,
+				"width": 608,
+				"height": 160
+			},
+			{
+				"x": 1120,
+				"y": 1760,
+				"width": 256,
+				"height": 352
+			},
+			{
+				"x": 640,
+				"y": 768,
+				"width": 128,
+				"height": 480
+			},
+			{
+				"x": 960,
+				"y": 256,
+				"width": 384,
+				"height": 544
+			},
+			{
+				"x": 480,
+				"y": 160,
+				"width": 256,
+				"height": 416
+			},
+			{
+				"x": 768,
+				"y": -96,
+				"width": 480,
+				"height": 320
+			},
+			{
+				"x": 1440,
+				"y": 448,
+				"width": 384,
+				"height": 384
+			},
+			{
+				"x": 224,
+				"y": 1088,
+				"width": 352,
+				"height": 192
+			},
+			{
+				"x": 896,
+				"y": 1152,
+				"width": 320,
+				"height": 576
+			},
+			{
+				"x": 1728,
+				"y": 1056,
+				"width": 672,
+				"height": 384
+			},
+			{
+				"x": 1056,
+				"y": 800,
+				"width": 352,
+				"height": 320
+			},
+			{
+				"x": 640,
+				"y": 768,
+				"width": 128,
+				"height": 480
+			},
+			{
+				"x": 960,
+				"y": 256,
+				"width": 384,
+				"height": 544
+			},
+			{
+				"x": 1440,
+				"y": 448,
+				"width": 384,
+				"height": 384
+			},
+			{
+				"x": 224,
+				"y": 1088,
+				"width": 352,
+				"height": 192
+			},
+			{
+				"x": 896,
+				"y": 1152,
+				"width": 320,
+				"height": 576
+			},
+			{
+				"x": 1728,
+				"y": 1056,
+				"width": 672,
+				"height": 384
+			},
+			{
+				"x": 1056,
+				"y": 800,
+				"width": 352,
+				"height": 320
+			},
+			{
+				"x": 448,
+				"y": 688,
+				"width": 128,
+				"height": 496
+			},
+			{
+				"x": 448,
+				"y": 1184,
+				"width": 624,
+				"height": 128
+			},
+			{
+				"x": 448,
+				"y": 688,
+				"width": 336,
+				"height": 128
+			},
+			{
+				"x": 784,
+				"y": 688,
+				"width": 128,
+				"height": 1360
+			},
+			{
+				"x": 1072,
+				"y": 944,
+				"width": 128,
+				"height": 240
+			},
+			{
+				"x": 1072,
+				"y": 944,
+				"width": 560,
+				"height": 128
+			},
+			{
+				"x": 1072,
+				"y": 1184,
+				"width": 128,
+				"height": 192
+			},
+			{
+				"x": 1072,
+				"y": 1376,
+				"width": 1296,
+				"height": 128
+			},
+			{
+				"x": 784,
+				"y": 1184,
+				"width": 288,
+				"height": 128
+			},
+			{
+				"x": 784,
+				"y": 1184,
+				"width": 128,
+				"height": 864
+			},
+			{
+				"x": 1072,
+				"y": 688,
+				"width": 128,
+				"height": 496
+			},
+			{
+				"x": 448,
+				"y": 688,
+				"width": 624,
+				"height": 128
+			},
+			{
+				"x": 784,
+				"y": 1376,
+				"width": 128,
+				"height": 672
+			},
+			{
+				"x": 784,
+				"y": 1376,
+				"width": 1584,
+				"height": 128
+			},
+			{
+				"x": 784,
+				"y": 2048,
+				"width": 288,
+				"height": 128
+			},
+			{
+				"x": 1072,
+				"y": 1184,
+				"width": 128,
+				"height": 864
+			},
+			{
+				"x": 1632,
+				"y": 688,
+				"width": 128,
+				"height": 256
+			},
+			{
+				"x": 448,
+				"y": 688,
+				"width": 1184,
+				"height": 128
+			},
+			{
+				"x": 1632,
+				"y": 944,
+				"width": 128,
+				"height": 240
+			},
+			{
+				"x": 1072,
+				"y": 1184,
+				"width": 560,
+				"height": 128
+			},
+			{
+				"x": 2368,
+				"y": 944,
+				"width": 128,
+				"height": 432
+			},
+			{
+				"x": 1632,
+				"y": 944,
+				"width": 736,
+				"height": 128
+			},
+			{
+				"x": 2368,
+				"y": 1184,
+				"width": 128,
+				"height": 192
+			},
+			{
+				"x": 1072,
+				"y": 1184,
+				"width": 1296,
+				"height": 128
+			}
+		],
+		"mainRooms": [
+			{
+				"x": 128,
+				"y": 416,
+				"width": 640,
+				"height": 544
+			},
+			{
+				"x": 928,
+				"y": 832,
+				"width": 288,
+				"height": 704
+			},
+			{
+				"x": 1920,
+				"y": 1152,
+				"width": 896,
+				"height": 448
+			},
+			{
+				"x": 1248,
+				"y": 800,
+				"width": 768,
+				"height": 288
+			},
+			{
+				"x": 672,
+				"y": 1664,
+				"width": 224,
+				"height": 768
+			}
+		],
+		"subRooms": [
+			{
+				"x": 640,
+				"y": 768,
+				"width": 128,
+				"height": 480
+			},
+			{
+				"x": 960,
+				"y": 256,
+				"width": 384,
+				"height": 544
+			},
+			{
+				"x": 1440,
+				"y": 448,
+				"width": 384,
+				"height": 384
+			},
+			{
+				"x": 224,
+				"y": 1088,
+				"width": 352,
+				"height": 192
+			},
+			{
+				"x": 896,
+				"y": 1152,
+				"width": 320,
+				"height": 576
+			},
+			{
+				"x": 1728,
+				"y": 1056,
+				"width": 672,
+				"height": 384
+			},
+			{
+				"x": 1056,
+				"y": 800,
+				"width": 352,
+				"height": 320
+			}
+		],
+		"roomConnections": {
+			"[128.0,416.0,640.0,544.0]": [
+				{
+					"class": "com.badlogic.gdx.math.Rectangle",
+					"x": 928,
+					"y": 832,
+					"width": 288,
+					"height": 704
+				},
+				{
+					"class": "com.badlogic.gdx.math.Rectangle",
+					"x": 672,
+					"y": 1664,
+					"width": 224,
+					"height": 768
+				}
+			],
+			"[928.0,832.0,288.0,704.0]": [
+				{
+					"class": "com.badlogic.gdx.math.Rectangle",
+					"x": 1248,
+					"y": 800,
+					"width": 768,
+					"height": 288
+				},
+				{
+					"class": "com.badlogic.gdx.math.Rectangle",
+					"x": 1920,
+					"y": 1152,
+					"width": 896,
+					"height": 448
+				},
+				{
+					"class": "com.badlogic.gdx.math.Rectangle",
+					"x": 672,
+					"y": 1664,
+					"width": 224,
+					"height": 768
+				},
+				{
+					"class": "com.badlogic.gdx.math.Rectangle",
+					"x": 128,
+					"y": 416,
+					"width": 640,
+					"height": 544
+				}
+			],
+			"[672.0,1664.0,224.0,768.0]": [
+				{
+					"class": "com.badlogic.gdx.math.Rectangle",
+					"x": 1920,
+					"y": 1152,
+					"width": 896,
+					"height": 448
+				},
+				{
+					"class": "com.badlogic.gdx.math.Rectangle",
+					"x": 928,
+					"y": 832,
+					"width": 288,
+					"height": 704
+				}
+			],
+			"[1248.0,800.0,768.0,288.0]": [
+				{
+					"class": "com.badlogic.gdx.math.Rectangle",
+					"x": 128,
+					"y": 416,
+					"width": 640,
+					"height": 544
+				},
+				{
+					"class": "com.badlogic.gdx.math.Rectangle",
+					"x": 928,
+					"y": 832,
+					"width": 288,
+					"height": 704
+				}
+			],
+			"[1920.0,1152.0,896.0,448.0]": [
+				{
+					"class": "com.badlogic.gdx.math.Rectangle",
+					"x": 1248,
+					"y": 800,
+					"width": 768,
+					"height": 288
+				},
+				{
+					"class": "com.badlogic.gdx.math.Rectangle",
+					"x": 928,
+					"y": 832,
+					"width": 288,
+					"height": 704
+				}
+			]
+		},
+		"rect": {
+			"x": -192,
+			"y": -96,
+			"width": 3008,
+			"height": 3232
+		},
+		"min": {
+			"x": -192,
+			"y": -96
+		},
+		"max": {
+			"x": 2816,
+			"y": 3136
+		},
+		"roomsNum": 5,
+		"tileSize": 32
+	}
+},
+"statistic": {
+	"visitedRooms": [
+		{
+			"x": 1248,
+			"y": 800,
+			"width": 768,
+			"height": 288
+		},
+		{
+			"x": 1632,
+			"y": 944,
+			"width": 128,
+			"height": 240
+		},
+		{
+			"x": 1728,
+			"y": 1056,
+			"width": 672,
+			"height": 384
+		},
+		{
+			"x": 1920,
+			"y": 1152,
+			"width": 896,
+			"height": 448
+		},
+		{
+			"x": 1056,
+			"y": 800,
+			"width": 352,
+			"height": 320
+		},
+		{
+			"x": 1072,
+			"y": 1184,
+			"width": 560,
+			"height": 128
+		},
+		{
+			"x": 1072,
+			"y": 1376,
+			"width": 1296,
+			"height": 128
+		},
+		{
+			"x": 928,
+			"y": 832,
+			"width": 288,
+			"height": 704
+		}
+	]
+}
+}

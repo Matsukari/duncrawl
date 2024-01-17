@@ -23,10 +23,13 @@ public class HudInput extends InputAdapter {
       else if (keycode == controls.action) hudManager.windowUi.statusWindow.inventoryHud.useSelected();
       return true;
     }
-    else if (hudManager.dialogueHud.isVisible()) {
-      if (keycode == controls.action) hudManager.dialogueHud.next();
-      return true;
-    }
+    // else if (hudManager.dialogueHud.isVisible()) {
+      // if (keycode == controls.action && !hudManager.dialogueHud.next()) {
+      //   hudManager.statusHud.player.lockState = false;
+      //   hudManager.dialogueHud.restart();
+      // }
+    //   return true;
+    // }
     return false;
   }
   
