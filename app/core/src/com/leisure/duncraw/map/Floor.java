@@ -121,6 +121,7 @@ public class Floor {
     Terrain terrain = background.getTerrain(x, y);
     Obj obj = background.getObj(x, y);
     TilemapChara chara = getChara(x, y);
+    // TilemapChara chara = getChara(x+player.movement.lastVelX, y+player.lastVelX);
     boolean traversable = true;
     if (terrain != null && !terrain.traversable()) traversable = false;
     if (obj != null && !(obj instanceof Item) && !(obj instanceof Decoration) && !(obj instanceof Terrain)) traversable = false;

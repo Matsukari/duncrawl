@@ -20,6 +20,11 @@
 		"back": "images/characters/ghost_king/ghost_king_hurl.png",
 		"front": "images/characters/ghost_king/ghost_king_hurl.png"
 	},
+	"hurt": {
+		"side": "images/characters/ghost_king/ghost_king_hurt.png",
+		"back": "images/characters/ghost_king/ghost_king_hurt.png",
+		"front": "images/characters/ghost_king/ghost_king_hurt.png"
+	},
 	"ghost_ball": {
 		"side": "images/effects/ghost_ball_idle.png",
 		"back": "images/effects/ghost_ball_idle.png",
@@ -38,9 +43,9 @@
 },
 "sounds": {},
 "status": {
-	"health": 100,
-	"stamina": 100,
-	"maxHealth": 100,
+	"health": 1000,
+	"stamina": 1000,
+	"maxHealth": 1000,
 	"maxStamina": 100,
 	"hpRecovery": 2,
 	"stRecovery": 3,

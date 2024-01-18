@@ -14,6 +14,7 @@ import com.leisure.duncraw.art.chara.Chara;
 import com.leisure.duncraw.art.chara.Enemy;
 import com.leisure.duncraw.art.chara.ai.AiWanderer;
 import com.leisure.duncraw.art.chara.ai.components.CharaLeafNode;
+import com.leisure.duncraw.art.chara.observers.AnimationBehaviour;
 import com.leisure.duncraw.art.chara.states.AttackState;
 import com.leisure.duncraw.art.chara.states.HurtState;
 import com.leisure.duncraw.art.chara.states.MoveState;
@@ -21,6 +22,7 @@ import com.leisure.duncraw.art.gfx.GfxAnimation;
 import com.leisure.duncraw.data.CharaData;
 import com.leisure.duncraw.data.Deserializer;
 import com.leisure.duncraw.logging.Logger;
+import com.leisure.duncraw.screen.GameScreen.Context;
 
 import behave.execution.ExecutionContext;
 import behave.models.DecoratorNode;
@@ -36,7 +38,10 @@ public class GhostKingAi extends DecoratorNode.InfiniteRepeaterNode {
   public void initialize(ExecutionContext context) {
     SequenceNode peakState = new SequenceNode();
     SequenceNode weakenedState = new SequenceNode();
-
+    Chara chara = ((Chara)context.getVariable("chara"));
+    chara.observers.add(new AnimationBehaviour(((Context)context.getVariable("context")).effectManager));
+    chara.dat.knockable = false;
+    
     peakState.addChild(new HurlBall());
     peakState.addChild(new GoAwayIfDamaged());
     weakenedState.addChild(new SummonWaveIf());
@@ -57,12 +62,14 @@ public class GhostKingAi extends DecoratorNode.InfiniteRepeaterNode {
     }
     @Override
     public Status tick(ExecutionContext context) {
+        Logger.log("GhostKingAi", "Dage" + Integer.toString(chara.status.health));
       if (chara.status.health != lastHealth) {
         lastHealth = chara.status.health;
         // getContext(context).effectManager.start(new InterpolationEffect(chara, Interpolation.fade, 2f));
         Pointi randomPos = getFloor(context).getTileInRandomRoom();
         // Pointi randomPos = new Pointi(MathUtils.random(chara.mapAgent.x-5, chara.mapAgent.x+5), MathUtils.random(chara.mapAgent.y-5, chara.mapAgent.y+5));
-        chara.setState(new MoveState(randomPos.x, randomPos.y, false));
+        chara.setState(new MoveState(randomPos.x, randomPos.y, false), true);
+        Logger.log("GhostKingAi", "Moved dmaaged");
 
       }
       if (chara.status.health <= 30) {
@@ -98,26 +105,27 @@ public class GhostKingAi extends DecoratorNode.InfiniteRepeaterNode {
   }
   
   public static class HurlBall extends CharaLeafNode {
-    private Timer timer = new Timer(1000);
-    private Timer projTimer = new Timer(3000);
+    private Timer timer = new Timer(4000);
+    private Timer projTimer = new Timer(4000);
     private int count = 0;
     private GfxAnimation projectile;
     private double angle;
-    private Vector2 lastPlayer;
     private Rectangle intersection = new Rectangle();
     public HurlBall() { timer.start(); }
     @Override
     public void initialize(ExecutionContext context) {
       super.initialize(context);
-      timer.start();
     }
     @Override
     public Status tick(ExecutionContext context) {
+      Logger.log("GhostKingAi", "Hurling " + Float.toString(timer.normalize()));
       if (timer.isFinished()) {
-        timer.stop();
+        stop(context);
+        timer.reset();
         count ++;
         context.setVariable("hurled_ball", count);
         chara.anims.set("hurl");
+        chara.anims.get("hurl").currentDir.stateTime = 0.1f;
         chara.anims.get("hurl").setPlayMode(PlayMode.NORMAL);
         projectile = new GfxAnimation(chara.anims.get("ghost_ball").currentDir, true);
         getContext(context).effectManager.start(projectile);
@@ -125,34 +133,24 @@ public class GhostKingAi extends DecoratorNode.InfiniteRepeaterNode {
         chara.bounds.getCenter(p1);
         player.bounds.getCenter(p2);
         angle = Math.atan2(p2.y-p1.y, p1.x - p2.x);
-        Logger.log("GhostKingAi", "Angle: " + Double.toString(angle));
-        // position = new Vector2(chara.bounds.x, chara.bounds.y);
-        // position.lerp(lastPlayer, projTimer.normalize()*0.02f);
-        lastPlayer = new Vector2(player.bounds.x, player.bounds.y);
         projectile.bounds.setSize(32);
         projectile.bounds.setPosition(p1.x, p1.y);
         projTimer.start();
-        // chara.setState(new AttackState(player));
+        // Logger.log("GhostKingAi", "Angle: " + Double.toString(angle));
       }
       if (projectile != null) {
-        if (chara.anims.get("hurl").currentDir.isFinished()) { chara.anims.set("idle"); }
-        // projectile.bounds.setPosition(position);
-        projectile.bounds.x -= Math.cos(angle) * 100f * Gdx.graphics.getDeltaTime();
-        projectile.bounds.y += Math.sin(angle) * 100f * Gdx.graphics.getDeltaTime();
+        projectile.bounds.x -= Math.cos(angle) * 200f * Gdx.graphics.getDeltaTime();
+        projectile.bounds.y += Math.sin(angle) * 200f * Gdx.graphics.getDeltaTime();
         if (Intersector.intersectRectangles(projectile.bounds, player.bounds, intersection)) {
           stop(context);
-          // chara.movement.lastVelX = (int)Math.cos(angle);
-          // chara.movement.lastVelY = (int)Math.sin(angle);
           chara.movement.lastVelX = -1;
           player.setState(new HurtState(chara, true), true);
-          return Status.Success;
         }
-        if (projTimer.isFinished()) {
+        if (projTimer.isFinished() || chara.status.dead) {
           stop(context);
-          return Status.Success;
         }
       }
-      return Status.Running;
+      return Status.Success;
     }
     public void stop(ExecutionContext context) {
       getContext(context).effectManager.stop(projectile);

@@ -91,6 +91,7 @@ public class GameScreen extends Screen {
     player.observers.add(new ShadowCloakBehaviour(effectManager));
     player.observers.add(new DashBehaviour(effectManager));
     player.observers.add(new IlluminateBehaviour(floorManager.lighting, new PointLight(Graphics.getSafeTextureRegion("images/lights/light_smooth.png"))));
+    // charaManager.observers.add(new AnimationBehaviour())
 
     musicManager = new MusicManager(this, AssetSource.getMusicData(), saveData.settings.music);
 

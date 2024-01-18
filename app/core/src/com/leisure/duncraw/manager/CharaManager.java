@@ -11,6 +11,7 @@ import com.leisure.duncraw.art.EntityArrayList;
 import com.leisure.duncraw.art.chara.Chara;
 import com.leisure.duncraw.art.chara.Npc;
 import com.leisure.duncraw.art.chara.Observer;
+import com.leisure.duncraw.art.chara.observers.AnimationBehaviour;
 import com.leisure.duncraw.art.chara.observers.AttackBehaviour;
 import com.leisure.duncraw.art.chara.observers.HurtBehaviour;
 import com.leisure.duncraw.art.chara.observers.SoundBehaviour;

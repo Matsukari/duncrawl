@@ -1240,22 +1240,6 @@
 			}
 		],
 		"roomConnections": {
-			"[128.0,416.0,640.0,544.0]": [
-				{
-					"class": "com.badlogic.gdx.math.Rectangle",
-					"x": 928,
-					"y": 832,
-					"width": 288,
-					"height": 704
-				},
-				{
-					"class": "com.badlogic.gdx.math.Rectangle",
-					"x": 672,
-					"y": 1664,
-					"width": 224,
-					"height": 768
-				}
-			],
 			"[928.0,832.0,288.0,704.0]": [
 				{
 					"class": "com.badlogic.gdx.math.Rectangle",
@@ -1332,6 +1316,22 @@
 					"y": 832,
 					"width": 288,
 					"height": 704
+				}
+			],
+			"[128.0,416.0,640.0,544.0]": [
+				{
+					"class": "com.badlogic.gdx.math.Rectangle",
+					"x": 928,
+					"y": 832,
+					"width": 288,
+					"height": 704
+				},
+				{
+					"class": "com.badlogic.gdx.math.Rectangle",
+					"x": 672,
+					"y": 1664,
+					"width": 224,
+					"height": 768
 				}
 			]
 		},

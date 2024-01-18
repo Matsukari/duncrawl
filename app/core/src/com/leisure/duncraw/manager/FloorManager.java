@@ -63,7 +63,7 @@ public class FloorManager {
     floor.initialSpawn(new Spawner(charaManager));
     lighting.updateEnv();
     ready = false;
-    transition = new GfxFloorTransition(Graphics.getSafeTextureRegion("images/ui/diamond.png"), Interpolation.swingOut, 1f, player.bounds.x, player.bounds.y);
+    transition = new GfxFloorTransition(Graphics.getSafeTextureRegion("images/ui/diamond.png"), Interpolation.fade, 1f, player.bounds.x, player.bounds.y);
     transition.onCovered = ()-> {
       ready = true;
     };

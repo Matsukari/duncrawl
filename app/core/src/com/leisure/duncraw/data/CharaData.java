@@ -14,6 +14,7 @@ public class CharaData extends Dat {
   public Pointi size;
   public float offsetX;
   public float offsetY;
+  public boolean knockable = true;
 
   @Override
   public void reset() {

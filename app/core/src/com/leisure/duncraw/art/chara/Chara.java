@@ -62,6 +62,7 @@ public class Chara extends Art {
     state.update(dt);
     observers.updateAll();
     if (state.next != null) setState(state.next); 
+    if (anims.current.currentDir.isFinished()) anims.set("idle", movement.lastVelX, movement.lastVelY);
     if (movement.update(dt)) {
       setState(new IdleState());
       // Logger.log("Chara", "Set to idle");

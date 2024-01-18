@@ -21,4 +21,8 @@ public class DirAnimationMap {
     a.face(dirX, dirY);
     return a; 
   }
+  public boolean isEqual(String anim) {
+    if (data.get(anim) == null) return false;
+    return true;
+  }
 }

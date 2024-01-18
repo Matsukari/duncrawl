@@ -42,16 +42,19 @@ public class AnimationBehaviour extends Observer {
     else if (state instanceof DashState) chara.anims.set("dash", chara.movement.velX, chara.movement.velY);
     else if (state instanceof IdleState) {
       inIdle = true;
-      chara.anims.set("idle", chara.movement.lastVelX, chara.movement.lastVelY);
+      // chara.anims.set("idle", chara.movement.lastVelX, chara.movement.lastVelY);
     }
     else if (state instanceof DeathState) {
       effectManager.start(new GfxInterpolation(chara, Interpolation.fade, 1));
     }
-    else if (state instanceof HurtState && ((HurtState)state).knockback) {
+    else if (state instanceof HurtState) {
       HurtState s = (HurtState)state;
       Chara attacker = s.attacker;
       Chara defender = s.chara;
-      effectManager.start(new KnockbackEffect(
+      chara.anims.set("hurt", chara.movement.lastVelX, chara.movement.lastVelY);
+      Logger.log("AnimationBehaviour", "hurt");
+      if (((HurtState)state).knockback && chara.dat.knockable)
+        effectManager.start(new KnockbackEffect(
             defender, attacker.movement.lastVelX * (defender.bounds.width/2), attacker.movement.lastVelY * (defender.bounds.height/2), Interpolation.fade, 0.16f));
     }
     else if (state instanceof AttackState || state instanceof DashAttackState) {
