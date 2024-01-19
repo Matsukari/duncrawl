@@ -50,6 +50,7 @@ public class GameScreen extends Screen {
   public final ExtendViewport viewport; 
   public Player player;
   public boolean blockCamera = false;
+  public boolean changeScreen = false;
   public Context context;
   public static class Context {
     public final StoryManager storyManager;
@@ -129,12 +130,16 @@ public class GameScreen extends Screen {
     // camera.zoom = 30f;
     debugManager.debugChara(mob);
   }
-  @Override
-  public void pause() {
-    Logger.log("GameScreen", "Paused");
+  public void save() {
+    storyManager.updateScene();
     saveData.progression.level.floor = floorManager.getFloor().generator.data.level;
     saveData.progression.level.scene = storyManager.sceneIndex;
     Serializer.save(saveData, Gdx.files.local(AssetSource.instance.save));
+
+  }
+  @Override
+  public void pause() {
+    Logger.log("GameScreen", "Paused");
   }
   @Override
   public void resize(int width, int height) {
@@ -159,6 +164,7 @@ public class GameScreen extends Screen {
     storyManager.updateScene();
     hudManager.update(delta);
     musicManager.update();
+    if (changeScreen) change();
     
     ScreenUtils.clear(backgroundColor);
     if (!floorManager.ready) return;
@@ -172,6 +178,7 @@ public class GameScreen extends Screen {
   }
   @Override
   public void dispose() {
+    save();
     hudManager.dispose();
     charaManager.dispose();
     floorManager.dispose();

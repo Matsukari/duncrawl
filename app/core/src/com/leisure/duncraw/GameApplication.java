@@ -24,6 +24,8 @@ public class GameApplication extends Game {
   public void render() {
     if (screen == null) return;
     if (((Screen)screen).hasChanged) {
+      screen.pause();
+      screen.dispose();
       setScreen(((Screen)screen).next());
     }
     screen.render(Gdx.graphics.getDeltaTime());

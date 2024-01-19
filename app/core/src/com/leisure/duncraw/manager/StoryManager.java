@@ -7,6 +7,7 @@ import java.util.Queue;
 import com.leisure.duncraw.data.AssetSource;
 import com.leisure.duncraw.data.Deserializer;
 import com.leisure.duncraw.data.StoryData;
+import com.leisure.duncraw.logging.Logger;
 import com.leisure.duncraw.screen.GameScreen;
 import com.leisure.duncraw.story.SceneQueue;
 import com.leisure.duncraw.story.chapters.Chapter1;
@@ -38,6 +39,7 @@ public class StoryManager {
     if (current.update(game) && current.hasEnded()) {
       play();
       sceneIndex++;
+      // Logger.log("StoryManager", String.format("Next story : %d", sceneIndex)) ;
     }
   }
 }

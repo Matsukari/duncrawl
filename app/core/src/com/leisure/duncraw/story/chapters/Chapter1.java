@@ -133,8 +133,7 @@ public class Chapter1 {
       if (!started) {
         if (game.floorManager.getFloor().generator.data.level == 4 && !delay.isTicking() && boss == null) {
           delay.start(); 
-          Enemy boss = 
-            game.floorManager.getFloor().spawner.spawn(new Enemy(game.floorManager.getFloor().spawner.sources.ghostKing)); 
+          Enemy boss = game.floorManager.getFloor().spawner.spawn(new Enemy(game.floorManager.getFloor().spawner.sources.ghostKing)); 
           boss.setState(new MoveState(game.floorManager.getFloor().background.cols/2, game.floorManager.getFloor().background.rows/2, false));
         
           scenes.add(new ParallelSceneNode(
@@ -145,17 +144,11 @@ public class Chapter1 {
             boss.startAI(new GhostKingAi(), game.floorManager.getFloor(), game.player, game.context);
           }));
           scenes.add(new ConditionalSceneNode(()->{
-            if (boss.status.dead) {
-              delayFinish.start();
-              scenes.add(new DialogueSceneNode(Deserializer.safeLoad(Conversation.class, "dat/story/ch1_10.conv")));
-              return true;
-            }
-            if (delayFinish.isFinished()) {
-            }
-            return false;
+            return boss.status.dead;
           }));
+          scenes.add(new DialogueSceneNode(Deserializer.safeLoad(Conversation.class, "dat/story/ch1_10.conv")));
           scenes.add(new PerformSceneNode(()->{
-            game.change();
+            game.changeScreen = true;
           }));
           start(game);
         }

@@ -1,7 +1,7 @@
 {
 "progression": {
 	"level": {
-		"floor": 2,
+		"floor": 4,
 		"scene": 6
 	}
 },
@@ -24,7 +24,7 @@
 			{
 				"datFile": "dat/item/monster_core_bronze.dat",
 				"classname": "com.leisure.duncraw.art.item.items.MonsterCore",
-				"quantity": 2,
+				"quantity": 3,
 				"maxQuantity": 16
 			}
 		],
@@ -38,7 +38,7 @@
 	},
 	"status": {
 		"health": 100,
-		"stamina": 93,
+		"stamina": 100,
 		"maxHealth": 100,
 		"maxStamina": 100,
 		"hpRecovery": 2,
