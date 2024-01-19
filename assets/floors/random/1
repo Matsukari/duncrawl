@@ -14,7 +14,7 @@
 "maxMob": 15,
 "maxElite": 5,
 "title": "Default Floor",
-"normalHeight": 3,
+"normalHeight": 2,
 "classname": "com.leisure.duncraw.map.floors.Floor1",
 "level": 1,
 "envColor": {
@@ -30,313 +30,487 @@
 "generation": {
 	"entities": [
 		{
-			"x": 47,
-			"y": 87,
-			"classname": "Lamp",
-			"dat": "dat/obj/lamp.dat"
-		},
-		{
-			"x": 89,
+			"x": 93,
 			"y": 46,
 			"classname": "Decoration",
 			"dat": "dat/obj/corpse_1.dat"
 		},
 		{
-			"x": 73,
+			"x": 89,
+			"y": 3,
+			"classname": "Lamp",
+			"dat": "dat/obj/lamp.dat"
+		},
+		{
+			"x": 7,
+			"y": 42,
+			"classname": "Decoration",
+			"dat": "dat/obj/rock_1.dat"
+		},
+		{
+			"x": 74,
+			"y": 2,
+			"classname": "Decoration",
+			"dat": "dat/obj/corpse_1.dat"
+		},
+		{
+			"x": 106,
+			"y": 46,
+			"classname": "Decoration",
+			"dat": "dat/obj/corpse_1.dat"
+		},
+		{
+			"x": 99,
+			"y": 3,
+			"classname": "Decoration",
+			"dat": "dat/obj/rock_1.dat"
+		},
+		{
+			"x": 101,
+			"y": 3,
+			"classname": "Lamp",
+			"dat": "dat/obj/lamp.dat"
+		},
+		{
+			"x": 62,
 			"y": 44,
 			"classname": "Decoration",
 			"dat": "dat/obj/rock_1.dat"
 		},
 		{
-			"x": 42,
-			"y": 85,
+			"x": 68,
+			"y": 1,
+			"classname": "Decoration",
+			"dat": "dat/obj/rock_1.dat"
+		},
+		{
+			"x": 32,
+			"y": 42,
 			"classname": "Decoration",
 			"dat": "dat/obj/corpse_1.dat"
 		},
 		{
-			"x": 87,
+			"x": 75,
+			"y": 1,
+			"classname": "Lamp",
+			"dat": "dat/obj/lamp.dat"
+		},
+		{
+			"x": 13,
+			"y": 41,
+			"classname": "Decoration",
+			"dat": "dat/obj/rock_1.dat"
+		},
+		{
+			"x": 45,
+			"y": 84,
+			"classname": "Totem",
+			"dat": "dat/obj/totem_1.dat"
+		},
+		{
+			"x": 69,
 			"y": 43,
 			"classname": "Decoration",
 			"dat": "dat/obj/rock_1.dat"
 		},
 		{
-			"x": 47,
-			"y": 41,
-			"classname": "Lamp",
-			"dat": "dat/obj/lamp.dat"
-		},
-		{
-			"x": 48,
-			"y": 41,
-			"classname": "Decoration",
-			"dat": "dat/obj/rock_1.dat"
-		},
-		{
-			"x": 42,
-			"y": 83,
-			"classname": "Decoration",
-			"dat": "dat/obj/rock_1.dat"
-		},
-		{
-			"x": 25,
-			"y": 39,
-			"classname": "Decoration",
-			"dat": "dat/obj/corpse_1.dat"
-		},
-		{
-			"x": 58,
-			"y": 40,
-			"classname": "Lamp",
-			"dat": "dat/obj/lamp.dat"
-		},
-		{
-			"x": 37,
-			"y": 39,
-			"classname": "Decoration",
-			"dat": "dat/obj/rock_1.dat"
-		},
-		{
-			"x": 16,
-			"y": 38,
-			"classname": "Decoration",
-			"dat": "dat/obj/rock_1.dat"
-		},
-		{
 			"x": 55,
-			"y": 39,
-			"classname": "Decoration",
-			"dat": "dat/obj/corpse_1.dat"
-		},
-		{
-			"x": 21,
-			"y": 80,
-			"classname": "Decoration",
-			"dat": "dat/obj/corpse_1.dat"
-		},
-		{
-			"x": 85,
-			"y": 40,
-			"classname": "Lamp",
-			"dat": "dat/obj/lamp.dat"
-		},
-		{
-			"x": 21,
-			"y": 37,
+			"y": 85,
 			"classname": "Decoration",
 			"dat": "dat/obj/rock_1.dat"
-		},
-		{
-			"x": 5,
-			"y": 36,
-			"classname": "Decoration",
-			"dat": "dat/obj/corpse_1.dat"
-		},
-		{
-			"x": 32,
-			"y": 37,
-			"classname": "Decoration",
-			"dat": "dat/obj/rock_1.dat"
-		},
-		{
-			"x": 1,
-			"y": 35,
-			"classname": "Decoration",
-			"dat": "dat/obj/rock_1.dat"
-		},
-		{
-			"x": 29,
-			"y": 35,
-			"classname": "Lamp",
-			"dat": "dat/obj/lamp.dat"
-		},
-		{
-			"x": 22,
-			"y": 77,
-			"classname": "Decoration",
-			"dat": "dat/obj/rock_1.dat"
-		},
-		{
-			"x": 26,
-			"y": 77,
-			"classname": "Decoration",
-			"dat": "dat/obj/rock_1.dat"
-		},
-		{
-			"x": 44,
-			"y": 34,
-			"classname": "Decoration",
-			"dat": "dat/obj/rock_1.dat"
-		},
-		{
-			"x": 47,
-			"y": 34,
-			"classname": "Lamp",
-			"dat": "dat/obj/lamp.dat"
-		},
-		{
-			"x": 33,
-			"y": 76,
-			"classname": "Lamp",
-			"dat": "dat/obj/lamp.dat"
 		},
 		{
 			"x": 73,
-			"y": 35,
+			"y": 43,
 			"classname": "Decoration",
 			"dat": "dat/obj/rock_1.dat"
 		},
 		{
-			"x": 50,
-			"y": 34,
+			"x": 4,
+			"y": 40,
 			"classname": "Decoration",
 			"dat": "dat/obj/corpse_1.dat"
 		},
 		{
-			"x": 27,
-			"y": 33,
-			"classname": "Decoration",
-			"dat": "dat/obj/rock_1.dat"
-		},
-		{
-			"x": 81,
-			"y": 35,
+			"x": 38,
+			"y": 84,
 			"classname": "Decoration",
 			"dat": "dat/obj/rock_1.dat"
 		},
 		{
 			"x": 57,
-			"y": 34,
+			"y": 42,
+			"classname": "Decoration",
+			"dat": "dat/obj/rock_1.dat"
+		},
+		{
+			"x": 95,
+			"y": 43,
+			"classname": "Decoration",
+			"dat": "dat/obj/rock_1.dat"
+		},
+		{
+			"x": 31,
+			"y": 40,
+			"classname": "Lamp",
+			"dat": "dat/obj/lamp.dat"
+		},
+		{
+			"x": 115,
+			"y": 86,
+			"classname": "Decoration",
+			"dat": "dat/obj/rock_1.dat"
+		},
+		{
+			"x": 40,
+			"y": 40,
 			"classname": "Lamp",
 			"dat": "dat/obj/lamp.dat"
 		},
 		{
 			"x": 89,
-			"y": 34,
-			"classname": "Totem",
-			"dat": "dat/obj/totem_1.dat"
-		},
-		{
-			"x": 38,
-			"y": 31,
+			"y": 42,
 			"classname": "Decoration",
 			"dat": "dat/obj/rock_1.dat"
 		},
 		{
-			"x": 89,
-			"y": 33,
+			"x": 53,
+			"y": 83,
 			"classname": "Decoration",
 			"dat": "dat/obj/rock_1.dat"
 		},
 		{
-			"x": 8,
-			"y": 28,
-			"classname": "Totem",
-			"dat": "dat/obj/totem_1.dat"
-		},
-		{
-			"x": 69,
-			"y": 31,
+			"x": 4,
+			"y": 38,
 			"classname": "Decoration",
 			"dat": "dat/obj/rock_1.dat"
 		},
 		{
-			"x": 82,
-			"y": 31,
+			"x": 63,
+			"y": 40,
 			"classname": "Decoration",
 			"dat": "dat/obj/corpse_1.dat"
 		},
 		{
-			"x": 15,
-			"y": 28,
-			"classname": "Decoration",
-			"dat": "dat/obj/corpse_1.dat"
-		},
-		{
-			"x": 18,
-			"y": 70,
-			"classname": "Decoration",
-			"dat": "dat/obj/rock_1.dat"
+			"x": 44,
+			"y": 39,
+			"classname": "Stair",
+			"dat": "dat/obj/stair_down.dat"
 		},
 		{
 			"x": 13,
+			"y": 37,
+			"classname": "Decoration",
+			"dat": "dat/obj/corpse_1.dat"
+		},
+		{
+			"x": 32,
+			"y": 80,
+			"classname": "Decoration",
+			"dat": "dat/obj/corpse_1.dat"
+		},
+		{
+			"x": 53,
+			"y": 38,
+			"classname": "Decoration",
+			"dat": "dat/obj/rock_1.dat"
+		},
+		{
+			"x": 66,
+			"y": 81,
+			"classname": "Lamp",
+			"dat": "dat/obj/lamp.dat"
+		},
+		{
+			"x": 65,
+			"y": 38,
+			"classname": "Decoration",
+			"dat": "dat/obj/rock_1.dat"
+		},
+		{
+			"x": 122,
+			"y": 40,
+			"classname": "Decoration",
+			"dat": "dat/obj/rock_1.dat"
+		},
+		{
+			"x": 76,
+			"y": 38,
+			"classname": "Decoration",
+			"dat": "dat/obj/rock_1.dat"
+		},
+		{
+			"x": 134,
+			"y": 40,
+			"classname": "Decoration",
+			"dat": "dat/obj/rock_1.dat"
+		},
+		{
+			"x": 38,
+			"y": 35,
+			"classname": "Totem",
+			"dat": "dat/obj/totem_1.dat"
+		},
+		{
+			"x": 40,
+			"y": 36,
+			"classname": "Decoration",
+			"dat": "dat/obj/rock_1.dat"
+		},
+		{
+			"x": 71,
+			"y": 79,
+			"classname": "Lamp",
+			"dat": "dat/obj/lamp.dat"
+		},
+		{
+			"x": 96,
+			"y": 80,
+			"classname": "Decoration",
+			"dat": "dat/obj/rock_1.dat"
+		},
+		{
+			"x": 99,
+			"y": 80,
+			"classname": "Decoration",
+			"dat": "dat/obj/rock_1.dat"
+		},
+		{
+			"x": 74,
+			"y": 36,
+			"classname": "Decoration",
+			"dat": "dat/obj/corpse_1.dat"
+		},
+		{
+			"x": 113,
+			"y": 80,
+			"classname": "Decoration",
+			"dat": "dat/obj/rock_1.dat"
+		},
+		{
+			"x": 93,
+			"y": 36,
+			"classname": "Decoration",
+			"dat": "dat/obj/rock_1.dat"
+		},
+		{
+			"x": 54,
+			"y": 34,
+			"classname": "Decoration",
+			"dat": "dat/obj/corpse_1.dat"
+		},
+		{
+			"x": 104,
+			"y": 36,
+			"classname": "Decoration",
+			"dat": "dat/obj/rock_1.dat"
+		},
+		{
+			"x": 84,
+			"y": 35,
+			"classname": "Decoration",
+			"dat": "dat/obj/rock_1.dat"
+		},
+		{
+			"x": 94,
+			"y": 78,
+			"classname": "Lamp",
+			"dat": "dat/obj/lamp.dat"
+		},
+		{
+			"x": 115,
+			"y": 36,
+			"classname": "Decoration",
+			"dat": "dat/obj/corpse_1.dat"
+		},
+		{
+			"x": 84,
+			"y": 77,
+			"classname": "Decoration",
+			"dat": "dat/obj/rock_1.dat"
+		},
+		{
+			"x": 86,
+			"y": 77,
+			"classname": "Decoration",
+			"dat": "dat/obj/corpse_1.dat"
+		},
+		{
+			"x": 41,
+			"y": 75,
+			"classname": "Decoration",
+			"dat": "dat/obj/rock_1.dat"
+		},
+		{
+			"x": 69,
+			"y": 76,
+			"classname": "Decoration",
+			"dat": "dat/obj/rock_1.dat"
+		},
+		{
+			"x": 103,
+			"y": 34,
+			"classname": "Lamp",
+			"dat": "dat/obj/lamp.dat"
+		},
+		{
+			"x": 108,
+			"y": 34,
+			"classname": "Decoration",
+			"dat": "dat/obj/corpse_1.dat"
+		},
+		{
+			"x": 100,
+			"y": 76,
+			"classname": "Decoration",
+			"dat": "dat/obj/corpse_1.dat"
+		},
+		{
+			"x": 32,
+			"y": 73,
+			"classname": "Decoration",
+			"dat": "dat/obj/rock_1.dat"
+		},
+		{
+			"x": 79,
+			"y": 32,
+			"classname": "Decoration",
+			"dat": "dat/obj/rock_1.dat"
+		},
+		{
+			"x": 105,
+			"y": 75,
+			"classname": "Decoration",
+			"dat": "dat/obj/corpse_1.dat"
+		},
+		{
+			"x": 84,
+			"y": 74,
+			"classname": "Lamp",
+			"dat": "dat/obj/lamp.dat"
+		},
+		{
+			"x": 111,
+			"y": 75,
+			"classname": "Decoration",
+			"dat": "dat/obj/corpse_1.dat"
+		},
+		{
+			"x": 93,
+			"y": 74,
+			"classname": "Decoration",
+			"dat": "dat/obj/corpse_1.dat"
+		},
+		{
+			"x": 47,
+			"y": 72,
+			"classname": "Decoration",
+			"dat": "dat/obj/rock_1.dat"
+		},
+		{
+			"x": 50,
+			"y": 72,
+			"classname": "Decoration",
+			"dat": "dat/obj/rock_1.dat"
+		},
+		{
+			"x": 76,
+			"y": 30,
+			"classname": "Lamp",
+			"dat": "dat/obj/lamp.dat"
+		},
+		{
+			"x": 48,
+			"y": 71,
+			"classname": "Decoration",
+			"dat": "dat/obj/corpse_1.dat"
+		},
+		{
+			"x": 92,
+			"y": 30,
+			"classname": "Decoration",
+			"dat": "dat/obj/rock_1.dat"
+		},
+		{
+			"x": 69,
+			"y": 29,
+			"classname": "Decoration",
+			"dat": "dat/obj/rock_1.dat"
+		},
+		{
+			"x": 102,
+			"y": 73,
+			"classname": "Decoration",
+			"dat": "dat/obj/rock_1.dat"
+		},
+		{
+			"x": 44,
+			"y": 69,
+			"classname": "Decoration",
+			"dat": "dat/obj/rock_1.dat"
+		},
+		{
+			"x": 66,
 			"y": 27,
 			"classname": "Decoration",
 			"dat": "dat/obj/rock_1.dat"
 		},
 		{
-			"x": 16,
-			"y": 27,
-			"classname": "Lamp",
-			"dat": "dat/obj/lamp.dat"
-		},
-		{
-			"x": 68,
-			"y": 29,
-			"classname": "Decoration",
-			"dat": "dat/obj/corpse_1.dat"
-		},
-		{
-			"x": 35,
-			"y": 69,
-			"classname": "Decoration",
-			"dat": "dat/obj/corpse_1.dat"
-		},
-		{
-			"x": 8,
-			"y": 25,
-			"classname": "Decoration",
-			"dat": "dat/obj/corpse_1.dat"
-		},
-		{
-			"x": 17,
+			"x": 54,
 			"y": 68,
 			"classname": "Decoration",
 			"dat": "dat/obj/corpse_1.dat"
 		},
 		{
-			"x": 80,
-			"y": 26,
-			"classname": "Lamp",
-			"dat": "dat/obj/lamp.dat"
-		},
-		{
-			"x": 40,
-			"y": 67,
-			"classname": "Lamp",
-			"dat": "dat/obj/lamp.dat"
-		},
-		{
-			"x": 21,
-			"y": 66,
+			"x": 105,
+			"y": 70,
 			"classname": "Decoration",
 			"dat": "dat/obj/rock_1.dat"
 		},
 		{
-			"x": 97,
+			"x": 80,
 			"y": 69,
 			"classname": "Lamp",
 			"dat": "dat/obj/lamp.dat"
 		},
 		{
-			"x": 67,
-			"y": 25,
+			"x": 74,
+			"y": 26,
+			"classname": "Lamp",
+			"dat": "dat/obj/lamp.dat"
+		},
+		{
+			"x": 58,
+			"y": 68,
+			"classname": "Decoration",
+			"dat": "dat/obj/corpse_1.dat"
+		},
+		{
+			"x": 37,
+			"y": 67,
+			"classname": "Decoration",
+			"dat": "dat/obj/corpse_1.dat"
+		},
+		{
+			"x": 110,
+			"y": 69,
 			"classname": "Decoration",
 			"dat": "dat/obj/rock_1.dat"
 		},
 		{
-			"x": 69,
-			"y": 25,
-			"classname": "Lamp",
-			"dat": "dat/obj/lamp.dat"
+			"x": 103,
+			"y": 67,
+			"classname": "Totem",
+			"dat": "dat/obj/totem_1.dat"
 		},
 		{
-			"x": 45,
+			"x": 58,
 			"y": 66,
-			"classname": "Lamp",
-			"dat": "dat/obj/lamp.dat"
+			"classname": "Decoration",
+			"dat": "dat/obj/rock_1.dat"
 		},
 		{
-			"x": 24,
+			"x": 36,
 			"y": 65,
 			"classname": "Decoration",
 			"dat": "dat/obj/rock_1.dat"
@@ -345,65 +519,53 @@
 			"x": 43,
 			"y": 65,
 			"classname": "Decoration",
-			"dat": "dat/obj/rock_1.dat"
-		},
-		{
-			"x": 28,
-			"y": 64,
-			"classname": "Decoration",
 			"dat": "dat/obj/corpse_1.dat"
 		},
 		{
-			"x": 62,
+			"x": 83,
 			"y": 65,
-			"classname": "Lamp",
-			"dat": "dat/obj/lamp.dat"
-		},
-		{
-			"x": 73,
-			"y": 65,
-			"classname": "Lamp",
-			"dat": "dat/obj/lamp.dat"
-		},
-		{
-			"x": 98,
-			"y": 66,
 			"classname": "Decoration",
 			"dat": "dat/obj/rock_1.dat"
 		},
 		{
-			"x": 35,
+			"x": 39,
 			"y": 63,
 			"classname": "Decoration",
 			"dat": "dat/obj/rock_1.dat"
 		},
 		{
-			"x": 27,
-			"y": 61,
-			"classname": "Decoration",
-			"dat": "dat/obj/rock_1.dat"
-		},
-		{
-			"x": 52,
-			"y": 62,
-			"classname": "Lamp",
-			"dat": "dat/obj/lamp.dat"
-		},
-		{
-			"x": 70,
-			"y": 62,
-			"classname": "Decoration",
-			"dat": "dat/obj/rock_1.dat"
-		},
-		{
-			"x": 63,
-			"y": 61,
+			"x": 42,
+			"y": 63,
 			"classname": "Decoration",
 			"dat": "dat/obj/corpse_1.dat"
 		},
 		{
-			"x": 39,
-			"y": 60,
+			"x": 71,
+			"y": 21,
+			"classname": "Decoration",
+			"dat": "dat/obj/corpse_1.dat"
+		},
+		{
+			"x": 83,
+			"y": 20,
+			"classname": "Totem",
+			"dat": "dat/obj/totem_1.dat"
+		},
+		{
+			"x": 61,
+			"y": 62,
+			"classname": "Decoration",
+			"dat": "dat/obj/rock_1.dat"
+		},
+		{
+			"x": 108,
+			"y": 63,
+			"classname": "Decoration",
+			"dat": "dat/obj/rock_1.dat"
+		},
+		{
+			"x": 79,
+			"y": 19,
 			"classname": "Decoration",
 			"dat": "dat/obj/rock_1.dat"
 		},
@@ -414,254 +576,230 @@
 			"dat": "dat/obj/corpse_1.dat"
 		},
 		{
-			"x": 80,
-			"y": 61,
-			"classname": "Lamp",
-			"dat": "dat/obj/lamp.dat"
-		},
-		{
-			"x": 56,
-			"y": 59,
-			"classname": "Totem",
-			"dat": "dat/obj/totem_1.dat"
-		},
-		{
-			"x": 51,
-			"y": 17,
+			"x": 73,
+			"y": 18,
 			"classname": "Decoration",
 			"dat": "dat/obj/rock_1.dat"
 		},
 		{
-			"x": 52,
+			"x": 101,
+			"y": 19,
+			"classname": "Decoration",
+			"dat": "dat/obj/corpse_1.dat"
+		},
+		{
+			"x": 83,
+			"y": 18,
+			"classname": "Decoration",
+			"dat": "dat/obj/rock_1.dat"
+		},
+		{
+			"x": 48,
 			"y": 59,
+			"classname": "Decoration",
+			"dat": "dat/obj/corpse_1.dat"
+		},
+		{
+			"x": 68,
+			"y": 59,
+			"classname": "Decoration",
+			"dat": "dat/obj/corpse_1.dat"
+		},
+		{
+			"x": 69,
+			"y": 59,
+			"classname": "Decoration",
+			"dat": "dat/obj/rock_1.dat"
+		},
+		{
+			"x": 88,
+			"y": 59,
+			"classname": "Decoration",
+			"dat": "dat/obj/rock_1.dat"
+		},
+		{
+			"x": 115,
+			"y": 60,
 			"classname": "Lamp",
 			"dat": "dat/obj/lamp.dat"
 		},
 		{
-			"x": 49,
+			"x": 88,
 			"y": 16,
+			"classname": "Stair",
+			"dat": "dat/obj/stair_up.dat"
+		},
+		{
+			"x": 123,
+			"y": 60,
 			"classname": "Lamp",
 			"dat": "dat/obj/lamp.dat"
 		},
 		{
 			"x": 59,
-			"y": 16,
-			"classname": "Lamp",
-			"dat": "dat/obj/lamp.dat"
-		},
-		{
-			"x": 56,
-			"y": 58,
+			"y": 56,
 			"classname": "Decoration",
 			"dat": "dat/obj/corpse_1.dat"
 		},
 		{
-			"x": 77,
-			"y": 58,
-			"classname": "Stair",
-			"dat": "dat/obj/stair_down.dat"
-		},
-		{
-			"x": 31,
+			"x": 80,
 			"y": 56,
 			"classname": "Decoration",
 			"dat": "dat/obj/rock_1.dat"
 		},
 		{
-			"x": 65,
-			"y": 57,
+			"x": 97,
+			"y": 14,
+			"classname": "Decoration",
+			"dat": "dat/obj/corpse_1.dat"
+		},
+		{
+			"x": 78,
+			"y": 13,
+			"classname": "Decoration",
+			"dat": "dat/obj/corpse_1.dat"
+		},
+		{
+			"x": 102,
+			"y": 14,
 			"classname": "Decoration",
 			"dat": "dat/obj/rock_1.dat"
-		},
-		{
-			"x": 68,
-			"y": 57,
-			"classname": "Decoration",
-			"dat": "dat/obj/corpse_1.dat"
-		},
-		{
-			"x": 40,
-			"y": 55,
-			"classname": "Decoration",
-			"dat": "dat/obj/corpse_1.dat"
-		},
-		{
-			"x": 45,
-			"y": 55,
-			"classname": "Decoration",
-			"dat": "dat/obj/rock_1.dat"
-		},
-		{
-			"x": 96,
-			"y": 57,
-			"classname": "Decoration",
-			"dat": "dat/obj/corpse_1.dat"
 		},
 		{
 			"x": 91,
-			"y": 56,
+			"y": 13,
 			"classname": "Decoration",
 			"dat": "dat/obj/rock_1.dat"
 		},
 		{
-			"x": 22,
-			"y": 53,
-			"classname": "Decoration",
-			"dat": "dat/obj/corpse_1.dat"
-		},
-		{
-			"x": 74,
-			"y": 55,
+			"x": 37,
+			"y": 52,
 			"classname": "Decoration",
 			"dat": "dat/obj/rock_1.dat"
 		},
 		{
-			"x": 84,
-			"y": 55,
-			"classname": "Decoration",
-			"dat": "dat/obj/rock_1.dat"
-		},
-		{
-			"x": 56,
-			"y": 11,
-			"classname": "Decoration",
-			"dat": "dat/obj/rock_1.dat"
-		},
-		{
-			"x": 89,
-			"y": 55,
-			"classname": "Lamp",
-			"dat": "dat/obj/lamp.dat"
-		},
-		{
-			"x": 44,
-			"y": 53,
-			"classname": "Lamp",
-			"dat": "dat/obj/lamp.dat"
-		},
-		{
-			"x": 16,
-			"y": 51,
-			"classname": "Decoration",
-			"dat": "dat/obj/rock_1.dat"
-		},
-		{
-			"x": 63,
+			"x": 64,
 			"y": 10,
 			"classname": "Decoration",
 			"dat": "dat/obj/rock_1.dat"
 		},
 		{
-			"x": 73,
-			"y": 52,
-			"classname": "Totem",
-			"dat": "dat/obj/totem_1.dat"
-		},
-		{
-			"x": 50,
-			"y": 52,
-			"classname": "Lamp",
-			"dat": "dat/obj/lamp.dat"
+			"x": 87,
+			"y": 10,
+			"classname": "Decoration",
+			"dat": "dat/obj/rock_1.dat"
 		},
 		{
 			"x": 76,
-			"y": 52,
+			"y": 9,
 			"classname": "Decoration",
 			"dat": "dat/obj/rock_1.dat"
 		},
 		{
-			"x": 99,
-			"y": 52,
+			"x": 84,
+			"y": 9,
+			"classname": "Decoration",
+			"dat": "dat/obj/corpse_1.dat"
+		},
+		{
+			"x": 69,
+			"y": 51,
+			"classname": "Decoration",
+			"dat": "dat/obj/corpse_1.dat"
+		},
+		{
+			"x": 32,
+			"y": 49,
+			"classname": "Decoration",
+			"dat": "dat/obj/rock_1.dat"
+		},
+		{
+			"x": 16,
+			"y": 48,
 			"classname": "Lamp",
 			"dat": "dat/obj/lamp.dat"
 		},
 		{
-			"x": 56,
-			"y": 50,
-			"classname": "Decoration",
-			"dat": "dat/obj/rock_1.dat"
-		},
-		{
-			"x": 66,
-			"y": 50,
-			"classname": "Stair",
-			"dat": "dat/obj/stair_up.dat"
-		},
-		{
-			"x": 68,
-			"y": 50,
+			"x": 22,
+			"y": 48,
 			"classname": "Decoration",
 			"dat": "dat/obj/rock_1.dat"
 		},
 		{
 			"x": 47,
+			"y": 49,
+			"classname": "Decoration",
+			"dat": "dat/obj/rock_1.dat"
+		},
+		{
+			"x": 45,
+			"y": 48,
+			"classname": "Decoration",
+			"dat": "dat/obj/rock_1.dat"
+		},
+		{
+			"x": 117,
+			"y": 51,
+			"classname": "Decoration",
+			"dat": "dat/obj/rock_1.dat"
+		},
+		{
+			"x": 24,
+			"y": 47,
+			"classname": "Decoration",
+			"dat": "dat/obj/corpse_1.dat"
+		},
+		{
+			"x": 92,
+			"y": 7,
+			"classname": "Decoration",
+			"dat": "dat/obj/corpse_1.dat"
+		},
+		{
+			"x": 44,
+			"y": 90,
+			"classname": "Decoration",
+			"dat": "dat/obj/rock_1.dat"
+		},
+		{
+			"x": 48,
+			"y": 90,
+			"classname": "Decoration",
+			"dat": "dat/obj/corpse_1.dat"
+		},
+		{
+			"x": 115,
+			"y": 50,
+			"classname": "Decoration",
+			"dat": "dat/obj/corpse_1.dat"
+		},
+		{
+			"x": 95,
 			"y": 6,
 			"classname": "Decoration",
 			"dat": "dat/obj/rock_1.dat"
 		},
 		{
-			"x": 60,
+			"x": 108,
 			"y": 49,
 			"classname": "Decoration",
 			"dat": "dat/obj/rock_1.dat"
 		},
 		{
-			"x": 63,
-			"y": 49,
+			"x": 26,
+			"y": 44,
 			"classname": "Decoration",
 			"dat": "dat/obj/rock_1.dat"
 		},
 		{
-			"x": 94,
-			"y": 50,
-			"classname": "Lamp",
-			"dat": "dat/obj/lamp.dat"
-		},
-		{
-			"x": 25,
+			"x": 98,
 			"y": 47,
 			"classname": "Lamp",
 			"dat": "dat/obj/lamp.dat"
 		},
 		{
-			"x": 29,
-			"y": 47,
-			"classname": "Decoration",
-			"dat": "dat/obj/rock_1.dat"
-		},
-		{
-			"x": 54,
-			"y": 5,
-			"classname": "Decoration",
-			"dat": "dat/obj/corpse_1.dat"
-		},
-		{
-			"x": 96,
-			"y": 49,
-			"classname": "Decoration",
-			"dat": "dat/obj/rock_1.dat"
-		},
-		{
-			"x": 74,
+			"x": 125,
 			"y": 48,
-			"classname": "Decoration",
-			"dat": "dat/obj/corpse_1.dat"
-		},
-		{
-			"x": 35,
-			"y": 46,
-			"classname": "Decoration",
-			"dat": "dat/obj/corpse_1.dat"
-		},
-		{
-			"x": 65,
-			"y": 4,
-			"classname": "Decoration",
-			"dat": "dat/obj/corpse_1.dat"
-		},
-		{
-			"x": 52,
-			"y": 3,
 			"classname": "Decoration",
 			"dat": "dat/obj/rock_1.dat"
 		}
@@ -670,756 +808,804 @@
 		"nodes": [
 			{
 				"p1": {
-					"x": 2176,
-					"y": 1488
+					"x": 1312,
+					"y": 1120
 				},
 				"p2": {
-					"x": 2096,
-					"y": 800
+					"x": 544,
+					"y": 2192
 				}
 			},
 			{
 				"p1": {
-					"x": 2096,
-					"y": 800
+					"x": 1920,
+					"y": 192
 				},
 				"p2": {
-					"x": 128,
-					"y": 816
+					"x": 1312,
+					"y": 1120
 				}
 			},
 			{
 				"p1": {
-					"x": 2096,
-					"y": 800
+					"x": 1920,
+					"y": 192
 				},
 				"p2": {
-					"x": 1648,
-					"y": 1424
+					"x": 608,
+					"y": 928
 				}
 			},
 			{
 				"p1": {
-					"x": 464,
-					"y": 1744
+					"x": 2480,
+					"y": 2112
 				},
 				"p2": {
-					"x": 1648,
-					"y": 1424
+					"x": 1920,
+					"y": 192
 				}
 			}
 		],
 		"corridors": [
 			{
 				"p1": {
-					"x": 2096,
-					"y": 800
+					"x": 2480,
+					"y": 2112
 				},
 				"p2": {
-					"x": 1648,
-					"y": 800
+					"x": 1920,
+					"y": 2112
 				}
 			},
 			{
 				"p1": {
-					"x": 1648,
-					"y": 800
+					"x": 1920,
+					"y": 2112
 				},
 				"p2": {
-					"x": 1648,
-					"y": 1424
+					"x": 1920,
+					"y": 192
 				}
 			},
 			{
 				"p1": {
-					"x": 2096,
-					"y": 800
+					"x": 2480,
+					"y": 2112
 				},
 				"p2": {
-					"x": 2096,
-					"y": 816
+					"x": 2480,
+					"y": 1120
 				}
 			},
 			{
 				"p1": {
-					"x": 2096,
-					"y": 816
+					"x": 2480,
+					"y": 1120
 				},
 				"p2": {
-					"x": 128,
-					"y": 816
+					"x": 1312,
+					"y": 1120
 				}
 			},
 			{
 				"p1": {
-					"x": 1648,
-					"y": 1424
+					"x": 544,
+					"y": 2192
 				},
 				"p2": {
-					"x": 1648,
-					"y": 1488
+					"x": 544,
+					"y": 2112
 				}
 			},
 			{
 				"p1": {
-					"x": 1648,
-					"y": 1488
+					"x": 544,
+					"y": 2112
 				},
 				"p2": {
-					"x": 2176,
-					"y": 1488
+					"x": 2480,
+					"y": 2112
 				}
 			},
 			{
 				"p1": {
-					"x": 1648,
-					"y": 1424
+					"x": 544,
+					"y": 2192
 				},
 				"p2": {
-					"x": 1648,
-					"y": 816
+					"x": 1312,
+					"y": 2192
 				}
 			},
 			{
 				"p1": {
-					"x": 1648,
-					"y": 816
+					"x": 1312,
+					"y": 2192
 				},
 				"p2": {
-					"x": 128,
-					"y": 816
+					"x": 1312,
+					"y": 1120
 				}
 			},
 			{
 				"p1": {
-					"x": 1648,
-					"y": 1424
+					"x": 1920,
+					"y": 192
 				},
 				"p2": {
-					"x": 1648,
-					"y": 1744
+					"x": 1312,
+					"y": 192
 				}
 			},
 			{
 				"p1": {
-					"x": 1648,
-					"y": 1744
+					"x": 1312,
+					"y": 192
 				},
 				"p2": {
-					"x": 464,
-					"y": 1744
+					"x": 1312,
+					"y": 1120
 				}
 			},
 			{
 				"p1": {
-					"x": 1648,
-					"y": 1424
+					"x": 1920,
+					"y": 192
 				},
 				"p2": {
-					"x": 2096,
-					"y": 1424
+					"x": 1920,
+					"y": 928
 				}
 			},
 			{
 				"p1": {
-					"x": 2096,
-					"y": 1424
+					"x": 1920,
+					"y": 928
 				},
 				"p2": {
-					"x": 2096,
-					"y": 800
+					"x": 608,
+					"y": 928
 				}
 			},
 			{
 				"p1": {
-					"x": 464,
-					"y": 1744
+					"x": 1312,
+					"y": 1120
 				},
 				"p2": {
-					"x": 464,
-					"y": 1424
+					"x": 1312,
+					"y": 2112
 				}
 			},
 			{
 				"p1": {
-					"x": 464,
-					"y": 1424
+					"x": 1312,
+					"y": 2112
 				},
 				"p2": {
-					"x": 1648,
-					"y": 1424
+					"x": 2480,
+					"y": 2112
 				}
 			},
 			{
 				"p1": {
-					"x": 464,
-					"y": 1744
+					"x": 1312,
+					"y": 1120
 				},
 				"p2": {
-					"x": 464,
-					"y": 1488
+					"x": 544,
+					"y": 1120
 				}
 			},
 			{
 				"p1": {
-					"x": 464,
-					"y": 1488
+					"x": 544,
+					"y": 1120
 				},
 				"p2": {
-					"x": 2176,
-					"y": 1488
+					"x": 544,
+					"y": 2192
 				}
 			},
 			{
 				"p1": {
-					"x": 2176,
-					"y": 1488
+					"x": 1312,
+					"y": 1120
 				},
 				"p2": {
-					"x": 2096,
-					"y": 1488
+					"x": 1312,
+					"y": 928
 				}
 			},
 			{
 				"p1": {
-					"x": 2096,
-					"y": 1488
+					"x": 1312,
+					"y": 928
 				},
 				"p2": {
-					"x": 2096,
-					"y": 800
+					"x": 608,
+					"y": 928
 				}
 			},
 			{
 				"p1": {
-					"x": 2176,
-					"y": 1488
+					"x": 1312,
+					"y": 1120
 				},
 				"p2": {
-					"x": 2176,
-					"y": 1424
+					"x": 1920,
+					"y": 1120
 				}
 			},
 			{
 				"p1": {
-					"x": 2176,
-					"y": 1424
+					"x": 1920,
+					"y": 1120
 				},
 				"p2": {
-					"x": 1648,
-					"y": 1424
+					"x": 1920,
+					"y": 192
 				}
 			},
 			{
 				"p1": {
-					"x": 128,
-					"y": 816
+					"x": 608,
+					"y": 928
 				},
 				"p2": {
-					"x": 464,
-					"y": 816
+					"x": 544,
+					"y": 928
 				}
 			},
 			{
 				"p1": {
-					"x": 464,
-					"y": 816
+					"x": 544,
+					"y": 928
 				},
 				"p2": {
-					"x": 464,
-					"y": 1744
+					"x": 544,
+					"y": 2192
 				}
 			},
 			{
 				"p1": {
-					"x": 128,
-					"y": 816
+					"x": 608,
+					"y": 928
 				},
 				"p2": {
-					"x": 128,
-					"y": 1424
+					"x": 608,
+					"y": 1120
 				}
 			},
 			{
 				"p1": {
-					"x": 128,
-					"y": 1424
+					"x": 608,
+					"y": 1120
 				},
 				"p2": {
-					"x": 1648,
-					"y": 1424
+					"x": 1312,
+					"y": 1120
 				}
 			}
 		],
 		"rooms": [
 			{
-				"x": -160,
-				"y": 544,
-				"width": 576,
-				"height": 544
+				"x": 1440,
+				"y": -192,
+				"width": 960,
+				"height": 768
 			},
 			{
-				"x": 1984,
-				"y": 1344,
-				"width": 384,
-				"height": 288
+				"x": 2112,
+				"y": 1696,
+				"width": 736,
+				"height": 832
 			},
 			{
-				"x": 1344,
-				"y": 1024,
-				"width": 608,
+				"x": 96,
+				"y": 1792,
+				"width": 896,
 				"height": 800
 			},
 			{
-				"x": 1632,
-				"y": 608,
-				"width": 928,
-				"height": 384
-			},
-			{
-				"x": 64,
-				"y": 1376,
-				"width": 800,
-				"height": 736
-			},
-			{
-				"x": 128,
-				"y": 1888,
-				"width": 480,
-				"height": 640
-			},
-			{
-				"x": 1056,
-				"y": 992,
-				"width": 544,
+				"x": 256,
+				"y": 832,
+				"width": 704,
 				"height": 192
 			},
 			{
-				"x": 1088,
-				"y": -256,
+				"x": 992,
+				"y": 736,
 				"width": 640,
-				"height": 448
+				"height": 768
 			},
 			{
-				"x": 672,
-				"y": 448,
-				"width": 160,
-				"height": 352
-			},
-			{
-				"x": 736,
-				"y": 2176,
-				"width": 384,
-				"height": 352
-			},
-			{
-				"x": 1024,
-				"y": 288,
-				"width": 352,
-				"height": 224
-			},
-			{
-				"x": 480,
-				"y": 1504,
-				"width": 352,
-				"height": 352
-			},
-			{
-				"x": 2368,
-				"y": 1472,
-				"width": 416,
-				"height": 416
-			},
-			{
-				"x": 928,
-				"y": 992,
+				"x": 704,
+				"y": 672,
 				"width": 128,
-				"height": 160
+				"height": 288
 			},
 			{
-				"x": 192,
-				"y": 896,
-				"width": 288,
-				"height": 320
+				"x": 2752,
+				"y": 864,
+				"width": 640,
+				"height": 192
 			},
 			{
-				"x": 2336,
-				"y": 1024,
+				"x": -896,
+				"y": 736,
 				"width": 512,
-				"height": 320
+				"height": 544
 			},
 			{
-				"x": 1760,
-				"y": 992,
-				"width": 384,
-				"height": 576
-			},
-			{
-				"x": 1728,
-				"y": 512,
-				"width": 448,
+				"x": 1216,
+				"y": -256,
+				"width": 416,
 				"height": 288
-			},
-			{
-				"x": 544,
-				"y": 928,
-				"width": 352,
-				"height": 512
-			},
-			{
-				"x": -384,
-				"y": 768,
-				"width": 448,
-				"height": 352
 			},
 			{
 				"x": 480,
-				"y": 1504,
-				"width": 352,
-				"height": 352
-			},
-			{
-				"x": 192,
-				"y": 896,
-				"width": 288,
-				"height": 320
-			},
-			{
-				"x": 1760,
-				"y": 992,
-				"width": 384,
-				"height": 576
-			},
-			{
-				"x": 1728,
-				"y": 512,
-				"width": 448,
-				"height": 288
-			},
-			{
-				"x": 544,
-				"y": 928,
-				"width": 352,
-				"height": 512
-			},
-			{
-				"x": 1648,
-				"y": 800,
-				"width": 448,
-				"height": 128
-			},
-			{
-				"x": 1648,
-				"y": 800,
-				"width": 128,
-				"height": 624
-			},
-			{
-				"x": 2096,
-				"y": 800,
-				"width": 128,
-				"height": 16
-			},
-			{
-				"x": 128,
-				"y": 816,
-				"width": 1968,
-				"height": 128
-			},
-			{
-				"x": 1648,
-				"y": 1424,
-				"width": 128,
-				"height": 64
-			},
-			{
-				"x": 1648,
-				"y": 1488,
-				"width": 528,
-				"height": 128
-			},
-			{
-				"x": 1648,
-				"y": 816,
-				"width": 128,
+				"y": 2304,
+				"width": 160,
 				"height": 608
 			},
 			{
-				"x": 128,
-				"y": 816,
-				"width": 1520,
-				"height": 128
+				"x": 1952,
+				"y": 832,
+				"width": 640,
+				"height": 288
 			},
 			{
-				"x": 1648,
-				"y": 1424,
-				"width": 128,
-				"height": 320
+				"x": 1088,
+				"y": 64,
+				"width": 288,
+				"height": 640
 			},
 			{
-				"x": 464,
-				"y": 1744,
-				"width": 1184,
-				"height": 128
-			},
-			{
-				"x": 1648,
-				"y": 1424,
-				"width": 448,
-				"height": 128
-			},
-			{
-				"x": 2096,
-				"y": 800,
-				"width": 128,
-				"height": 624
-			},
-			{
-				"x": 464,
-				"y": 1424,
-				"width": 128,
-				"height": 320
-			},
-			{
-				"x": 464,
-				"y": 1424,
-				"width": 1184,
-				"height": 128
-			},
-			{
-				"x": 464,
-				"y": 1488,
-				"width": 128,
+				"x": 1248,
+				"y": 704,
+				"width": 640,
 				"height": 256
 			},
 			{
-				"x": 464,
-				"y": 1488,
-				"width": 1712,
-				"height": 128
+				"x": 128,
+				"y": 1632,
+				"width": 416,
+				"height": 608
 			},
 			{
-				"x": 2096,
-				"y": 1488,
-				"width": 80,
-				"height": 128
+				"x": 1536,
+				"y": 1440,
+				"width": 416,
+				"height": 480
 			},
 			{
-				"x": 2096,
-				"y": 800,
+				"x": -320,
+				"y": 1024,
+				"width": 640,
+				"height": 512
+			},
+			{
+				"x": 384,
+				"y": 1120,
+				"width": 192,
+				"height": 224
+			},
+			{
+				"x": 928,
+				"y": 1344,
+				"width": 512,
+				"height": 512
+			},
+			{
+				"x": 800,
+				"y": 960,
+				"width": 384,
+				"height": 320
+			},
+			{
+				"x": 2656,
+				"y": 1248,
+				"width": 576,
+				"height": 384
+			},
+			{
+				"x": 704,
+				"y": 672,
 				"width": 128,
-				"height": 688
+				"height": 288
 			},
 			{
-				"x": 2176,
-				"y": 1424,
-				"width": 128,
-				"height": 64
+				"x": 1952,
+				"y": 832,
+				"width": 640,
+				"height": 288
 			},
 			{
-				"x": 1648,
-				"y": 1424,
-				"width": 528,
-				"height": 128
+				"x": 1088,
+				"y": 64,
+				"width": 288,
+				"height": 640
+			},
+			{
+				"x": 1248,
+				"y": 704,
+				"width": 640,
+				"height": 256
 			},
 			{
 				"x": 128,
-				"y": 816,
-				"width": 336,
+				"y": 1632,
+				"width": 416,
+				"height": 608
+			},
+			{
+				"x": 1536,
+				"y": 1440,
+				"width": 416,
+				"height": 480
+			},
+			{
+				"x": 384,
+				"y": 1120,
+				"width": 192,
+				"height": 224
+			},
+			{
+				"x": 928,
+				"y": 1344,
+				"width": 512,
+				"height": 512
+			},
+			{
+				"x": 800,
+				"y": 960,
+				"width": 384,
+				"height": 320
+			},
+			{
+				"x": 1920,
+				"y": 2112,
+				"width": 560,
 				"height": 128
 			},
 			{
-				"x": 464,
-				"y": 816,
+				"x": 1920,
+				"y": 192,
+				"width": 128,
+				"height": 1920
+			},
+			{
+				"x": 2480,
+				"y": 1120,
+				"width": 128,
+				"height": 992
+			},
+			{
+				"x": 1312,
+				"y": 1120,
+				"width": 1168,
+				"height": 128
+			},
+			{
+				"x": 544,
+				"y": 2112,
+				"width": 128,
+				"height": 80
+			},
+			{
+				"x": 544,
+				"y": 2112,
+				"width": 1936,
+				"height": 128
+			},
+			{
+				"x": 544,
+				"y": 2192,
+				"width": 768,
+				"height": 128
+			},
+			{
+				"x": 1312,
+				"y": 1120,
+				"width": 128,
+				"height": 1072
+			},
+			{
+				"x": 1312,
+				"y": 192,
+				"width": 608,
+				"height": 128
+			},
+			{
+				"x": 1312,
+				"y": 192,
 				"width": 128,
 				"height": 928
 			},
 			{
-				"x": 128,
-				"y": 816,
+				"x": 1920,
+				"y": 192,
 				"width": 128,
-				"height": 608
+				"height": 736
 			},
 			{
-				"x": 128,
-				"y": 1424,
-				"width": 1520,
+				"x": 608,
+				"y": 928,
+				"width": 1312,
+				"height": 128
+			},
+			{
+				"x": 1312,
+				"y": 1120,
+				"width": 128,
+				"height": 992
+			},
+			{
+				"x": 1312,
+				"y": 2112,
+				"width": 1168,
+				"height": 128
+			},
+			{
+				"x": 544,
+				"y": 1120,
+				"width": 768,
+				"height": 128
+			},
+			{
+				"x": 544,
+				"y": 1120,
+				"width": 128,
+				"height": 1072
+			},
+			{
+				"x": 1312,
+				"y": 928,
+				"width": 128,
+				"height": 192
+			},
+			{
+				"x": 608,
+				"y": 928,
+				"width": 704,
+				"height": 128
+			},
+			{
+				"x": 1312,
+				"y": 1120,
+				"width": 608,
+				"height": 128
+			},
+			{
+				"x": 1920,
+				"y": 192,
+				"width": 128,
+				"height": 928
+			},
+			{
+				"x": 544,
+				"y": 928,
+				"width": 64,
+				"height": 128
+			},
+			{
+				"x": 544,
+				"y": 928,
+				"width": 128,
+				"height": 1264
+			},
+			{
+				"x": 608,
+				"y": 928,
+				"width": 128,
+				"height": 192
+			},
+			{
+				"x": 608,
+				"y": 1120,
+				"width": 704,
 				"height": 128
 			}
 		],
 		"mainRooms": [
 			{
-				"x": -160,
-				"y": 544,
-				"width": 576,
-				"height": 544
+				"x": 1440,
+				"y": -192,
+				"width": 960,
+				"height": 768
 			},
 			{
-				"x": 1984,
-				"y": 1344,
-				"width": 384,
-				"height": 288
+				"x": 2112,
+				"y": 1696,
+				"width": 736,
+				"height": 832
 			},
 			{
-				"x": 1344,
-				"y": 1024,
-				"width": 608,
+				"x": 96,
+				"y": 1792,
+				"width": 896,
 				"height": 800
 			},
 			{
-				"x": 1632,
-				"y": 608,
-				"width": 928,
-				"height": 384
+				"x": 256,
+				"y": 832,
+				"width": 704,
+				"height": 192
 			},
 			{
-				"x": 64,
-				"y": 1376,
-				"width": 800,
-				"height": 736
+				"x": 992,
+				"y": 736,
+				"width": 640,
+				"height": 768
 			}
 		],
 		"subRooms": [
 			{
-				"x": 480,
-				"y": 1504,
-				"width": 352,
-				"height": 352
-			},
-			{
-				"x": 192,
-				"y": 896,
-				"width": 288,
-				"height": 320
-			},
-			{
-				"x": 1760,
-				"y": 992,
-				"width": 384,
-				"height": 576
-			},
-			{
-				"x": 1728,
-				"y": 512,
-				"width": 448,
+				"x": 704,
+				"y": 672,
+				"width": 128,
 				"height": 288
 			},
 			{
-				"x": 544,
-				"y": 928,
-				"width": 352,
+				"x": 1952,
+				"y": 832,
+				"width": 640,
+				"height": 288
+			},
+			{
+				"x": 1088,
+				"y": 64,
+				"width": 288,
+				"height": 640
+			},
+			{
+				"x": 1248,
+				"y": 704,
+				"width": 640,
+				"height": 256
+			},
+			{
+				"x": 128,
+				"y": 1632,
+				"width": 416,
+				"height": 608
+			},
+			{
+				"x": 1536,
+				"y": 1440,
+				"width": 416,
+				"height": 480
+			},
+			{
+				"x": 384,
+				"y": 1120,
+				"width": 192,
+				"height": 224
+			},
+			{
+				"x": 928,
+				"y": 1344,
+				"width": 512,
 				"height": 512
+			},
+			{
+				"x": 800,
+				"y": 960,
+				"width": 384,
+				"height": 320
 			}
 		],
 		"roomConnections": {
-			"[-160.0,544.0,576.0,544.0]": [
+			"[992.0,736.0,640.0,768.0]": [
 				{
 					"class": "com.badlogic.gdx.math.Rectangle",
-					"x": 64,
-					"y": 1376,
-					"width": 800,
-					"height": 736
+					"x": 2112,
+					"y": 1696,
+					"width": 736,
+					"height": 832
 				},
 				{
 					"class": "com.badlogic.gdx.math.Rectangle",
-					"x": 1344,
-					"y": 1024,
-					"width": 608,
-					"height": 800
-				}
-			],
-			"[1984.0,1344.0,384.0,288.0]": [
-				{
-					"class": "com.badlogic.gdx.math.Rectangle",
-					"x": 1632,
-					"y": 608,
-					"width": 928,
-					"height": 384
-				},
-				{
-					"class": "com.badlogic.gdx.math.Rectangle",
-					"x": 1344,
-					"y": 1024,
-					"width": 608,
-					"height": 800
-				}
-			],
-			"[1344.0,1024.0,608.0,800.0]": [
-				{
-					"class": "com.badlogic.gdx.math.Rectangle",
-					"x": 1984,
-					"y": 1344,
-					"width": 384,
-					"height": 288
-				},
-				{
-					"class": "com.badlogic.gdx.math.Rectangle",
-					"x": -160,
-					"y": 544,
-					"width": 576,
-					"height": 544
-				},
-				{
-					"class": "com.badlogic.gdx.math.Rectangle",
-					"x": 64,
-					"y": 1376,
-					"width": 800,
-					"height": 736
-				},
-				{
-					"class": "com.badlogic.gdx.math.Rectangle",
-					"x": 1632,
-					"y": 608,
-					"width": 928,
-					"height": 384
-				}
-			],
-			"[64.0,1376.0,800.0,736.0]": [
-				{
-					"class": "com.badlogic.gdx.math.Rectangle",
-					"x": 1344,
-					"y": 1024,
-					"width": 608,
+					"x": 96,
+					"y": 1792,
+					"width": 896,
 					"height": 800
 				},
 				{
 					"class": "com.badlogic.gdx.math.Rectangle",
-					"x": 1984,
-					"y": 1344,
-					"width": 384,
-					"height": 288
-				}
-			],
-			"[1632.0,608.0,928.0,384.0]": [
+					"x": 256,
+					"y": 832,
+					"width": 704,
+					"height": 192
+				},
 				{
 					"class": "com.badlogic.gdx.math.Rectangle",
-					"x": 1344,
-					"y": 1024,
-					"width": 608,
+					"x": 1440,
+					"y": -192,
+					"width": 960,
+					"height": 768
+				}
+			],
+			"[96.0,1792.0,896.0,800.0]": [
+				{
+					"class": "com.badlogic.gdx.math.Rectangle",
+					"x": 2112,
+					"y": 1696,
+					"width": 736,
+					"height": 832
+				},
+				{
+					"class": "com.badlogic.gdx.math.Rectangle",
+					"x": 992,
+					"y": 736,
+					"width": 640,
+					"height": 768
+				}
+			],
+			"[2112.0,1696.0,736.0,832.0]": [
+				{
+					"class": "com.badlogic.gdx.math.Rectangle",
+					"x": 1440,
+					"y": -192,
+					"width": 960,
+					"height": 768
+				},
+				{
+					"class": "com.badlogic.gdx.math.Rectangle",
+					"x": 992,
+					"y": 736,
+					"width": 640,
+					"height": 768
+				}
+			],
+			"[256.0,832.0,704.0,192.0]": [
+				{
+					"class": "com.badlogic.gdx.math.Rectangle",
+					"x": 96,
+					"y": 1792,
+					"width": 896,
 					"height": 800
 				},
 				{
 					"class": "com.badlogic.gdx.math.Rectangle",
-					"x": -160,
-					"y": 544,
-					"width": 576,
-					"height": 544
+					"x": 992,
+					"y": 736,
+					"width": 640,
+					"height": 768
+				}
+			],
+			"[1440.0,-192.0,960.0,768.0]": [
+				{
+					"class": "com.badlogic.gdx.math.Rectangle",
+					"x": 992,
+					"y": 736,
+					"width": 640,
+					"height": 768
+				},
+				{
+					"class": "com.badlogic.gdx.math.Rectangle",
+					"x": 256,
+					"y": 832,
+					"width": 704,
+					"height": 192
 				}
 			]
 		},
 		"rect": {
-			"x": -384,
+			"x": -896,
 			"y": -256,
-			"width": 3232,
-			"height": 2784
+			"width": 4288,
+			"height": 3168
 		},
 		"min": {
-			"x": -384,
+			"x": -896,
 			"y": -256
 		},
 		"max": {
-			"x": 2848,
-			"y": 2528
+			"x": 3392,
+			"y": 2912
 		},
 		"roomsNum": 5,
 		"tileSize": 32
@@ -1428,280 +1614,40 @@
 "statistic": {
 	"visitedRooms": [
 		{
-			"x": 1856,
-			"y": 1248,
-			"width": 992,
-			"height": 736
+			"x": 992,
+			"y": 736,
+			"width": 640,
+			"height": 768
 		},
 		{
-			"x": 1344,
-			"y": 1184,
+			"x": 1536,
+			"y": 1440,
 			"width": 416,
 			"height": 480
 		},
 		{
-			"x": 1280,
-			"y": 1312,
-			"width": 416,
-			"height": 832
-		},
-		{
-			"x": 2304,
-			"y": 1088,
-			"width": 256,
-			"height": 352
-		},
-		{
-			"x": 704,
-			"y": 384,
-			"width": 896,
-			"height": 672
-		},
-		{
-			"x": 1440,
-			"y": 512,
-			"width": 480,
-			"height": 224
-		},
-		{
-			"x": 1504,
-			"y": 1152,
-			"width": 848,
-			"height": 128
-		},
-		{
-			"x": 2352,
-			"y": 720,
+			"x": 1920,
+			"y": 192,
 			"width": 128,
-			"height": 896
-		},
-		{
-			"x": 1152,
-			"y": 720,
-			"width": 1200,
-			"height": 128
-		},
-		{
-			"x": 1504,
-			"y": 720,
-			"width": 128,
-			"height": 432
-		},
-		{
-			"x": 1184,
-			"y": 1056,
-			"width": 640,
-			"height": 192
-		},
-		{
-			"x": 1664,
-			"y": 960,
-			"width": 608,
-			"height": 192
-		},
-		{
-			"x": 1488,
-			"y": 1616,
-			"width": 864,
-			"height": 128
-		},
-		{
-			"x": 176,
-			"y": 1152,
-			"width": 1328,
-			"height": 128
-		},
-		{
-			"x": 176,
-			"y": 1104,
-			"width": 976,
-			"height": 128
-		},
-		{
-			"x": 1120,
-			"y": 1024,
-			"width": 192,
-			"height": 320
-		},
-		{
-			"x": -160,
-			"y": 896,
-			"width": 672,
-			"height": 416
-		},
-		{
-			"x": 2048,
-			"y": 1632,
-			"width": 544,
-			"height": 448
-		},
-		{
-			"x": 1600,
-			"y": 2336,
-			"width": 384,
-			"height": 640
+			"height": 1920
 		},
 		{
 			"x": 1312,
-			"y": 1920,
-			"width": 512,
-			"height": 928
-		},
-		{
-			"x": 1856,
-			"y": 2080,
-			"width": 288,
-			"height": 416
-		},
-		{
-			"x": 2816,
-			"y": 1184,
-			"width": 544,
-			"height": 416
-		},
-		{
-			"x": 2688,
-			"y": 1696,
-			"width": 640,
-			"height": 384
-		},
-		{
-			"x": 1328,
-			"y": 2880,
-			"width": 960,
+			"y": 1120,
+			"width": 1168,
 			"height": 128
-		},
-		{
-			"x": 2240,
-			"y": 2048,
-			"width": 480,
-			"height": 640
-		},
-		{
-			"x": 1344,
-			"y": 2432,
-			"width": 512,
-			"height": 576
-		},
-		{
-			"x": 1776,
-			"y": 2704,
-			"width": 128,
-			"height": 336
-		},
-		{
-			"x": 1600,
-			"y": 2464,
-			"width": 352,
-			"height": 480
-		},
-		{
-			"x": 2560,
-			"y": 1504,
-			"width": 544,
-			"height": 704
 		},
 		{
 			"x": 1952,
-			"y": 1248,
-			"width": 576,
-			"height": 896
-		},
-		{
-			"x": 2368,
-			"y": 1472,
-			"width": 416,
-			"height": 416
-		},
-		{
-			"x": 464,
-			"y": 1744,
-			"width": 1184,
-			"height": 128
-		},
-		{
-			"x": 1344,
-			"y": 1024,
-			"width": 608,
-			"height": 800
-		},
-		{
-			"x": 64,
-			"y": 1376,
-			"width": 800,
-			"height": 736
-		},
-		{
-			"x": 736,
-			"y": 2176,
-			"width": 384,
-			"height": 352
-		},
-		{
-			"x": 1984,
-			"y": 1344,
-			"width": 384,
+			"y": 832,
+			"width": 640,
 			"height": 288
 		},
 		{
-			"x": 1648,
-			"y": 1488,
-			"width": 528,
-			"height": 128
-		},
-		{
-			"x": 464,
-			"y": 1488,
-			"width": 1712,
-			"height": 128
-		},
-		{
-			"x": 464,
-			"y": 1424,
-			"width": 1184,
-			"height": 128
-		},
-		{
-			"x": 1760,
-			"y": 992,
-			"width": 384,
-			"height": 576
-		},
-		{
-			"x": 1632,
-			"y": 608,
-			"width": 928,
-			"height": 384
-		},
-		{
-			"x": 2336,
-			"y": 1024,
-			"width": 512,
-			"height": 320
-		},
-		{
-			"x": 2096,
-			"y": 800,
-			"width": 128,
-			"height": 624
-		},
-		{
-			"x": 544,
-			"y": 928,
-			"width": 352,
-			"height": 512
-		},
-		{
-			"x": 1056,
-			"y": 992,
-			"width": 544,
-			"height": 192
-		},
-		{
-			"x": 128,
-			"y": 816,
-			"width": 1968,
-			"height": 128
+			"x": 1440,
+			"y": -192,
+			"width": 960,
+			"height": 768
 		}
 	]
 }

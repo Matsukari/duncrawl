@@ -8,10 +8,11 @@ import com.leisure.duncraw.art.chara.Player;
 import com.leisure.duncraw.art.item.Armor;
 import com.leisure.duncraw.art.item.Item;
 import com.leisure.duncraw.art.item.Weapon;
+import com.leisure.duncraw.helper.AArray;
 import com.leisure.duncraw.logging.Logger;
 
 public class Inventory extends Dat {
-  public transient ArrayList<Item> items = new ArrayList<>();
+  public transient AArray<Item> items = new AArray<>();
   public transient Player owner;
   public ArrayList<InventoryItemData> itemsData;
   public int capacity;
@@ -28,23 +29,24 @@ public class Inventory extends Dat {
     if (items.size() > capacity) return;
     item.isDrop = false; 
     item.owner = owner;
+    final Item testItem = item;
     InventoryItemData itemData =new InventoryItemData(item);;
     Logger.log("Inventory", "Put item " + item.id);
-    if (!items.contains(item) || item.quantity > item.maxQuantity) {
+    if (items.getIf((e)->e.same(testItem)) == null || item.quantity > item.maxQuantity) {
       item = item.clone();
       items.add(item); 
       itemsData.add(itemData);
     }
     else {
-      for (Item i : items) if (i.equals(item)) item = i;
-      for (InventoryItemData i : itemsData) if (i.equals(itemData)) itemData = i; 
+      for (Item i : items) if (i.same(item)) item = i;
+      for (InventoryItemData i : itemsData) if (i.same(itemData)) itemData = i; 
     }
     itemData.quantity++;
     item.quantity++;
   }
   private InventoryItemData getItemData(Item item) {
     InventoryItemData itemData =new InventoryItemData(item);;
-    for (InventoryItemData i : itemsData) if (i.equals(itemData)) itemData = i; 
+    for (InventoryItemData i : itemsData) if (i.same(itemData)) itemData = i; 
     return itemData;
   }
   public Item use(Item item) {
@@ -92,7 +94,7 @@ public class Inventory extends Dat {
   }
   @Override
   public void reset() {
-    items = new ArrayList<>(); 
+    items = new AArray<>(); 
     itemsData = new ArrayList<>();
     capacity = 10;
   }

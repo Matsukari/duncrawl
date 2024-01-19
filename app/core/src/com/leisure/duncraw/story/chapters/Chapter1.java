@@ -154,6 +154,9 @@ public class Chapter1 {
             }
             return false;
           }));
+          scenes.add(new PerformSceneNode(()->{
+            game.change();
+          }));
           start(game);
         }
         return false;

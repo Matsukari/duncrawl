@@ -16,11 +16,11 @@ public class EntityArrayList <T extends Art> extends EntityGroup<T> {
     super.add(e);
   }
   @Override
-  public void remove(Object o) {
+  public boolean remove(Object o) {
     synchronized (data) {
       data.remove(o);
     }
-    super.remove(o);
+    return super.remove(o);
   }  
   @Override
   public void clear() {

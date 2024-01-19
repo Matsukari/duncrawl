@@ -29,6 +29,7 @@ public class EntityHashMap <K, T extends Art> extends EntityGroup <T> {
     for (Map.Entry<K, T> entry : data.entrySet()) {
       // values.add(entry.getValue());
       remove(entry.getValue());
+      
       // Logger.log("EntityHashMap", "Removing...");
     } 
     // manager.entities.removeAll(values);

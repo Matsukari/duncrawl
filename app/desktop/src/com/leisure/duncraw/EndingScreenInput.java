@@ -1,22 +1,21 @@
-package com.leisure.duncraw.screen;
-
-import org.jgrapht.alg.cycle.TiernanSimpleCycles;
+package com.leisure.duncraw;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.maps.tiled.TideMapLoader;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.leisure.duncraw.hud.Hud;
+import com.leisure.duncraw.screen.Screen;
 
 import lib.time.Timer;
 
-public class EndingScreen extends Screen implements InputProcessor {
+public class EndingScreenInput extends Screen implements InputProcessor {
+
   public Color bgTo = Color.valueOf("#bbbbbb");
   public Color bgFrom = Color.valueOf("#000015");
   public Color bg = bgFrom.cpy();
@@ -24,7 +23,7 @@ public class EndingScreen extends Screen implements InputProcessor {
   public boolean sectime = false;
   public Stage stage;
   public Table root;
-  public EndingScreen() {
+  public EndingScreenInput() {
     stage = new Stage();
     root = new Table();
     root.setFillParent(true);
@@ -50,7 +49,7 @@ public class EndingScreen extends Screen implements InputProcessor {
   }
   @Override
   public Screen next() {
-    return new MenuScreen();
+    return new MenuScreenInput();
   }
   @Override
   public boolean keyDown(int keycode) {

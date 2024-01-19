@@ -83,11 +83,12 @@ public class Floor {
   }
   public void unstage() {
     Serializer.save(generator.data, generator.datFile);
+    for (TilemapChara agent : chars) {
+      agent.chara.dropObj = null;
+      if (!(agent.chara instanceof Player)) agent.chara.kill();
+    }
     for (Map.Entry<Pointi, Obj> obj : background.objs.data.entrySet()) {
       obj.getValue().onUnstage(this);
-    }
-    for (TilemapChara agent : chars) {
-      if (!(agent.chara instanceof Player)) agent.chara.kill();
     }
     background.objs.clear();
     nextLevel = -1;

@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.leisure.duncraw.art.item.Item;
 import com.leisure.duncraw.art.map.LayeredTerrain;
 import com.leisure.duncraw.art.map.Obj;
 import com.leisure.duncraw.art.map.ObjParser;
@@ -76,7 +77,7 @@ public class TerrainSetGenerator {
       data.firstGen = false;
       for (Map.Entry<Pointi, Obj> obj : terrainSet.objs.data.entrySet()) {
         FloorData.Generation.Entity entity = new FloorData.Generation.Entity();
-        if (obj.getValue() instanceof Terrain) continue;
+        if (obj.getValue() instanceof Terrain || obj.getValue() instanceof Item) continue;
         entity.x = (int)obj.getValue().bounds.x / data.tileSize;
         entity.y = (int)obj.getValue().bounds.y / data.tileSize;
         entity.classname = obj.getValue().getClass().getSimpleName();

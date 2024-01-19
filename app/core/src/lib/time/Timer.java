@@ -20,7 +20,7 @@ public class Timer {
   }
   public float normalize() {
     if (!hasStarted) return 0;
-    return peeker.sinceLastPeek() / ms;
+    return Math.min(peeker.sinceLastPeek() / ms, 1f);
   }
   public boolean isTicking() {
     return hasStarted;

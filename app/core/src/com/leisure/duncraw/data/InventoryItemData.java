@@ -21,8 +21,7 @@ public class InventoryItemData extends Dat {
     datFile = "none";
     classname = "none";
   }
-  @Override
-  public boolean equals(Object obj) {
+  public boolean same(Object obj) {
     return ((InventoryItemData)obj).datFile.equals(datFile);
   }
   

@@ -10,7 +10,10 @@ public abstract class Art {
   public transient Rectangle bounds = new Rectangle(0, 0, 100f, 100f);
   public transient Color tint = new Color(1f, 1f, 1f, 1f);
   public Art() {
+  }
+  {
     id = IdGenerator.gen();
+
   }
   public void centerTo(Art other) {
     bounds.x = other.getWorldX() - bounds.width/2;

@@ -14,6 +14,7 @@ import com.leisure.duncraw.art.chara.states.dark.ShadowCloakSkill;
 import com.leisure.duncraw.data.SaveData;
 import com.leisure.duncraw.data.Settings.DesktopControls;
 import com.leisure.duncraw.screen.GameScreen;
+import com.leisure.duncraw.screen.Screen;
 
 public class GameScreenInput extends GameScreen implements InputProcessor {
   private int pressedKey = -1;
@@ -37,6 +38,9 @@ public class GameScreenInput extends GameScreen implements InputProcessor {
     else if (Gdx.input.isKeyPressed(desktopControls.up)) { player.setState(new MoveState(0, 1, true, steerMode)); }
     else if (Gdx.input.isKeyPressed(desktopControls.left)) { player.setState(new MoveState(-1, 0, true, steerMode)); }
     else if (Gdx.input.isKeyPressed(desktopControls.right)) { player.setState(new MoveState(1, 0, true, steerMode)); }
+  }
+  @Override public Screen next() {
+    return new EndingScreenInput();
   }
   @Override public boolean keyDown(int keycode) {
     // Logger.log("GameScreenInput", "Keydown");

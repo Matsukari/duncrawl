@@ -74,9 +74,8 @@ public class Item extends Obj {
   protected void onUse() {
     Logger.log("Item", "use base class");    
   }
-  @Override
-  public boolean equals(Object obj) {
-    return datFile.equals(((Item)obj).datFile);
+  public boolean same(Item obj) {
+    return datFile.equals((obj).datFile);
   }
   // Will be called by Terrain
   @Override

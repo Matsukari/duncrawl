@@ -15,9 +15,9 @@ public class EntityGroup <T extends Art> {
       manager.entities.add(e);
     }
   }
-  public void remove(Object o) {
-    synchronized (manager.entities) {
-      manager.entities.remove(o);
+  public boolean remove(Object o) {
+    synchronized (manager.entities) { 
+      return manager.entities.remove(o);
     }
   }
   public void clear() {
