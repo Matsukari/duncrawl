@@ -31,8 +31,8 @@
 		}
 	},
 	"status": {
-		"health": 82,
-		"stamina": 100,
+		"health": 84,
+		"stamina": 33,
 		"maxHealth": 100,
 		"maxStamina": 100,
 		"hpRecovery": 2,

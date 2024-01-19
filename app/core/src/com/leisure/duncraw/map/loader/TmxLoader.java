@@ -10,6 +10,7 @@ import com.badlogic.gdx.maps.tiled.TiledMapTile;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer.Cell;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
 import com.leisure.duncraw.art.chara.Chara;
 import com.leisure.duncraw.art.chara.CharaParser;
@@ -49,7 +50,12 @@ public class TmxLoader {
       Array<RectangleMapObject> rects = l.getObjects().getByType(RectangleMapObject.class);
       if (rects.size > 0) {
         for (RectangleMapObject r : rects) {
-          floor.generator.roomsBuilder.rooms.add(r.getRectangle());
+          Rectangle room = r.getRectangle();
+          room.x *= 2;
+          room.y *= 2;
+          room.width *= 2;
+          room.height *= 2;
+          floor.generator.roomsBuilder.rooms.add(room);
           rooms ++;
         }
       }
