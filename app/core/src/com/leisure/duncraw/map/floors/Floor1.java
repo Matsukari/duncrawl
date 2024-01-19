@@ -1,9 +1,12 @@
 package com.leisure.duncraw.map.floors;
 
+import com.badlogic.gdx.math.MathUtils;
+import com.leisure.duncraw.Graphics;
 import com.leisure.duncraw.art.chara.Enemy;
 import com.leisure.duncraw.art.chara.Spawner;
 import com.leisure.duncraw.art.chara.ai.AiWanderer;
 import com.leisure.duncraw.art.chara.states.MoveState;
+import com.leisure.duncraw.art.item.items.MonsterCore;
 import com.leisure.duncraw.logging.Logger;
 import com.leisure.duncraw.map.Floor;
 import com.leisure.duncraw.map.WallType;
@@ -44,6 +47,9 @@ public class Floor1 extends Floor {
       Enemy enemy = new Enemy(spawner.sources.ghost);
       spawner.spawn(enemy);
       Pointi pos = getTileInRandomRoom();
+      if (MathUtils.randomBoolean(0.7f)) {
+        enemy.dropObj = new MonsterCore(Graphics.objsSources.bronzeMonsterCore);
+      }
       enemy.setState(new MoveState(pos.x, pos.y, false));
       enemy.startAI(new AiWanderer(),this, player, context);
     }

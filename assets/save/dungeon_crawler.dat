@@ -1,8 +1,8 @@
 {
 "progression": {
 	"level": {
-		"floor": 4,
-		"scene": 6
+		"floor": 1,
+		"scene": 7
 	}
 },
 "player": {
@@ -20,6 +20,12 @@
 				"classname": "com.leisure.duncraw.art.item.items.StaminaPotion",
 				"quantity": 5,
 				"maxQuantity": 16
+			},
+			{
+				"datFile": "dat/item/monster_core_bronze.dat",
+				"classname": "com.leisure.duncraw.art.item.items.MonsterCore",
+				"quantity": 2,
+				"maxQuantity": 16
 			}
 		],
 		"capacity": 10,
@@ -31,8 +37,8 @@
 		}
 	},
 	"status": {
-		"health": 82,
-		"stamina": 50,
+		"health": 100,
+		"stamina": 93,
 		"maxHealth": 100,
 		"maxStamina": 100,
 		"hpRecovery": 2,

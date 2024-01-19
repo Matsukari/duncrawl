@@ -8,6 +8,7 @@ import com.leisure.duncraw.logging.Logger;
 public class MonsterCore extends Item {
   public MonsterCore(String datFile) {
     super(datFile);
+    Logger.log("MonsterCore", "Got " + Float.toString(anim.stateTime));
   }
   @Override
   public void onUse() {

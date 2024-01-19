@@ -25,7 +25,7 @@ public class Item extends Obj {
   public transient LinearAnimation<TextureRegion> storeAnim;
   public Item(String datFile) {
     load(datFile);
-    anim = idle;
+    // anim = idle;
     // animation = storeAnim;
   }
   public Item() {} 
@@ -43,6 +43,7 @@ public class Item extends Obj {
     dropAnim = GeneralAnimation.line(dat.anims.get("drop"), PlayMode.LOOP, Math.max(dat.size.x, dat.size.y) * 16); 
     storeAnim = GeneralAnimation.line(dat.anims.get("store"), PlayMode.LOOP, Math.max(dat.size.x, dat.size.y) * 16); 
     anim = dropAnim;
+    idle = dropAnim;
     return type;
   }
   @Override
