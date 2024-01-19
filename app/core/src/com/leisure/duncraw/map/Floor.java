@@ -8,6 +8,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.leisure.duncraw.art.chara.Spawner;
+import com.leisure.duncraw.art.Art;
+import com.leisure.duncraw.art.chara.Chara;
 import com.leisure.duncraw.art.chara.Player;
 import com.leisure.duncraw.art.chara.states.MoveState;
 import com.leisure.duncraw.art.item.Item;

@@ -11,7 +11,6 @@ import com.leisure.duncraw.logging.Logger;
 
 public class Npc extends Chara {  
   public NpcData npcData;
-  public String datFile;
   public static class NpcData extends CharaData {
     public ArrayList<String> convs;
     @Override

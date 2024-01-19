@@ -1,8 +1,11 @@
 package com.leisure.duncraw.manager;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.LinkedList;
 import java.util.Queue;
+
+import org.jgrapht.alg.tour.ChristofidesThreeHalvesApproxMetricTSP;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;
@@ -47,7 +50,14 @@ public class CharaManager {
     CharaData data = Deserializer.safeLoad(CharaData.class, source);
     try { 
       return add(clazz.getDeclaredConstructor(CharaData.class).newInstance(data));
-    } catch (Exception e) { e.printStackTrace(); System.exit(-1); }
+    } catch (Exception x) { 
+      try {
+        return add(clazz.getDeclaredConstructor(String.class).newInstance(source));
+      }
+      catch (Exception e) {
+        e.printStackTrace(); System.exit(-1); 
+      }
+    }
     return null;
   }
   public Chara addFrom(String source) { return addFrom(source, Chara.class); }
@@ -61,9 +71,9 @@ public class CharaManager {
     for (Observer observer : observers) chara.observers.add(observer.copy());
     return chara;  
   }
-  public Npc getNpc(String datFile) {
+  public <T extends Chara> T getByType(Class<T> clazz, String datFile) {
     for (Chara c : charas.data) {
-      if (c instanceof Npc && datFile.equals(((Npc)c).datFile)) return (Npc)c;
+      if (c.getClass() == clazz && c.datFile != null && datFile.equals(c.datFile)) return clazz.cast(c);
     }
     return null;
   }

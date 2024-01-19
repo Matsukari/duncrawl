@@ -3,6 +3,7 @@ package com.leisure.duncraw;
 import javax.swing.plaf.DesktopIconUI;
 
 import com.badlogic.gdx.InputAdapter;
+import com.leisure.duncraw.art.chara.states.TalkState;
 import com.leisure.duncraw.data.Settings.DesktopControls;
 import com.leisure.duncraw.manager.HudManager;
 
@@ -23,13 +24,13 @@ public class HudInput extends InputAdapter {
       else if (keycode == controls.action) hudManager.windowUi.statusWindow.inventoryHud.useSelected();
       return true;
     }
-    // else if (hudManager.dialogueHud.isVisible()) {
-      // if (keycode == controls.action && !hudManager.dialogueHud.next()) {
-      //   hudManager.statusHud.player.lockState = false;
-      //   hudManager.dialogueHud.restart();
-      // }
-    //   return true;
-    // }
+    else if (hudManager.dialogueHud.isVisible() && !(hudManager.windowUi.statusWindow.statusHud.player.state instanceof TalkState) ){
+      if (keycode == controls.action && !hudManager.dialogueHud.next()) {
+        hudManager.statusHud.player.lockState = false;
+        // hudManager.dialogueHud.restart();
+      }
+      return true;
+    }
     return false;
   }
   

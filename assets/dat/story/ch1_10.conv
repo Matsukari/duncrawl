@@ -1,0 +1,14 @@
+{
+"messages": [
+	{
+		"message": "He's gone.",
+		"sender": "Unknown",
+		"specialState": "normal"
+	},
+	{
+		"message": "...",
+		"sender": "Unknown",
+		"specialState": "normal"
+	}
+]
+}

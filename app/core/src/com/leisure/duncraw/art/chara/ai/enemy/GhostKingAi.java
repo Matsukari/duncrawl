@@ -89,7 +89,7 @@ public class GhostKingAi extends DecoratorNode.InfiniteRepeaterNode {
         int spawns = MathUtils.random(maxSpawn-5, maxSpawn+5);
         
         for (int i = 0; i < spawns; i++) {
-          Enemy enemy = new Enemy(Deserializer.safeLoad(CharaData.class, getFloor(context).spawner.sources.ghost));
+          Enemy enemy = new Enemy(getFloor(context).spawner.sources.ghost);
           remains.add(enemy);
           getFloor(context).spawner.spawn(enemy);
           enemy.setState(new MoveState(getFloor(context).getTileInRandomRoom()));

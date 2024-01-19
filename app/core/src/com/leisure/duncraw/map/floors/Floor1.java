@@ -1,21 +1,11 @@
 package com.leisure.duncraw.map.floors;
 
-import java.util.ArrayList;
-
-import com.leisure.duncraw.Graphics;
 import com.leisure.duncraw.art.chara.Enemy;
 import com.leisure.duncraw.art.chara.Spawner;
 import com.leisure.duncraw.art.chara.ai.AiWanderer;
-import com.leisure.duncraw.art.chara.Player;
 import com.leisure.duncraw.art.chara.states.MoveState;
-import com.leisure.duncraw.art.map.TilemapChara;
-import com.leisure.duncraw.art.map.objs.Stair;
-import com.leisure.duncraw.data.CharaData;
-import com.leisure.duncraw.data.Deserializer;
 import com.leisure.duncraw.logging.Logger;
-import com.leisure.duncraw.manager.EffectManager;
 import com.leisure.duncraw.map.Floor;
-import com.leisure.duncraw.map.Tileset;
 import com.leisure.duncraw.map.WallType;
 import com.leisure.duncraw.map.generator.GhostLairFurnisher;
 import com.leisure.duncraw.map.generator.LightSourcesFurnisher;
@@ -51,7 +41,7 @@ public class Floor1 extends Floor {
   public void initialSpawn(Spawner spawner) {
     super.initialSpawn(spawner);
     for (int i = 0; i < generator.data.maxMob; i++) {
-      Enemy enemy = new Enemy(Deserializer.safeLoad(CharaData.class, spawner.sources.ghost));
+      Enemy enemy = new Enemy(spawner.sources.ghost);
       spawner.spawn(enemy);
       Pointi pos = getTileInRandomRoom();
       enemy.setState(new MoveState(pos.x, pos.y, false));

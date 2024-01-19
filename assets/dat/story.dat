@@ -23,7 +23,10 @@
     {
       "classname": "Chapter1$Scene6",
       "title": "The place of people"
+    },
+    {
+      "classname": "Chapter1$Scene7",
+      "title": "Big ghost"
     }
-
   ]
 }

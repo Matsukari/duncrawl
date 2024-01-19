@@ -30,6 +30,7 @@ public class Chara extends Art {
   public HashMap<String, String> sounds;     
   public DirAnimationMap anims = new DirAnimationMap();
   public CharaData dat;
+  public String datFile;
   public Obj dropObj;
   public Chara(CharaData data) {
     init(data);

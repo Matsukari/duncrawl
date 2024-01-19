@@ -3,6 +3,7 @@ package com.leisure.duncraw.art.chara;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Interpolation;
 import com.leisure.duncraw.data.CharaData;
+import com.leisure.duncraw.data.Deserializer;
 import com.leisure.duncraw.map.Floor;
 import com.leisure.duncraw.screen.GameScreen.Context;
 
@@ -13,8 +14,9 @@ import behave.models.Node;
 public class Enemy extends Chara { 
   public Node ai;
   public Executor exec;
-  public Enemy(CharaData data) {
-    super(data);
+  public Enemy(String dd) {
+    super(Deserializer.safeLoad(CharaData.class, dd));
+    datFile = dd;
   }
   public void startAI(Node ai, Floor floor, Player player, Context gameContext) {
     this.ai = ai;

@@ -2,6 +2,8 @@ package com.leisure.duncraw.story.chapters;
 
 import com.badlogic.gdx.math.Vector2;
 import com.leisure.duncraw.art.chara.Enemy;
+import com.leisure.duncraw.art.chara.Npc;
+import com.leisure.duncraw.art.chara.ai.enemy.GhostKingAi;
 import com.leisure.duncraw.art.chara.states.HurtState;
 import com.leisure.duncraw.art.chara.states.MoveState;
 import com.leisure.duncraw.data.CharaData;
@@ -12,6 +14,7 @@ import com.leisure.duncraw.screen.GameScreen;
 import com.leisure.duncraw.story.SceneQueue;
 import com.leisure.duncraw.story.components.BlockCameraSceneNode;
 import com.leisure.duncraw.story.components.CharaSceneNode;
+import com.leisure.duncraw.story.components.ConditionalSceneNode;
 import com.leisure.duncraw.story.components.DialogueSceneNode;
 import com.leisure.duncraw.story.components.FloorSceneNodes;
 import com.leisure.duncraw.story.components.MoveCameraSceneNode;
@@ -20,6 +23,8 @@ import com.leisure.duncraw.story.components.ParallelSceneNode;
 import com.leisure.duncraw.story.components.PerformSceneNode;
 import com.leisure.duncraw.story.components.SequenceSceneNode;
 import com.leisure.duncraw.story.components.CharaSceneNode.CharaFunction;
+
+import lib.time.Timer;
 
 public class Chapter1 {
   public static class Scene1 extends SceneQueue {
@@ -67,7 +72,7 @@ public class Chapter1 {
             game.floorManager.getFloor().generator.data.statistic.visitedRooms.size() > 2) {
           // scenes.add(new BlockCameraSceneNode(false));
           Enemy boss = 
-            game.floorManager.getFloor().spawner.spawn(new Enemy(Deserializer.safeLoad(CharaData.class, game.floorManager.getFloor().spawner.sources.ghostKing))); 
+            game.floorManager.getFloor().spawner.spawn(new Enemy(game.floorManager.getFloor().spawner.sources.ghostKing)); 
           scenes.add(new DialogueSceneNode(Deserializer.safeLoad(Conversation.class, "dat/story/ch1_4.conv")));
           scenes.add(new MoveCharaSceneNode(boss, new MoveState(game.player.mapAgent.x, game.player.mapAgent.y+3, false)));
           scenes.add(new ParallelSceneNode(
@@ -93,7 +98,7 @@ public class Chapter1 {
           scenes.add(new DialogueSceneNode(Deserializer.safeLoad(Conversation.class, "dat/story/ch1_6.conv")));
           scenes.add(new MoveCameraSceneNode(new Vector2(game.player.bounds.x, game.player.bounds.y + 200), 5f)); 
           scenes.add(new MoveCharaSceneNode(
-                game.charaManager.getNpc(game.charaManager.sources.elder), new MoveState(0, -10, true)));
+                game.charaManager.getByType(Npc.class, game.charaManager.sources.elder), new MoveState(0, -10, true)));
           scenes.add(new DialogueSceneNode(Deserializer.safeLoad(Conversation.class, "dat/story/ch1_7.conv")));
           start(game);
         }
@@ -119,5 +124,42 @@ public class Chapter1 {
     }
 
   }
+  public static class Scene7 extends SceneQueue {
+    private Timer delay = new Timer(2000); 
+    private Timer delayFinish= new Timer(1000);
+    private Enemy boss;
+    @Override
+    public boolean update(GameScreen game) {
+      if (!started) {
+        if (game.floorManager.getFloor().generator.data.level == 4 && !delay.isTicking() && boss == null) {
+          delay.start(); 
+          Enemy boss = 
+            game.floorManager.getFloor().spawner.spawn(new Enemy(game.floorManager.getFloor().spawner.sources.ghostKing)); 
+          boss.setState(new MoveState(game.floorManager.getFloor().background.cols/2, game.floorManager.getFloor().background.rows/2, false));
+        
+          scenes.add(new ParallelSceneNode(
+            new MoveCharaSceneNode(game.player, new MoveState(0, game.player.mapAgent.y+3, true)),
+            new DialogueSceneNode(Deserializer.safeLoad(Conversation.class, "dat/story/ch1_9.conv"))
+          ));
+          scenes.add(new PerformSceneNode(()->{
+            boss.startAI(new GhostKingAi(), game.floorManager.getFloor(), game.player, game.context);
+          }));
+          scenes.add(new ConditionalSceneNode(()->{
+            if (boss.status.dead) {
+              delayFinish.start();
+              scenes.add(new DialogueSceneNode(Deserializer.safeLoad(Conversation.class, "dat/story/ch1_10.conv")));
+              return true;
+            }
+            if (delayFinish.isFinished()) {
+            }
+            return false;
+          }));
+          start(game);
+        }
+        return false;
+      }
+      return super.update(game);
+    }
 
+  }
 }
