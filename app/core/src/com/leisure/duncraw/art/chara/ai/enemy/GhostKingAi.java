@@ -1,5 +1,6 @@
 package com.leisure.duncraw.art.chara.ai.enemy;
 
+import java.security.ProtectionDomain;
 import java.util.ArrayList;
 
 import org.jgrapht.util.MathUtil;
@@ -62,17 +63,15 @@ public class GhostKingAi extends DecoratorNode.InfiniteRepeaterNode {
     }
     @Override
     public Status tick(ExecutionContext context) {
-        Logger.log("GhostKingAi", "Dage" + Integer.toString(chara.status.health));
       if (chara.status.health != lastHealth) {
         lastHealth = chara.status.health;
         // getContext(context).effectManager.start(new InterpolationEffect(chara, Interpolation.fade, 2f));
         Pointi randomPos = getFloor(context).getTileInRandomRoom();
         // Pointi randomPos = new Pointi(MathUtils.random(chara.mapAgent.x-5, chara.mapAgent.x+5), MathUtils.random(chara.mapAgent.y-5, chara.mapAgent.y+5));
         chara.setState(new MoveState(randomPos.x, randomPos.y, false), true);
-        Logger.log("GhostKingAi", "Moved dmaaged");
 
       }
-      if (chara.status.health <= 30) {
+      if (chara.status.health <= chara.status.maxHealth * 0.35f) {
         Logger.log("GhostKingAi", "Reached weakend");
         return Status.Success;
       }
@@ -118,7 +117,12 @@ public class GhostKingAi extends DecoratorNode.InfiniteRepeaterNode {
     }
     @Override
     public Status tick(ExecutionContext context) {
-      Logger.log("GhostKingAi", "Hurling " + Float.toString(timer.normalize()));
+      // Logger.log("GhostKingAi", "Hurling " + Float.toString(timer.normalize()));
+      hurl(context);
+      update(context);
+      return Status.Success;
+    }
+    protected void hurl(ExecutionContext context) {
       if (timer.isFinished()) {
         stop(context);
         timer.reset();
@@ -138,10 +142,14 @@ public class GhostKingAi extends DecoratorNode.InfiniteRepeaterNode {
         projTimer.start();
         // Logger.log("GhostKingAi", "Angle: " + Double.toString(angle));
       }
+
+    }
+    protected void update(ExecutionContext context) {
       if (projectile != null) {
         projectile.bounds.x -= Math.cos(angle) * 200f * Gdx.graphics.getDeltaTime();
         projectile.bounds.y += Math.sin(angle) * 200f * Gdx.graphics.getDeltaTime();
         if (Intersector.intersectRectangles(projectile.bounds, player.bounds, intersection)) {
+          onHit(context);
           stop(context);
           chara.movement.lastVelX = -1;
           player.setState(new HurtState(chara, true), true);
@@ -150,7 +158,7 @@ public class GhostKingAi extends DecoratorNode.InfiniteRepeaterNode {
           stop(context);
         }
       }
-      return Status.Success;
+
     }
     public void stop(ExecutionContext context) {
       getContext(context).effectManager.stop(projectile);
@@ -158,17 +166,26 @@ public class GhostKingAi extends DecoratorNode.InfiniteRepeaterNode {
       projTimer.stop();
 
     }
+    protected void onHit(ExecutionContext context) {}
   }
-  public static class HurlBallExplodeIf extends CharaLeafNode {
+  public static class HurlBallExplodeIf extends HurlBall {
     private int countThreshold = 3;
     @Override
     public Status tick(ExecutionContext context) {
       if ((int)context.getVariable("hurled_ball") >= countThreshold) {
         context.setVariable("hurled_ball", 0);
-        chara.anims.set("hurl");
-        // chara.setState(new AttackState(player));
+        hurl(context);
       }
-      return Status.Failure;
+      update(context);
+      return Status.Success;
+    }
+    @Override
+    protected void onHit(ExecutionContext context) {
+      GfxAnimation animation = new GfxAnimation(chara.anims.get("ghost_ball_explode").currentDir, false);
+      getContext(context).effectManager.start(animation);
+      animation.centerTo(player);
+      animation.bounds.setSize(64, 64);
+      Logger.log("GhostKingAi", "Ghit");
     }
   }
 

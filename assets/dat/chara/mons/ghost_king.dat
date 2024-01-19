@@ -43,9 +43,9 @@
 },
 "sounds": {},
 "status": {
-	"health": 1000,
-	"stamina": 1000,
-	"maxHealth": 1000,
+	"health": 100,
+	"stamina": 100,
+	"maxHealth": 100,
 	"maxStamina": 100,
 	"hpRecovery": 2,
 	"stRecovery": 3,
