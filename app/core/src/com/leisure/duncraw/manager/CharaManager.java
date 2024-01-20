@@ -10,14 +10,17 @@ import org.jgrapht.alg.tour.ChristofidesThreeHalvesApproxMetricTSP;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Intersector;
 import com.leisure.duncraw.art.EntityArrayList;
 import com.leisure.duncraw.art.chara.Chara;
 import com.leisure.duncraw.art.chara.Npc;
 import com.leisure.duncraw.art.chara.Observer;
+import com.leisure.duncraw.art.chara.Player;
 import com.leisure.duncraw.art.chara.observers.AnimationBehaviour;
 import com.leisure.duncraw.art.chara.observers.AttackBehaviour;
 import com.leisure.duncraw.art.chara.observers.HurtBehaviour;
 import com.leisure.duncraw.art.chara.observers.SoundBehaviour;
+import com.leisure.duncraw.art.chara.states.AttackState;
 import com.leisure.duncraw.art.map.TilemapChara;
 import com.leisure.duncraw.data.CharaData;
 import com.leisure.duncraw.data.CharasData;
@@ -82,6 +85,11 @@ public class CharaManager {
   }
   public void updateAll(float dt) {
     for (Chara chara : charas.data) {
+      // for (Chara other : charas.data) {
+      //   if (other != chara && chara.bounds.overlaps(other.bounds)) chara.movement.paused = true;
+      //   // else if (!(chara instanceof Player) || !(chara.state instanceof AttackState)) chara.movement.paused = false;
+      //   else chara.movement.paused = false;
+      // }
       chara.update(dt);
       if (chara.status.health <= 0 || chara.status.dead) {
         deadCharas.add(chara);
