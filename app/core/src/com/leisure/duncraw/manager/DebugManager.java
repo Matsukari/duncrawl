@@ -25,25 +25,13 @@ public class DebugManager extends ToolAgent {
     tooling = new Tooling();
     Tooling.init(tooling);
   }
-  public void debugPlayer(Player player) {
-    Tooling.addAgent(new PlayerDebug(player));
-  }
-  public void editFloorGen(FloorManager floorGenerator) {
-    Tooling.addAgent(new FloorEditor(floorGenerator));  
-  }
-  public void debugChara(Chara chara) {
-    Tooling.addAgent(new CharaDebug(chara));
-  }
   public void debugMap(Floor floor) {
     Logger.log("DebugManager", "Debugging map");
     gridLines = new GridLines(floor.background.cols, floor.background.rows, 
       floor.background.terrainWidth, floor.background.terrainHeight);
   }
-  public void debugTool(ToolAgent tool) {
+  public void debug(ToolAgent tool) {
     Tooling.addAgent(tool);
-  }
-  public void debugSystem() {
-    Tooling.addAgent(new SystemDebug());
   }
   public void render(Camera cam) { 
     renderer.setProjectionMatrix(cam.combined);

@@ -18,10 +18,10 @@
 "classname": "com.leisure.duncraw.map.floors.Floor1",
 "level": 3,
 "envColor": {
-	"r": 0.033,
-	"g": 0.033,
-	"b": 0.1,
-	"a": 0.2
+	"r": 0.136,
+	"g": 0.091,
+	"b": 0.136,
+	"a": 0.273
 },
 "customHeight": {},
 "prefabRooms": {},
@@ -1408,6 +1408,42 @@
 			"y": 160,
 			"width": 256,
 			"height": 416
+		},
+		{
+			"x": 1440,
+			"y": 448,
+			"width": 384,
+			"height": 384
+		},
+		{
+			"x": 1632,
+			"y": 944,
+			"width": 736,
+			"height": 128
+		},
+		{
+			"x": 1824,
+			"y": 1568,
+			"width": 512,
+			"height": 448
+		},
+		{
+			"x": 1120,
+			"y": 1760,
+			"width": 256,
+			"height": 352
+		},
+		{
+			"x": 1072,
+			"y": 1184,
+			"width": 128,
+			"height": 864
+		},
+		{
+			"x": 896,
+			"y": 1152,
+			"width": 320,
+			"height": 576
 		}
 	]
 }

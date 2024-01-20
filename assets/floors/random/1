@@ -18,9 +18,9 @@
 "classname": "com.leisure.duncraw.map.floors.Floor1",
 "level": 1,
 "envColor": {
-	"r": 0.033,
-	"g": 0.033,
-	"b": 0.1,
+	"r": 0.136,
+	"g": 0.091,
+	"b": 0.136,
 	"a": 0.2
 },
 "customHeight": {},
@@ -1648,6 +1648,24 @@
 			"y": -192,
 			"width": 960,
 			"height": 768
+		},
+		{
+			"x": 928,
+			"y": 1344,
+			"width": 512,
+			"height": 512
+		},
+		{
+			"x": 2112,
+			"y": 1696,
+			"width": 736,
+			"height": 832
+		},
+		{
+			"x": 544,
+			"y": 2112,
+			"width": 1936,
+			"height": 128
 		}
 	]
 }

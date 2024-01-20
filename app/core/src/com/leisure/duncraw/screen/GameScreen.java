@@ -20,8 +20,12 @@ import com.leisure.duncraw.data.CharaData;
 import com.leisure.duncraw.data.Deserializer;
 import com.leisure.duncraw.data.SaveData;
 import com.leisure.duncraw.data.Serializer;
+import com.leisure.duncraw.debug.CharaDebug;
 import com.leisure.duncraw.debug.HudDebug;
+import com.leisure.duncraw.debug.PlayerDebug;
 import com.leisure.duncraw.debug.SpriteBatchDebug;
+import com.leisure.duncraw.debug.SystemDebug;
+import com.leisure.duncraw.debug.editor.FloorEditor;
 import com.leisure.duncraw.debug.editor.LightEnvEditor;
 import com.leisure.duncraw.logging.Logger;
 import com.leisure.duncraw.manager.CharaManager;
@@ -101,14 +105,14 @@ public class GameScreen extends Screen {
 
 
     debugManager = new DebugManager();
-    debugManager.debugSystem();
-    debugManager.debugTool(new HudDebug(hudManager));
-    debugManager.debugPlayer(player);
-    debugManager.editFloorGen(floorManager);
-    debugManager.debugTool(new SpriteBatchDebug(floorManager.batch));
-    // debugManager.debugTool(new LightEnvEditor(floorManager.lighting));
+    debugManager.debug(new SystemDebug(this));
+    debugManager.debug(new HudDebug(hudManager));
+    debugManager.debug(new PlayerDebug(player));
+    debugManager.debug(new FloorEditor(floorManager));
+    // debugManager.debugTool(new SpriteBatchDebug(floorManager.batch));
+    // debugManager.debug(new LightEnvEditor(floorManager.lighting));
    
-    testPlaceScene();
+    // testPlaceScene();
   }
   private void testPlaceScene() {
     Enemy mob = charaManager.addFrom(charaManager.sources.ghost, Enemy.class);
@@ -128,7 +132,7 @@ public class GameScreen extends Screen {
    
     // floorManager.getFloor().initialSpawn(new Spawner(charaManager));
     // camera.zoom = 30f;
-    debugManager.debugChara(mob);
+    debugManager.debug(new CharaDebug(mob));
   }
   public void save() {
     storyManager.updateScene();
