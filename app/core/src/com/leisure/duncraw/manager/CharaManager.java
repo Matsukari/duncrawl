@@ -85,11 +85,6 @@ public class CharaManager {
   }
   public void updateAll(float dt) {
     for (Chara chara : charas.data) {
-      // for (Chara other : charas.data) {
-      //   if (other != chara && chara.bounds.overlaps(other.bounds)) chara.movement.paused = true;
-      //   // else if (!(chara instanceof Player) || !(chara.state instanceof AttackState)) chara.movement.paused = false;
-      //   else chara.movement.paused = false;
-      // }
       chara.update(dt);
       if (chara.status.health <= 0 || chara.status.dead) {
         deadCharas.add(chara);

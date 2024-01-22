@@ -38,7 +38,6 @@ public class FloorEditor extends ToolAgent {
     generator.roomsBuilder = roomsBuilder;
     font = Graphics.getFont(Graphics.fontSources.def);
     lights.addAll(manager.lighting.getEnv().lightSources);
-    manager.lighting.getEnv().lightSources.clear();
   }
   @Override
   public void tool() {

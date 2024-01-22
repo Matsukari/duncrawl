@@ -1,4 +1,4 @@
-package com.leisure.duncraw;
+package com.leisure.duncraw.input;
 
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 

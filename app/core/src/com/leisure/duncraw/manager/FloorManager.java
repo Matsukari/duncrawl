@@ -22,7 +22,7 @@ import com.leisure.duncraw.screen.GameScreen.Context;
 import lib.time.Timer;
 
 public class FloorManager {
-  public boolean showLighting = false;
+  public boolean showLighting = true;
   public final FloorsData sources;
   public final SpriteBatch batch;
   public Tileset tileset;

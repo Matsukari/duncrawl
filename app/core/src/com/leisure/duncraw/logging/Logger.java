@@ -36,6 +36,7 @@ public class Logger extends ToolAgent {
     return String.format("[%s] %s", tag, msg);
   }
   public static void log(String tag, String msg) {
+    tag = "Duncrawl." + tag;
     if (hidden.contains(tag)) return;
     if (group && !logList.isEmpty() && format(tag, msg).equals(logList.get(logList.size()-1))) streak++;
     else if (group && streak >= 3) {
